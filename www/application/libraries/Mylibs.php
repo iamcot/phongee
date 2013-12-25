@@ -42,7 +42,7 @@ class MyLibs
     public function accessadmin()
     {
         $acees = false;
-        switch ($this->CI->session->userdata("darole")) {
+        switch ($this->CI->session->userdata("pgrole")) {
             case "admin":
                 $acees = true;
                 break;
@@ -62,7 +62,7 @@ class MyLibs
     public function accessuserpage()
     {
         $acees = false;
-        switch ($this->CI->session->userdata("darole")) {
+        switch ($this->CI->session->userdata("pgrole")) {
             case "admin":
                 $acees = true;
                 break;
@@ -82,7 +82,7 @@ class MyLibs
     public function accessaddresspage()
     {
         $acees = false;
-        switch ($this->CI->session->userdata("darole")) {
+        switch ($this->CI->session->userdata("pgrole")) {
             case "admin":
                 $acees = true;
                 break;
@@ -102,7 +102,7 @@ class MyLibs
     public function accessservicepage()
     {
         $acees = false;
-        switch ($this->CI->session->userdata("darole")) {
+        switch ($this->CI->session->userdata("pgrole")) {
             case "admin":
                 $acees = true;
                 break;
@@ -122,7 +122,7 @@ class MyLibs
     public function accessdealpage()
     {
         $acees = false;
-        switch ($this->CI->session->userdata("darole")) {
+        switch ($this->CI->session->userdata("pgrole")) {
             case "admin":
                 $acees = true;
                 break;
@@ -141,7 +141,7 @@ class MyLibs
     public function candeletecomment()
     {
         $acees = false;
-        switch ($this->CI->session->userdata("darole")) {
+        switch ($this->CI->session->userdata("pgrole")) {
             case "admin":
                 $acees = 2;
                 break;

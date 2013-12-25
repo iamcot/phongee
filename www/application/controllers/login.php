@@ -14,11 +14,10 @@ class Login extends CI_Controller
         $this->lang->load("default", $this->crrlang);
         date_default_timezone_set('Asia/Ho_Chi_Minh');
     }
-    public $tbprovince = 'daprovince';
     public function index()
     {
         $nofi = "";
-        if ($this->input->post("submit")) {
+        if ($this->input->post("login")) {
             $rs = $this->checklogin();
             if ($rs != null) {
                 header("Location: " . $this->session->userdata('referer'));
@@ -30,40 +29,29 @@ class Login extends CI_Controller
             $this->session->set_userdata('referer', base_url());
         if ($nofi != "")
             $data["nofi"] = $nofi;
-        $this->load->model("main_m");
         $data['title'] = "Login";
-        $data['cat'] = 'admin';
-        $oCurrentProvince = $this->main_m->getProvince();
-        $aNavAddr[$this->tbprovince] = $oCurrentProvince;
-
-        $data['aNavAddr'] = $this->mylibs->makeNavAddr($this->tbprovince,$aNavAddr);
         $this->render($data);
     }
 
     public function checklogin()
     {
-        $dausername = $this->input->post("dausername");
-        $dapassword = $this->input->post("dapassword");
-        $daalwayslogin = $this->input->post("dalwayslogin");
+        $dausername = $this->input->post("pgusername");
+        $dapassword = $this->input->post("pgpassword");
         $dapassword = md5(md5($dapassword));
-        $sql = "select * FROM " . $this->tbuser . " WHERE dausername= '$dausername' AND dapassword='$dapassword' and dadeleted=0";
+        $sql = "select * FROM " . $this->tbuser . " WHERE pgusername= '$dausername' AND pgpassword='$dapassword' and pgdeleted=0";
         $qr = $this->db->query($sql);
         if ($qr->num_rows() == 1) {
             $user = $qr->row();
-            if ($daalwayslogin == "on") {
-
-            } else {
-            }
             $param = array(
-                "dausername" => $user->dausername,
-                "dauser_id" => $user->id,
-                "dafname" => $user->dafname,
-                "dalname" => $user->dalname,
-                "darole" => $user->darole,
-                "damobi" => $user->damobi,
-                "daemail" => $user->daemail,
-                "daaddr" => $user->daaddr,
-                "daavatar" => $user->daavatar,
+                "pgusername" => $user->pgusername,
+                "pguser_id" => $user->id,
+                "pgfname" => $user->pgfname,
+                "pglname" => $user->pglname,
+                "pgrole" => $user->pgrole,
+                "pgmobi" => $user->pgmobi,
+                "pgemail" => $user->pgemail,
+                "pgaddr" => $user->pgaddr,
+                "pgavatar" => $user->pgavatar,
             );
             $this->session->set_userdata($param);
             if($this->mylibs->accessadmin()){
@@ -74,7 +62,7 @@ class Login extends CI_Controller
         } else return null;
     }
 
-    public $tbuser = 'dauser';
+    public $tbuser = 'pguser';
     public $crrlang = '';
 
     public function render($data = array())

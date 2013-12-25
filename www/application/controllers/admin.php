@@ -21,7 +21,7 @@ class Admin extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        if (!$this->session->userdata("darole")) {
+        if (!$this->session->userdata("pgrole")) {
             $this->session->set_userdata('referer', base_url() . "admin");
             header("Location: " . base_url() . "login");
         } else if (!$this->mylibs->accessadmin()) {
@@ -57,9 +57,9 @@ class Admin extends CI_Controller
     public $tbnews = 'danews';
     public $crrlang = '';
     public $tbconfig = 'daconfig';
-    public $tbdealuser = "dadeal_user";
-    public $tbcomment = "dacomment";
-    public $tbdealuserlog = "dadealuser_log";
+    public $tbdealuser = "pgdeal_user";
+    public $tbcomment = "pgcomment";
+    public $tbdealuserlog = "pgdealuser_log";
 
     public function render($data = array())
     {
