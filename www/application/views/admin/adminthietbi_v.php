@@ -1,7 +1,9 @@
 <div id="tabs">
     <ul>
-        <li><a href="<?=base_url()?>admin/listpageuser">Danh sách thành viên</a></li>
-        <li><a href="<?=base_url()?>admin/listpage/store">Danh sách cửa hàng</a></li>
+        <li><a href="<?=base_url()?>admin/listpagechitietthietbi">Chi tiết thiết bị</a></li>
+        <li><a href="<?=base_url()?>admin/listpagethietbi">Thiết bị</a></li>
+        <li><a href="<?=base_url()?>admin/listpage/nhomthietbi">Nhóm thiết bị</a></li>
+
     </ul>
 </div>
 <script>

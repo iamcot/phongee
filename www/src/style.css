@@ -8,6 +8,7 @@ html,body{
     color:#444;
     height: 100%;
     display: block;
+    background: #f2f2f2;
 }
 li {
     display: list-item;
@@ -97,7 +98,7 @@ header{
 header h2{
     float: left;
     letter-spacing: -0.06em;
-    font-size: 28px;
+    font-size: 20px;
     font-weight: 900;
     line-height: 1.375;
     margin: 0;
@@ -110,13 +111,30 @@ header h2{
     max-width: 1050px;
 }
 .nav{
-    background: #fcfcfc;
-    border-bottom: 1px solid #f2f2f2;
+    background: #707070;
+    background: -o-linear-gradient(top,rgba(0,0,0,.2) 0,rgba(0,0,0,0) 5%,rgba(0,0,0,0) 95%,rgba(0,0,0,.2) 100%),-o-linear-gradient(left,rgba(0,0,0,.2) 0,rgba(0,0,0,0) .2%,rgba(0,0,0,0) 99.8%,rgba(0,0,0,.2) 100%),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA9QAAAAkCAMAAABfcIIyAAAAGXRF…x%2BeQqLpPJDae9P5%2FmrVz491%2FWekBlKy7PXVfn9rb9xXsMD2wdOcAAAAAElFTkSuQmCC") no-repeat 50% 50%,-o-linear-gradient(bottom,#666 0,#5e5e5e 50%,#707070 51%,#808080 100%);
+    background: -moz-linear-gradient(top,rgba(0,0,0,.2) 0,rgba(0,0,0,0) 5%,rgba(0,0,0,0) 95%,rgba(0,0,0,.2) 100%),-moz-linear-gradient(left,rgba(0,0,0,.2) 0,rgba(0,0,0,0) .2%,rgba(0,0,0,0) 99.8%,rgba(0,0,0,.2) 100%),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA9QAAAAkCAMAAABfcIIyAAAAGXRF…x%2BeQqLpPJDae9P5%2FmrVz491%2FWekBlKy7PXVfn9rb9xXsMD2wdOcAAAAAElFTkSuQmCC") no-repeat 50% 50%,-moz-linear-gradient(bottom,#666 0,#5e5e5e 50%,#707070 51%,#808080 100%);
+    background: -webkit-gradient(linear,0 0,0 100%,from(rgba(0,0,0,.2)),color-stop(0.05,rgba(0,0,0,0)),color-stop(0.95,rgba(0,0,0,0)),to(rgba(0,0,0,.2))),-webkit-gradient(linear,0 0,100% 0,from(rgba(0,0,0,.2)),color-stop(0.002,rgba(0,0,0,0)),color-stop(0.998,rgba(0,0,0,0)),to(rgba(0,0,0,.2))),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA9QAAAAkCAMAAABfcIIyAAAAGXRF…x%2BeQqLpPJDae9P5%2FmrVz491%2FWekBlKy7PXVfn9rb9xXsMD2wdOcAAAAAElFTkSuQmCC") no-repeat 50% 50%,-webkit-gradient(linear,0 100%,0 0,from(#666),color-stop(0.5,#5e5e5e),color-stop(0.51,#707070),to(#808080));
+    background: -ms-linear-gradient(top,rgba(0,0,0,.2) 0,rgba(0,0,0,0) 5%,rgba(0,0,0,0) 95%,rgba(0,0,0,.2) 100%),-ms-linear-gradient(left,rgba(0,0,0,.2) 0,rgba(0,0,0,0) .2%,rgba(0,0,0,0) 99.8%,rgba(0,0,0,.2) 100%),url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA9QAAAAkCAMAAABfcIIyAAAAGXRF…x%2BeQqLpPJDae9P5%2FmrVz491%2FWekBlKy7PXVfn9rb9xXsMD2wdOcAAAAAElFTkSuQmCC") no-repeat 50% 50%,-ms-linear-gradient(bottom,#666 0,#5e5e5e 50%,#707070 51%,#808080 100%);
+    /*background: #fcfcfc;*/
+    /*border-bottom: 1px solid #f2f2f2;*/
     margin: 0 0 30px;
     min-height: 36px;
     overflow: hidden;
     padding: 0 12px;
-    -webkit-box-shadow: 0 0 8px #D0D0D0;
+    /*-webkit-box-shadow: 0 0 8px #D0D0D0;*/
+    position: relative;
+    z-index: 10;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: rgba(0,0,0,0.3) 0 1px 2px;
+    -moz-box-shadow: rgba(0,0,0,0.3) 0 1px 2px;
+    box-shadow: rgba(0,0,0,0.3) 0 1px 2px;
+    font: .9em "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+    vertical-align: middle;
+    overflow: hidden;
+    color: #fff;
 }
 .headeruser{
     float:right;
@@ -132,18 +150,25 @@ header h2{
     height: 36px;
     line-height: 2.4;
 }
+.nav a{
+    color:#fff;
+}
 .nav ul li a{
     display: block;
     height: 36px;
-    margin: 0 7px 0 0;
+    /*margin: 0 7px 0 0;*/
     padding: 0 15px 0 15px;
     position: relative;
     overflow: hidden;
-}
-.nav ul li a:hover,
-.nav ul li a.select{
-    background: #f5f5f5;
+    color: #fff;
     font-weight: bold;
+}
+.nav ul li a:hover{
+    background: #555;
+}
+.nav ul li a.select{
+    background: #333;
+
 }
 
 .ui-tabs-vertical { width: 100%; }
@@ -159,6 +184,7 @@ header h2{
     overflow: hidden;
     min-width: 600px;
     -webkit-box-shadow: 0 0 8px #D0D0D0;
+
 }
 ::-webkit-input-placeholder {
     color: #aaa;
@@ -360,4 +386,12 @@ footer{
 }
 .pagination input{
     width:auto !important;
+}
+
+.logo{
+    background: url(img/phongee.png) no-repeat 100% 100%;
+    background-size: contain;
+    height: 30px;
+    width:200px;
+    display: inline-block;
 }

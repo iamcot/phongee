@@ -25,7 +25,7 @@
 <div id="allpage">
     <header>
         <div class="wrap">
-            <h2><?=$this->config->item('sitename')?> - Trang quản trị</h2>
+            <h2><a href="<?=base_url()?>" class="logo"></a> - Trang quản trị</h2>
         </div>
     </header>
     <div class="nav">
@@ -34,16 +34,16 @@
                 <li><a href="<?= base_url() ?>admin/"
                        class="<?= (($cat == 'admin') ? 'select' : '') ?>">Tổng quan</a></li>
                 <? if ($this->mylibs->accessaddresspage()): ?>
-                    <li><a href="<?= base_url() ?>admin/address"
-                           class="<?= (($cat == 'address') ? 'select' : '') ?>">Địa chỉ</a></li>
+                    <li><a href="<?= base_url() ?>admin/inout"
+                           class="<?= (($cat == 'inout') ? 'select' : '') ?>">Xuất/Nhập</a></li>
                 <? endif ?>
                 <? if ($this->mylibs->accessservicepage()): ?>
-                    <li><a href="<?= base_url() ?>admin/service"
-                           class="<?= (($cat == 'service') ? 'select' : '') ?>">Dịch vụ</a></li>
+                    <li><a href="<?= base_url() ?>admin/report"
+                           class="<?= (($cat == 'report') ? 'select' : '') ?>">Báo cáo</a></li>
                 <? endif ?>
                 <? if ($this->mylibs->accessdealpage()): ?>
-                    <li><a href="<?= base_url() ?>admin/deal"
-                           class="<?= (($cat == 'deal') ? 'select' : '') ?>">Khuyến mãi</a></li>
+                    <li><a href="<?= base_url() ?>admin/thietbi"
+                           class="<?= (($cat == 'thietbi') ? 'select' : '') ?>">Thiết bị</a></li>
                 <? endif ?>
                 <? if ($this->mylibs->accessuserpage()): ?>
                     <li><a href="<?= base_url() ?>admin/user"
@@ -51,9 +51,9 @@
                 <? endif ?>
             </ul>
             <div class="headeruser">
-                <? if ($this->session->userdata('dauser_id')): ?>
-                    <? if($this->session->userdata('daavatar')!="") echo '<img class="navavatar" src="'.base_url().'thumbnails/'.$this->session->userdata('daavatar').'">';?>
-                    <?= $this->session->userdata('dalname') . ' ' . $this->session->userdata('dafname') ?> | <a
+                <? if ($this->session->userdata('pguser_id')): ?>
+                    <? if($this->session->userdata('pgavatar')!="") echo '<img class="navavatar" src="'.base_url().'thumbnails/'.$this->session->userdata('pgavatar').'">';?>
+                    <?= $this->session->userdata('pglname') . ' ' . $this->session->userdata('pgfname') ?> | <a
                         href="<?= base_url() ?>">Trang chủ</a> | <a href="<?= base_url() ?>login/logout">Đăng xuất</a>
                 <? else: ?>
                     <a href="<?= base_url() ?>login">Đăng nhập</a>

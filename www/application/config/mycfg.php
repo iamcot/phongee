@@ -1,7 +1,7 @@
 <?php
-$config['sitename'] = 'Sài Gòn - Hà Nội';
-$oonfig['slogan'] = 'Cẩm nang tiêu dùng Việt';
-$config['sufix_title'] = 'saigonhanoi.com.vn - Cẩm nang tiêu dùng Việt.';
+$config['sitename'] = 'Phongee';
+$oonfig['slogan'] = '';
+$config['sufix_title'] = 'phongee.com';
 $config['submitdealsendemail'] = false;
 $config['pp'] = 10;
 
@@ -11,10 +11,7 @@ $config['mapz'] = 15;
 $config['aAddrTree'] = array(  // table,parenttable)
                                'daprovince' => array('daprovince',''            ),
                                'dadistrict' => array('dadistrict','daprovince'  ),
-                               'daward'     => array('daward'    ,'dadistrict'  ),
-                               'dastreet'   => array('dastreet'  ,'daward'      ),
-                               'daservice_place'   => array('daservice_place','dastreet'),
-                            );
+);
 
 $config['iHomeServicePlae'] = 10;
 $config['num_comment'] = 10;
