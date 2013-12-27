@@ -3,6 +3,18 @@
     <table id="inputserviceplace">
         <tr>
             <td>
+                <input type="radio" name="pgtype" value="thietbi" checked=checked> Thiết bị
+                <input type="radio" name="pgtype" value="phukien"> Phụ kiện
+            </td>
+            <td>
+                <select name="pgtype_pk" style="display: none">
+                    <option value="ban">Phụ kiện bán</option>
+                    <option value="suachua">Phụ kiện sửa chữa</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <input type="text" name="pglongname" placeholder="Tên thiết bị"></td>
             <td>
                 <input type="text" name="pgcode" placeholder="Mã thiết bị">
@@ -10,13 +22,16 @@
         </tr>
         <tr>
             <td>
-                <select name="pgnhomthietbi_id">
-                    <option value="0">Chọn nhóm thiết bị</option>
-                    <? foreach($aNhomthietbi as $store):?>
-                        <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
-                    <? endforeach;?>
-                </select>
+                <input type="text" name="pgcountry" placeholder="Các nước sản xuất "></td>
+            <td>
+                <input type="text" name="pgcolor" placeholder="Các màu ">
             </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="text" name="pgyear" placeholder="Các năm ">
+            </td>
+
             <td rowspan="3" style="vertical-align: top">
                 <input type="text" name="pgpic" placeholder="Hình ảnh đại diện" readonly=true>
                 <input id="picupload"  type="file" name="files[]" data-url="<?=base_url()?>admin/calljupload" multiple>
@@ -24,7 +39,19 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td id="parent">
+                <select name="pgnhomthietbi_id">
+                    <option value="0">Chọn nhóm thiết bị</option>
+                    <? foreach($aNhomthietbi as $store):?>
+                        <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
+                    <? endforeach;?>
+                </select>
+                <div id="pkparent" style="display: none">
+                    <input type="text" name="pkthietbicode" placeholder="Mã thiết bị" style="width: 28%;float:left;" onblur="getThietbi(this.value)">
+                    <input type="text" name="pklongname" placeholder="Tên thiết bị"  style="width: 48%;float:left;">
+                    <input type="text" name="pkthietbi_id" placeholder="ID thiết bị" style="width: 19%;float:left;">
+                </div>
+
                 <label>Giá hiện tại</label>
                 <input type="text" name="pgprice" placeholder="Giá hiện tại">
                 <label>Giá cũ</label>
@@ -45,12 +72,12 @@
             </td>
         </tr>
         <tr>
-            <td><input type="hidden" name="edit" value="">
+            <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <input type="button" value="Lưu" onclick="save()">
-                <input type="button" value="Load" onclick="load(1)">
-                <input type="button" value="Xóa nhập liệu" onclick="myclear()"></td>
-            <td>
+                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
+                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+
                 <div id="loadstatus" style="float:right;"></div>
             </td>
         </tr>
@@ -64,18 +91,33 @@
 </fieldset>
 <script>
     $(function () {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
         load(1);
     });
     function save() {
         var pglongname     = $("input[name=pglongname]").val();
+        var pgtype     = $("input[name=pgtype]:checked").val();
         var pgcode     = $("input[name=pgcode]").val();
         var pgpic  = $("input[name=pgpic]").val();
         var pgprice  = $("input[name=pgprice]").val();
         var pgprice_old      = $("input[name=pgprice_old]").val();
         var pgshort_info     = $("input[name=pgshort_info]").val();
+        var pgcolor     = $("input[name=pgcolor]").val();
+        var pgyear     = $("input[name=pgyear]").val();
+        var pgcountry     = $("input[name=pgcountry]").val();
         var pglong_info      = $("textarea[name=pglong_info]").val();
         var pgtech_info    = $("textarea[name=pgtech_info]").val();
+        var pgtype_pk   = "";
+//        console.log($("input[name=pgtype]:checked").val());
+        if(pgtype == "thietbi"){
         var pgnhomthietbi_id      = $("select[name=pgnhomthietbi_id]").val();
+        }
+        else{
+        var pgnhomthietbi_id      = $("input[name=pkthietbi_id]").val();
+            pgtype_pk = $("select[name=pgtype_pk]").val();
+        }
 
         var edit = $("input[name=edit]").val();
 
@@ -87,9 +129,14 @@
                     + "&pgcode=" + pgcode
                     + "&pgpic=" + pgpic
                     + "&pgnhomthietbi_id=" + pgnhomthietbi_id
+                    + "&pgtype_pk=" + pgtype_pk
+                    + "&pgtype=" + pgtype
                     + "&pgprice=" + pgprice
                     + "&pgprice_old=" + pgprice_old
                     + "&pgshort_info=" + pgshort_info
+                    + "&pgcolor=" + pgcolor
+                    + "&pgyear=" + pgyear
+                    + "&pgcountry=" + pgcountry
                     + "&pglong_info=" + encodeURIComponent(pglong_info)
                     + "&pgtech_info=" + encodeURIComponent(pgtech_info)
 
@@ -130,8 +177,12 @@
         $("input[name=pglongname]").val("");
         $("input[name=pgcode]").val("");
         $("input[name=pgpic]").val("");
+        $("input[name=pkthietbi_id]").val("");
         $("select[name=pgnhomthietbi_id]").val("");
         $("input[name=pgprice]").val("");
+        $("input[name=pgcolor]").val("");
+        $("input[name=pgyear]").val("");
+        $("input[name=pgcountry]").val("");
         $("input[name=pgprice_old]").val("");
         $("input[name=pgshort_info]").val("");
         $("textarea[name=pglong_info]").val("");
@@ -150,7 +201,11 @@
                 else {
                     var province = eval(msg);
                     $("input[name=pglongname]").val(province.pglong_name);
+                    $("input[value="+province.pgtype+"]").prop("checked",true);
                     $("input[name=pgcode]").val(province.pgcode);
+                    $("input[name=pgcolor]").val(province.pgcolor);
+                    $("input[name=pgyear]").val(province.pgyear);
+                    $("input[name=pgcountry]").val(province.pgcountry);
                     $("input[name=pgpic]").val(province.pgpic);
                     $("input[name=pgprice]").val(province.pgprice);
                     $("input[name=pgprice_old]").val(province.pgprice_old);
@@ -158,7 +213,21 @@
                     $("textarea[name=pglong_info]").val(province.pglong_info);
                     $("textarea[name=pgtech_info]").val(province.pgtech_info);
                     $("input[name=edit]").val(province.id);
-                    $("select[name=pgnhomthietbi_id]").val(province.pgnhomthietbi_id);
+
+                    $("select[name=pgtype_pk]").val(province.pgtype_pk);
+                    if(province.pgtype == 'phukien'){
+                        $("input[name=pkthietbi_id]").val(province.pgnhomthietbi_id);
+                        $("select[name=pgtype_pk]").show();
+                        $("#pkparent").show();
+                        $("select[name=pgnhomthietbi_id]").hide();
+                    }
+                    else{
+                        $("select[name=pgnhomthietbi_id]").val(province.pgnhomthietbi_id);
+                        $("select[name=pgtype_pk]").hide();
+                        $("select[name=pgnhomthietbi_id]").show();
+                        $("#pkparent").hide();
+
+                    }
 
                     $("#pgavatardemo").html('<img src="<?=base_url()?>thumbnails/' + province.pgpic + '">');
                 }
@@ -180,7 +249,22 @@
         });
     }
     $(function () {
-        $( '.ckeditor' ).ckeditor();
+        $( '.ckeditor' ).ckeditor({
+            language: 'vi',
+            height:80,
+            toolbarGroups: [
+                { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+                { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+                { name: 'links' },
+                { name: 'insert' },
+                '/',
+                { name: 'styles' },
+                { name: 'colors' }
+
+            ]
+
+        });
+
         $('#picupload').fileupload({
             dataType: 'json',
             done: function (e, data) {
@@ -191,5 +275,35 @@
                 });
             }
         });
+        $("input[name=pgtype]").click(function(){
+//            console.log($(this).val() );
+            if($(this).val() == 'phukien'){
+                $("select[name=pgtype_pk]").show();
+                $("#pkparent").show();
+                $("select[name=pgnhomthietbi_id]").hide();
+            }
+            else{
+                $("select[name=pgtype_pk]").hide();
+                $("select[name=pgnhomthietbi_id]").show();
+                $("#pkparent").hide();
+
+            }
+        })
     });
+
+    function getThietbi(id){
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/loadcode/thietbi/" + id,
+            success: function (msg) {
+                if (msg == "0") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    $("input[name=pklongname]").val(province.pglong_name);
+
+                    $("input[name=pkthietbi_id]").val(province.id);
+                }
+            }
+        });
+    }
 </script>

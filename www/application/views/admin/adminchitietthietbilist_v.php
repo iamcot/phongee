@@ -1,12 +1,11 @@
 <fieldset>
     <legend>Thông tin</legend>
     <table id="inputserviceplace">
-        <tr>
-                <input type="button" value="Lưu" onclick="save()">
-                <input type="button" value="Load" onclick="load(1)">
-                <input type="button" value="Xóa nhập liệu" onclick="myclear()">
-            </td>
-            <td>
+        <tr><td colspan="2">
+            <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
+            <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
+            <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+
             </td>
         </tr>
         <tr>
@@ -21,15 +20,23 @@
         </tr>
         <tr>
             <td>
-                <input type="text" name="pgcolor" placeholder="Màu">
-
+<!--                <input type="text" name="pgcolor" placeholder="Màu">-->
+                <select name="pgcolor">
+                    <option value="0">Màu </option>
+                </select>
             <td>
-                <input type="text" name="pgcountry" placeholder="Nước"></td>
+<!--                <input type="text" name="pgcountry" placeholder="Nước"></td>-->
+                    <select name="pgcountry">
+                        <option value="0">Nước sản xuất</option>
+                    </select>
             </td>
         </tr>
         <tr>
             <td>
-                <input type="text" name="pgyear" placeholder="Năm sx" >
+<!--                <input type="text" name="pgyear" placeholder="Năm sx" >-->
+                <select name="pgyear">
+                    <option value="0">Năm sản xuất</option>
+                </select>
             </td>
             <td rowspan="3" style="vertical-align: top">
                 <input type="text" name="pgpic" placeholder="Hình ảnh đại diện" readonly=true>
@@ -53,22 +60,25 @@
         <tr>
             <td colspan="2" >
                 <label>Thông tin sản phẩm</label>
-                <textarea name="pglong_info" class="ckeditor"></textarea>
+                <textarea name="pglong_info" class="ckeditor" id="textare1"></textarea>
                 <label>Thông tin kỹ thuật</label>
                 <textarea name="pgtech_info" class="ckeditor"></textarea>
             </td>
         </tr>
         <tr>
-            <td><input type="hidden" name="edit" value="">
+            <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <input type="button" value="Lưu" onclick="save()">
-                <input type="button" value="Load" onclick="load(1)">
-                <input type="button" value="Xóa nhập liệu" onclick="myclear()">
-                <input type="checkbox" name="checkdelinput"> Không xóa dữ liệu
-            </td>
-            <td>
+                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
+                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+
+                <span class="rowCheckbox">
+                <input type="checkbox" name="checkdelinput"> <label>Không xóa dữ liệu</label>
+                </span>
+
                 <div id="loadstatus" style="float:right;"></div>
             </td>
+
         </tr>
     </table>
 
@@ -89,9 +99,9 @@
         var pgprice  = $("input[name=pgprice]").val();
         var pgprice_old      = $("input[name=pgprice_old]").val();
         var pgshort_info     = $("input[name=pgshort_info]").val();
-        var pgcolor    = $("input[name=pgcolor]").val();
-        var pgcountry    = $("input[name=pgcountry]").val();
-        var pgyear     = $("input[name=pgyear]").val();
+        var pgcolor    = $("select[name=pgcolor]").val();
+        var pgcountry    = $("select[name=pgcountry]").val();
+        var pgyear     = $("select[name=pgyear]").val();
         var pglong_info      = $("textarea[name=pglong_info]").val();
         var pgtech_info    = $("textarea[name=pgtech_info]").val();
         var pgthietbi_id      = $("input[name=pgthietbi_id]").val();
@@ -129,6 +139,9 @@
                             addsavegif("#loadstatus");
                             if(!$("input[name=checkdelinput]").prop("checked"))
                             myclear();
+                            else{
+                                $("input[name=edit]").val("");
+                            }
                             break;
                         default :
                             alert("Lỗi lưu - không xác định.")
@@ -152,9 +165,9 @@
     }
     function myclear() {
         $("input[name=pglongname]").val("");
-        $("input[name=pgyear]").val("");
-        $("input[name=pgcountry]").val("");
-        $("input[name=pgcolor]").val("");
+        $("select[name=pgyear]").val("");
+        $("select[name=pgcountry]").val("");
+        $("select[name=pgcolor]").val("");
         $("input[name=pgcode]").val("");
         $("input[name=pgpic]").val("");
         $("input[name=pgthietbi_id]").val("");
@@ -189,6 +202,7 @@
                     $("textarea[name=pgtech_info]").val(province.pgtech_info);
                     $("input[name=edit]").val(province.id);
                     $("input[name=pgthietbi_id]").val(province.pgthietbi_id);
+                    getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
 
                     $("#pgavatardemo").html('<img src="<?=base_url()?>thumbnails/' + province.pgpic + '">');
                 }
@@ -210,7 +224,26 @@
         });
     }
     $(function () {
-        $( '.ckeditor' ).ckeditor();
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
+//        CKEDITOR.replace( '.textare1' );
+       $( '.ckeditor' ).ckeditor({
+           language: 'vi',
+           height:80,
+           toolbarGroups: [
+               { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+               { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+               { name: 'links' },
+               { name: 'insert' },
+               '/',
+               { name: 'styles' },
+               { name: 'colors' }
+
+           ]
+
+       });
+
         $('#picupload').fileupload({
             dataType: 'json',
             done: function (e, data) {
@@ -222,6 +255,36 @@
             }
         });
     });
+    function getthietbiselect(id,year,color,country) {
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/loadedit/thietbi/" + id,
+            success: function (msg) {
+                if (msg == "0") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    var array = province.pgyear.split(",");
+                    var select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"' "+((year==array[i].trim())?"selected=selected":"")+">"+array[i]+"</option>";
+                    }
+                    $("select[name=pgyear]").html(select);
+                    array = province.pgcolor.split(",");
+                    select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'  "+((color==array[i].trim())?"selected=selected":"")+">"+array[i]+"</option>";
+                    }
+                    $("select[name=pgcolor]").html(select);
+                    array = province.pgcountry.split(",");
+                    select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'  "+((country==array[i].trim())?"selected=selected":"")+">"+array[i]+"</option>";
+                    }
+                    $("select[name=pgcountry]").html(select);
+                }
+            }
+        });
+    }
     function getThietbi(id){
         $.ajax({
             type: "post",
@@ -238,6 +301,25 @@
                     $("textarea[name=pglong_info]").val(province.pglong_info);
                     $("textarea[name=pgtech_info]").val(province.pgtech_info);
                     $("input[name=pgthietbi_id]").val(province.id);
+                    var array = province.pgyear.split(",");
+                    var select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgyear]").html(select);
+                    array = province.pgcolor.split(",");
+                    select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgcolor]").html(select);
+                    array = province.pgcountry.split(",");
+                    select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgcountry]").html(select);
+
 
                     $("#pgavatardemo").html('<img src="<?=base_url()?>thumbnails/' + province.pgpic + '">');
                 }

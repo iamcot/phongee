@@ -17,8 +17,9 @@
             </td>
         </tr>
         <tr>
-            <td>
-                <select name="pgrole">
+            <td id="selectrole">
+
+                <select name="pgrole" data-placeholder="Quyền hạn"  >
                     <option value="member">Thành viên</option>
                     <option value="provider">Nhà cung cấp</option>
                     <option value="custom">Khách hàng</option>
@@ -27,6 +28,7 @@
                     <option value="ketoantruong">Kế toán trưởng</option>
                     <option value="admin">Quản trị</option>
                 </select>
+
             </td>
             <td>
                 <input type="text" name="pgmobi" placeholder="Điện thoại">
@@ -58,12 +60,12 @@
 
         </tr>
         <tr>
-            <td><input type="hidden" name="edit" value="">
+            <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <input type="button" value="Lưu" onclick="save()">
-                <input type="button" value="Load" onclick="load(1)">
-                <input type="button" value="Xóa nhập liệu" onclick="myclear()"></td>
-            <td>
+                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
+                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+
                 <div id="loadstatus" style="float:right;"></div>
             </td>
         </tr>
@@ -195,6 +197,9 @@
         });
     }
     $(function () {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
         $('#picupload').fileupload({
             dataType: 'json',
             done: function (e, data) {
@@ -205,5 +210,7 @@
                 });
             }
         });
+
     });
+
 </script>

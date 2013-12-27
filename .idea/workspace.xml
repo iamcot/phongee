@@ -2,23 +2,123 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/libraries/Mylibs.php" afterPath="$PROJECT_DIR$/www/application/libraries/Mylibs.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/controllers/admin.php" afterPath="$PROJECT_DIR$/www/application/controllers/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/config/config.php" afterPath="$PROJECT_DIR$/www/application/config/config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/config/database.php" afterPath="$PROJECT_DIR$/www/application/config/database.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/controllers/login.php" afterPath="$PROJECT_DIR$/www/application/controllers/login.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/login_v.php" afterPath="$PROJECT_DIR$/www/application/views/login_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/config/routes.php" afterPath="$PROJECT_DIR$/www/application/config/routes.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/Jplayer.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/avatar.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/avatar5.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/badges-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/badges.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/bs-carousel-arrows-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/bs-carousel-arrows.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/buttons-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/buttons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/fonts/glyphicons-halflings-regular.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/fonts/glyphicons-halflings-regular.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/jp-controls-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/jp-controls.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/jquery.friendurl.js.zip" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/knob-balance-bg-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/knob-balance-bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/knob-balance-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/knob-balance.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/knob-volume-bg-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/knob-volume-bg.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/knob-volume-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/knob-volume.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/music-player-4.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/music-player-5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/music-player-6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/nicEditorIcons-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/nicEditorIcons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/post-img-1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/post-img-2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/post-img-3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/ribbons-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/ribbons.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/icons/star-off-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/icons/star-off.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/icons/star-on-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/icons/star-on.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/switch-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/switch.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/tab-img-1.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/tab-img-3.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/tab-img-5.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/tab-img-6.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/tab-img-7.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/tab-img-8.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/tag-2-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/tag-2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/tag-x2.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/tag.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/video-js.swf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/images/temp/vjs-poster-2.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/fonts/video-js/vjs.eot" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/fonts/video-js/vjs.ttf" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/fonts/video-js/vjs.woff" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/css/bootstrap.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/libs/bootstrap.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/css/chosen.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/chosen.jquery.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/custom.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/excanvas.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/general.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/fonts/glyphicons-halflings-regular.svg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/index.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/css/jplayer.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jplayer.playlist.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/libs/jquery-1.10.2.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/libs/jquery-ui.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery-ui.multidatespicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.customInput.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.flot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.flot.resize.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.jplayer.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.jscrollpane.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.mousewheel.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.powerful-placeholder.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.slider.bundle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.slider.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/css/jslider.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/knobRot-0.2.2.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/libs/modernizr.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/nicEdit.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/progressbar.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/respond.min.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/style.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/template.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/css/video-js.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/video.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/fonts/video-js/vjs.svg" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/src/ckeditor/config.js" afterPath="$PROJECT_DIR$/www/src/ckeditor/config.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/container_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/__db/phongee.sql" afterPath="$PROJECT_DIR$/www/__db/phongee.sql" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/src/style.css" afterPath="$PROJECT_DIR$/www/src/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="phongee.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387989954341" ignored="false" />
+    <file path="/Dummy.txt" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388114287920" ignored="false" />
     <file path="/login_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996345188" ignored="false" />
     <file path="/login.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387992540668" ignored="false" />
     <file path="/styles.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996454179" ignored="false" />
     <file path="/login.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996625355" ignored="false" />
+    <file path="/adminthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388121417728" ignored="false" />
+    <file path="/adminnhomthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388115896703" ignored="false" />
+    <file path="/adminchitietthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388142755210" ignored="false" />
+    <file path="/container_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388140689342" ignored="false" />
+    <file path="/adminuser_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388125889842" ignored="false" />
+    <file path="/style.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388139761238" ignored="false" />
+    <file path="/adminuserlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388137539244" ignored="false" />
+    <file path="/a.dummy" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388139617652" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../Shared/development/projects_git/webshop/dwshop/oxid_webshop/oxid/out/dwrespo/src/css/dwshop/dwshop.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388142160767" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +133,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -69,7 +170,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -79,20 +179,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="database.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/config/database.php">
+      <file leaf-file-name="adminthietbilist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="37" selection-start="2738" selection-end="2738" vertical-scroll-proportion="-16.653847">
-              <folding />
+            <state line="266" column="7" selection-start="10840" selection-end="10840" vertical-scroll-proportion="-10.791667">
+              <folding>
+                <element signature="n#style#0;n#select#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#3;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="config.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/config/config.php">
+      <file leaf-file-name="container_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="226" column="41" selection-start="7547" selection-end="7547" vertical-scroll-proportion="-62.692307">
-              <folding />
+            <state line="36" column="69" selection-start="2043" selection-end="2043" vertical-scroll-proportion="-16.875">
+              <folding>
+                <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <marker date="1388140724000" expanded="true" signature="1159:1217" placeholder="..." />
+                <marker date="1388140724000" expanded="true" signature="1179:1205" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -100,55 +208,84 @@
       <file leaf-file-name="login_v.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/application/views/login_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="28" selection-start="398" selection-end="398" vertical-scroll-proportion="-9.153846">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/controllers/login.php">
+      <file leaf-file-name="adminuser_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuser_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="23" selection-start="2128" selection-end="2134" vertical-scroll-proportion="-12.235294">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
+      <file leaf-file-name="adminuserlist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="184" column="45" selection-start="6568" selection-end="6571" vertical-scroll-proportion="3.9302325">
+            <state line="201" column="18" selection-start="7428" selection-end="7508" vertical-scroll-proportion="-15.208333">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adminstorelist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="9" selection-start="1417" selection-end="1417" vertical-scroll-proportion="-11.875">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adminnhomthietbilist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="9" selection-start="1267" selection-end="1267" vertical-scroll-proportion="-11.875">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/src/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="379" column="21" selection-start="11892" selection-end="11892" vertical-scroll-proportion="-12.16">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adminchitietthietbilist_v.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="144" column="14" selection-start="6193" selection-end="6193" vertical-scroll-proportion="0.6910828">
               <folding>
-                <marker date="1387996898932" expanded="false" signature="48389:48405" placeholder="..." />
+                <element signature="n#style#0;n#div#0;n#td#0;n#tr#7;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Session.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/system/libraries/Session.php">
+      <file leaf-file-name="config.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/src/ckeditor/config.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="469" column="0" selection-start="12895" selection-end="12895" vertical-scroll-proportion="-5.3846154">
+            <state line="7" column="4" selection-start="274" selection-end="976" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Mylibs.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
+      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/src/chubby-stacks-css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="48" selection-start="2190" selection-end="2190" vertical-scroll-proportion="-2.7058823">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="routes.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/config/routes.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="0" selection-start="1526" selection-end="1526" vertical-scroll-proportion="-19.923077">
-              <folding />
+            <state line="1944" column="39" selection-start="144014" selection-end="144014" vertical-scroll-proportion="-4.16">
+              <folding>
+                <element signature="e#172891#173066#2" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -156,16 +293,7 @@
       <file leaf-file-name="styles.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/src/assets/css/styles.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="312" column="20" selection-start="5583" selection-end="5583" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="container_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/container_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="21" column="4" selection-start="1376" selection-end="1458" vertical-scroll-proportion="-13.730769">
+            <state line="306" column="21" selection-start="5467" selection-end="5467" vertical-scroll-proportion="-11.96">
               <folding />
             </state>
           </provider>
@@ -190,16 +318,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/www/application/config/database.php" />
-        <option value="$PROJECT_DIR$/www/application/config/config.php" />
-        <option value="$PROJECT_DIR$/www/src/login.css" />
-        <option value="$PROJECT_DIR$/www/application/config/routes.php" />
         <option value="$PROJECT_DIR$/www/src/assets/js/script.js" />
         <option value="$PROJECT_DIR$/www/application/views/login_v.php" />
         <option value="$PROJECT_DIR$/www/src/assets/css/styles.css" />
         <option value="$PROJECT_DIR$/www/application/controllers/login.php" />
         <option value="$PROJECT_DIR$/www/application/libraries/Mylibs.php" />
         <option value="$PROJECT_DIR$/www/application/controllers/admin.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminuser_v.php" />
+        <option value="$PROJECT_DIR$/www/src/style.css" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" />
+        <option value="$PROJECT_DIR$/www/src/chubby-stacks-css/style.css" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
+        <option value="$PROJECT_DIR$/www/src/ckeditor/config.js" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" />
       </list>
     </option>
   </component>
@@ -211,9 +345,9 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-4" />
-    <option name="y" value="-4" />
+    <option name="y" value="22" />
     <option name="width" value="1288" />
-    <option name="height" value="988" />
+    <option name="height" value="718" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -222,6 +356,8 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
+    <OptionsSetting value="true" id="Undo Check Out" />
+    <OptionsSetting value="true" id="Get Latest Version" />
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
@@ -241,8 +377,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -311,59 +445,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phongee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phongee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phongee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phongee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
+              <option name="myItemId" value="ckeditor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -382,28 +464,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phongee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="phongee" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="application" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -475,26 +535,16 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="vcs.Git" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHub/PortableGit_0f65d050d0c352fd38a0b25d82ee942deb19ef87/bin/git.exe" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="restartRequiresConfirmation" value="true" />
-    <property name="MemberChooser.showClasses" value="true" />
-    <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="recentsLimit" value="5" />
+    <property name="JavaScriptLanguageLevel" value="ES5" />
+    <property name="JavaScriptPreferStrict" value="true" />
   </component>
   <component name="RunManager" selected="PHP Remote Debug.mywww.phongee">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -516,6 +566,19 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -544,19 +607,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -627,33 +677,33 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="988" extended-state="6" />
+    <frame x="-4" y="22" width="1288" height="718" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897863" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3277592" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39904988" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897863" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959481" sideWeight="0.6009501" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24879228" sideWeight="0.6722408" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -717,112 +767,135 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/www/application/controllers/login.php</url>
-          <line>55</line>
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="1" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/application/config/database.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/street_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="37" selection-start="2738" selection-end="2738" vertical-scroll-proportion="-16.653847">
+        <state line="49" column="17" selection-start="2393" selection-end="2504" vertical-scroll-proportion="0.49718574">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/config/config.php">
+    <entry file="file://$PROJECT_DIR$/www/src/jquery.friendurl.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="226" column="41" selection-start="7547" selection-end="7547" vertical-scroll-proportion="-62.692307">
-          <folding />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-1.043233">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/container_v.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuser_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="4" selection-start="1376" selection-end="1458" vertical-scroll-proportion="-13.730769">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/src/frontstyle.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1382" column="0" selection-start="27076" selection-end="27109" vertical-scroll-proportion="-10.08">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/src/login.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="26" selection-start="629" selection-end="629" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/src/assets/js/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="34" selection-start="651" selection-end="651" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/src/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="63" selection-start="134" selection-end="134" vertical-scroll-proportion="0.06351183">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/config/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="0" selection-start="1526" selection-end="1526" vertical-scroll-proportion="-19.923077">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/views/login_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="28" selection-start="398" selection-end="398" vertical-scroll-proportion="-9.153846">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/src/assets/css/styles.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="312" column="20" selection-start="5583" selection-end="5583" vertical-scroll-proportion="0.0">
+        <state line="306" column="21" selection-start="5467" selection-end="5467" vertical-scroll-proportion="-11.96">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
+    <entry file="file://$PROJECT_DIR$/www/src/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="48" selection-start="2190" selection-end="2190" vertical-scroll-proportion="-2.7058823">
+        <state line="379" column="21" selection-start="11892" selection-end="11892" vertical-scroll-proportion="-12.16">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/system/libraries/Session.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="469" column="0" selection-start="12895" selection-end="12895" vertical-scroll-proportion="-5.3846154">
+        <state line="201" column="18" selection-start="7428" selection-end="7508" vertical-scroll-proportion="-15.208333">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/controllers/login.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="23" selection-start="2128" selection-end="2134" vertical-scroll-proportion="-12.235294">
+        <state line="47" column="9" selection-start="1417" selection-end="1417" vertical-scroll-proportion="-11.875">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
+    <entry file="file://$PROJECT_DIR$/www/src/chubby-stacks-css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="184" column="45" selection-start="6568" selection-end="6571" vertical-scroll-proportion="3.9302325">
+        <state line="1944" column="39" selection-start="144014" selection-end="144014" vertical-scroll-proportion="-4.16">
           <folding>
-            <marker date="1387996898932" expanded="false" signature="48389:48405" placeholder="..." />
+            <element signature="e#172891#173066#2" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/src/ckeditor/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.14503817">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/src/ckeditor/ckeditor.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+            <marker date="1388112941000" expanded="false" signature="-1:-1" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="69" selection-start="2043" selection-end="2043" vertical-scroll-proportion="-16.875">
+          <folding>
+            <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1388140724000" expanded="true" signature="1159:1217" placeholder="..." />
+            <marker date="1388140724000" expanded="true" signature="1179:1205" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="9" selection-start="1267" selection-end="1267" vertical-scroll-proportion="-11.875">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/src/ckeditor/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="4" selection-start="274" selection-end="976" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="266" column="7" selection-start="10840" selection-end="10840" vertical-scroll-proportion="-10.791667">
+          <folding>
+            <element signature="n#style#0;n#select#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#3;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="14" selection-start="6193" selection-end="6193" vertical-scroll-proportion="0.6910828">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#7;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

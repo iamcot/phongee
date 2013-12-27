@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 3.3.9
+-- version 4.0.9
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 27, 2013 at 05:34 AM
--- Server version: 5.5.8
--- PHP Version: 5.3.5
+-- Generation Time: Dec 27, 2013 at 06:13 PM
+-- Server version: 5.6.14
+-- PHP Version: 5.3.15
 
-SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -42,14 +43,18 @@ CREATE TABLE IF NOT EXISTS `pgchitietthietbi` (
   `pgcolor` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `pgcountry` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `pgchitietthietbi`
 --
 
 INSERT INTO `pgchitietthietbi` (`id`, `pgcreate`, `pgthietbi_id`, `pglong_name`, `pgcode`, `pgpic`, `pgshort_info`, `pglong_info`, `pgtech_info`, `pgprice`, `pgprice_old`, `pgdeleted`, `pgyear`, `pgcolor`, `pgcountry`) VALUES
-(1, '2013-12-27 04:58:11', 1, 'Iphone 4', '23423424234234', '0ab6a7ce01267426b4c341e1bf78e5d5.jpg', '111', '<p>222</p>\n', '<p>333</p>\n', 12000, 14, 0, 2009, 'do', 'my');
+(1, '2013-12-26 21:58:11', 1, 'Iphone 4', '23423424234234', '0ab6a7ce01267426b4c341e1bf78e5d5.jpg', '111', '<p><span style="background-color:#A52A2A">222</span></p>\n', '<p><span style="color:#FFD700">333</span></p>\n', 12000, 14, 0, 2013, 'nau', 'trung quốc'),
+(2, '2013-12-27 11:11:20', 3, 'bulong', '12121212e', '', '', '', '', 0, 0, 0, 0, '', 'my'),
+(3, '2013-12-27 11:13:09', 3, 'bulong', '12121212e3', '', '', '', '', 0, 0, 0, 0, '', 'my'),
+(4, '2013-12-27 11:13:14', 3, 'bulong', '12121212e3w', '', '', '', '', 0, 0, 0, 0, '', 'my'),
+(5, '2013-12-27 11:13:18', 3, 'bulong', '12121212e3w', '', '', '', '', 0, 0, 0, 0, '', 'my');
 
 -- --------------------------------------------------------
 
@@ -118,15 +123,22 @@ CREATE TABLE IF NOT EXISTS `pgthietbi` (
   `pgprice` int(11) NOT NULL,
   `pgprice_old` int(11) NOT NULL,
   `pgdeleted` int(11) NOT NULL,
+  `pgyear` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `pgcolor` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `pgcountry` varchar(100) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `pgtype` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `pgtype_pk` varchar(20) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `pgthietbi`
 --
 
-INSERT INTO `pgthietbi` (`id`, `pgcreate`, `pgnhomthietbi_id`, `pglong_name`, `pgcode`, `pgpic`, `pgshort_info`, `pglong_info`, `pgtech_info`, `pgprice`, `pgprice_old`, `pgdeleted`) VALUES
-(1, '2013-12-27 04:27:35', 1, 'Iphone 4', 'ip4', '0ab6a7ce01267426b4c341e1bf78e5d5.jpg', '111', '222', '333', 12, 14, 0);
+INSERT INTO `pgthietbi` (`id`, `pgcreate`, `pgnhomthietbi_id`, `pglong_name`, `pgcode`, `pgpic`, `pgshort_info`, `pglong_info`, `pgtech_info`, `pgprice`, `pgprice_old`, `pgdeleted`, `pgyear`, `pgcolor`, `pgcountry`, `pgtype`, `pgtype_pk`) VALUES
+(1, '2013-12-26 21:27:35', 1, 'Iphone 4', 'ip4', '0ab6a7ce01267426b4c341e1bf78e5d5.jpg', '111', '<p>222</p>\n', '<p>333</p>\n', 12, 14, 0, '2010,2011,2012,2013', 'đỏ, xám, trắng, đen, nau', 'mỹ, trung quốc , han', 'thietbi', ''),
+(2, '2013-12-27 05:12:36', 1, 'tai nghe', 'tnip4', '', '', '', '', 200000, 300000, 0, '2013', 'trang', 'my', 'phukien', 'ban'),
+(3, '2013-12-27 05:19:57', 1, 'bulong', 'bl', '', '', '', '', 0, 0, 0, '', '', 'my', 'phukien', 'suachua');
 
 -- --------------------------------------------------------
 
@@ -159,4 +171,8 @@ CREATE TABLE IF NOT EXISTS `pguser` (
 --
 
 INSERT INTO `pguser` (`id`, `pgfname`, `pglname`, `pgusername`, `pgpassword`, `pgavatar`, `pgrole`, `pgdeleted`, `pgedit`, `pgcreate`, `pgmobi`, `pgemail`, `pgaddr`, `pgstore_id`) VALUES
-(1, 'Quản Trị', 'Viên', 'root', '57f231b1ec41dc6641270cb09a56f897', '556e4e92769fd1a03e416dd399390de3.jpg', 'admin', 0, '2013-12-27 03:22:21', '2013-12-27 02:06:41', '0123e', 'qưeqưeqư', 'eee', 0);
+(1, 'Quản Trị', 'Viên', 'root', '57f231b1ec41dc6641270cb09a56f897', '22beb1b8f43f74770f57fd80bd8167c7.png', 'admin', 0, '2013-12-27 06:28:25', '2013-12-26 19:06:41', '0123e', 'qưeqưeqư', 'eee', 0);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

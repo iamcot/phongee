@@ -3,7 +3,7 @@
     <table id="inputserviceplace">
         <tr>
             <td>
-                <input type="text" name="pglong_name" placeholder="Tên mhóm thiết bị">
+                <input type="text" name="pglong_name" placeholder="Tên nhóm thiết bị">
             </td>
         </tr>
         <tr>
@@ -18,12 +18,12 @@
         </tr>
 
         <tr>
-            <td><input type="hidden" name="edit" value="">
+            <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <input type="button" value="Lưu" onclick="save()">
-                <input type="button" value="Load" onclick="load(1)">
-                <input type="button" value="Xóa nhập liệu" onclick="myclear()"></td>
-            <td>
+                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
+                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+
                 <div id="loadstatus" style="float:right;"></div>
             </td>
         </tr>
@@ -37,6 +37,9 @@
 </fieldset>
 <script>
     $(function () {
+        if($("[placeholder]").size() > 0) {
+            $.Placeholder.init();
+        }
         load(1);
     });
     function save() {
