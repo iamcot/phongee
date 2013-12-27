@@ -43,7 +43,9 @@
     <script src="<?= base_url() ?>src/chubby-stacks-css/js/nicEdit.js"></script>
     <script src="<?= base_url() ?>src/chubby-stacks-css/js/jquery.customInput.js"></script>
     <link media="screen" type="text/css" rel="stylesheet" href="<?= base_url() ?>src/style.css">
-
+    <link type="text/css" rel="stylesheet" href="<?= base_url() ?>src/font-awesome/css/font-awesome.css">
+    <script src="<?= base_url() ?>src/chubby-stacks-css/js/jquery-ui.multidatespicker.js"></script>
+    <script src="<?= base_url() ?>src/autoNumeric.js"></script>
 </head>
 
 <body>
@@ -68,19 +70,19 @@
             <ul class="menu clearfix gradient">
                 <li><a href="<?= base_url() ?>admin/"
                        class="<?= (($cat == 'admin') ? 'select' : '') ?>">Tổng quan</a></li>
-                <? if ($this->mylibs->accessaddresspage()): ?>
+                <? if ($this->mylibs->checkRole('raInout')): ?>
                     <li><a href="<?= base_url() ?>admin/inout"
                            class="<?= (($cat == 'inout') ? 'select' : '') ?>">Xuất/Nhập</a></li>
                 <? endif ?>
-                <? if ($this->mylibs->accessservicepage()): ?>
+                <? if ($this->mylibs->checkRole('raReport')): ?>
                     <li><a href="<?= base_url() ?>admin/report"
                            class="<?= (($cat == 'report') ? 'select' : '') ?>">Báo cáo</a></li>
                 <? endif ?>
-                <? if ($this->mylibs->accessdealpage()): ?>
+                <? if ($this->mylibs->checkRole('raThietbi')): ?>
                     <li><a href="<?= base_url() ?>admin/thietbi"
                            class="<?= (($cat == 'thietbi') ? 'select' : '') ?>">Thiết bị</a></li>
                 <? endif ?>
-                <? if ($this->mylibs->accessuserpage()): ?>
+                <? if ($this->mylibs->checkRole('raUser')): ?>
                     <li><a href="<?= base_url() ?>admin/user"
                            class="<?= (($cat == 'user') ? 'select' : '') ?>">Người dùng</a></li>
                 <? endif ?>
@@ -89,6 +91,7 @@
         </div>
 <!--    </div>-->
     <div id="content">
+        <?=$this->mylibs->checkRole('raAdmin')?>
         <div class="wrap">
             <?= (isset($body) ? $body : "") ?>
         </div>

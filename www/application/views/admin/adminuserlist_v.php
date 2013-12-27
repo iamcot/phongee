@@ -20,13 +20,9 @@
             <td id="selectrole">
 
                 <select name="pgrole" data-placeholder="Quyền hạn"  >
-                    <option value="member">Thành viên</option>
-                    <option value="provider">Nhà cung cấp</option>
-                    <option value="custom">Khách hàng</option>
-                    <option value="staff">Nhân viên</option>
-                    <option value="ketoan">Kế toán cửa hàng</option>
-                    <option value="ketoantruong">Kế toán trưởng</option>
-                    <option value="admin">Quản trị</option>
+                    <? foreach($this->config->item('aRole') as $k=>$v):?>
+                    <option value="<?=$k?>"><?=$v?></option>
+                    <? endforeach;?>
                 </select>
 
             </td>
@@ -62,9 +58,9 @@
         <tr>
             <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
-                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+                <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
+                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
 
                 <div id="loadstatus" style="float:right;"></div>
             </td>

@@ -24,8 +24,8 @@ class Admin extends CI_Controller
         if (!$this->session->userdata("pgrole")) {
             $this->session->set_userdata('referer', base_url() . "admin");
             header("Location: " . base_url() . "login");
-        } else if (!$this->mylibs->accessadmin()) {
-            header("Location: " . base_url());
+        } else if (!$this->mylibs->checkRole('raAdmin')) {
+            header("Location: " . base_url().'login');
         }
         // Your own constructor code
         if ($this->session->userdata("lang"))
@@ -67,7 +67,7 @@ class Admin extends CI_Controller
      */
     public function user()
     {
-        if (!$this->mylibs->accessuserpage())
+        if (!$this->mylibs->checkRole('raUser'))
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/adminuser_v', $data, true);
@@ -76,11 +76,24 @@ class Admin extends CI_Controller
         $this->render($data);
     }
     /**
+     * Render import and export page
+     */
+    public function inout()
+    {
+        if (!$this->mylibs->checkRole('raInout'))
+            header("Location: " . base_url() . "admin");
+        $data = array();
+        $data['body'] = $this->load->view('admin/admininout_v', $data, true);
+        $data['cat'] = 'inout';
+        $data['title'] = 'Quản lý Xuất nhập';
+        $this->render($data);
+    }
+    /**
      * Render Thiet bi page
      */
     public function thietbi()
     {
-        if (!$this->mylibs->accessuserpage())
+        if (!$this->mylibs->checkRole('raThietbi'))
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/adminthietbi_v', $data, true);

@@ -1,7 +1,7 @@
 *{
     padding: 0px;
     margin: 0px;
-    font-family: Helvetica, arial, freesans, clean, sans-serif !important;
+    font-family: Helvetica, arial, freesans, clean, sans-serif;
 }
 html,body{
     font-size:100%;
@@ -192,12 +192,12 @@ header h2{
     /*font-size:80%;*/
 /*}*/
 
-/*:-moz-placeholder { *//* Firefox 18- */
+/*:-moz-placeholder {*/
     /*color: #aaa;*/
     /*font-size:80%;*/
 /*}*/
 
-/*::-moz-placeholder {  *//* Firefox 19+ */
+/*::-moz-placeholder {*/
     /*color: #aaa;*/
     /*font-size:80%;*/
 /*}*/
@@ -410,4 +410,15 @@ input[type="text"] {
 select{
     padding: 5px;
     width: 100%;
+}
+.ui-datepicker-next,
+.ui-datepicker-prev{
+    border: none;
+    top:4px !important;
+}
+.ui-datepicker-prev{
+    left:3px!important;
+}
+.ui-datepicker-next{
+    right:3px!important;
 }

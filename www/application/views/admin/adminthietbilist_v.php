@@ -3,8 +3,14 @@
     <table id="inputserviceplace">
         <tr>
             <td>
-                <input type="radio" name="pgtype" value="thietbi" checked=checked> Thiết bị
-                <input type="radio" name="pgtype" value="phukien"> Phụ kiện
+                <span style="display: inline-block;">
+                <input type="radio" name="pgtype" value="thietbi" checked=checked id="thietbiradio">
+                <label for="thietbiradio">Thiết bị</label>
+                    </span>
+                 <span style="display: inline-block;">
+                <input type="radio" name="pgtype" value="phukien" id="phukienradio">
+                <label for="phukienradio"> Phụ kiện</label>
+                    </span>
             </td>
             <td>
                 <select name="pgtype_pk" style="display: none">
@@ -74,9 +80,9 @@
         <tr>
             <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
-                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+                <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
+                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
 
                 <div id="loadstatus" style="float:right;"></div>
             </td>
@@ -95,6 +101,7 @@
             $.Placeholder.init();
         }
         load(1);
+        $("input").customInput();
     });
     function save() {
         var pglongname     = $("input[name=pglongname]").val();

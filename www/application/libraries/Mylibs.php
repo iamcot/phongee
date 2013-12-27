@@ -8,35 +8,21 @@ class MyLibs
 
     public $CI;
 
-    public function makeNavAddr($sStopLevel, $aAddress, $placeid=0)
-    {
-        $aAddrTree = $this->CI->config->item('aAddrTree');
-        $sNavCurr = "/";
-        $font = 10;
-        $parentid = 0;
-        $parentname = "";
-        $sAddNav = "";
-        $currurl = base_url();
-        foreach ($aAddrTree as $level => $aAddr) {
-            $oCurrAdd = $aAddress[$level];
-            if ($oCurrAdd == null) header("Location: " . $currurl);
-            $sAddNav .= '<li class="parentnav smalltext' . $font . '" onmouseover="ShowSubCat(this,\'' . $parentname . '\',' . $parentid . ',\'' . $level . '\',\'' . $sNavCurr . '\')" onmouseout="HideSubCat(\'' . $level . '\')">
-                ' . (($font == 10) ? '<i class="fa fa-map-marker"></i> ' : '') . '<a href="' . $sNavCurr . $oCurrAdd->daurl.(($placeid>0 && $font==6)?'-'.$placeid.'.html':'') . '">' . $oCurrAdd->dalong_name . '</a> <i class="fa fa-caret-down"></i>
-                <div class="subnav" id="subcat_' . $level . '" style="display: none;"></div>
-                </li>';
-            $parentname = $level;
-            $parentid = $oCurrAdd->id;
-            $sNavCurr .= $oCurrAdd->daurl . '/';
-            $currurl .= $oCurrAdd->daurl . '/';
-            $font--;
-            if ($sStopLevel == $level) break;
-        }
-        return $sAddNav;
-    }
-
     public function echojson($data = array())
     {
         $this->CI->output->set_content_type('application/json')->set_output(json_encode($data));
+    }
+    public function makeUserString(){
+        $str = "";
+        foreach($this->CI->config->item("aRole") as $k=>$v){
+            if($k == $this->CI->session->userdata("pgrole"))
+                $str .= "1";
+            else $str.="0";
+        }
+        return bindec($str);
+    }
+    public function checkRole($rolename=""){
+        return ($this->makeUserString() == ($this->makeUserString() & $this->CI->config->item($rolename)));
     }
 
     public function accessadmin()
@@ -57,110 +43,6 @@ class MyLibs
                 break;
         }
         return $acees;
-    }
-
-    public function accessuserpage()
-    {
-        $acees = false;
-        switch ($this->CI->session->userdata("pgrole")) {
-            case "admin":
-                $acees = true;
-                break;
-            case "author":
-                $acees = false;
-                break;
-            case "member":
-                $acees = false;
-                break;
-            default:
-                $acees = false;
-                break;
-        }
-        return $acees;
-    }
-
-    public function accessaddresspage()
-    {
-        $acees = false;
-        switch ($this->CI->session->userdata("pgrole")) {
-            case "admin":
-                $acees = true;
-                break;
-            case "author":
-                $acees = true;
-                break;
-            case "member":
-                $acees = false;
-                break;
-            default:
-                $acees = false;
-                break;
-        }
-        return $acees;
-    }
-
-    public function accessservicepage()
-    {
-        $acees = false;
-        switch ($this->CI->session->userdata("pgrole")) {
-            case "admin":
-                $acees = true;
-                break;
-            case "author":
-                $acees = true;
-                break;
-            case "member":
-                $acees = false;
-                break;
-            default:
-                $acees = false;
-                break;
-        }
-        return $acees;
-    }
-
-    public function accessdealpage()
-    {
-        $acees = false;
-        switch ($this->CI->session->userdata("pgrole")) {
-            case "admin":
-                $acees = true;
-                break;
-            case "author":
-                $acees = true;
-                break;
-            case "member":
-                $acees = false;
-                break;
-            default:
-                $acees = false;
-                break;
-        }
-        return $acees;
-    }
-    public function candeletecomment()
-    {
-        $acees = false;
-        switch ($this->CI->session->userdata("pgrole")) {
-            case "admin":
-                $acees = 2;
-                break;
-            case "author":
-                $acees = 2;
-                break;
-            case "member":
-                $acees = 1;
-                break;
-            default:
-                $acees = 0;
-                break;
-        }
-        return $acees;
-    }
-
-    public function makePlaceUrl($place)
-    {
-        return base_url() . $place->provinceurl . '/' . $place->districturl . '/' . (($place->wardurl != '') ? $place->wardurl . '/' : '') . (($place->streeturl != '') ? $place->streeturl . '/' : '') . $place->daurl . '-' . $place->id . '.html';
     }
 
     public function makeThumbnails($file_path, $file_name, $width, $height)
@@ -241,11 +123,6 @@ class MyLibs
         );
         @imagedestroy($src_img);
         return $new_img;
-    }
-    function getIdFromSeourl($seourl){
-        $a = explode(".",$seourl);
-        $l = explode("-",$a[0]);
-        return end($l);
     }
 
 }

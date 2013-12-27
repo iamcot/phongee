@@ -1,80 +1,69 @@
 <fieldset>
     <legend>Thông tin</legend>
     <table id="inputserviceplace">
-        <tr><td colspan="2">
-            <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
-            <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
-            <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+        <tr>
+            <td>
+                <span style="display: inline-block;">
+                <input type="radio" name="pgtype" value="nhap"  id="nhapradio">
+                <label for="nhapradio">Nhập</label>
+                    </span>
+                 <span style="display: inline-block;">
+                <input type="radio" name="pgtype" value="xuat"  id="xuatradio">
+                <label for="xuatradio">Xuất</label>
+                 </span>    <br>
+                <input tabindex="1" type="text" name="pgmahoadon" style="width:40%;display: inline-block" placeholder="Mã hóa đơn">
+                <input  tabindex="2" type="text" id="pgdate" name="pgdate" style="width:40%;display: inline-block" placeholder="Ngày">
+
+            </td>
+            <td>
+                <span id="xuatoption" style="display: none">
+                    <span style="display: inline-block;">
+                    <input type="radio" name="pgtypexuat" value="cuahang"  id="cuahangradio">
+                    <label for="cuahangradio">Cửa hàng</label>
+                        </span>
+                     <span style="display: inline-block;">
+                    <input type="radio" name="pgtypexuat" value="khachhang"  id="khachhangradio">
+                    <label for="khachhangradio">Khách hàng</label>
+                     </span>
+                </span>
+                    <div id="targetoption" style="display: none">
+                        <select name="pgfrom" style="width: 40%;display: inline-block">
+                            <option value="-1">Cửa hàng</option>
+                        </select>
+                        <i class="fa fa-plane fa-2x"></i>
+                        <select name="pgto"  style="width: 40%;display: inline-block">
+                            <option value="-1">Cửa hàng</option>
+                        </select>
+                    </div>
 
             </td>
         </tr>
         <tr>
-            <td>
-                <input type="text" name="pgthietbicode" placeholder="Mã thiết bị" style="width: 28%;float:left;" onblur="getThietbi(this.value)">
-                <input type="text" name="pglongname" placeholder="Tên thiết bị"  style="width: 48%;float:left;">
-                <input type="text" name="pgthietbi_id" placeholder="ID thiết bị" style="width: 19%;float:left;">
-            </td>
-            <td>
-                <input type="text" name="pgcode" placeholder="Số series/ID định dạng thiết bị" ondblclick="this.value=''"></td>
-            </td>
-        </tr>
-        <tr>
-            <td>
-<!--                <input type="text" name="pgcolor" placeholder="Màu">-->
-                <select name="pgcolor">
+            <td colspan="2">
+                <input  tabindex="3" type="text" name="pgseries" style="width:20%;display: inline-block" placeholder="Series/IMEI">
+                <input  tabindex="4" type="text" onblur="getThietbi(this.value)" name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
+
+                <input type="hidden" name="pgthietbi_id" >
+                <input  tabindex="5"  type="text" onblur="console.log(parseInt($(this).val().replace(/ /g,'')))" name="pgprice" style="width:15%;display: inline-block" placeholder="Giá">
+                <input  tabindex="6" type="text" name="pgcount" style="width:8%;display: inline-block" placeholder="Số lượng">
+                <select  tabindex="7" name="pgcolor" style="width:10%;display: inline-block" >
                     <option value="0">Màu </option>
                 </select>
-            <td>
-<!--                <input type="text" name="pgcountry" placeholder="Nước"></td>-->
-                    <select name="pgcountry">
-                        <option value="0">Nước sản xuất</option>
-                    </select>
-            </td>
-        </tr>
-        <tr>
-            <td>
-<!--                <input type="text" name="pgyear" placeholder="Năm sx" >-->
-                <select name="pgyear">
-                    <option value="0">Năm sản xuất</option>
+                <select  tabindex="8" name="pgcountry" style="width:10%;display: inline-block" >
+                    <option value="0">Nước sx</option>
                 </select>
-            </td>
-            <td rowspan="3" style="vertical-align: top">
-                <input type="text" name="pgpic" placeholder="Hình ảnh đại diện" readonly=true>
-                <input id="picupload"  type="file" name="files[]" data-url="<?=base_url()?>admin/calljupload" multiple>
-                <div id="pgavatardemo"></div>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <label>Giá hiện tại</label>
-                <input type="text" name="pgprice" placeholder="Giá hiện tại">
-                <label>Giá cũ</label>
-                <input type="text" name="pgprice_old" placeholder="Giá cũ">
-            </td>
-
-        </tr>
-        <tr>
-            <td><input type="text" name="pgshort_info" placeholder="Thông tin ngắn"></td>
-
-        </tr>
-        <tr>
-            <td colspan="2" >
-                <label>Thông tin sản phẩm</label>
-                <textarea name="pglong_info" class="ckeditor" id="textare1"></textarea>
-                <label>Thông tin kỹ thuật</label>
-                <textarea name="pgtech_info" class="ckeditor"></textarea>
+                <select tabindex="9"  name="pgyear" style="width:10%;display: inline-block" >
+                    <option value="0">Năm sx</option>
+                </select>
+                <span class="btn btn-follow"><input  tabindex="10" type="button" value="Lưu" onclick="save()"> </span>
             </td>
         </tr>
         <tr>
             <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
-                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
-                <span style="display: inline-block">
-                <input type="checkbox" name="checkdelinput" id="notclear">
-                <label for="notclear">Không xóa dữ liệu</label>
-                    </span>
+
+                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
 
                 <div id="loadstatus" style="float:right;"></div>
             </td>
@@ -85,13 +74,34 @@
 
 </fieldset>
 <fieldset>
-    <legend>Danh sách</legend>
-    <div id="list_province"></div>
+    <legend>Chi tiết hóa đơn</legend>
+    <div id="list_hoadonitem"></div>
+</fieldset>
+<fieldset>
+    <legend>Danh sách hóa đơn</legend>
+    <div id="list_hoadon"></div>
 </fieldset>
 <script>
     $(function () {
+        $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
         load(1);
         $("input").customInput();
+        $( "#pgdate" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $("input[name=pgtype]").click(function(){
+//            console.log($(this).val() );
+            if($(this).val() == 'nhap'){
+                $("#xuatoption").hide();
+                $("#targetoption").show();
+            }
+            else{
+                $("#xuatoption").show();
+                $("#targetoption").show();
+            }
+        })
     });
     function save() {
         var pglongname     = $("input[name=pglongname]").val();
@@ -329,6 +339,39 @@
             }
         });
     }
+    function getThietbi(id){
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/loadcode/thietbi/" + id,
+            success: function (msg) {
+                if (msg == "0") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    $("input[name=pgprice]").val(province.pgprice);
+                    $("input[name=pgthietbi_id]").val(province.id);
+                    var array = province.pgyear.split(",");
+                    var select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgyear]").html(select);
+                    array = province.pgcolor.split(",");
+                    select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgcolor]").html(select);
+                    array = province.pgcountry.split(",");
+                    select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgcountry]").html(select);
 
+
+                }
+            }
+        });
+    }
 </script>
 

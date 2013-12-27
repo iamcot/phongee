@@ -2,9 +2,9 @@
     <legend>Thông tin</legend>
     <table id="inputserviceplace">
         <tr><td colspan="2">
-            <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
-            <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
-            <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+            <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
+            <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+            <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
 
             </td>
         </tr>
@@ -68,13 +68,13 @@
         <tr>
             <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
-                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
-
-                <span class="rowCheckbox">
-                <input type="checkbox" name="checkdelinput"> <label>Không xóa dữ liệu</label>
-                </span>
+                <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
+                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+                <span style="display: inline-block">
+                <input type="checkbox" name="checkdelinput" id="notclear">
+                <label for="notclear">Không xóa dữ liệu</label>
+                    </span>
 
                 <div id="loadstatus" style="float:right;"></div>
             </td>
@@ -91,6 +91,7 @@
 <script>
     $(function () {
         load(1);
+        $("input").customInput();
     });
     function save() {
         var pglongname     = $("input[name=pglongname]").val();
@@ -141,6 +142,8 @@
                             myclear();
                             else{
                                 $("input[name=edit]").val("");
+                                $("input[name=pgcode]").val("");
+
                             }
                             break;
                         default :
@@ -326,4 +329,6 @@
             }
         });
     }
+
 </script>
+

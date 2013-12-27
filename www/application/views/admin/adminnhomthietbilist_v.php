@@ -20,9 +20,9 @@
         <tr>
             <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
-                <span class="btn"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn"><input type="button" value="Load" onclick="load(1)"> </span>
-                <span class="btn"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+                <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
+                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
 
                 <div id="loadstatus" style="float:right;"></div>
             </td>
