@@ -12,17 +12,21 @@ class MyLibs
     {
         $this->CI->output->set_content_type('application/json')->set_output(json_encode($data));
     }
-    public function makeUserString(){
-        $str = "";
+    public function getUserPosition(){
+        $i = 0;
         foreach($this->CI->config->item("aRole") as $k=>$v){
             if($k == $this->CI->session->userdata("pgrole"))
-                $str .= "1";
-            else $str.="0";
+                break;
+            $i++;
         }
-        return bindec($str);
+        return $i;
     }
     public function checkRole($rolename=""){
-        return ($this->makeUserString() == ($this->makeUserString() & $this->CI->config->item($rolename)));
+        $strrole =  str_split($this->CI->config->item($rolename));
+        $pos = $this->getUserPosition();
+        if($pos >=0)
+        return $strrole[$pos] ;
+        else return 0;
     }
 
     public function accessadmin()

@@ -26,10 +26,12 @@ $config['aRole'] = array(
     'ketoantruong'=>'Kế toán trưởng',
     'admin'=>'Quản trị',
 );
-$config['raAdmin'] = '0001111';
-$config['raUser'] = '0000001';
-$config['raThietbi'] = '0001111';
-$config['raInout'] = '0000111';
-$config['raReport'] = '0000111';
+// ra = 0 : not alow, ra = 1: can view, ra = 2: can edit yourself, ra=3 edit all
+$config['raAdmin'] = '0001123';
+$config['raUser'] = '0000003';
+$config['raThietbi'] = '0001123';
+$config['raInout'] = '0000123';
+$config['raReport'] = '0000123';
+$config['rqStore'] = '0002233'; //
 
 

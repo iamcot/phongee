@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/autoNumeric.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/js/libs/jquery-1.10.2.min.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/libraries/Mylibs.php" afterPath="$PROJECT_DIR$/www/application/libraries/Mylibs.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/controllers/admin.php" afterPath="$PROJECT_DIR$/www/application/controllers/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/admininout_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/admininout_v.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/container_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/controllers/login.php" afterPath="$PROJECT_DIR$/www/application/controllers/login.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/config/mycfg.php" afterPath="$PROJECT_DIR$/www/application/config/mycfg.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/src/style.css" afterPath="$PROJECT_DIR$/www/src/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/src/chubby-stacks-css/style.css" afterPath="$PROJECT_DIR$/www/src/chubby-stacks-css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="phongee.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,10 +27,11 @@
     <file path="E:/../Shared/development/projects_git/webshop/dwshop/oxid_webshop/oxid/out/dwrespo/src/css/dwshop/dwshop.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388142160767" ignored="false" />
     <file path="/jquery.customInput.js" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388160245673" ignored="false" />
     <file path="/admininout_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388162574916" ignored="false" />
-    <file path="/admin.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388173696525" ignored="false" />
-    <file path="/admininoutlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388172834815" ignored="false" />
+    <file path="/admin.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388198423270" ignored="false" />
+    <file path="/admininoutlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388198317175" ignored="false" />
     <file path="/mycfg.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388174186561" ignored="false" />
-    <file path="/Mylibs.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388175529191" ignored="false" />
+    <file path="/Mylibs.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388195464932" ignored="false" />
+    <file path="/fragment.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388195415835" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -129,11 +120,11 @@
       <file leaf-file-name="container_v.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="84" column="57" selection-start="4914" selection-end="4948" vertical-scroll-proportion="-11.269231">
+            <state line="92" column="22" selection-start="5223" selection-end="5223" vertical-scroll-proportion="-14.538462">
               <folding>
                 <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1388175704641" expanded="true" signature="1159:1217" placeholder="..." />
-                <marker date="1388175704641" expanded="true" signature="1179:1205" placeholder="{...}" />
+                <marker date="1388196239954" expanded="true" signature="1159:1217" placeholder="..." />
+                <marker date="1388196239954" expanded="true" signature="1179:1205" placeholder="{...}" />
               </folding>
             </state>
           </provider>
@@ -157,10 +148,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mycfg.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="mycfg.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/application/config/mycfg.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="66" selection-start="492" selection-end="492" vertical-scroll-proportion="0.28752643">
+            <state line="34" column="16" selection-start="931" selection-end="938" vertical-scroll-proportion="-22.23077">
               <folding />
             </state>
           </provider>
@@ -199,7 +190,7 @@
       <file leaf-file-name="admininoutlist_v.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="97" column="42" selection-start="4573" selection-end="4573" vertical-scroll-proportion="-8.423077">
+            <state line="110" column="134" selection-start="5206" selection-end="5206" vertical-scroll-proportion="-19.538462">
               <folding>
                 <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
@@ -210,7 +201,7 @@
                 <element signature="n#style#0;n#span#1;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#select#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#1;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#span#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#3;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
@@ -218,6 +209,9 @@
                 <element signature="n#style#0;n#select#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#select#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#select#2;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+                <marker date="1388198355886" expanded="true" signature="4595:4627" placeholder="..." />
+                <marker date="1388198355886" expanded="true" signature="5173:5205" placeholder="..." />
+                <marker date="1388198355886" expanded="true" signature="5352:5384" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -226,7 +220,7 @@
       <file leaf-file-name="Mylibs.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="34" selection-start="512" selection-end="512" vertical-scroll-proportion="-12.423077">
+            <state line="10" column="28" selection-start="142" selection-end="150" vertical-scroll-proportion="-6.5384617">
               <folding />
             </state>
           </provider>
@@ -241,10 +235,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="admin.php" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="admin.php" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="51" selection-start="1031" selection-end="1031" vertical-scroll-proportion="-17.653847">
+            <state line="195" column="30" selection-start="6613" selection-end="6613" vertical-scroll-proportion="0.49579832">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="login.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/controllers/login.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="49" selection-start="2381" selection-end="2381" vertical-scroll-proportion="-21.576923">
               <folding />
             </state>
           </provider>
@@ -280,7 +283,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/www/src/ckeditor/config.js" />
         <option value="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.customInput.js" />
         <option value="$PROJECT_DIR$/www/application/views/admin/admininout_v.php" />
         <option value="$PROJECT_DIR$/www/src/chubby-stacks-css/style.css" />
@@ -290,12 +292,13 @@
         <option value="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" />
         <option value="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" />
         <option value="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" />
         <option value="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" />
         <option value="$PROJECT_DIR$/www/application/libraries/Mylibs.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
-        <option value="$PROJECT_DIR$/www/application/controllers/admin.php" />
         <option value="$PROJECT_DIR$/www/application/config/mycfg.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
+        <option value="$PROJECT_DIR$/www/application/controllers/login.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/controllers/admin.php" />
       </list>
     </option>
   </component>
@@ -677,7 +680,7 @@
     <frame x="-4" y="-4" width="1288" height="988" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32660332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32660332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -695,7 +698,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.67339665" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.6009501" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -764,17 +767,10 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuser_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_news_v.php">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -850,9 +846,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="36" selection-start="853" selection-end="853" vertical-scroll-proportion="-8.5">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="22" selection-start="5223" selection-end="5223" vertical-scroll-proportion="-14.538462">
+          <folding>
+            <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1388196239954" expanded="true" signature="1159:1217" placeholder="..." />
+            <marker date="1388196239954" expanded="true" signature="1179:1205" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/controllers/login.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="49" selection-start="2381" selection-end="2381" vertical-scroll-proportion="-21.576923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="28" selection-start="142" selection-end="150" vertical-scroll-proportion="-6.5384617">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="42" selection-start="4573" selection-end="4573" vertical-scroll-proportion="-8.423077">
+        <state line="110" column="134" selection-start="5206" selection-end="5206" vertical-scroll-proportion="-19.538462">
           <folding>
             <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
@@ -863,7 +891,7 @@
             <element signature="n#style#0;n#span#1;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#select#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#span#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#3;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
@@ -871,45 +899,23 @@
             <element signature="n#style#0;n#select#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#select#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#select#2;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
+            <marker date="1388198355886" expanded="true" signature="4595:4627" placeholder="..." />
+            <marker date="1388198355886" expanded="true" signature="5173:5205" placeholder="..." />
+            <marker date="1388198355886" expanded="true" signature="5352:5384" placeholder="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="36" selection-start="853" selection-end="853" vertical-scroll-proportion="-8.5">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="34" selection-start="512" selection-end="512" vertical-scroll-proportion="-12.423077">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="84" column="57" selection-start="4914" selection-end="4948" vertical-scroll-proportion="-11.269231">
-          <folding>
-            <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1388175704641" expanded="true" signature="1159:1217" placeholder="..." />
-            <marker date="1388175704641" expanded="true" signature="1179:1205" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="51" selection-start="1031" selection-end="1031" vertical-scroll-proportion="-17.653847">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/config/mycfg.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="66" selection-start="492" selection-end="492" vertical-scroll-proportion="0.28752643">
+        <state line="34" column="16" selection-start="931" selection-end="938" vertical-scroll-proportion="-22.23077">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="195" column="30" selection-start="6613" selection-end="6613" vertical-scroll-proportion="0.49579832">
           <folding />
         </state>
       </provider>

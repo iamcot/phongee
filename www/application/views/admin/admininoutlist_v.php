@@ -31,9 +31,11 @@
                             <option value="-1">Cửa hàng</option>
                         </select>
                         <i class="fa fa-plane fa-2x"></i>
+                        <span id="pgtospan">
                         <select name="pgto"  style="width: 40%;display: inline-block">
                             <option value="-1">Cửa hàng</option>
                         </select>
+                        </span>
                     </div>
 
             </td>
@@ -84,7 +86,7 @@
 <script>
     $(function () {
         $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
-        load(1);
+        loadinout(1);
         $("input").customInput();
         $( "#pgdate" ).datepicker({
             changeMonth: true,
@@ -92,16 +94,31 @@
             dateFormat: "yy-mm-dd"
         });
         $("input[name=pgtype]").click(function(){
-//            console.log($(this).val() );
             if($(this).val() == 'nhap'){
+                $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
+                getStore('nhap');
                 $("#xuatoption").hide();
                 $("#targetoption").show();
             }
             else{
                 $("#xuatoption").show();
+                $("#targetoption").hide();
+            }
+        });
+        $("input[name=pgtypexuat]").click(function(){
+            if($(this).val() == 'khachhang'){
+                getStore('xuat');
+                $("#pgtospan").html("<input type='text' name='pgto' placeholder='Khách hàng'  style='width: 40%;display: inline-block'>");
                 $("#targetoption").show();
             }
-        })
+            else{
+                $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
+                getStore('xuat');
+                $("#xuatoption").show();
+                $("#targetoption").show();
+
+            }
+        });
     });
     function save() {
         var pglongname     = $("input[name=pglongname]").val();
@@ -169,9 +186,9 @@
             alert("Vui lòng nhập dữ liệu");
         }
     }
-    function load(page) {
+    function loadinout(page) {
         addloadgif("#loadstatus");
-        $("#list_province").load("<?=base_url()?>admin/load/chitietthietbi/" + page, function () {
+        $("#list_hoadon").load("<?=base_url()?>admin/load/inout/" + page, function () {
             removeloadgif("#loadstatus");
         });
         $("input[name=currpage]").val(page);
@@ -215,7 +232,7 @@
                     $("textarea[name=pgtech_info]").val(province.pgtech_info);
                     $("input[name=edit]").val(province.id);
                     $("input[name=pgthietbi_id]").val(province.pgthietbi_id);
-                    getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
+                   // getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
 
                     $("#pgavatardemo").html('<img src="<?=base_url()?>thumbnails/' + province.pgpic + '">');
                 }
@@ -268,6 +285,32 @@
             }
         });
     });
+    function getStore(type){
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/jsGetStore",
+            success: function (msg) {
+                if (msg == "0") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    var option = "";
+                    $.each(province, function (index, store){
+//                        console.log(store);
+                        option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
+                    });
+                    if(type =="nhap"){
+                        $("select[name=pgfrom]").html("");
+                        $("select[name=pgto]").html(option);
+                    }
+                    else if(type=="xuat") {
+                        $("select[name=pgfrom]").html(option);
+                        $("select[name=pgto]").html(option);
+                    }
+
+                }
+            }
+        });
+    }
     function getthietbiselect(id,year,color,country) {
         $.ajax({
             type: "post",
@@ -298,47 +341,7 @@
             }
         });
     }
-    function getThietbi(id){
-        $.ajax({
-            type: "post",
-            url: "<?=base_url()?>admin/loadcode/thietbi/" + id,
-            success: function (msg) {
-                if (msg == "0") alert('<?=lang("NO_DATA")?>');
-                else {
-                    var province = eval(msg);
-                    $("input[name=pglongname]").val(province.pglong_name);
-                    $("input[name=pgpic]").val(province.pgpic);
-                    $("input[name=pgprice]").val(province.pgprice);
-                    $("input[name=pgprice_old]").val(province.pgprice_old);
-                    $("input[name=pgshort_info]").val(province.pgshort_info);
-                    $("textarea[name=pglong_info]").val(province.pglong_info);
-                    $("textarea[name=pgtech_info]").val(province.pgtech_info);
-                    $("input[name=pgthietbi_id]").val(province.id);
-                    var array = province.pgyear.split(",");
-                    var select ="";
-                    for(var i=0;i<array.length;i++){
-                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
-                    }
-                    $("select[name=pgyear]").html(select);
-                    array = province.pgcolor.split(",");
-                    select ="";
-                    for(var i=0;i<array.length;i++){
-                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
-                    }
-                    $("select[name=pgcolor]").html(select);
-                    array = province.pgcountry.split(",");
-                    select ="";
-                    for(var i=0;i<array.length;i++){
-                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
-                    }
-                    $("select[name=pgcountry]").html(select);
 
-
-                    $("#pgavatardemo").html('<img src="<?=base_url()?>thumbnails/' + province.pgpic + '">');
-                }
-            }
-        });
-    }
     function getThietbi(id){
         $.ajax({
             type: "post",

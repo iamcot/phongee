@@ -24,7 +24,7 @@ class Admin extends CI_Controller
         if (!$this->session->userdata("pgrole")) {
             $this->session->set_userdata('referer', base_url() . "admin");
             header("Location: " . base_url() . "login");
-        } else if (!$this->mylibs->checkRole('raAdmin')) {
+        } else if ($this->mylibs->checkRole('raAdmin')==0) {
             header("Location: " . base_url().'login');
         }
         // Your own constructor code
@@ -67,7 +67,7 @@ class Admin extends CI_Controller
      */
     public function user()
     {
-        if (!$this->mylibs->checkRole('raUser'))
+        if ($this->mylibs->checkRole('raUser')==0)
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/adminuser_v', $data, true);
@@ -80,7 +80,7 @@ class Admin extends CI_Controller
      */
     public function inout()
     {
-        if (!$this->mylibs->checkRole('raInout'))
+        if ($this->mylibs->checkRole('raInout')==0)
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/admininout_v', $data, true);
@@ -93,7 +93,7 @@ class Admin extends CI_Controller
      */
     public function thietbi()
     {
-        if (!$this->mylibs->checkRole('raThietbi'))
+        if ($this->mylibs->checkRole('raThietbi')==0)
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/adminthietbi_v', $data, true);
@@ -188,6 +188,25 @@ class Admin extends CI_Controller
         }
         if ($this->db->query($str)) echo 1;
         else echo 0;
+    }
+    public function getStore(){
+        if($this->mylibs->checkRole("rqStore")>= 2)
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
+        if($this->mylibs->checkRole("rqStore")== 2)
+             $sql.= " AND id =".$this->session->userdata("pgstore_id")."";
+        $sql .= " ORDER BY pgorder ";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            return $qr->result_array();
+        }
+        else return null;
+    }
+    public function jsGetStore(){
+        $arr = $this->getStore();
+        if($arr!=null){
+            $this->mylibs->echojson($arr);
+        }
+        else echo "";
     }
     /**
      * Select database with condition

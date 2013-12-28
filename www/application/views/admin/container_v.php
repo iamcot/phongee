@@ -70,19 +70,19 @@
             <ul class="menu clearfix gradient">
                 <li><a href="<?= base_url() ?>admin/"
                        class="<?= (($cat == 'admin') ? 'select' : '') ?>">Tổng quan</a></li>
-                <? if ($this->mylibs->checkRole('raInout')): ?>
+                <? if ($this->mylibs->checkRole('raInout')>0): ?>
                     <li><a href="<?= base_url() ?>admin/inout"
                            class="<?= (($cat == 'inout') ? 'select' : '') ?>">Xuất/Nhập</a></li>
                 <? endif ?>
-                <? if ($this->mylibs->checkRole('raReport')): ?>
+                <? if ($this->mylibs->checkRole('raReport')>0): ?>
                     <li><a href="<?= base_url() ?>admin/report"
                            class="<?= (($cat == 'report') ? 'select' : '') ?>">Báo cáo</a></li>
                 <? endif ?>
-                <? if ($this->mylibs->checkRole('raThietbi')): ?>
+                <? if ($this->mylibs->checkRole('raThietbi')>0): ?>
                     <li><a href="<?= base_url() ?>admin/thietbi"
                            class="<?= (($cat == 'thietbi') ? 'select' : '') ?>">Thiết bị</a></li>
                 <? endif ?>
-                <? if ($this->mylibs->checkRole('raUser')): ?>
+                <? if ($this->mylibs->checkRole('raUser')>0): ?>
                     <li><a href="<?= base_url() ?>admin/user"
                            class="<?= (($cat == 'user') ? 'select' : '') ?>">Người dùng</a></li>
                 <? endif ?>
@@ -91,7 +91,6 @@
         </div>
 <!--    </div>-->
     <div id="content">
-        <?=$this->mylibs->checkRole('raAdmin')?>
         <div class="wrap">
             <?= (isset($body) ? $body : "") ?>
         </div>

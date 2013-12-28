@@ -52,6 +52,7 @@ class Login extends CI_Controller
                 "pgemail" => $user->pgemail,
                 "pgaddr" => $user->pgaddr,
                 "pgavatar" => $user->pgavatar,
+                "pgstore_id" => $user->pgstore_id,
             );
             $this->session->set_userdata($param);
             if($this->mylibs->accessadmin()){
