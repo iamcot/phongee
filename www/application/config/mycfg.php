@@ -26,7 +26,7 @@ $config['aRole'] = array(
     'ketoantruong'=>'Kế toán trưởng',
     'admin'=>'Quản trị',
 );
-// ra = 0 : not alow, ra = 1: can view, ra = 2: can edit yourself, ra=3 edit all
+// role = 0 : not alow, ra = 1: can view, ra = 2: can create and edit yourself, ra=3 edit all
 $config['raAdmin'] = '0001123';
 $config['raUser'] = '0000003';
 $config['raThietbi'] = '0001123';
@@ -36,5 +36,11 @@ $config['rqStore'] = '0002233'; //
 $config['rsNhapRadio'] = '0000033';
 $config['rsXuatRadio'] = '0000233';
 $config['rsXuatCuaHang'] = '0000033';
+$config['rlinout'] = '0001233';
+$config['rlinout_details'] = '0001233';
+$config['rluser'] = '0001233';
+$config['rlnhomthietbi'] = '0001233';
+$config['rlthietbi'] = '0001233';
+$config['rlchitietthietbi'] = '0001233';
 
 

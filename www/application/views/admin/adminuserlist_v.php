@@ -114,14 +114,11 @@
                             load($("input[name=currpage]").val());
                             myclear();
                             break;
-                        case "1":
+
+                        default :
                             load($("input[name=currpage]").val());
                             addsavegif("#loadstatus");
                             myclear();
-                            break;
-                        default :
-                            alert("Lỗi lưu - không xác định.")
-                            load($("input[name=currpage]").val());
                             break;
                     }
 

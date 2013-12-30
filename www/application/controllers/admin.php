@@ -109,6 +109,10 @@ class Admin extends CI_Controller
             if($table == 'inout_details')
             $parent = array("pginout_id" => $where);
         }
+        $role = $this->mylibs->checkRole("rl".$table);
+        if($role == 1 || $role == 2){
+            $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
+        }
         if (($rs = $this->Select($this->tbprefix.$table, $parent, ($page-1), array('field' => 'id', 'type' => ''))) != null) {
             $data['province'] = $rs;
             $data['sumpage'] = $this->getSumPage($this->tbprefix.$table, null);
@@ -181,6 +185,7 @@ class Admin extends CI_Controller
             if($k=="edit" || $k=='pgpassword') continue;
             $param[$k] = $this->input->post($k);
         }
+        $param['pgcreateuser_id'] = $this->session->userdata('pguser_id');
         if($table=='inout'){
             $param['pgdate'] = strtotime($param['pgdate']);
         }
@@ -192,11 +197,24 @@ class Admin extends CI_Controller
             echo $this->db->query($str);
         } else { //insert
             if($table == 'inout_details'){
-                $sql2 = "SELECT count(id) numrows FROM ".$this->tbprefix.$table." WHERE pginout_id=".$param['pginout_id']." AND pgseries='".$param['pgseries']."' ";
-                $qr = $this->db->query($sql2);
-                if($qr->row()->numrows > 0){
-                    echo '-1';
-                    return;
+                $sql3 = "SELECT d.* FROM ".$this->tbprefix."inout d WHERE d.id=".$param['pginout_id']."";
+                $qr = $this->db->query($sql3);
+                if ($qr->num_rows > 0) {
+                    $row = $qr->row();
+                    $type=$row->pgtype;
+                    $hdid = $row->id;
+                    $xuattype=$row->pgxuattype;
+                    $sql2 = "SELECT d.*,i.pgtype, i.pgxuattype  FROM " . $this->tbprefix . "inout_details d, " . $this->tbprefix . "inout i WHERE d.pginout_id = i.id  AND d.pgseries='" . $param['pgseries'] . "' ORDER BY d.id DESC LIMIT 0,1";
+                    $qr = $this->db->query($sql2);
+                    if ($qr->num_rows() > 0) {
+                        $row = $qr->row();
+                        if($type == 'nhap'){
+                            if($row->pgto == $param['pgto']){
+                                echo '-1'; // da duoc nhap ve
+                                return;
+                            }
+                        }
+                    }
                 }
             }
             $str = $this->db->insert_string($this->tbprefix.$table, $param);
@@ -206,6 +224,31 @@ class Admin extends CI_Controller
             else echo 0;
         }
 
+    }
+    public function checkSeriesNr($series,$inout_id,$pgfrom,$pgto){
+        $sql3 = "SELECT d.* FROM ".$this->tbprefix."inout d WHERE d.id=".$inout_id."";
+        $qr = $this->db->query($sql3);
+        if ($qr->row()->numrows > 0) {
+            $row = $qr->row();
+            $type=$row->pgtype;
+            $hdid = $row->id;
+            $xuattype=$row->pgxuattype;
+            $sql2 = "SELECT d.*,i.pgtype, i.pgxuattype  FROM " . $this->tbprefix . "inout_details d, " . $this->tbprefix . "inout i WHERE d.inout_id = i.id  AND d.pgseries='" .$series . "' ORDER BY d.id DESC LIMIT 0,1";
+            $qr = $this->db->query($sql2);
+            if ($qr->num_rows() > 0) {
+                $row = $qr->row();
+                if($type == 'nhap'){
+                    if($row->pgto == $pgto){
+                        echo '-1'; // da duoc nhap ve
+                        return;
+                    }
+                }
+                else {
+
+                        }
+
+            }
+        }
     }
     public function getStore(){
         if($this->mylibs->checkRole("rqStore")>= 2)
@@ -369,16 +412,22 @@ class Admin extends CI_Controller
             return $this->mylibs->echojson($qr->result_array());
         else return "";
     }
-    public function getNhacungcap(){
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." WHERE pgdeleted=0 AND pgrole='provider' ORDER BY pgfname";
+    public function getUserList($type=""){
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." WHERE pgdeleted=0 AND pgrole='$type' ORDER BY pgfname";
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             return $qr->result_array();
         }
         else return null;
     }
+    public function jxloadcustomer(){
+        $provider = $this->getUserList("custom");
+        if($provider!=null){
+            $this->mylibs->echojson($provider);
+        }   else echo '';
+    }
     public function jxloadnhacungcap(){
-        $provider = $this->getNhacungcap();
+        $provider = $this->getUserList("provider");
         if($provider!=null){
             $this->mylibs->echojson($provider);
         }   else echo '';

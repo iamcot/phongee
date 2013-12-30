@@ -27,8 +27,8 @@
     <script src="<?= base_url() ?>src/chubby-stacks-css/js/jquery.powerful-placeholder.min.js"></script>
     <link type="text/css" rel="stylesheet" href="<?= base_url() ?>src/smoothness/jquery-ui-1.10.3.custom.css">
 <!--    <script src="--><?//= base_url() ?><!--src/jquery.min.js"></script>-->
-    <script src="<?= base_url() ?>src/mylib.js"></script>
     <script src="<?= base_url() ?>src/jquery-ui-min.js"></script>
+    <script src="<?= base_url() ?>src/mylib.js"></script>
     <script src="<?= base_url() ?>src/jquery.jqpagination.min.js"></script>
     <script src="<?= base_url() ?>src/jupload/vendor/jquery.ui.widget.js"></script>
     <script src="<?= base_url() ?>src/jupload/jquery.iframe-transport.js"></script>
@@ -38,13 +38,13 @@
     <script src="<?= base_url() ?>src/ckeditor/adapters/jquery.js"></script>
     <script src="<?= base_url() ?>src/jquery.maskedinput.min.js"></script>
     <script src="<?= base_url() ?>src/jquery.friendurl.js"></script>
-<!--    <link rel="stylesheet" href="--><?//= base_url() ?><!--src/chubby-stacks-css/css/chosen.css">-->
-<!--    <script src="--><?//= base_url() ?><!--src/chubby-stacks-css/js/chosen.jquery.min.js" type="text/javascript"></script>-->
-    <script src="<?= base_url() ?>src/chubby-stacks-css/js/nicEdit.js"></script>
+    <link rel="stylesheet" href="<?= base_url() ?>src/chubby-stacks-css/css/chosen.css">
+    <script src="<?= base_url() ?>src/chubby-stacks-css/js/chosen.jquery.min.js" type="text/javascript"></script>
+<!--    <script src="--><?//= base_url() ?><!--src/chubby-stacks-css/js/nicEdit.js"></script>-->
     <script src="<?= base_url() ?>src/chubby-stacks-css/js/jquery.customInput.js"></script>
     <link media="screen" type="text/css" rel="stylesheet" href="<?= base_url() ?>src/style.css">
     <link type="text/css" rel="stylesheet" href="<?= base_url() ?>src/font-awesome/css/font-awesome.css">
-    <script src="<?= base_url() ?>src/chubby-stacks-css/js/jquery-ui.multidatespicker.js"></script>
+<!--    <script src="--><?//= base_url() ?><!--src/chubby-stacks-css/js/jquery-ui.multidatespicker.js"></script>-->
     <script src="<?= base_url() ?>src/autoNumeric.js"></script>
 </head>
 

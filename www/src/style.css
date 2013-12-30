@@ -422,3 +422,18 @@ select{
 .ui-datepicker-next{
     right:3px!important;
 }
+.chosen-container{
+    min-height: 32px;
+    vertical-align: middle;
+    line-height: 32px;
+}
+.chosen-container a{
+    padding-left: 10px;
+    display: block;
+}
+#targetoption .field_select{
+    width: 40%;
+}
+table td a{
+         display: block;
+}

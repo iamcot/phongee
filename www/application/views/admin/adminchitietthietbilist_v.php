@@ -135,20 +135,16 @@
                            if(!$("input[name=checkdelinput]").prop("checked"))
                             myclear();
                             break;
-                        case "1":
+                        default :
                             load($("input[name=currpage]").val());
                             addsavegif("#loadstatus");
                             if(!$("input[name=checkdelinput]").prop("checked"))
-                            myclear();
+                                myclear();
                             else{
                                 $("input[name=edit]").val("");
                                 $("input[name=pgcode]").val("");
 
                             }
-                            break;
-                        default :
-                            alert("Lỗi lưu - không xác định.")
-                            load($("input[name=currpage]").val());
                             break;
                     }
 
