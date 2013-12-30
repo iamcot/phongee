@@ -1,14 +1,14 @@
 .DS_Store
 
-application/cache/*
-!application/cache/index.html
-!application/cache/.htaccess
+www/application/cache/*
+!www/application/cache/index.html
+!www/application/cache/.htaccess
 
-application/logs/*
-!application/logs/index.html
-!application/logs/.htaccess
+www/application/logs/*
+!www/application/logs/index.html
+!www/application/logs/.htaccess
 
 .idea
 
-images/*
-thumbnails/*
+www/images/*
+www/thumbnails/*
