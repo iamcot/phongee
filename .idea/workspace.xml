@@ -2,36 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/libraries/Mylibs.php" afterPath="$PROJECT_DIR$/www/application/libraries/Mylibs.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/list_inout_v.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/controllers/admin.php" afterPath="$PROJECT_DIR$/www/application/controllers/admin.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/container_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/controllers/login.php" afterPath="$PROJECT_DIR$/www/application/controllers/login.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/config/mycfg.php" afterPath="$PROJECT_DIR$/www/application/config/mycfg.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="phongee.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388157130068" ignored="false" />
+    <file path="/Dummy.txt" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388372082974" ignored="false" />
     <file path="/login_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996345188" ignored="false" />
     <file path="/login.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387992540668" ignored="false" />
     <file path="/styles.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996454179" ignored="false" />
     <file path="/login.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996625355" ignored="false" />
-    <file path="/adminthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388161678615" ignored="false" />
+    <file path="/adminthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388121417728" ignored="false" />
     <file path="/adminnhomthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388115896703" ignored="false" />
-    <file path="/adminchitietthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388171538485" ignored="false" />
-    <file path="/container_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388175483403" ignored="false" />
+    <file path="/adminchitietthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388142755210" ignored="false" />
+    <file path="/container_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388140689342" ignored="false" />
     <file path="/adminuser_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388125889842" ignored="false" />
-    <file path="/style.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388168398873" ignored="false" />
-    <file path="/adminuserlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388174115779" ignored="false" />
+    <file path="/style.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388139761238" ignored="false" />
+    <file path="/adminuserlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388137539244" ignored="false" />
     <file path="/a.dummy" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388139617652" ignored="false" />
-    <file path="E:/../Shared/development/projects_git/webshop/dwshop/oxid_webshop/oxid/out/dwrespo/src/css/dwshop/dwshop.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388142160767" ignored="false" />
-    <file path="/jquery.customInput.js" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388160245673" ignored="false" />
-    <file path="/admininout_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388162574916" ignored="false" />
-    <file path="/admin.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388198423270" ignored="false" />
-    <file path="/admininoutlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388198317175" ignored="false" />
-    <file path="/mycfg.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388174186561" ignored="false" />
-    <file path="/Mylibs.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388195464932" ignored="false" />
-    <file path="/fragment.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388195415835" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../Shared/development/projects_git/webshop/dwshop/oxid_webshop/oxid/out/dwrespo/src/css/dwshop/dwshop.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388391474572" ignored="false" />
+    <file path="$PROJECT_DIR$/../../../Shared/development/projects_git/webshop/dwshop/oxid_webshop/oxid/application/views/dwrespo/tpl/layout/base.tpl" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388372562023" ignored="false" />
+    <file path="/admininoutlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388400505918" ignored="false" />
+    <file path="/admin.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388397324474" ignored="false" />
+    <file path="/mycfg.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388385666701" ignored="false" />
+    <file path="/list_inout_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388389975240" ignored="false" />
+    <file path="/list_inout_details_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388390583801" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,180 +90,150 @@
     <favorites_list name="phongee" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="adminthietbilist_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="297" column="27" selection-start="11587" selection-end="12073" vertical-scroll-proportion="-21.307692">
-              <folding>
-                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#2;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/src/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="420" column="33" selection-start="12597" selection-end="12597" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="container_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="22" selection-start="5223" selection-end="5223" vertical-scroll-proportion="-14.538462">
-              <folding>
-                <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <marker date="1388196239954" expanded="true" signature="1159:1217" placeholder="..." />
-                <marker date="1388196239954" expanded="true" signature="1179:1205" placeholder="{...}" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admininout_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininout_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="56" selection-start="81" selection-end="81" vertical-scroll-proportion="-1.3076923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adminuserlist_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="36" selection-start="853" selection-end="853" vertical-scroll-proportion="-8.5">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="mycfg.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/config/mycfg.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="16" selection-start="931" selection-end="938" vertical-scroll-proportion="-22.23077">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adminstorelist_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="42" selection-start="1026" selection-end="1026" vertical-scroll-proportion="-15.538462">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adminnhomthietbilist_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="42" selection-start="893" selection-end="893" vertical-scroll-proportion="-15.692307">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="adminchitietthietbilist_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="42" selection-start="3300" selection-end="3300" vertical-scroll-proportion="-9.807693">
-              <folding>
-                <element signature="n#style#0;n#span#3;n#td#0;n#tr#7;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#td#0;n#tr#7;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admininoutlist_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="134" selection-start="5206" selection-end="5206" vertical-scroll-proportion="-19.538462">
-              <folding>
-                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#span#1;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#span#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#3;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#4;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#2;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-                <marker date="1388198355886" expanded="true" signature="4595:4627" placeholder="..." />
-                <marker date="1388198355886" expanded="true" signature="5173:5205" placeholder="..." />
-                <marker date="1388198355886" expanded="true" signature="5352:5384" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mylibs.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="28" selection-start="142" selection-end="150" vertical-scroll-proportion="-6.5384617">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="container_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/container_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="3" selection-start="930" selection-end="1036" vertical-scroll-proportion="-13.076923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="admin.php" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="195" column="30" selection-start="6613" selection-end="6613" vertical-scroll-proportion="0.49579832">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="login.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/controllers/login.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="49" selection-start="2381" selection-end="2381" vertical-scroll-proportion="-21.576923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/src/chubby-stacks-css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1714" column="36" selection-start="133219" selection-end="133219" vertical-scroll-proportion="-5.32">
-              <folding>
-                <element signature="e#57223#57970#2" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <splitter split-orientation="horizontal" split-proportion="0.5637728">
+      <split-first>
+        <leaf>
+          <file leaf-file-name="admininoutlist_v.php" pinned="false" current="true" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="220" column="42" selection-start="9434" selection-end="9434" vertical-scroll-proportion="0.6027088">
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#2;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#1;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#0;n#span#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#1;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#2;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#td#0;n#tr#2;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#fieldset#1;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#fieldset#2;n#div#0;n#!!top" expanded="true" />
+                    <marker date="1388400641000" expanded="false" signature="5308:5340" placeholder="..." />
+                    <marker date="1388400641000" expanded="false" signature="5980:6012" placeholder="..." />
+                    <marker date="1388400641000" expanded="false" signature="6159:6191" placeholder="..." />
+                    <marker date="1388400641000" expanded="true" signature="11841:11873" placeholder="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="list_inout_v.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_v.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="7" column="96" selection-start="386" selection-end="396" vertical-scroll-proportion="-4.375">
+                  <folding>
+                    <element signature="e#515#539#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="list_inout_details_v.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="7" column="103" selection-start="393" selection-end="410" vertical-scroll-proportion="-4.375">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="Mylibs.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="admin.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="191" column="17" selection-start="6462" selection-end="6462" vertical-scroll-proportion="-21.183674">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="admininout_v.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininout_v.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="2" column="51" selection-start="76" selection-end="76" vertical-scroll-proportion="-1.25">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="mycfg.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/application/config/mycfg.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="37" column="22" selection-start="1038" selection-end="1051" vertical-scroll-proportion="-18.375">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="admindeal_v.php" pinned="false" current="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/www/application/views/admin/admindeal_v.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="179" column="50" selection-start="7452" selection-end="7491" vertical-scroll-proportion="-11.916667">
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf>
+          <file leaf-file-name="admininoutlist_v.php" pinned="false" current="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
+              <provider selected="true" editor-type-id="text-editor">
+                <state line="56" column="0" selection-start="2867" selection-end="2867" vertical-scroll-proportion="0.34055117">
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#2;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#span#1;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#0;n#span#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#input#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#1;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#select#2;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#div#0;n#td#0;n#tr#2;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#fieldset#1;n#div#0;n#!!top" expanded="true" />
+                    <element signature="n#style#0;n#fieldset#2;n#div#0;n#!!top" expanded="true" />
+                    <marker date="1388400641000" expanded="false" signature="5308:5340" placeholder="..." />
+                    <marker date="1388400641000" expanded="false" signature="5980:6012" placeholder="..." />
+                    <marker date="1388400641000" expanded="false" signature="6159:6191" placeholder="..." />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -276,6 +245,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitLogSettings">
+    <option name="myStructureFilterPaths" />
     <option name="myDateState">
       <MyDateState />
     </option>
@@ -283,22 +253,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/www/src/chubby-stacks-css/js/jquery.customInput.js" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/admininout_v.php" />
-        <option value="$PROJECT_DIR$/www/src/chubby-stacks-css/style.css" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminuser_v.php" />
         <option value="$PROJECT_DIR$/www/src/style.css" />
-        <option value="$PROJECT_DIR$/www/src/autoformatcurrency.js" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" />
         <option value="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" />
         <option value="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" />
-        <option value="$PROJECT_DIR$/www/application/libraries/Mylibs.php" />
-        <option value="$PROJECT_DIR$/www/application/config/mycfg.php" />
+        <option value="$PROJECT_DIR$/www/src/chubby-stacks-css/style.css" />
         <option value="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
-        <option value="$PROJECT_DIR$/www/application/controllers/login.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" />
+        <option value="$PROJECT_DIR$/www/src/ckeditor/config.js" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/admininout_v.php" />
+        <option value="$PROJECT_DIR$/www/application/config/mycfg.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/list_inout_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php" />
         <option value="$PROJECT_DIR$/www/application/controllers/admin.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" />
       </list>
     </option>
   </component>
@@ -310,9 +280,9 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-4" />
-    <option name="y" value="-4" />
+    <option name="y" value="22" />
     <option name="width" value="1288" />
-    <option name="height" value="988" />
+    <option name="height" value="718" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -342,8 +312,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -391,6 +359,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phongee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phongee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ckeditor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -528,22 +518,20 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="options.splitter.main.proportions" value="0.3" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="vcs.Git" />
     <property name="recentsLimit" value="5" />
     <property name="JavaScriptLanguageLevel" value="ES5" />
     <property name="JavaScriptPreferStrict" value="true" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="E:\mywww\phongee\www\application\views\admin" />
+      <recent name="$PROJECT_DIR$/www/application/views/admin" />
     </key>
   </component>
   <component name="RunManager" selected="PHP Remote Debug.mywww.phongee">
@@ -566,6 +554,22 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -594,19 +598,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -673,37 +664,41 @@
       <created>1387989298817</created>
       <updated>1387989298817</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="bootstrap">
+      <created>1388142948265</created>
+      <updated>1388142948265</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="988" extended-state="6" />
+    <frame x="-4" y="22" width="1288" height="718" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32660332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32608697" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39904988" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897863" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897863" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.6009501" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24879228" sideWeight="0.67391306" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -712,8 +707,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <value>
         <are-packages-shown value="false" />
@@ -749,7 +744,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value=":(" />
+    <option name="LAST_COMMIT_MESSAGE" value="bootstrap" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -764,159 +759,147 @@
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value=":(" />
+    <MESSAGE value="bootstrap" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="1" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_news_v.php">
+    <entry file="file://$PROJECT_DIR$/www/src/ckeditor/README.md">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.14503817" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/container_v.php">
+    <entry file="file://$PROJECT_DIR$/www/src/ckeditor/ckeditor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="3" selection-start="930" selection-end="1036" vertical-scroll-proportion="-13.076923">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininout_v.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="56" selection-start="81" selection-end="81" vertical-scroll-proportion="-1.3076923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/src/chubby-stacks-css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1714" column="36" selection-start="133219" selection-end="133219" vertical-scroll-proportion="-5.32">
-          <folding>
-            <element signature="e#57223#57970#2" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/src/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="420" column="33" selection-start="12597" selection-end="12597" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="42" selection-start="3300" selection-end="3300" vertical-scroll-proportion="-9.807693">
-          <folding>
-            <element signature="n#style#0;n#span#3;n#td#0;n#tr#7;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#0;n#tr#7;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="42" selection-start="1026" selection-end="1026" vertical-scroll-proportion="-15.538462">
+        <state line="36" column="69" selection-start="2043" selection-end="2043" vertical-scroll-proportion="0.029411765">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="42" selection-start="893" selection-end="893" vertical-scroll-proportion="-15.692307">
+        <state line="41" column="9" selection-start="1297" selection-end="1297" vertical-scroll-proportion="0.027472528">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/src/ckeditor/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="4" selection-start="274" selection-end="976" vertical-scroll-proportion="0.18421052">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="175" column="44" selection-start="7363" selection-end="7363" vertical-scroll-proportion="0.478424">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="297" column="27" selection-start="11587" selection-end="12073" vertical-scroll-proportion="-21.307692">
-          <folding>
-            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#2;n#div#0;n#td#0;n#tr#4;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="36" selection-start="853" selection-end="853" vertical-scroll-proportion="-8.5">
+        <state line="266" column="7" selection-start="11093" selection-end="11093" vertical-scroll-proportion="7.780392">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_deal_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="22" selection-start="5223" selection-end="5223" vertical-scroll-proportion="-14.538462">
-          <folding>
-            <element signature="n#style#0;n#div#2;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <marker date="1388196239954" expanded="true" signature="1159:1217" placeholder="..." />
-            <marker date="1388196239954" expanded="true" signature="1179:1205" placeholder="{...}" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.2945591">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/controllers/login.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/admindeal_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="49" selection-start="2381" selection-end="2381" vertical-scroll-proportion="-21.576923">
+        <state line="179" column="50" selection-start="7452" selection-end="7491" vertical-scroll-proportion="-11.916667">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininout_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="51" selection-start="76" selection-end="76" vertical-scroll-proportion="-1.25">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="28" selection-start="142" selection-end="150" vertical-scroll-proportion="-6.5384617">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="134" selection-start="5206" selection-end="5206" vertical-scroll-proportion="-19.538462">
-          <folding>
-            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#span#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#3;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#4;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#2;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#!!top" expanded="true" />
-            <marker date="1388198355886" expanded="true" signature="4595:4627" placeholder="..." />
-            <marker date="1388198355886" expanded="true" signature="5173:5205" placeholder="..." />
-            <marker date="1388198355886" expanded="true" signature="5352:5384" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/config/mycfg.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="16" selection-start="931" selection-end="938" vertical-scroll-proportion="-22.23077">
+        <state line="37" column="22" selection-start="1038" selection-end="1051" vertical-scroll-proportion="-18.375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="96" selection-start="386" selection-end="396" vertical-scroll-proportion="-4.375">
+          <folding>
+            <element signature="e#515#539#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="103" selection-start="393" selection-end="410" vertical-scroll-proportion="-4.375">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="195" column="30" selection-start="6613" selection-end="6613" vertical-scroll-proportion="0.49579832">
+        <state line="191" column="17" selection-start="6462" selection-end="6462" vertical-scroll-proportion="-21.183674">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="220" column="42" selection-start="9434" selection-end="9434" vertical-scroll-proportion="0.6027088">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#2;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#span#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#span#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#1;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#2;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#2;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#fieldset#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#fieldset#2;n#div#0;n#!!top" expanded="true" />
+            <marker date="1388400641000" expanded="false" signature="5308:5340" placeholder="..." />
+            <marker date="1388400641000" expanded="false" signature="5980:6012" placeholder="..." />
+            <marker date="1388400641000" expanded="false" signature="6159:6191" placeholder="..." />
+            <marker date="1388400641000" expanded="true" signature="11841:11873" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -995,17 +978,6 @@
         </settings>
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ScopeChooserConfigurable.UI">
         <settings>
           <splitter-proportions>
             <option name="proportions">

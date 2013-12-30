@@ -33,5 +33,8 @@ $config['raThietbi'] = '0001123';
 $config['raInout'] = '0000123';
 $config['raReport'] = '0000123';
 $config['rqStore'] = '0002233'; //
+$config['rsNhapRadio'] = '0000033';
+$config['rsXuatRadio'] = '0000233';
+$config['rsXuatCuaHang'] = '0000033';
 
 

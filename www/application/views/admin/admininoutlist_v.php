@@ -1,26 +1,36 @@
+<div style="overflow: hidden">
 <fieldset>
     <legend>Thông tin</legend>
     <table id="inputserviceplace">
         <tr>
-            <td>
+            <td id="hoadoninfo">
+                <? if($this->mylibs->checkRole('rsNhapRadio')):?>
                 <span style="display: inline-block;">
                 <input type="radio" name="pgtype" value="nhap"  id="nhapradio">
                 <label for="nhapradio">Nhập</label>
                     </span>
+                <? endif;?>
+                <? if($this->mylibs->checkRole('rsXuatRadio')):?>
                  <span style="display: inline-block;">
                 <input type="radio" name="pgtype" value="xuat"  id="xuatradio">
                 <label for="xuatradio">Xuất</label>
-                 </span>    <br>
+                 </span>
+                <? endif;?>
+                <br>
                 <input tabindex="1" type="text" name="pgmahoadon" style="width:40%;display: inline-block" placeholder="Mã hóa đơn">
-                <input  tabindex="2" type="text" id="pgdate" name="pgdate" style="width:40%;display: inline-block" placeholder="Ngày">
+                <input  tabindex="2" type="text" id="pgdate" name="pgdate" style="width:30%;display: inline-block" placeholder="Ngày">
+                <input  tabindex="3" type="text" id="pghour" name="pghour" style="width:25%;display: inline-block" placeholder="Giờ:phút:giây">
 
             </td>
             <td>
+
                 <span id="xuatoption" style="display: none">
+                    <? if ($this->mylibs->checkRole('rsXuatCuaHang')): ?>
                     <span style="display: inline-block;">
-                    <input type="radio" name="pgtypexuat" value="cuahang"  id="cuahangradio">
+                    <input type="radio" name="pgtypexuat" value="cuahang" id="cuahangradio">
                     <label for="cuahangradio">Cửa hàng</label>
-                        </span>
+                    </span>
+                    <? endif; ?>
                      <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="khachhang"  id="khachhangradio">
                     <label for="khachhangradio">Khách hàng</label>
@@ -40,14 +50,15 @@
 
             </td>
         </tr>
-        <tr>
+        <tr >
             <td colspan="2">
                 <input  tabindex="3" type="text" name="pgseries" style="width:20%;display: inline-block" placeholder="Series/IMEI">
+                <input  tabindex="5"  type="text" onblur="" name="pgprice" style="width:15%;display: inline-block" placeholder="Giá">
+   <span id="inputchitiethoadon">
                 <input  tabindex="4" type="text" onblur="getThietbi(this.value)" name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
 
                 <input type="hidden" name="pgthietbi_id" >
-                <input  tabindex="5"  type="text" onblur="console.log(parseInt($(this).val().replace(/ /g,'')))" name="pgprice" style="width:15%;display: inline-block" placeholder="Giá">
-                <input  tabindex="6" type="text" name="pgcount" style="width:8%;display: inline-block" placeholder="Số lượng">
+<!--                <input  tabindex="6" type="text" name="pgcount" style="width:8%;display: inline-block" placeholder="Số lượng">-->
                 <select  tabindex="7" name="pgcolor" style="width:10%;display: inline-block" >
                     <option value="0">Màu </option>
                 </select>
@@ -57,12 +68,14 @@
                 <select tabindex="9"  name="pgyear" style="width:10%;display: inline-block" >
                     <option value="0">Năm sx</option>
                 </select>
+                    </span>
                 <span class="btn btn-follow"><input  tabindex="10" type="button" value="Lưu" onclick="save()"> </span>
             </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="hidden" name="edit" value="">
-                <input type="hidden" name="currpage" value="1">
+            <td colspan="2">
+                <input type="hidden" name="idhoadon" value="">
+                <input type="hidden" name="idchitiethoadon" value="">
 
                 <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
                 <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
@@ -75,19 +88,23 @@
 
 
 </fieldset>
-<fieldset>
+<div class="clearfix"></div>
+<fieldset style="float:left;width:49%">
     <legend>Chi tiết hóa đơn</legend>
     <div id="list_hoadonitem"></div>
 </fieldset>
-<fieldset>
+<fieldset style="float:right;width:49%">
     <legend>Danh sách hóa đơn</legend>
     <div id="list_hoadon"></div>
 </fieldset>
+</div>
 <script>
     $(function () {
+        $('#pghour').mask('99:99:99');
+        $('#pgdate').mask('9999-99-99');
         $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
         loadinout(1);
-        $("input").customInput();
+       $("input").customInput();
         $( "#pgdate" ).datepicker({
             changeMonth: true,
             changeYear: true,
@@ -97,12 +114,15 @@
             if($(this).val() == 'nhap'){
                 $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
                 getStore('nhap');
+                getProvider();
                 $("#xuatoption").hide();
                 $("#targetoption").show();
+                enableinput();
             }
             else{
                 $("#xuatoption").show();
                 $("#targetoption").hide();
+                disableinput();
             }
         });
         $("input[name=pgtypexuat]").click(function(){
@@ -120,70 +140,105 @@
             }
         });
     });
+    function savehoadon(){
+        var pgcode     = $("input[name=pgmahoadon]").val();
+
+        var pgdate     = $("input[name=pgdate]").val();
+        var pghour     = $("input[name=pghour]").val();
+        if(pgcode == ""){
+            alert("Vui lòng nhập mã hóa đơn");
+            return false;
+        }
+        if(pgdate != "" && pghour !=""){
+            pgdate = pgdate+" "+pghour;
+        }
+        else{
+            alert("Vui lòng nhập ngày và giờ");
+            return false;
+        }
+        var pgtype= $("input[name=pgtype]:checked").val();
+
+        var pgtypexuat =  $("input[name=pgtypexuat]:checked").val();
+//        var pgseries = $("input[name=pgmahoadon]").val();
+//        if(pgseries == ""){
+//            alert("Hóa đơn phải có ít nhất một thiết bị");
+//            return false;
+//        }
+        var idhoadon = $("input[name=idhoadon]").val();
+
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/save/inout",
+            data: "pgcode=" + pgcode
+                      + "&pgdate=" + pgdate
+                      + "&pgtype=" + pgtype
+                      + "&pgxuattype=" + pgtypexuat
+                      + "&edit=" + idhoadon,
+            success: function (msg) {
+                if (msg == 0) {
+                    alert("Không thể lưu");
+                }
+                else {
+                    $("input[name=idhoadon]").val(msg);
+                    loadinout(1);
+                }
+                 }
+            });
+
+    }
     function save() {
-        var pglongname     = $("input[name=pglongname]").val();
-        var pgcode     = $("input[name=pgcode]").val();
-        var pgpic  = $("input[name=pgpic]").val();
-        var pgprice  = $("input[name=pgprice]").val();
-        var pgprice_old      = $("input[name=pgprice_old]").val();
-        var pgshort_info     = $("input[name=pgshort_info]").val();
+        savehoadon();
+        var pgseries     = $("input[name=pgseries]").val();
+        var pgthietbi_id     = $("input[name=pgthietbi_id]").val();
+        var pgprice  = $("input[name=pgprice]").val().replace(/ /g,'');
         var pgcolor    = $("select[name=pgcolor]").val();
         var pgcountry    = $("select[name=pgcountry]").val();
         var pgyear     = $("select[name=pgyear]").val();
-        var pglong_info      = $("textarea[name=pglong_info]").val();
-        var pgtech_info    = $("textarea[name=pgtech_info]").val();
-        var pgthietbi_id      = $("input[name=pgthietbi_id]").val();
+        var pgfrom     = $("select[name=pgfrom]").val();
+        var pgto     = $("select[name=pgto]").val();
+        var pgcount = $("input[name=pgcount]").val();
+        var idhoadon = $("input[name=idhoadon]").val();
+        var idchitiethoadon = $("input[name=idchitiethoadon]").val();
 
-        var edit = $("input[name=edit]").val();
-
-        if (pglongname.trim() != "" && pgcode.trim() != "") {
+        if(pgto == -1 || pgfrom == -1 || pgto== "" || pgfrom == ""){
+            alert("Vui lòng nhập nơi gửi và nơi nhận");
+            return false;
+        }
+        if (idhoadon.trim() !="" && pgseries.trim() != "" && pgthietbi_id.trim() != "" && pgcount > 0) {
             $.ajax({
                 type: "post",
-                url: "<?=base_url()?>admin/save/chitietthietbi",
-                data: "pglong_name=" + pglongname
-                    + "&pgcode=" + pgcode
-                    + "&pgpic=" + pgpic
+                url: "<?=base_url()?>admin/save/inout_details",
+                data: "pgseries=" + pgseries
                     + "&pgthietbi_id=" + pgthietbi_id
                     + "&pgprice=" + pgprice
-                    + "&pgprice_old=" + pgprice_old
                     + "&pgcolor=" + pgcolor
                     + "&pgcountry=" + pgcountry
-                    + "&pgshort_info=" + pgshort_info
                     + "&pgyear=" + pgyear
-                    + "&pglong_info=" + encodeURIComponent(pglong_info)
-                    + "&pgtech_info=" + encodeURIComponent(pgtech_info)
+                    + "&pgfrom=" + pgfrom
+                    + "&pgto=" + pgto
+                    + "&pgcount=" + pgcount
+                    + "&pginout_id=" + idhoadon
 
-                    + "&edit=" + edit,
+                    + "&edit=" + idchitiethoadon,
                 success: function (msg) {
-                    switch (msg) {
-                        case "0":
-                            alert("Không thể lưu");
-                            load($("input[name=currpage]").val());
-                           if(!$("input[name=checkdelinput]").prop("checked"))
-                            myclear();
-                            break;
-                        case "1":
-                            load($("input[name=currpage]").val());
-                            addsavegif("#loadstatus");
-                            if(!$("input[name=checkdelinput]").prop("checked"))
-                            myclear();
-                            else{
-                                $("input[name=edit]").val("");
-                                $("input[name=pgcode]").val("");
+                    if(msg=="0"){
+                        alert("Lỗi lưu.");
 
-                            }
-                            break;
-                        default :
-                            alert("Lỗi lưu - không xác định.")
-                            load($("input[name=currpage]").val());
-                            break;
                     }
+                    else if(msg==-1){
+                        alert("Đã có số S/n trong hóa đơn này..");
+                    }
+                    else{
+                        $("input[name=pgseries]").val("");
+                        loadinout_details(1,idhoadon);
+                    }
+
 
                 }
             });
         }
         else {
-            alert("Vui lòng nhập dữ liệu");
+        //        alert("Cập nhật hóa đơn mà không có chi tiết nào ");
         }
     }
     function loadinout(page) {
@@ -191,30 +246,57 @@
         $("#list_hoadon").load("<?=base_url()?>admin/load/inout/" + page, function () {
             removeloadgif("#loadstatus");
         });
-        $("input[name=currpage]").val(page);
+    }
+    function loadinout_details(page,parent) {
+        addloadgif("#loadstatus");
+        $("#list_hoadonitem").load("<?=base_url()?>admin/load/inout_details/" + page+"/"+parent, function () {
+            removeloadgif("#loadstatus");
+        });
     }
     function myclear() {
-        $("input[name=pglongname]").val("");
-        $("select[name=pgyear]").val("");
-        $("select[name=pgcountry]").val("");
-        $("select[name=pgcolor]").val("");
-        $("input[name=pgcode]").val("");
-        $("input[name=pgpic]").val("");
-        $("input[name=pgthietbi_id]").val("");
-        $("input[name=pgprice]").val("");
-        $("input[name=pgprice_old]").val("");
-        $("input[name=pgshort_info]").val("");
-        $("textarea[name=pglong_info]").val("");
-        $("input[name=edit]").val("");
-        $("textarea[name=pgtech_info]").val("");
-        $("#pgavatardemo").html('');
-
+        $("input[type=text]").val("");
+        $("input[type=hidden]").val("");
+        $("#hoadoninfo input[type=radio]").prop('disabled', false);
 
     }
-    function edit(id) {
+    function edithoadon(id){
+        $("#hoadoninfo input[type=radio]").prop('disabled', 'disabled');
+        $("input[name=idhoadon]").val(id);
+        loadinout_details(1,id);
         $.ajax({
             type: "post",
-            url: "<?=base_url()?>admin/loadedit/chitietthietbi/" + id,
+            url: "<?=base_url()?>admin/loadedit/inout/" + id,
+            success: function (msg) {
+                if (msg == "0") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    $("input[name=pgmahoadon]").val(province.pgcode);
+                    $("input[name=pgdate]").val(formatDate(province.pgdate));
+                    $("input[name=pghour]").val(formatTime(province.pgdate));
+                   // console.log($("input[value="+province.pgtype+"]"));
+                    $("label").removeClass("checked")
+                    $("input[value="+province.pgtype+"]").prop('checked', true);
+                    $("label[for="+province.pgtype+"radio]").addClass("checked");
+                    if($("input[value="+province.pgtype+"]:checked").val() == 'nhap'){
+                        $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
+                        getStore('nhap');
+                        getProvider();
+                        $("#xuatoption").hide();
+                        $("#targetoption").show();
+                    }
+                    else{
+                        $("label[for="+province.pgxuattype+"radio]").addClass("checked");
+                        $("#xuatoption").show();
+                        $("#targetoption").hide();
+                    }
+                }
+            }
+        });
+    }
+    function editchitiethoadon(id) {
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/loadedit/inout_details/" + id,
             success: function (msg) {
                 if (msg == "0") alert('<?=lang("NO_DATA")?>');
                 else {
@@ -299,13 +381,32 @@
                         option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
                     });
                     if(type =="nhap"){
-                        $("select[name=pgfrom]").html("");
                         $("select[name=pgto]").html(option);
                     }
                     else if(type=="xuat") {
                         $("select[name=pgfrom]").html(option);
                         $("select[name=pgto]").html(option);
                     }
+
+                }
+            }
+        });
+    }
+    function getProvider(){
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/jxloadnhacungcap",
+            success: function (msg) {
+                if (msg == "0") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    var option = "";
+                    $.each(province, function (index, store){
+//                        console.log(store);
+                        option += "<option value='"+store.id+"'>"+store.pgfname+"</option>";
+                    });
+                        $("select[name=pgfrom]").html(option);
+
 
                 }
             }
@@ -375,6 +476,53 @@
                 }
             }
         });
+    }
+    var formatTime = function(unixTimestamp) {
+        var dt = new Date(unixTimestamp * 1000);
+
+        var hours = dt.getHours();
+        var minutes = dt.getMinutes();
+        var seconds = dt.getSeconds();
+
+        // the above dt.get...() functions return a single digit
+        // so I prepend the zero here when needed
+        if (hours < 10)
+            hours = '0' + hours;
+
+        if (minutes < 10)
+            minutes = '0' + minutes;
+
+        if (seconds < 10)
+            seconds = '0' + seconds;
+
+        return hours + ":" + minutes + ":" + seconds;
+    }
+    var formatDate = function(unixTimestamp) {
+        var dt = new Date(unixTimestamp * 1000);
+
+        var day = dt.getDate();
+        var month = dt.getMonth()+1;
+        var year = dt.getFullYear();
+
+        // the above dt.get...() functions return a single digit
+        // so I prepend the zero here when needed
+        if (day < 10)
+            day = '0' + day;
+
+        if (month < 10)
+            month = '0' + month;
+
+
+        return year + "-" + month + "-" + day;
+    }
+     function disableinput(){
+        $("#inputchitiethoadon input").prop('disabled', 'disabled');
+        $("#inputchitiethoadon select").prop('disabled', 'disabled');
+     }
+    function enableinput(){
+        $("#inputchitiethoadon input").prop('disabled', false);
+        $("#inputchitiethoadon select").prop('disabled', false);
+
     }
 </script>
 

@@ -102,10 +102,14 @@ class Admin extends CI_Controller
         $this->render($data);
     }
 
-    public function load($table,$page = 1)
+    public function load($table,$page = 1,$where = "")
     {
-
-        if (($rs = $this->Select($this->tbprefix.$table, null, ($page-1), array('field' => 'id', 'type' => ''))) != null) {
+        $parent = null;
+        if($where!= ""){
+            if($table == 'inout_details')
+            $parent = array("pginout_id" => $where);
+        }
+        if (($rs = $this->Select($this->tbprefix.$table, $parent, ($page-1), array('field' => 'id', 'type' => ''))) != null) {
             $data['province'] = $rs;
             $data['sumpage'] = $this->getSumPage($this->tbprefix.$table, null);
             $data['page'] = $page;
@@ -177,17 +181,31 @@ class Admin extends CI_Controller
             if($k=="edit" || $k=='pgpassword') continue;
             $param[$k] = $this->input->post($k);
         }
+        if($table=='inout'){
+            $param['pgdate'] = strtotime($param['pgdate']);
+        }
         if ($this->input->post("pgpassword") != "")
             $param['pgpassword'] = md5(md5($this->input->post("pgpassword")));
         if ($this->input->post("edit") != "") //update
         {
             $str = $this->db->update_string($this->tbprefix.$table, $param, " id = " . $this->input->post("edit"));
+            echo $this->db->query($str);
         } else { //insert
+            if($table == 'inout_details'){
+                $sql2 = "SELECT count(id) numrows FROM ".$this->tbprefix.$table." WHERE pginout_id=".$param['pginout_id']." AND pgseries='".$param['pgseries']."' ";
+                $qr = $this->db->query($sql2);
+                if($qr->row()->numrows > 0){
+                    echo '-1';
+                    return;
+                }
+            }
             $str = $this->db->insert_string($this->tbprefix.$table, $param);
-
+            if ($this->db->query($str)) {
+                echo $this->db->insert_id();
+            }
+            else echo 0;
         }
-        if ($this->db->query($str)) echo 1;
-        else echo 0;
+
     }
     public function getStore(){
         if($this->mylibs->checkRole("rqStore")>= 2)
@@ -222,7 +240,7 @@ class Admin extends CI_Controller
         $where = "";
         if ($parent_id != null) {
             foreach ($parent_id as $k => $v) {
-                if ($v > 0 || strlen($v) >= 3)    {
+                if ($v > 0)    {
                     if($where != ""){
                         if(strpos("OR",$k) != false){
                             $where .= $k . " = " . "'$v'";
@@ -350,6 +368,20 @@ class Admin extends CI_Controller
         if($qr->num_rows()>0)
             return $this->mylibs->echojson($qr->result_array());
         else return "";
+    }
+    public function getNhacungcap(){
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." WHERE pgdeleted=0 AND pgrole='provider' ORDER BY pgfname";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            return $qr->result_array();
+        }
+        else return null;
+    }
+    public function jxloadnhacungcap(){
+        $provider = $this->getNhacungcap();
+        if($provider!=null){
+            $this->mylibs->echojson($provider);
+        }   else echo '';
     }
 }
 
