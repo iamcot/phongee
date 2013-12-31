@@ -42,5 +42,6 @@ $config['rluser'] = '0001233';
 $config['rlnhomthietbi'] = '0001233';
 $config['rlthietbi'] = '0001233';
 $config['rlchitietthietbi'] = '0001233';
+$config['rlmoneytransfer'] = '0001233';
 
 

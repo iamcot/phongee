@@ -38,31 +38,33 @@
                 </span>
                     <div id="targetoption" style="display: none">
                         <div class="field_select" id="pgfromspan">
-                        <select name="pgfrom" style="width: 40%;display: inline-block">
+                        <select name="pgfrom" style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển">
                             <option value="-1">Cửa hàng</option>
                         </select>
                         </div>
                         <i class="fa fa-plane fa-2x" style="float:left"></i>
                         <div class="field_select" id="pgtospan">
 
-                        <select name="pgto"  style="width: 40%;display: inline-block">
+                        <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận">
                             <option value="-1">Cửa hàng</option>
                         </select>
 
                             </div>
                     </div>
-
+                          <input type="hidden" name="pgtotmp">
+                          <input type="hidden" name="pgfromtmp">
             </td>
         </tr>
         <tr >
             <td colspan="2">
-                <input  tabindex="3" type="text" name="pgseries" style="width:20%;display: inline-block" placeholder="Series/IMEI">
+                <input  tabindex="3" onblur="blursninput(this.value)" type="text" name="pgseries" style="width:20%;display: inline-block" placeholder="Series/IMEI">
                 <input  tabindex="5"  type="text" onblur="" name="pgprice" style="width:15%;display: inline-block" placeholder="Giá">
+                <input  tabindex="6" type="text" name="pgcount" style="width:8%;display: inline-block" placeholder="Số lượng" value="1">
    <span id="inputchitiethoadon">
                 <input  tabindex="4" type="text" onblur="getThietbi(this.value)" name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
 
                 <input type="hidden" name="pgthietbi_id" >
-                <input  tabindex="6" type="text" name="pgcount" style="width:8%;display: inline-block" placeholder="Số lượng">
+
                 <select  tabindex="7" name="pgcolor" style="width:10%;display: inline-block" >
                     <option value="0">Màu </option>
                 </select>
@@ -88,6 +90,27 @@
             </td>
 
         </tr>
+        <tr>
+            <td id="thanhtoanbox" style="width:40%">
+                <div>
+                <label>Tổng giá trị hóa đơn: </label> <br>
+                <input   type="text" readonly="readonly" name="pgsumprice" style="width:80%;display: block" placeholder="Tổng giá trị hóa đơn">
+                </div>
+                <div>
+                <label>Thanh toán: </label>    <br>
+                <input type="hidden" name="pgtypethanhtoan" >
+                <input   type="text" name="pgthanhtoan" style="width:80%;display: block" placeholder="Số tiền thanh toán">
+                </div>
+                <div class="btn btn-small">
+                    <input type="button" value="Thanh toán" onclick="savethanhtoan()">
+                </div>
+
+            </td>
+            <td style="width:59%">
+                <b>Lịch sử thanh toán đơn hàng.</b>
+                <div id="list_transfer"></div>
+            </td>
+        </tr>
     </table>
 
 
@@ -103,10 +126,26 @@
 </fieldset>
 </div>
 <script>
-    function typecheck(type){
+    function typexuatcheck(type){
+        if(type == 'khachhang'){
+            getStore('xuat');
+            $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">khách hàng</option></select>');
+            getCustomer();
+            $("#targetoption").show();
+        }
+        else{
+            $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">Cửa hàng</option></select>');
+            $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"><option value="-1">Cửa hàng</option></select>');
+            getStore('xuatcuahang');
+            $("#xuatoption").show();
+            $("#targetoption").show();
+
+        }
+    }
+    function typecheck(type,xuattype){
         if(type == 'nhap'){
-            $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
-            $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
+            $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">Cửa hàng</option></select>');
+            $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"><option value="-1">Cửa hàng</option></select>');
             getStore('nhap');
             getProvider();
             $("#xuatoption").hide();
@@ -118,9 +157,20 @@
         else{
             $("#xuatoption").show();
             $("#targetoption").hide();
-            $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
-            $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
-
+            $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">Cửa hàng</option></select>');
+            $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"><option value="-1">Cửa hàng</option></select>');
+                if(xuattype == "cuahang"){
+                    $("#xuatoption label").removeClass("checked");
+                    $("input[value=cuahang]").prop('checked', true);
+                    $("label[for=cuahangradio]").addClass("checked");
+                    typexuatcheck("cuahang");
+                }
+                else{
+                    $("#xuatoption label").removeClass("checked");
+                    $("input[value=khachhang]").prop('checked', true);
+                    $("label[for=khachhangradio]").addClass("checked");
+                    typexuatcheck("khachhang");
+                }
             disableinput();
         }
     }
@@ -128,6 +178,7 @@
         $('#pghour').mask('99:99:99');
         $('#pgdate').mask('9999-99-99');
         $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
+        $("input[name=pgthanhtoan]").autoNumeric({aSep:' ',aPad: false});
         loadinout(1);
        $("input").customInput();
         $( "#pgdate" ).datepicker({
@@ -140,23 +191,10 @@
 
 
         $("input[name=pgtype]").click(function(){
-            typecheck($(this).val());
+            typecheck($(this).val(),"");
         });
         $("input[name=pgtypexuat]").click(function(){
-            if($(this).val() == 'khachhang'){
-                getStore('xuat');
-                $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block"><option value="-1">khách hàng</option></select>');
-                getCustomer();
-                $("#targetoption").show();
-            }
-            else{
-                $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
-                $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block"><option value="-1">Cửa hàng</option></select>');
-                getStore('xuatcuahang');
-                $("#xuatoption").show();
-                $("#targetoption").show();
-
-            }
+                typexuatcheck($(this).val())
         });
     });
     function savehoadon(){
@@ -177,7 +215,14 @@
         }
         var pgtype= $("input[name=pgtype]:checked").val();
 
+        if(pgtype == "xuat") {
         var pgtypexuat =  $("input[name=pgtypexuat]:checked").val();
+        }
+        else{
+            var pgtypexuat = "";
+        }
+        var pgfrom = $('select[name=pgfrom]').chosen().val();
+        var pgto = $("select[name=pgto]").chosen().val();
 //        var pgseries = $("input[name=pgmahoadon]").val();
 //        if(pgseries == ""){
 //            alert("Hóa đơn phải có ít nhất một thiết bị");
@@ -192,6 +237,8 @@
                       + "&pgdate=" + pgdate
                       + "&pgtype=" + pgtype
                       + "&pgxuattype=" + pgtypexuat
+                      + "&pgfrom=" + pgfrom
+                      + "&pgto=" + pgto
                       + "&edit=" + idhoadon,
             success: function (msg) {
                 if (msg == 0) {
@@ -215,7 +262,7 @@
         var pgcountry    = $("select[name=pgcountry]").val();
         var pgyear     = $("select[name=pgyear]").val();
         var pgfrom     = $('select[name=pgfrom]').chosen().val();
-        var pgto     = $("select[name=pgto]").val();
+        var pgto     = $("select[name=pgto]").chosen().val();
         var pgcount = $("input[name=pgcount]").val();
         var idhoadon = $("input[name=idhoadon]").val();
         var idchitiethoadon = $("input[name=idchitiethoadon]").val();
@@ -255,6 +302,7 @@
                         $("input[name=pgseries]").val("");
                         loadinout_details(1,idhoadon);
                         clearinputdetails();
+                        loadSumPrice(idhoadon,$("input[name=pgtype]:checked").val());
                     }
 
 
@@ -271,6 +319,12 @@
             removeloadgif("#loadstatus");
         });
     }
+    function loadmoneytransfer(page,pginout_id) {
+        addloadgif("#loadstatus");
+        $("#list_transfer").load("<?=base_url()?>admin/load/moneytransfer/" + page+"/"+pginout_id, function () {
+            removeloadgif("#loadstatus");
+        });
+    }
     function loadinout_details(page,parent) {
         addloadgif("#loadstatus");
         $("#list_hoadonitem").load("<?=base_url()?>admin/load/inout_details/" + page+"/"+parent, function () {
@@ -281,27 +335,36 @@
         $("input[type=text]").val("");
         $("input[type=hidden]").val("");
         $("#hoadoninfo input[type=radio]").prop('disabled', false);
+        enableinput();
 
     }
     function edithoadon(id){
-        $("#hoadoninfo input[type=radio]").prop('disabled', 'disabled');
-        $("input[name=idhoadon]").val(id);
-        loadinout_details(1,id);
+
         $.ajax({
             type: "post",
             url: "<?=base_url()?>admin/loadedit/inout/" + id,
             success: function (msg) {
                 if (msg == "0") alert('<?=lang("NO_DATA")?>');
                 else {
+                    myclear();
+
                     var province = eval(msg);
                     $("input[name=pgmahoadon]").val(province.pgcode);
                     $("input[name=pgdate]").val(formatDate(province.pgdate));
                     $("input[name=pghour]").val(formatTime(province.pgdate));
+                    $("input[name=pgtotmp]").val(province.pgto);
+                    $("input[name=pgfromtmp]").val(province.pgfrom);
                    // console.log($("input[value="+province.pgtype+"]"));
                     $("label").removeClass("checked");
                     $("input[value="+province.pgtype+"]").prop('checked', true);
                     $("label[for="+province.pgtype+"radio]").addClass("checked");
-                    typecheck($("input[value="+province.pgtype+"]:checked").val());
+                    typecheck($("input[value="+province.pgtype+"]:checked").val(),province.pgxuattype);
+                    loadSumPrice(id,province.pgtype);
+                    $("#hoadoninfo input[type=radio]").prop('disabled', 'disabled');
+                    $("input[name=idhoadon]").val(id);
+                    loadinout_details(1,id);
+                    loadmoneytransfer(1,id);
+
 
                 }
             }
@@ -409,10 +472,14 @@
                     if(type =="nhap"){
                         $("select[name=pgto]").html(option);
                         $('select[name=pgto]').chosen({width:"100%"});
+                        $('select[name=pgto]').val($("input[name=pgtotmp]").val()).trigger("chosen:updated");
+
                     }
                     else if(type=="xuat") {
                         $("select[name=pgfrom]").html(option);
                         $('select[name=pgfrom]').chosen({width:"100%"});
+                        $('select[name=pgfrom]').val($("input[name=pgfromtmp]").val()).trigger("chosen:updated");
+
 //                        $("select[name=pgto]").html(option);
 //                        $('select[name=pgto]').chosen({width:"100%"});
                     }
@@ -421,6 +488,9 @@
                         $('select[name=pgfrom]').chosen({width:"100%"});
                         $("select[name=pgto]").html(option);
                         $('select[name=pgto]').chosen({width:"100%"});
+                        $('select[name=pgfrom]').val($("input[name=pgfromtmp]").val()).trigger("chosen:updated");
+                        $('select[name=pgto]').val($("input[name=pgtotmp]").val()).trigger("chosen:updated");
+
                     }
 
                 }
@@ -441,6 +511,8 @@
                     });
                         $("select[name=pgfrom]").html(option);
                     $('select[name=pgfrom]').chosen({width:"100%"});
+                    $('select[name=pgfrom]').val($("input[name=pgfromtmp]").val()).trigger("chosen:updated");
+
                 }
             }
         });
@@ -528,6 +600,59 @@
             }
         });
     }
+    function getThietbiFromSn(id){
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/loadcode/chitietthietbi/" + id,
+            success: function (msg) {
+                if (msg == "0"){
+                    if(confirm('S/n này chưa có! hệ thống sẽ tự động thêm mới s/n này vào dữ liệu thiết bị?')){
+                        enableinput();
+                    }
+                    else{
+                        $("input[name=pgseries]").val("");
+                    }
+
+                }
+                else {
+                    var pgfrom     = $('select[name=pgfrom]').chosen().val();
+                    var pgto     = $("select[name=pgto]").val();
+                    var pgcount = $("input[name=pgcount]").val();
+                    var pgtype= $("input[name=pgtype]:checked").val();
+                    var pgtypexuat =  $("input[name=pgtypexuat]:checked").val();
+                    var pginout_id =  $("input[name=idhoadon]").val();
+                    if(pgtype=='xuat'){
+                        checkXuat(id,pgtypexuat,pgfrom,pgto,pginout_id);
+                    }
+
+                    var province = eval(msg);
+                    $("input[name=pgprice]").val(province.pgprice);
+                    $("input[name=pgthietbi_id]").val(province.id);
+                    $("input[name=pgthietbicode]").val(province.pgthietbi_code);
+                    var array = province.pgyear.split(",");
+                    var select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgyear]").html(select);
+                    array = province.pgcolor.split(",");
+                    select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgcolor]").html(select);
+                    array = province.pgcountry.split(",");
+                    select ="";
+                    for(var i=0;i<array.length;i++){
+                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
+                    }
+                    $("select[name=pgcountry]").html(select);
+
+
+                }
+            }
+        });
+    }
     var formatTime = function(unixTimestamp) {
         var dt = new Date(unixTimestamp * 1000);
 
@@ -575,5 +700,90 @@
         $("#inputchitiethoadon select").prop('disabled', false);
 
     }
+
+    function blursninput(val){
+        disableinput();
+        getThietbiFromSn(val);
+        $("input[name=pgcount]").val("1");
+
+    }
+    function checkXuat(sn,xuattype,from,to,inout_id){
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/checkxuat/" + sn,
+            data: "xuattype="+xuattype+"&from="+from+"&to="+to+"&inout_id="+inout_id,
+            success: function (msg) {
+                switch (msg){
+                    case "-1": alert("Sản phẩm đã bán cho khách");
+                        $("input[name=pgseries]").val("");
+                        break;
+                    case "-2":  alert("Sản phẩm đã ở cửa hàng này hoặc đang được chuyển vào");
+                        $("input[name=pgseries]").val("");
+                        break;
+                    case "-3":  alert("Sản phẩm không có ở cửa hàng này hoặc đang được chuyển đi");
+                        $("input[name=pgseries]").val("");
+                        break;
+                    case "-4":  alert("Nơi chuyển và nơi nhận phải khác nhau");
+                        $("input[name=pgseries]").val("");
+                        break;
+                    case "-5":  alert("Chưa chọn nơi chuyển và nơi nhận");
+                        $("input[name=pgseries]").val("");
+                        break;
+                    case "-6":  alert("Đã có sản phẩm này trong đơn hàng");
+                        $("input[name=pgseries]").val("");
+                        break;
+                    case "1": break;
+                    default : break;
+                }
+            }
+        });
+    }
+function loadSumPrice(inout_id,type){
+    $.ajax({
+        type: "post",
+        url: "<?=base_url()?>admin/jxloadsuminout/" + inout_id,
+        success: function (msg) {
+            $("input[name=pgsumprice]").val(msg);
+            $("input[name=pgtypethanhtoan]").val(type);
+
+        }
+    });
+}
+function savethanhtoan(){
+    var pginout_id = $("input[name=idhoadon]").val();
+    var pgsumprice = $("input[name=pgsumprice]").val().replace(/ /g,'');
+    var pgthanhtoan = $("input[name=pgthanhtoan]").val().replace(/ /g,'');
+    var pgtypethanhtoan = $("input[name=pgtypethanhtoan]").val();
+   if(pginout_id =="") {
+       alert("Chưa có thông tin hóa đơn");
+       return;
+   }
+    if(pgtypethanhtoan == ""){
+       alert("Chưa chọn nhập hay xuất hàng");
+       return;
+    }
+    if(parseInt(pgthanhtoan) > parseInt(pgsumprice)){
+        if(confirm("Giá thanh toán nhiều hơn tổng giá trị, bạn muốn thanh toán hết đơn hàng?")){
+            $("input[name=pgthanhtoan]").val(pgsumprice);
+            pgthanhtoan = pgsumprice;
+        }
+        else{
+            $("input[name=pgthanhtoan]").val("");
+            return;
+        }
+    }
+    $.ajax({
+        type: "post",
+        url: "<?=base_url()?>admin/save/moneytransfer",
+        data:"pginout_id="+pginout_id+
+         //    "&pgsumprice="+pgsumprice+
+             "&pgamount="+pgthanhtoan+
+             "&pgtype="+pgtypethanhtoan,
+        success: function (msg) {
+            loadmoneytransfer(1,pginout_id);
+
+        }
+    });
+}
 </script>
 

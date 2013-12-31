@@ -108,12 +108,14 @@ class Admin extends CI_Controller
         if($where!= ""){
             if($table == 'inout_details')
             $parent = array("pginout_id" => $where);
+            else  if($table == 'moneytransfer')
+                $parent = array("pginout_id" => $where);
         }
         $role = $this->mylibs->checkRole("rl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
         }
-        if (($rs = $this->Select($this->tbprefix.$table, $parent, ($page-1), array('field' => 'id', 'type' => ''))) != null) {
+        if (($rs = $this->Select($this->tbprefix.$table, $parent, ($page-1), array('field' => 'id', 'type' => 'DESC'))) != null) {
             $data['province'] = $rs;
             $data['sumpage'] = $this->getSumPage($this->tbprefix.$table, null);
             $data['page'] = $page;
@@ -250,6 +252,40 @@ class Admin extends CI_Controller
             }
         }
     }
+    public function checkxuat($sn){
+        $pgtype="xuat";
+        $pgxuattype = $this->input->post('xuattype');
+        $pgto = $this->input->post('to');
+        $pgfrom = $this->input->post('from');
+        $pginout_id = $this->input->post('inout_id');
+        $kq = 0;
+        if($pgto == -1 || $pgfrom == -1){
+            echo -5;//chua chon target
+            return ;
+        }
+        if($pgxuattype == "cuahang" && $pgfrom == $pgto){
+            echo  -4;// to va from giong nhau
+            return;
+        }
+        $sql="SELECT count(id) numrows FROM ".$this->tbprefix."inout_details WHERE pginout_id='$pginout_id' AND pgseries='$sn'";
+        $qr = $this->db->query($sql);
+        if($qr->row()->numrows >0){
+            echo -6; // da co sp trong don hang
+            return;
+        }
+        //kiem tra hoa don cuoi cung
+        $sql="SELECT i.pgtype,d.pgfrom, d.pgto, i.pgxuattype FROM ".$this->tbprefix."inout_details d, ".$this->tbprefix."inout i
+        WHERE i.id = d.pginout_id AND d.pgdeleted=0 AND d.pgseries = '$sn' ORDER BY d.id DESC LIMIT 0,1";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $row = $qr->row();
+            if($row->pgxuattype == "khachhang") $kq = -1;//da ban
+            else if($row->pgtype=="xuat" && $row->pgto != $pgfrom) $kq = -3;//sp ko co o cua hang nay
+            else if($row->pgxuattype == "cuahang" && $row->pgto == $pgto) $kq = -2;// sp da o cua hang nay
+            else $kq = 1;
+        }
+        echo $kq;
+    }
     public function getStore(){
         if($this->mylibs->checkRole("rqStore")>= 2)
         $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
@@ -268,6 +304,14 @@ class Admin extends CI_Controller
             $this->mylibs->echojson($arr);
         }
         else echo "";
+    }
+    public  function getSuminout($inout_id){
+        $sql="SELECT sum(pgcount * pgprice) summoney FROM ".$this->tbprefix."inout_details WHERE pginout_id='$inout_id' ";
+        $qr = $this->db->query($sql);
+        return $qr->row()->summoney;
+    }
+    public function jxloadsuminout($inout_id){
+        echo number_format($this->getSuminout($inout_id),0,'.',' ');
     }
     /**
      * Select database with condition
@@ -432,6 +476,7 @@ class Admin extends CI_Controller
             $this->mylibs->echojson($provider);
         }   else echo '';
     }
+
 }
 
 /* End of file welcome.php */

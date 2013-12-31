@@ -106,6 +106,7 @@
         var pglong_info      = $("textarea[name=pglong_info]").val();
         var pgtech_info    = $("textarea[name=pgtech_info]").val();
         var pgthietbi_id      = $("input[name=pgthietbi_id]").val();
+        var pgthietbi_code     = $("input[name=pgthietbicode]").val();
 
         var edit = $("input[name=edit]").val();
 
@@ -117,6 +118,7 @@
                     + "&pgcode=" + pgcode
                     + "&pgpic=" + pgpic
                     + "&pgthietbi_id=" + pgthietbi_id
+                    + "&pgthietbi_code=" + pgthietbi_code
                     + "&pgprice=" + pgprice
                     + "&pgprice_old=" + pgprice_old
                     + "&pgcolor=" + pgcolor
@@ -170,6 +172,7 @@
         $("input[name=pgcode]").val("");
         $("input[name=pgpic]").val("");
         $("input[name=pgthietbi_id]").val("");
+        $("input[name=pgthietbicode]").val("");
         $("input[name=pgprice]").val("");
         $("input[name=pgprice_old]").val("");
         $("input[name=pgshort_info]").val("");
@@ -201,6 +204,7 @@
                     $("textarea[name=pgtech_info]").val(province.pgtech_info);
                     $("input[name=edit]").val(province.id);
                     $("input[name=pgthietbi_id]").val(province.pgthietbi_id);
+                    $("input[name=pgthietbicode]").val(province.pgthietbi_code);
                     getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
 
                     $("#pgavatardemo").html('<img src="<?=base_url()?>thumbnails/' + province.pgpic + '">');

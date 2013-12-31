@@ -223,8 +223,9 @@ header h2{
     vertical-align: top;
 }
 #inputserviceplace td{
-    width: 45%;
+    max-width: 50%;
 }
+
 /*td input[type=text],*/
 /*td select,*/
 /*td textarea{*/
@@ -436,4 +437,15 @@ select{
 }
 table td a{
          display: block;
+}
+#thanhtoanbox div{
+      margin: 3px;
+    display: block;
+}
+b{
+    font-weight: 700;
+}
+#lichsudonhang{
+    max-height: 100px;
+    overflow-y: auto;
 }
