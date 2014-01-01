@@ -2,7 +2,7 @@
     <legend>Thông tin</legend>
     <table id="inputserviceplace">
         <tr>
-            <td>
+            <td id="pgtype">
                 <span style="display: inline-block;">
                 <input type="radio" name="pgtype" value="thietbi" checked=checked id="thietbiradio">
                 <label for="thietbiradio">Thiết bị</label>
@@ -205,7 +205,7 @@
                 else {
                     var province = eval(msg);
                     $("input[name=pglongname]").val(province.pglong_name);
-                    $("input[value="+province.pgtype+"]").prop("checked",true);
+                   // $("input[value="+province.pgtype+"]").prop("checked",true);
                     $("input[name=pgcode]").val(province.pgcode);
                     $("input[name=pgcolor]").val(province.pgcolor);
                     $("input[name=pgyear]").val(province.pgyear);
@@ -219,6 +219,11 @@
                     $("input[name=edit]").val(province.id);
 
                     $("select[name=pgtype_pk]").val(province.pgtype_pk);
+
+                    $("#pgtype label").removeClass("checked");
+                    $("input[value="+province.pgtype+"]").prop('checked', true);
+                    $("label[for="+province.pgtype+"radio]").addClass("checked");
+
                     if(province.pgtype == 'phukien'){
                         $("input[name=pkthietbi_id]").val(province.pgnhomthietbi_id);
                         $("select[name=pgtype_pk]").show();

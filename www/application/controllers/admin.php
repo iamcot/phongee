@@ -89,6 +89,19 @@ class Admin extends CI_Controller
         $this->render($data);
     }
     /**
+     * Render Report page
+     */
+    public function report()
+    {
+        if ($this->mylibs->checkRole('raReport')==0)
+            header("Location: " . base_url() . "admin");
+        $data = array();
+        $data['body'] = $this->load->view('admin/adminreport_v', $data, true);
+        $data['cat'] = 'report';
+        $data['title'] = 'Báo cáo';
+        $this->render($data);
+    }
+    /**
      * Render Thiet bi page
      */
     public function thietbi()
@@ -125,7 +138,12 @@ class Admin extends CI_Controller
 
     public function loadcode($table,$id)
     {
-        $sql = "SELECT * FROM " . $this->tbprefix.$table . " WHERE pgcode='$id'";
+        if($table!="chitietthietbi")
+            $sql = "SELECT * FROM " . $this->tbprefix.$table . " WHERE pgcode='$id'";
+        else
+            $sql = "SELECT c.*,b.pgtype thietbitype FROM " . $this->tbprefix . "chitietthietbi c, ".$this->tbprefix."thietbi b
+            WHERE c.pgcode='$id' AND b.id=c.pgthietbi_id ";
+
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             $row = $qr->row_array();
@@ -206,17 +224,24 @@ class Admin extends CI_Controller
                     $type=$row->pgtype;
                     $hdid = $row->id;
                     $xuattype=$row->pgxuattype;
-                    $sql2 = "SELECT d.*,i.pgtype, i.pgxuattype  FROM " . $this->tbprefix . "inout_details d, " . $this->tbprefix . "inout i WHERE d.pginout_id = i.id  AND d.pgseries='" . $param['pgseries'] . "' ORDER BY d.id DESC LIMIT 0,1";
+                    $sql2 = "SELECT count(d.id) numdetail, b.pgtype pgthietbitype
+                    FROM " . $this->tbprefix . "inout_details d, ".$this->tbprefix."thietbi b
+                    WHERE  d.pgthietbi_id = b.id AND d.pgseries='" . $param['pgseries'] . "'
+                    AND d.pginout_id='".$param['pginout_id']."'";
                     $qr = $this->db->query($sql2);
-                    if ($qr->num_rows() > 0) {
                         $row = $qr->row();
-                        if($type == 'nhap'){
-                            if($row->pgto == $param['pgto']){
+                        if($type == 'nhap' && $row->numdetail>0 && $row->pgthietbitype!='phukien'){
+//                            if($row->pgto == $param['pgto']){
                                 echo '-1'; // da duoc nhap ve
                                 return;
-                            }
+//                            }
                         }
-                    }
+                        if($type == 'xuat' && $row->numdetail>0 && $row->pgthietbitype!='phukien' ){
+//                            if($row->pgto == $param['pgto']){
+                                echo '-11'; // da duoc xuat trong hoa don nay
+                                return;
+//                            }
+                        }
                 }
             }
             $str = $this->db->insert_string($this->tbprefix.$table, $param);
@@ -310,8 +335,20 @@ class Admin extends CI_Controller
         $qr = $this->db->query($sql);
         return $qr->row()->summoney;
     }
+    public function getSumremain($inout_id){
+        $sql="SELECT sum( pgamount) summoney FROM ".$this->tbprefix."moneytransfer WHERE pginout_id='$inout_id' ";
+        $qr = $this->db->query($sql);
+        return $qr->row()->summoney;
+    }
     public function jxloadsuminout($inout_id){
-        echo number_format($this->getSuminout($inout_id),0,'.',' ');
+        $sum = $this->getSuminout($inout_id);
+        $remain = $this->getSumremain($inout_id);
+        $arr = array(
+            'sum' =>number_format($sum,0,'.',' '),
+            'remain' =>number_format(($sum - $remain),0,'.',' '),
+        );
+        $this->mylibs->echojson($arr);
+
     }
     /**
      * Select database with condition
@@ -475,6 +512,20 @@ class Admin extends CI_Controller
         if($provider!=null){
             $this->mylibs->echojson($provider);
         }   else echo '';
+    }
+    public function gettonkho($sn,$from){
+        $sql="SELECT sum(d.pgcount) numin from ".$this->tbprefix."inout_details d,pginout i
+        where i.id = d.pginout_id and i.pgto=$from and d.pgseries='$sn' AND (i.pgtype='nhap' OR i.pgxuattype='cuahang')";
+        $qr = $this->db->query($sql);
+        $in = $qr->row()->numin;
+        $sql="SELECT sum(d.pgcount) numout from ".$this->tbprefix."inout_details d,pginout i
+        where i.id = d.pginout_id and i.pgfrom=$from and d.pgseries='$sn' AND i.pgtype='xuat'";
+        $qr = $this->db->query($sql);
+        $out = $qr->row()->numout;
+        return ($in - $out);
+    }
+    public function jxgettonkho($sn,$from){
+        echo $this->gettonkho($sn,$from);
     }
 
 }

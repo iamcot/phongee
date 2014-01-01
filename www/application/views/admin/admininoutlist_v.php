@@ -57,11 +57,12 @@
         </tr>
         <tr >
             <td colspan="2">
+                <div>Thông tin thiết bị: mã <b id="icode"></b>, tên thiết bị: <b id="iname"></b>, loại: <b id="itype"></b>, tồn kho <b id="icount"></b></div>
                 <input  tabindex="3" onblur="blursninput(this.value)" type="text" name="pgseries" style="width:20%;display: inline-block" placeholder="Series/IMEI">
                 <input  tabindex="5"  type="text" onblur="" name="pgprice" style="width:15%;display: inline-block" placeholder="Giá">
                 <input  tabindex="6" type="text" name="pgcount" style="width:8%;display: inline-block" placeholder="Số lượng" value="1">
    <span id="inputchitiethoadon">
-                <input  tabindex="4" type="text" onblur="getThietbi(this.value)" name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
+                <input  tabindex="4" type="text" onblur="getThietbi(this.value,true)" name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
 
                 <input type="hidden" name="pgthietbi_id" >
 
@@ -93,8 +94,8 @@
         <tr>
             <td id="thanhtoanbox" style="width:40%">
                 <div>
-                <label>Tổng giá trị hóa đơn: </label> <br>
-                <input   type="text" readonly="readonly" name="pgsumprice" style="width:80%;display: block" placeholder="Tổng giá trị hóa đơn">
+                <label>Tổng giá trị hóa đơn: </label> <b id="pgsumprice">0</b><br>
+                <label>Số tiền còn lại: </label> <b id="pgsumremain">0</b><br>
                 </div>
                 <div>
                 <label>Thanh toán: </label>    <br>
@@ -223,11 +224,6 @@
         }
         var pgfrom = $('select[name=pgfrom]').chosen().val();
         var pgto = $("select[name=pgto]").chosen().val();
-//        var pgseries = $("input[name=pgmahoadon]").val();
-//        if(pgseries == ""){
-//            alert("Hóa đơn phải có ít nhất một thiết bị");
-//            return false;
-//        }
         var idhoadon = $("input[name=idhoadon]").val();
 
         $.ajax({
@@ -253,65 +249,123 @@
 
     }
     function save() {
-        savehoadon();
-        var pgseries     = $("input[name=pgseries]").val();
-        var pgthietbi_id     = $("input[name=pgthietbi_id]").val();
-        var pgthietbicode     = $("input[name=pgthietbicode]").val();
-        var pgprice  = $("input[name=pgprice]").val().replace(/ /g,'');
-        var pgcolor    = $("select[name=pgcolor]").val();
-        var pgcountry    = $("select[name=pgcountry]").val();
-        var pgyear     = $("select[name=pgyear]").val();
-        var pgfrom     = $('select[name=pgfrom]').chosen().val();
-        var pgto     = $("select[name=pgto]").chosen().val();
-        var pgcount = $("input[name=pgcount]").val();
-        var idhoadon = $("input[name=idhoadon]").val();
-        var idchitiethoadon = $("input[name=idchitiethoadon]").val();
+        var pgcode     = $("input[name=pgmahoadon]").val();
 
-//        console.log(pgfrom);
-
-        if(pgto == -1 || pgfrom == -1 || pgto== "" || pgfrom == ""){
-            alert("Vui lòng nhập nơi gửi và nơi nhận");
+        var pgdate     = $("input[name=pgdate]").val();
+        var pghour     = $("input[name=pghour]").val();
+        if(pgcode == ""){
+            alert("Vui lòng nhập mã hóa đơn");
             return false;
         }
-        if (idhoadon.trim() !="" && pgseries.trim() != "" && pgthietbi_id.trim() != "" && pgcount > 0) {
-            $.ajax({
-                type: "post",
-                url: "<?=base_url()?>admin/save/inout_details",
-                data: "pgseries=" + pgseries
-                    + "&pgthietbi_id=" + pgthietbi_id
-                    + "&pgthietbi_code=" + pgthietbicode
-                    + "&pgprice=" + pgprice
-                    + "&pgcolor=" + pgcolor
-                    + "&pgcountry=" + pgcountry
-                    + "&pgyear=" + pgyear
-                    + "&pgfrom=" + pgfrom
-                    + "&pgto=" + pgto
-                    + "&pgcount=" + pgcount
-                    + "&pginout_id=" + idhoadon
+        if(pgdate != "" && pghour !=""){
+            pgdate = pgdate+" "+pghour;
+        }
+        else{
+            alert("Vui lòng nhập ngày và giờ");
+            return false;
+        }
+        var pgtype= $("input[name=pgtype]:checked").val();
 
-                    + "&edit=" + idchitiethoadon,
-                success: function (msg) {
-                    if(msg=="0"){
-                        alert("Lỗi lưu.");
+        if(pgtype == "xuat") {
+            var pgtypexuat =  $("input[name=pgtypexuat]:checked").val();
+        }
+        else{
+            var pgtypexuat = "";
+        }
+        var pgfrom = $('select[name=pgfrom]').chosen().val();
+        var pgto = $("select[name=pgto]").chosen().val();
+        var idhoadon = $("input[name=idhoadon]").val();
 
-                    }
-                    else if(msg==-1){
-                        alert("S/n này đã được nhập vào cửa hàng này");
-                    }
-                    else{
-                        $("input[name=pgseries]").val("");
-                        loadinout_details(1,idhoadon);
-                        clearinputdetails();
-                        loadSumPrice(idhoadon,$("input[name=pgtype]:checked").val());
-                    }
-
-
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/save/inout",
+            data: "pgcode=" + pgcode
+                + "&pgdate=" + pgdate
+                + "&pgtype=" + pgtype
+                + "&pgxuattype=" + pgtypexuat
+                + "&pgfrom=" + pgfrom
+                + "&pgto=" + pgto
+                + "&edit=" + idhoadon,
+            success: function (msg) {
+                if (msg == 0) {
+                    alert("Không thể lưu");
                 }
-            });
-        }
-        else {
-                alert("Chưa đủ thông tin của chi tiết đơn hàng.");
-        }
+                else {
+                   // console.log(msg);
+
+                    if(idhoadon.trim() == "") $("input[name=idhoadon]").val(msg);
+                   // console.log($("input[name=idhoadon]").val());
+                    loadinout(1);
+                    var pgseries     = $("input[name=pgseries]").val();
+                    var pgthietbi_id     = $("input[name=pgthietbi_id]").val();
+                    var pgthietbicode     = $("input[name=pgthietbicode]").val();
+                    var pgprice  = $("input[name=pgprice]").val().replace(/ /g,'');
+                    var pgcolor    = $("select[name=pgcolor]").val();
+                    var pgcountry    = $("select[name=pgcountry]").val();
+                    var pgyear     = $("select[name=pgyear]").val();
+                    var pgfrom     = $('select[name=pgfrom]').chosen().val();
+                    var pgto     = $("select[name=pgto]").chosen().val();
+                    var pgcount = $("input[name=pgcount]").val();
+                    idhoadon = $("input[name=idhoadon]").val();
+                    var idchitiethoadon = $("input[name=idchitiethoadon]").val();
+                //    console.log(idhoadon+"@"+pgseries+"@"+pgthietbi_id+"@"+pgcount);
+                    if(pgtype=='xuat' && (pgcount < 0 || pgcount > parseInt($("#icount").html()))) {
+                        alert("Số lượng không đúng hoặc vượt quá tồn kho.");
+                        return;
+                    }
+//        console.log(pgfrom);
+
+                    if(pgto == -1 || pgfrom == -1 || pgto== "" || pgfrom == ""){
+                        alert("Vui lòng nhập nơi gửi và nơi nhận");
+                        return false;
+                    }
+                    if (idhoadon.trim() !="" && pgseries.trim() != "" && pgthietbi_id.trim() != "" && pgcount > 0) {
+                        $.ajax({
+                            type: "post",
+                            url: "<?=base_url()?>admin/save/inout_details",
+                            data: "pgseries=" + pgseries
+                                + "&pgthietbi_id=" + pgthietbi_id
+                                + "&pgthietbi_code=" + pgthietbicode
+                                + "&pgprice=" + pgprice
+                                + "&pgcolor=" + pgcolor
+                                + "&pgcountry=" + pgcountry
+                                + "&pgyear=" + pgyear
+                                + "&pgfrom=" + pgfrom
+                                + "&pgto=" + pgto
+                                + "&pgcount=" + pgcount
+                                + "&pginout_id=" + idhoadon
+
+                                + "&edit=" + idchitiethoadon,
+                            success: function (msg) {
+                                if(msg=="0"){
+                                    alert("Lỗi lưu.");
+
+                                }
+                                else if(msg==-1){
+                                    alert("S/n này đã có trong đơn hàng");
+                                }
+                                else if(msg==-11){
+                                    alert("S/n này đã có trong đơn hàng");
+                                }
+                                else{
+                                    $("input[name=pgseries]").val("");
+                                    loadinout_details(1,idhoadon);
+                                    clearinputdetails();
+                                    loadSumPrice(idhoadon,$("input[name=pgtype]:checked").val());
+                                }
+
+
+                            }
+                        });
+                    }
+                    else {
+                        alert("Chưa đủ thông tin của chi tiết đơn hàng.");
+                    }
+                }
+            }
+        });
+
+
     }
     function loadinout(page) {
         addloadgif("#loadstatus");
@@ -383,13 +437,27 @@
                 else {
                     var province = eval(msg);
                     $("input[name=pgseries]").val(province.pgseries);
-                    $("input[name=pgthietbi_id]").val(province.pgthietbi_id);
                     $("input[name=pgthietbicode]").val(province.pgthietbi_code);
+                    $("input[name=pgthietbi_id]").val(province.pgthietbi_id);
+                    $("input[name=idchitiethoadon]").val(province.id);
+
+                    getThietbi(province.pgthietbi_code,false);
+                    getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
                     $("input[name=pgprice]").val(province.pgprice);
 
                     $("input[name=pgcount]").val(province.pgcount);
-                    $("input[name=idchitiethoadon]").val(province.id);
-                    getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
+                    var pgfrom     = $('select[name=pgfrom]').chosen().val();
+
+                    var pgtype= $("input[name=pgtype]:checked").val();
+
+                    if(pgtype=='xuat'){
+
+                        gettonkho(province.pgseries,pgfrom,true);
+                    }
+
+                    else{
+                        $("#icount").html("");
+                    }
 
 
                 }
@@ -566,7 +634,7 @@
         });
     }
 
-    function getThietbi(id){
+    function getThietbi(id,custom){
         $.ajax({
             type: "post",
             url: "<?=base_url()?>admin/loadcode/thietbi/" + id,
@@ -574,8 +642,10 @@
                 if (msg == "0") alert('<?=lang("NO_DATA")?>');
                 else {
                     var province = eval(msg);
-                    $("input[name=pgprice]").val(province.pgprice);
                     $("input[name=pgthietbi_id]").val(province.id);
+                    if(!custom){
+                    $("input[name=pgprice]").val(province.pgprice);
+
                     var array = province.pgyear.split(",");
                     var select ="";
                     for(var i=0;i<array.length;i++){
@@ -594,7 +664,16 @@
                         select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
                     }
                     $("select[name=pgcountry]").html(select);
-
+                    if(province.pgtype != "phukien"){
+                        $("input[name=pgcount]").prop('disabled', 'disabled');
+                    }
+                    else{
+                        $("input[name=pgcount]").prop('disabled', false);
+                    }
+                    }
+                    $("#icode").html(province.pgcode);
+                    $("#iname").html(province.pglong_name);
+                    $("#itype").html(province.pgtype);
 
                 }
             }
@@ -623,6 +702,10 @@
                     var pginout_id =  $("input[name=idhoadon]").val();
                     if(pgtype=='xuat'){
                         checkXuat(id,pgtypexuat,pgfrom,pgto,pginout_id);
+                        gettonkho(id,pgfrom,false);
+                    }
+                    else{
+                        $("#icount").html("");
                     }
 
                     var province = eval(msg);
@@ -647,7 +730,15 @@
                         select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
                     }
                     $("select[name=pgcountry]").html(select);
-
+                    if(province.thietbitype != "phukien"){
+                        $("input[name=pgcount]").prop('disabled', 'disabled');
+                    }
+                    else{
+                        $("input[name=pgcount]").prop('disabled', false);
+                    }
+                    $("#icode").html(province.pgthietbi_code);
+                    $("#iname").html(province.pglong_name);
+                    $("#itype").html(province.thietbitype);
 
                 }
             }
@@ -743,7 +834,9 @@ function loadSumPrice(inout_id,type){
         type: "post",
         url: "<?=base_url()?>admin/jxloadsuminout/" + inout_id,
         success: function (msg) {
-            $("input[name=pgsumprice]").val(msg);
+            var price = eval(msg);
+            $("#pgsumprice").html(price.sum);
+            $("#pgsumremain").html(price.remain);
             $("input[name=pgtypethanhtoan]").val(type);
 
         }
@@ -751,9 +844,14 @@ function loadSumPrice(inout_id,type){
 }
 function savethanhtoan(){
     var pginout_id = $("input[name=idhoadon]").val();
-    var pgsumprice = $("input[name=pgsumprice]").val().replace(/ /g,'');
+    var pgsumprice = $("#pgsumremain").html().replace(/ /g,'');
     var pgthanhtoan = $("input[name=pgthanhtoan]").val().replace(/ /g,'');
     var pgtypethanhtoan = $("input[name=pgtypethanhtoan]").val();
+    $("input[name=pgthanhtoan]").val("");
+    if(pgsumprice == 0){
+        alert("Đơn hàng đã thanh toán đủ");
+        return;
+    }
    if(pginout_id =="") {
        alert("Chưa có thông tin hóa đơn");
        return;
@@ -781,7 +879,20 @@ function savethanhtoan(){
              "&pgtype="+pgtypethanhtoan,
         success: function (msg) {
             loadmoneytransfer(1,pginout_id);
+            loadSumPrice(pginout_id,pgtypethanhtoan);
 
+        }
+    });
+}
+function gettonkho(sn,from,fromedit){
+    $.ajax({
+        type: "post",
+        url: "<?=base_url()?>admin/jxgettonkho/"+sn+"/"+from,
+        success: function (msg) {
+            if(fromedit){
+                msg = parseInt(msg)+parseInt($("input[name=pgcount]").val());
+            }
+            $("#icount").html(msg);
         }
     });
 }

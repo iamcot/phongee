@@ -1,11 +1,11 @@
 <? if (isset($province)): ?>
-    <table>
+    <table style="text-align: right">
         <thead>
         <tr><td>ID</td><td>Thanh toán </td><td>Ngày</td><td>Loại</td></tr>
         </thead>
         <? $i=1; foreach ($province as $row): $inout_id = $row->pginout_id;?>
                <tr class="<?=(($i%2==0))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
-                   id="tr<?=$row->id?>"><td><?=$row->id?></td><td><a href="javascript:edithoadon(<?=$row->id?>)"><?=$row->pgamount?></a></td><td><?=date("d/m/Y H:i:s",strtotime($row->pgcreate))?></td><td><?=$row->pgtype?></td></tr>
+                   id="tr<?=$row->id?>"><td><?=$row->id?></td><td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',' ')?></a></td><td><?=date("d/m/Y H:i:s",strtotime($row->pgcreate))?></td><td><?=$row->pgtype?></td></tr>
         <? $i++; endforeach; ?>
     </table>
     <? if($sumpage > 1):?>

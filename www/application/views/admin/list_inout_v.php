@@ -8,6 +8,7 @@
                    id="tr<?=$row->id?>"><td><?=$row->id?></td><td><a href="javascript:edithoadon(<?=$row->id?>)"><?=$row->pgcode?></a></td><td><?=date("d/m/Y H:i:s",$row->pgdate)?></td><td><?=$row->pgtype?></td><td style="text-align:right"><a href="javascript:hideinout(<?=$row->id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a></td></tr>
         <? $i++; endforeach; ?>
     </table>
+    <? if($sumpage > 1):?>
     <div class="pagination">
         <a href="#" class="first" data-action="first">&laquo;</a>
         <a href="#" class="previous" data-action="previous">&lsaquo;</a>
@@ -23,4 +24,5 @@
         current_page: <?=$page?>
     });
     </script>
+        <? endif;?>
 <? endif;
