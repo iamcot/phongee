@@ -33,7 +33,7 @@ class Main extends CI_Controller
 
     public function index() //seourl
     {
-        header("Location: /admin");
+        header("Location: ".base_url()."admin");
         $data['sBody'] = 'Hello';
         $data['sTitle'] =  'Trang chủ';
         $this->render($data);

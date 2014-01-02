@@ -1,6 +1,6 @@
 <div id="tabs">
     <ul>
-        <li><a href="<?=base_url()?>admin/listpage/xnt">Xuất Nhập Tồn</a></li>
+        <li><a href="<?=base_url()?>admin/listpagexnt">Xuất Nhập Tồn</a></li>
     </ul>
 </div>
 <script>

@@ -428,7 +428,7 @@ select{
     vertical-align: middle;
     line-height: 32px;
 }
-.chosen-container a{
+a.chosen-single{
     padding-left: 10px;
     display: block;
 }
@@ -448,4 +448,7 @@ b{
 #lichsudonhang{
     max-height: 100px;
     overflow-y: auto;
+}
+:-webkit-autofill{
+    background-color: #fff !important;
 }

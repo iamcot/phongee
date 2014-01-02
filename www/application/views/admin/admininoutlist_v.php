@@ -436,13 +436,14 @@
                 if (msg == "0") alert('<?=lang("NO_DATA")?>');
                 else {
                     var province = eval(msg);
+
+
+                    getThietbi(province.pgthietbi_code,false);
+                    getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
                     $("input[name=pgseries]").val(province.pgseries);
                     $("input[name=pgthietbicode]").val(province.pgthietbi_code);
                     $("input[name=pgthietbi_id]").val(province.pgthietbi_id);
                     $("input[name=idchitiethoadon]").val(province.id);
-
-                    getThietbi(province.pgthietbi_code,false);
-                    getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
                     $("input[name=pgprice]").val(province.pgprice);
 
                     $("input[name=pgcount]").val(province.pgcount);
@@ -456,7 +457,7 @@
                     }
 
                     else{
-                        $("#icount").html("");
+                        gettonkho(province.pgseries,pgto,true);
                     }
 
 
@@ -643,33 +644,34 @@
                 else {
                     var province = eval(msg);
                     $("input[name=pgthietbi_id]").val(province.id);
-                    if(!custom){
-                    $("input[name=pgprice]").val(province.pgprice);
+                   // console.log(custom);
+                    if (custom) {
+                        $("input[name=pgprice]").val(province.pgprice);
 
-                    var array = province.pgyear.split(",");
-                    var select ="";
-                    for(var i=0;i<array.length;i++){
-                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
-                    }
-                    $("select[name=pgyear]").html(select);
-                    array = province.pgcolor.split(",");
-                    select ="";
-                    for(var i=0;i<array.length;i++){
-                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
-                    }
-                    $("select[name=pgcolor]").html(select);
-                    array = province.pgcountry.split(",");
-                    select ="";
-                    for(var i=0;i<array.length;i++){
-                        select+= "<option value='"+array[i].trim()+"'>"+array[i].trim()+"</option>";
-                    }
-                    $("select[name=pgcountry]").html(select);
-                    if(province.pgtype != "phukien"){
-                        $("input[name=pgcount]").prop('disabled', 'disabled');
-                    }
-                    else{
-                        $("input[name=pgcount]").prop('disabled', false);
-                    }
+                        var array = province.pgyear.split(",");
+                        var select = "";
+                        for (var i = 0; i < array.length; i++) {
+                            select += "<option value='" + array[i].trim() + "'>" + array[i].trim() + "</option>";
+                        }
+                        $("select[name=pgyear]").html(select);
+                        array = province.pgcolor.split(",");
+                        select = "";
+                        for (var i = 0; i < array.length; i++) {
+                            select += "<option value='" + array[i].trim() + "'>" + array[i].trim() + "</option>";
+                        }
+                        $("select[name=pgcolor]").html(select);
+                        array = province.pgcountry.split(",");
+                        select = "";
+                        for (var i = 0; i < array.length; i++) {
+                            select += "<option value='" + array[i].trim() + "'>" + array[i].trim() + "</option>";
+                        }
+                        $("select[name=pgcountry]").html(select);
+                        if (province.pgtype != "phukien") {
+                            $("input[name=pgcount]").prop('disabled', 'disabled');
+                        }
+                        else {
+                            $("input[name=pgcount]").prop('disabled', false);
+                        }
                     }
                     $("#icode").html(province.pgcode);
                     $("#iname").html(province.pglong_name);
@@ -705,7 +707,7 @@
                         gettonkho(id,pgfrom,false);
                     }
                     else{
-                        $("#icount").html("");
+                        gettonkho(id,pgto,false);
                     }
 
                     var province = eval(msg);

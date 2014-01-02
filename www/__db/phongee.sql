@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 31, 2013 at 05:49 PM
+-- Generation Time: Jan 02, 2014 at 04:55 PM
 -- Server version: 5.6.14
 -- PHP Version: 5.3.15
 
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `pgchitietthietbi` (
   `pgthietbi_code` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pgcode_2` (`pgcode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `pgchitietthietbi`
@@ -54,8 +54,8 @@ CREATE TABLE IF NOT EXISTS `pgchitietthietbi` (
 
 INSERT INTO `pgchitietthietbi` (`id`, `pgcreate`, `pgthietbi_id`, `pglong_name`, `pgcode`, `pgpic`, `pgshort_info`, `pglong_info`, `pgtech_info`, `pgprice`, `pgprice_old`, `pgdeleted`, `pgyear`, `pgcolor`, `pgcountry`, `pgcreateuser_id`, `pgthietbi_code`) VALUES
 (1, '2013-12-26 21:58:11', 1, 'Iphone 4', 'ip41', '0ab6a7ce01267426b4c341e1bf78e5d5.jpg', '111', '<p>222</p>\n', '<p>333</p>\n', 12000000, 14, 0, 2010, 'đỏ', 'mỹ', 1, 'ip4'),
-(2, '2013-12-27 11:11:20', 3, 'bulong', 'bl1', '', '', '', '', 0, 0, 0, 0, '', 'my', 1, NULL),
-(3, '2013-12-27 11:13:09', 3, 'bulong', 'bl2', '', '', '', '', 0, 0, 0, 0, '', 'my', 1, NULL),
+(2, '2013-12-27 11:11:20', 3, 'bulong', 'bl1', '', '', '', '', 120, 120, 0, 0, '', 'my', 1, 'bl'),
+(3, '2013-12-27 11:13:09', 3, 'bulong', 'bl2', '', '', '', '', 130, 120, 0, 0, '', 'my', 1, 'bl'),
 (4, '2013-12-27 11:13:14', 3, 'bulong', '12121212e3w', '', '', '', '', 0, 0, 0, 0, '', 'my', 0, NULL);
 
 -- --------------------------------------------------------
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `pginout` (
   `pgcreateuser_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `pgcode` (`pgcode`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `pginout`
@@ -86,7 +86,8 @@ CREATE TABLE IF NOT EXISTS `pginout` (
 
 INSERT INTO `pginout` (`id`, `pgcreate`, `pgdate`, `pgcode`, `pgtype`, `pgfrom`, `pgto`, `pgxuattype`, `pgdeleted`, `pgstatus`, `pgcreateuser_id`) VALUES
 (1, '2013-12-31 04:54:39', 1388455200, 'hd1', 'nhap', '8', '2', '', 0, 0, 1),
-(2, '2013-12-31 04:55:45', 1388458800, 'xdh1', 'xuat', '2', '1', 'cuahang', 0, 0, 1);
+(2, '2013-12-31 04:55:45', 1388458800, 'xdh1', 'xuat', '2', '1', 'cuahang', 0, 0, 1),
+(3, '2014-01-02 04:51:44', 1388628000, 'xk1', 'xuat', '2', '1', 'cuahang', 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `pginout_details` (
   `pgto` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `pgcreateuser_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `pginout_details`
@@ -121,7 +122,8 @@ CREATE TABLE IF NOT EXISTS `pginout_details` (
 INSERT INTO `pginout_details` (`id`, `pgcreate`, `pgdeleted`, `pginout_id`, `pgseries`, `pgthietbi_id`, `pgthietbi_code`, `pgprice`, `pgcount`, `pgcolor`, `pgyear`, `pgcountry`, `pgstatus`, `pgfrom`, `pgto`, `pgcreateuser_id`) VALUES
 (1, '2013-12-31 04:54:55', 0, 1, 'ip41', 1, 'ip4', 13000000, 1, 'đỏ', '2010', 'mỹ', 0, '7', '2', 1),
 (5, '2013-12-31 05:16:32', 0, 2, 'ip41', 1, 'ip4', 12000002, 1, 'đỏ', '2010', 'mỹ', 0, '2', '2', 1),
-(6, '2013-12-31 08:07:37', 0, 1, 'bl1', 2, '', 120000, 10, 'trang', '2013', 'my', 0, '7', '2', 1);
+(6, '2013-12-31 08:07:37', 0, 1, 'bl1', 2, 'bl', 120, 100, '', '0', 'my', 0, '8', '2', 1),
+(7, '2014-01-02 04:51:44', 0, 3, 'bl1', 3, 'bl', 120, 60, 'trang', '2013', 'my', 0, '2', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -139,15 +141,7 @@ CREATE TABLE IF NOT EXISTS `pgmoneytransfer` (
   `pginout_id` int(11) NOT NULL,
   `pgdate` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
-
---
--- Dumping data for table `pgmoneytransfer`
---
-
-INSERT INTO `pgmoneytransfer` (`id`, `pgtype`, `pgamount`, `pgcreate`, `pgdeleted`, `pgcreateuser_id`, `pginout_id`, `pgdate`) VALUES
-(2, 'xuat', 1000000, '2013-12-31 10:27:20', 0, 1, 2, 0),
-(3, 'xuat', 2000000, '2013-12-31 10:30:22', 0, 1, 2, 0);
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -276,6 +270,49 @@ INSERT INTO `pguser` (`id`, `pgfname`, `pglname`, `pgusername`, `pgpassword`, `p
 (8, 'Nha cc B', '', 'ccb', '', '', 'provider', 0, '2013-12-30 06:30:01', '0000-00-00 00:00:00', '', '', '', 0, 0),
 (9, 'Khach hang 1', '', 'kh1', '', '', 'custom', 0, '2013-12-31 03:16:41', '0000-00-00 00:00:00', '', '', '', 0, 1),
 (10, 'Khach hang 2', '', 'kh2', '', '', 'custom', 0, '2013-12-31 03:16:49', '0000-00-00 00:00:00', '', '', '', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `v_inout`
+--
+CREATE TABLE IF NOT EXISTS `v_inout` (
+`id` int(11)
+,`pgcreate` timestamp
+,`pgdeleted` int(11)
+,`pginout_id` int(11)
+,`pgseries` varchar(50)
+,`pgthietbi_id` int(11)
+,`pgthietbi_code` varchar(50)
+,`pgprice` int(11)
+,`pgcount` int(11)
+,`pgcolor` varchar(20)
+,`pgyear` varchar(10)
+,`pgcountry` varchar(20)
+,`pgstatus` int(11)
+,`pgfrom` varchar(50)
+,`pgto` varchar(50)
+,`pgcreateuser_id` int(11)
+,`inoutcode` varchar(50)
+,`inouttype` varchar(20)
+,`pgxuattype` varchar(20)
+,`inoutfrom` varchar(50)
+,`inoutto` varchar(50)
+,`thietbiname` varchar(50)
+,`nhomthietbi_id` int(11)
+,`nhomthietbiname` varchar(50)
+,`pgfname` varchar(20)
+,`pglname` varchar(50)
+,`inoutdate` int(11)
+);
+-- --------------------------------------------------------
+
+--
+-- Structure for view `v_inout`
+--
+DROP TABLE IF EXISTS `v_inout`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`oxid`@`localhost` SQL SECURITY DEFINER VIEW `v_inout` AS select `d`.`id` AS `id`,`d`.`pgcreate` AS `pgcreate`,`d`.`pgdeleted` AS `pgdeleted`,`d`.`pginout_id` AS `pginout_id`,`d`.`pgseries` AS `pgseries`,`d`.`pgthietbi_id` AS `pgthietbi_id`,`d`.`pgthietbi_code` AS `pgthietbi_code`,`d`.`pgprice` AS `pgprice`,`d`.`pgcount` AS `pgcount`,`d`.`pgcolor` AS `pgcolor`,`d`.`pgyear` AS `pgyear`,`d`.`pgcountry` AS `pgcountry`,`d`.`pgstatus` AS `pgstatus`,`d`.`pgfrom` AS `pgfrom`,`d`.`pgto` AS `pgto`,`d`.`pgcreateuser_id` AS `pgcreateuser_id`,`i`.`pgcode` AS `inoutcode`,`i`.`pgtype` AS `inouttype`,`i`.`pgxuattype` AS `pgxuattype`,`i`.`pgfrom` AS `inoutfrom`,`i`.`pgto` AS `inoutto`,`t`.`pglong_name` AS `thietbiname`,`n`.`id` AS `nhomthietbi_id`,`n`.`pglong_name` AS `nhomthietbiname`,`u`.`pgfname` AS `pgfname`,`u`.`pglname` AS `pglname`,`i`.`pgdate` AS `inoutdate` from (((((`pginout_details` `d` join `pginout` `i`) join `pgchitietthietbi` `c`) join `pgthietbi` `t`) join `pgnhomthietbi` `n`) join `pguser` `u`) where ((`d`.`pginout_id` = `i`.`id`) and (`d`.`pgthietbi_id` = `t`.`id`) and (`t`.`pgnhomthietbi_id` = `n`.`id`) and (`d`.`pgcreateuser_id` = `u`.`id`) and (`d`.`pgdeleted` = 0)) group by `d`.`id` order by `d`.`pginout_id`;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
