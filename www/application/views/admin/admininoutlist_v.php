@@ -193,6 +193,8 @@
         }
     }
     $(function () {
+        $("input[name=pgdate]").val(mygetdate());
+        $("input[name=pghour]").val(mygettime());
         $('#pghour').mask('99:99:99');
         $('#pgdate').mask('9999-99-99');
         $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
@@ -413,7 +415,8 @@
         $("input[type=hidden]").val("");
         $("#hoadoninfo input[type=radio]").prop('disabled', false);
         enableinput();
-
+        $("input[name=pgdate]").val(mygetdate());
+        $("input[name=pghour]").val(mygettime());
     }
     function edithoadon(id){
 
