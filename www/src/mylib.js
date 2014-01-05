@@ -150,3 +150,44 @@ function checkexitsseourl(table,catname,catval,url){
         }
     })
 }
+
+function mygetdate(){
+    var dt = new Date();
+
+    var day = dt.getDate();
+    var month = dt.getMonth()+1;
+    var year = dt.getFullYear();
+
+    // the above dt.get...() functions return a single digit
+    // so I prepend the zero here when needed
+    if (day < 10)
+        day = '0' + day;
+
+    if (month < 10)
+        month = '0' + month;
+
+
+    return year + "-" + month + "-" + day;
+
+}
+function mygettime(){
+    var dt = new Date();
+
+    var h = dt.getHours();
+    var i = dt.getMinutes();
+    var s = dt.getSeconds();
+
+    // the above dt.get...() functions return a single digit
+    // so I prepend the zero here when needed
+    if (h < 10)
+        h = '0' + h;
+
+    if (i < 10)
+        i = '0' + i;
+    if (s < 10)
+        s = '0' + s;
+
+
+    return h+":"+i+":"+s;
+
+}

@@ -4,7 +4,7 @@
         <tr><td>ID</td><td>Tiêu đề </td><td>Seo url </td><td>Sửa cuối </td><td>Xem </td><td>Bình</td><td>Thích </td><td></td></tr>
         </thead>
         <? $i=1; foreach ($newslist as $row): ?>
-               <tr class="<?=(($i%2==0))?'odd':''?> <?=($row->dadeleted==0?'':'trdelete')?>"
+               <tr class="<?=(($i%2==1))?'odd':''?> <?=($row->dadeleted==0?'':'trdelete')?>"
                    id="tr<?=$row->id?>"><td><?=$row->id?></td>
                    <td><a href="javascript:editnews(<?=$row->id?>)"><?=$row->dalong_name?></a></td>
                    <td><?=$row->daurl.'-'.$row->id.'.html'?></td>

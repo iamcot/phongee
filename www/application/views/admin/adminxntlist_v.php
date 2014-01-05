@@ -19,8 +19,8 @@
         </select>
 
     </div>
-    <input type="text" name="pgdatefrom" id="pgdatefrom" placeholder="Từ ngày" style="width:15%">
-    <input type="text" name="pgdateto" id="pgdateto" placeholder="Đến ngày" style="width:15%">
+    <input type="text" name="pgdatefrom" id="pgdatefrom" placeholder="Từ ngày" style="width:15%" value="<?=date("Y-m-d", strtotime("-1 months"));?>">
+    <input type="text" name="pgdateto" id="pgdateto" placeholder="Đến ngày" style="width:15%" value="<?=date("Y-m-d");?>">
     <div class="btn btn-small">
         <input type="button" value="Xem" onclick="viewreport()">
     </div>
@@ -37,6 +37,10 @@
          <span style="display: inline-block;">
         <input type="checkbox" name="pgprice" id="pgprice" checked="checked">
         <label for="pgprice">Giá</label>
+            </span>
+        <span style="display: inline-block;">
+        <input type="checkbox" name="pgcreateuser" id="pgcreateuser" checked="checked">
+        <label for="pgcreateuser">Người tạo</label>
             </span>
         <span style="display: inline-block;">
         <input type="checkbox" name="pgyear" id="pgyear">

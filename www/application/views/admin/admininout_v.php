@@ -1,6 +1,7 @@
 <div id="tabs">
     <ul>
         <li><a href="<?=base_url()?>admin/listpage/inout">Xuất/Nhập hàng</a></li>
+        <li><a href="<?=base_url()?>admin/listpage/money">Rút/Gửi tiên mặt</a></li>
     </ul>
 </div>
 <script>

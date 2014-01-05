@@ -1,10 +1,10 @@
 <? if (isset($province)): ?>
-    <table>
+    <table  class="tblist">
         <thead>
         <tr><td>ID</td><td>S/N Thiet bi</td><td>Mã hóa đơn </td><td>Giá</td><td></td></tr>
         </thead>
         <? $i=1; foreach ($province as $row): ?>
-               <tr class="<?=(($i%2==0))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
+               <tr class="<?=(($i%2==1))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
                    id="tr<?=$row->id?>"><td><?=$row->id?></td><td><a href="javascript:editchitiethoadon(<?=$row->id?>)"><?=$row->pgseries?></a></td><td><?=$row->pginout_id?></td><td><?=number_format($row->pgprice,0,'.',' ')?></td><td style="text-align:right"><a href="javascript:hidedetails(<?=$row->id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a></td></tr>
         <? $i++; endforeach; ?>
     </table>

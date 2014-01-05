@@ -130,13 +130,13 @@ class Admin extends CI_Controller
         }
         if (($rs = $this->Select($this->tbprefix.$table, $parent, ($page-1), array('field' => 'id', 'type' => 'DESC'))) != null) {
             $data['province'] = $rs;
-            $data['sumpage'] = $this->getSumPage($this->tbprefix.$table, null);
+            $data['sumpage'] = $this->getSumPage($this->tbprefix.$table, $parent);
             $data['page'] = $page;
             echo $this->load->view("admin/list_".$table."_v", $data, true);
         } else echo lang("NO_DATA");
     }
 
-    public function loadcode($table,$id)
+    public function loadcode($table,$id=0,$type='')
     {
         if($table!="chitietthietbi")
             $sql = "SELECT * FROM " . $this->tbprefix.$table . " WHERE pgcode='$id'";
@@ -147,9 +147,24 @@ class Admin extends CI_Controller
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             $row = $qr->row_array();
+            if($type=='nhap' && $row['thietbitype']=='thietbi'){
+                if($this->TBremaininstock($id) > 0) {
+                    echo -1;
+                    return false;
+                }
+            }
             $this->mylibs->echojson($row);
 
         } else echo '0';
+    }
+    public function TBremaininstock($sn){
+        $sql="SELECT count(id) numrow from v_inout WHERE pgseries='$sn' AND inouttype='nhap'
+        union all
+        SELECT count(id) from v_inout WHERE pgseries='$sn' AND (pgxuattype='khachle' OR pgxuattype='khachhang')";
+//        echo $sql;
+        $qr = $this->db->query($sql);
+        $result = $qr->result();
+        return $result[0]->numrow - $result[1]->numrow;
     }
     public function loadedit($table,$id)
     {
@@ -192,15 +207,30 @@ class Admin extends CI_Controller
         $data['aStore'] = $rs;
         echo $this->load->view('admin/adminuserlist_v', $data, true);
     }
-    public function listpagexnt()
+    public function listpagerp($page)
     {
         $data = array();
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." ORDER BY pgorder,pglong_name";
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." where pgdeleted=0 ORDER BY pgorder,pglong_name";
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0) $rs = $qr->result();
         else $rs = null;
         $data['aStore'] = $rs;
-        echo $this->load->view('admin/adminxntlist_v', $data, true);
+        if($page=='tonkho'){
+            $sql="SELECT *  FROM ".$this->tbprefix.$this->tbthietbi." where pgdeleted=0 ORDER BY pglong_name ";
+            $qr = $this->db->query($sql);
+            if($qr->num_rows()>0) $rs = $qr->result();
+            else $rs = null;
+            $data['aThietbi'] = $rs;
+        }
+        if($page=='congno'){
+            $sql="SELECT *  FROM ".$this->tbprefix.$this->tbuser." where pgdeleted=0 ORDER BY pgfname ";
+            $qr = $this->db->query($sql);
+            if($qr->num_rows()>0) $rs = $qr->result();
+            else $rs = null;
+            $data['aUser'] = $rs;
+        }
+
+        echo $this->load->view('admin/admin'.$page.'list_v', $data, true);
     }
     public function listpage($page)
     {
@@ -236,17 +266,17 @@ class Admin extends CI_Controller
                     $xuattype=$row->pgxuattype;
                     $sql2 = "SELECT count(d.id) numdetail, b.pgtype pgthietbitype
                     FROM " . $this->tbprefix . "inout_details d, ".$this->tbprefix."thietbi b
-                    WHERE  d.pgthietbi_id = b.id AND d.pgseries='" . $param['pgseries'] . "'
+                    WHERE  d.pgseries='" . $param['pgseries'] . "'
                     AND d.pginout_id='".$param['pginout_id']."'";
                     $qr = $this->db->query($sql2);
                         $row = $qr->row();
-                        if($type == 'nhap' && $row->numdetail>0 && $row->pgthietbitype!='phukien'){
+                        if($type == 'nhap' && $row->numdetail>0 ){
 //                            if($row->pgto == $param['pgto']){
                                 echo '-1'; // da duoc nhap ve
                                 return;
 //                            }
                         }
-                        if($type == 'xuat' && $row->numdetail>0 && $row->pgthietbitype!='phukien' ){
+                        if($type == 'xuat' && $row->numdetail>0 ){
 //                            if($row->pgto == $param['pgto']){
                                 echo '-11'; // da duoc xuat trong hoa don nay
                                 return;
@@ -360,6 +390,25 @@ class Admin extends CI_Controller
         );
         $this->mylibs->echojson($arr);
 
+    }
+    public function jxloadsuminoutfromcode($inout_code){
+        $sql = "SELECT id,pgtype from pginout WHERE pgcode='$inout_code'";
+        $qr = $this->db->query($sql);
+        if ($qr->num_rows() > 0) {
+            $row = $qr->row();
+            $inout_id = $row->id;
+            $sum = $this->getSuminout($inout_id);
+            $remain = $this->getSumremain($inout_id);
+            $arr = array(
+                'sum' => number_format($sum, 0, '.', ' '),
+                'remain' => number_format(($sum - $remain), 0, '.', ' '),
+                'type' => $row->pgtype,
+                'id' => $row->id,
+            );
+            $this->mylibs->echojson($arr);
+        } else {
+            echo '-1';
+        }
     }
     /**
      * Select database with condition
@@ -504,8 +553,15 @@ class Admin extends CI_Controller
             return $this->mylibs->echojson($qr->result_array());
         else return "";
     }
-    public function getUserList($type=""){
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." WHERE pgdeleted=0 AND pgrole='$type' ORDER BY pgfname";
+    public function getUserList($type=array()){
+		$role = '';
+		foreach($type as $k=>$v){
+			if($role == '') $role .= ' AND (';
+			else $role .= ' OR ';
+			$role.= " pgrole='$v' ";
+		}
+		if($role !='') $role .= ')';
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." WHERE pgdeleted=0 $role ORDER BY pgfname";
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             return $qr->result_array();
@@ -513,18 +569,18 @@ class Admin extends CI_Controller
         else return null;
     }
     public function jxloadcustomer(){
-        $provider = $this->getUserList("custom");
+        $provider = $this->getUserList();
         if($provider!=null){
             $this->mylibs->echojson($provider);
         }   else echo '';
     }
     public function jxloadnhacungcap(){
-        $provider = $this->getUserList("provider");
+        $provider = $this->getUserList();
         if($provider!=null){
             $this->mylibs->echojson($provider);
         }   else echo '';
     }
-    public function gettonkho($sn,$from){
+    public function gettonkho($sn,$from=0){
         $sql="SELECT sum(d.pgcount) numin from ".$this->tbprefix."inout_details d,pginout i
         where i.id = d.pginout_id and i.pgto=$from and d.pgseries='$sn' AND (i.pgtype='nhap' OR i.pgxuattype='cuahang')";
         $qr = $this->db->query($sql);
@@ -536,7 +592,7 @@ class Admin extends CI_Controller
         return ($in - $out);
 
     }
-    public function jxgettonkho($sn,$from){
+    public function jxgettonkho($sn,$from=0){
         echo $this->gettonkho($sn,$from);
     }
     public function reportxnt(){
@@ -550,6 +606,7 @@ class Admin extends CI_Controller
         $pgcountry=$this->input->get("pgcountry");
         $pgcolor=$this->input->get("pgcolor");
         $pgyear=$this->input->get("pgyear");
+        $pgcreateuser=$this->input->get("pgcreateuser");
         $data['pgtype'] = $pgtype;
         $data['pgname'] = $pgname;
         $data['pgstore_id'] = $pgstore_id;
@@ -560,6 +617,7 @@ class Admin extends CI_Controller
         $data['pgcountry'] = $pgcountry;
         $data['pgcolor'] = $pgcolor;
         $data['pgyear'] = $pgyear;
+        $data['pgcreateuser'] = $pgcreateuser;
 
         echo  $this->calReportXNT($data);
     }
@@ -575,7 +633,7 @@ class Admin extends CI_Controller
         }
         $param['aStore'] = $aStore;
         $aProvider = null;
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." where pgrole='provider' ";
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." where pgdeleted=0 ";
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             $rs = $qr->result();
@@ -584,17 +642,6 @@ class Admin extends CI_Controller
             }
         }
         $param['aProvider'] = $aProvider;
-        $aCustomer = null;
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." where pgrole='custom'";
-        $qr = $this->db->query($sql);
-        if($qr->num_rows()>0){
-            $rs = $qr->result();
-            foreach($rs as $v){
-                $aCustomer[$v->id] = $v;
-            }
-        }
-        $param['aCustomer'] = $aCustomer;
-       // $swhere = '';
         $sstore = '';
         foreach($param['pgstore_id'] as $store){
               if($store == 'all'){
@@ -624,6 +671,159 @@ class Admin extends CI_Controller
         $param['aReport'] = $report;
 
         return $this->load->view("admin/rp_xnt",$param);
+    }
+    public function reporttonkho(){
+        $pgthietbi_id=$this->input->get("pgthietbi_id");
+        $storename=$this->input->get("storename");
+        $pgstore_id=$this->input->get("pgstore_id");
+        $data['pgthietbi_id'] = explode(",",$pgthietbi_id);
+        $data['storename'] = $storename;
+        $data['pgstore_id'] = $pgstore_id;
+
+        echo  $this->calReportTonkho($data);
+    }
+    function calReportTonkho($param){
+        //print_r($param['pgstore_id']) ;
+        $aStore = null;
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." ";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $rs = $qr->result();
+            foreach($rs as $v){
+                $aStore[$v->id] = $v;
+            }
+        }
+        $param['aStore'] = $aStore;
+        $sstore = '';
+        if($param['pgstore_id'] == 'all'){
+            $sstore.=" AND ( inouttype='nhap' OR pgxuattype='khachle' OR pgxuattype='khachhang' )";
+        }
+        else{
+           $sstore .= " AND ( ( (inouttype='nhap' OR pgxuattype='cuahang' ) AND inoutto='".$param['pgstore_id']."' )
+           OR ( inouttype='xuat' AND inoutfrom = '".$param['pgstore_id']."' )  ) ";
+        }
+        $sthietbi = '';
+        foreach($param['pgthietbi_id'] as $thietbi){
+            if($thietbi == 'all'){
+                $sthietbi = '';
+                break;
+            }
+            else {
+                if($sthietbi == '') $sthietbi.=' AND (';
+                else $sthietbi .=' OR ';
+                $sthietbi.=" pgthietbi_id = '$thietbi'";
+            }
+        }
+        if($sthietbi!='') $sthietbi.=')';
+        if($param['pgstore_id'] != 'all')
+            $sql="SELECT thietbiname, sum(case when (inoutfrom='".$param['pgstore_id']."') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname";
+        else if($param['pgstore_id'] =='all')
+            $sql="SELECT thietbiname, sum(case when (inouttype='xuat') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname";
+
+       // echo $sql;
+         $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $report = $qr->result();
+        }
+        else $report = null;
+        $param['aReport'] = $report;
+
+        return $this->load->view("admin/rp_tonkho",$param);
+    }
+    public function reporttienquy(){
+        $pgtype=$this->input->get("pgtype");
+        $pgstore_id=$this->input->get("pgstore_id");
+        $pgdatefrom=$this->input->get("pgdatefrom");
+        $pgdateto=$this->input->get("pgdateto");
+        $data['pgtype'] = explode(",",$pgtype);
+        $data['pgstore_id'] = $pgstore_id;
+        $data['pgdatefrom'] = ($pgdatefrom);
+        $data['pgdateto'] = ($pgdateto);
+
+        echo  $this->calReportTienQuy($data);
+    }
+    function calReportTienQuy($param){
+        //print_r($param['pgstore_id']) ;
+        $aStore = null;
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." ";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $rs = $qr->result();
+            foreach($rs as $v){
+                $aStore[$v->id] = $v;
+            }
+        }
+        $param['aStore'] = $aStore;
+        $date = "";
+        if($param['pgdatefrom'] != "")
+            $date .= " WHERE a.pgdate >= ".strtotime($param['pgdatefrom']);
+        if($date != "") $date .=" AND ";
+        else $date .=' WHERE ';
+        if($param['pgdateto'] != "")
+            $date .= " a.pgdate <= ".strtotime($param['pgdateto']);
+
+
+        $sql = "SELECT a.* FROM v_tienquy a $date  ORDER BY a.pgdate";
+
+         $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $report = $qr->result();
+        }
+        else $report = null;
+        $param['dudauky'] = $this->getdudauky(strtotime($param['pgdatefrom']));
+        $param['aReport'] = $report;
+
+        return $this->load->view("admin/rp_tienquy",$param);
+    }
+    public function reportcongno(){
+        $pgtype=$this->input->get("pgtype");
+        $pguser_id=$this->input->get("pguser_id");
+
+        $data['pgtype'] = $pgtype;
+        $data['pguser_id'] = explode(",",$pguser_id);
+
+
+        echo  $this->calreportcongno($data);
+    }
+    function calreportcongno($param){
+        //print_r($param['pgstore_id']) ;
+        $aStore = null;
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." ";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $rs = $qr->result();
+            foreach($rs as $v){
+                $aStore[$v->id] = $v;
+            }
+        }
+        $param['aStore'] = $aStore;
+        $suser = '';
+        foreach($param['pguser_id'] as $user){
+            if($user == 'all'){
+                $suser = '';
+                break;
+            }
+            else {
+                if($suser == '') $suser.=' WHERE ';
+                else $suser .=' OR ';
+                $suser.=" id = '$user' ";
+            }
+        }
+        $sql = "SELECT * FROM v_congno $suser  ORDER BY pgfname";
+        //echo $sql;
+         $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $report = $qr->result();
+        }
+        else $report = null;
+        $param['aReport'] = $report;
+
+        return $this->load->view("admin/rp_congno",$param);
+    }
+    function getdudauky($datefrom){
+        $sql="SELECT COALESCE((sum(moneyin) + sum(moneyout) ),0) dudauky FROM v_tienquy WHERE pgdate < '$datefrom' ";
+        $qr = $this->db->query($sql);
+        return $qr->row()->dudauky;
     }
 
 }

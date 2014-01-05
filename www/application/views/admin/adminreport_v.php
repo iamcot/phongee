@@ -1,6 +1,9 @@
 <div id="tabs">
     <ul>
-        <li><a href="<?=base_url()?>admin/listpagexnt">Xuất Nhập Tồn</a></li>
+        <li><a href="<?=base_url()?>admin/listpagerp/xnt">Xuất Nhập Tồn</a></li>
+        <li><a href="<?=base_url()?>admin/listpagerp/tonkho">Tồn kho</a></li>
+        <li><a href="<?=base_url()?>admin/listpagerp/tienquy">Tiền quỹ</a></li>
+        <li><a href="<?=base_url()?>admin/listpagerp/congno">Công nợ</a></li>
     </ul>
 </div>
 <script>

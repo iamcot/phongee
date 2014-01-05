@@ -1,11 +1,18 @@
 <? if (isset($province)): ?>
-    <table style="text-align: right">
+    <table style="text-align: right" class="tblist">
         <thead>
-        <tr><td>ID</td><td>Thanh toán </td><td>Ngày</td><td>Loại</td></tr>
+        <tr><td>ID</td><td>Ngày</td><td>Thanh toán </td><td>Mã HĐ</td><td>Loại</td><td>Ghi chú</td></tr>
         </thead>
         <? $i=1; foreach ($province as $row): $inout_id = $row->pginout_id;?>
-               <tr class="<?=(($i%2==0))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
-                   id="tr<?=$row->id?>"><td><?=$row->id?></td><td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',' ')?></a></td><td><?=date("d/m/Y H:i:s",strtotime($row->pgcreate))?></td><td><?=$row->pgtype?></td></tr>
+               <tr class="<?=(($i%2==1))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
+                   id="tr<?=$row->id?>">
+                   <td><?=$row->id?></td>
+                   <td><?=date("d/m/Y H:i:s",($row->pgdate))?></td>
+                   <td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',' ')?></a></td>
+                   <td><?=$row->pginout_id?></td>
+                   <td><?=$row->pgtype?></td>
+                    <td><?=$row->pginfo?></td>
+            </tr>
         <? $i++; endforeach; ?>
     </table>
     <? if($sumpage > 1):?>

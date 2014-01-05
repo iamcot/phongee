@@ -31,9 +31,9 @@ foreach($pgstore_id as $store){
         }
     }?>
 <?
- $col = 10;
+ $col = 9;
     ?>
-<table>
+<table  class="tblist">
     <thead>
     <tr>
         <td>#</td>
@@ -45,7 +45,7 @@ foreach($pgstore_id as $store){
         <td>Slg</td>
         <td style="text-align: right">Giá</td>
         <td>Ngày</td>
-        <td>Người tạo</td>
+    <? if($pgcreateuser=='true'): $col++;?><td>Người tạo</td><? endif;?>
         <? if($pgname=='true'): $col++;?><td>Tên TB</td><? endif;?>
         <? if($pgcode=='true'): $col++;?><td>Mã TB</td><? endif;?>
         <? if($pgcolor=='true'): $col++;?><td>Màu</td><? endif;?>
@@ -71,17 +71,22 @@ foreach($pgstore_id as $store){
                 <?else:?>
                         <?=$aStore[$row->inoutfrom]->pglong_name?>
                 <? endif;?></td>
-                <td><? if($row->pgxuattype=='khachhang'):?>
-                        <?=$aCustomer[$row->inoutto]->pgfname?>
-                    <?else:?>
-                        <?=$aStore[$row->inoutto]->pglong_name?>
-                    <? endif;?></td>
+                <td><?
+                    if ($row->pgxuattype == 'khachhang')
+                        echo $aProvider[$row->inoutto]->pgfname;
+                    else if ($row->pgxuattype == 'khachle')
+                        echo $row->inoutto;
+                    else
+                        echo $aStore[$row->inoutto]->pglong_name;
+
+
+                     ?></td>
                 <td><?=$row->inoutcode?></td>
                 <td><?=$row->pgseries?></td>
                 <td><?=$row->pgcount?></td>
                 <td style="text-align: right"><?=number_format($row->pgprice,0,'.',' ')?></td>
                 <td><?=date('d/m/Y',$row->inoutdate)?></td>
-                <td><?=$row->pglname.' '.$row->pgfname?></td>
+                <? if($pgcreateuser=='true'): $col++;?><td><?=$row->pglname.' '.$row->pgfname?></td><? endif;?>
                 <? if($pgname=='true'): $col++;?><td><?=$row->thietbiname?></td><? endif;?>
                 <? if($pgcode=='true'): $col++;?><td><?=$row->pgthietbi_code?></td><? endif;?>
                 <? if($pgcolor=='true'): $col++;?><td><?=$row->pgcolor?></td><? endif;?>

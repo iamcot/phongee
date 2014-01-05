@@ -1,45 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/__db/script.sql" />
+    <list default="true" id="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" name="Default" comment="inout">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/admincongnolist_v.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/adminmoneylist_v.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/admintienquylist_v.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/admintonkholist_v.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/rp_congno.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/rp_tienquy.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/application/views/admin/rp_tonkho.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/__db/v_congno.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/__db/v_suminoutbyuser.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/__db/v_sumtienquy.sql" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/www/__db/v_tienquy.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/controllers/admin.php" afterPath="$PROJECT_DIR$/www/application/controllers/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/admininout_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/admininout_v.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/container_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminreport_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminreport_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/adminxntlist_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/adminxntlist_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/src/autoNumeric.js" afterPath="$PROJECT_DIR$/www/src/autoNumeric.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_chitietthietbi_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_chitietthietbi_v.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_inout_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_inout_v.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/config/mycfg.php" afterPath="$PROJECT_DIR$/www/application/config/mycfg.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_moneytransfer_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_moneytransfer_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_news_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_news_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_nhomthietbi_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_nhomthietbi_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_store_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_store_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_thietbi_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_thietbi_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/list_user_v.php" afterPath="$PROJECT_DIR$/www/application/views/admin/list_user_v.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/src/mylib.js" afterPath="$PROJECT_DIR$/www/src/mylib.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/application/views/admin/rp_xnt.php" afterPath="$PROJECT_DIR$/www/application/views/admin/rp_xnt.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/__db/script.sql" afterPath="$PROJECT_DIR$/www/__db/script.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/www/src/style.css" afterPath="$PROJECT_DIR$/www/src/style.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="phongee.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388420394941" ignored="false" />
+    <file path="/Dummy.txt" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388834420004" ignored="false" />
     <file path="/login_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996345188" ignored="false" />
     <file path="/login.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387992540668" ignored="false" />
     <file path="/styles.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996454179" ignored="false" />
     <file path="/login.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1387996625355" ignored="false" />
-    <file path="/adminthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388121417728" ignored="false" />
+    <file path="/adminthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388605642859" ignored="false" />
     <file path="/adminnhomthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388115896703" ignored="false" />
     <file path="/adminchitietthietbilist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388142755210" ignored="false" />
     <file path="/container_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388140689342" ignored="false" />
     <file path="/adminuser_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388125889842" ignored="false" />
-    <file path="/style.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388427239596" ignored="false" />
+    <file path="/style.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894758606" ignored="false" />
     <file path="/adminuserlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388421091090" ignored="false" />
     <file path="/a.dummy" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388139617652" ignored="false" />
     <file path="E:/../Shared/development/projects_git/webshop/dwshop/oxid_webshop/oxid/out/dwrespo/src/css/dwshop/dwshop.css" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388391474572" ignored="false" />
     <file path="E:/../Shared/development/projects_git/webshop/dwshop/oxid_webshop/oxid/application/views/dwrespo/tpl/layout/base.tpl" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388372562023" ignored="false" />
-    <file path="/admininoutlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388428738135" ignored="false" />
-    <file path="/admin.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388431785615" ignored="false" />
+    <file path="/admininoutlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388948680833" ignored="false" />
+    <file path="/admin.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388949589438" ignored="false" />
     <file path="/mycfg.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388385666701" ignored="false" />
-    <file path="/list_inout_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388389975240" ignored="false" />
-    <file path="/list_inout_details_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388390583801" ignored="false" />
-    <file path="/script.sql" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388427483487" ignored="false" />
+    <file path="/list_inout_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894786668" ignored="false" />
+    <file path="/list_inout_details_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894817158" ignored="false" />
+    <file path="/script.sql" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388838379021" ignored="false" />
+    <file path="/list_moneytransfer_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894773423" ignored="false" />
+    <file path="/adminreport_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388895956972" ignored="false" />
+    <file path="/adminxntlist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388836283150" ignored="false" />
+    <file path="/rp_xnt.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894859112" ignored="false" />
+    <file path="/admininout_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388836663456" ignored="false" />
+    <file path="/adminmoneylist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388920774826" ignored="false" />
+    <file path="/mylib.js" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388860026213" ignored="false" />
+    <file path="/list_chitietthietbi_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894825804" ignored="false" />
+    <file path="/list_user_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894831950" ignored="false" />
+    <file path="/list_store_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894836751" ignored="false" />
+    <file path="/list_nhomthietbi_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388894845792" ignored="false" />
+    <file path="/admintonkholist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388914233409" ignored="false" />
+    <file path="/rp_tonkho.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388950349302" ignored="false" />
+    <file path="/admintienquylist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388940303122" ignored="false" />
+    <file path="/rp_tienquy.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388950353246" ignored="false" />
+    <file path="/admincongnolist_v.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388949907979" ignored="false" />
+    <file path="/rp_congno.php" changelist="65fc67cb-c1f0-4240-8e3f-1aa1a6be921a" time="1388950356663" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +88,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -91,6 +124,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -100,25 +134,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="admininoutlist_v.php" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="admininoutlist_v.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="253" column="71" selection-start="10758" selection-end="10758" vertical-scroll-proportion="0.6659751">
+            <state line="627" column="66" selection-start="26509" selection-end="26509" vertical-scroll-proportion="95.254906">
               <folding>
-                <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#i#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#input#2;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-                <marker date="1388431946969" expanded="true" signature="5042:5074" placeholder="..." />
-                <marker date="1388431946969" expanded="true" signature="5191:5223" placeholder="..." />
-                <marker date="1388431946969" expanded="true" signature="5598:5630" placeholder="..." />
-                <marker date="1388431946969" expanded="true" signature="5747:5779" placeholder="..." />
-                <marker date="1388431946969" expanded="true" signature="6548:6580" placeholder="..." />
-                <marker date="1388431946969" expanded="true" signature="6805:6837" placeholder="..." />
-                <marker date="1388431946969" expanded="true" signature="6958:6990" placeholder="..." />
+                <marker date="1388948718106" expanded="true" signature="6595:6627" placeholder="..." />
+                <marker date="1388948718106" expanded="true" signature="6882:6914" placeholder="..." />
+                <marker date="1388948718106" expanded="true" signature="7059:7091" placeholder="..." />
+                <marker date="1388948718106" expanded="true" signature="7368:7400" placeholder="..." />
+                <marker date="1388948718106" expanded="true" signature="7751:7783" placeholder="..." />
+                <marker date="1388948718106" expanded="true" signature="7928:7960" placeholder="..." />
+                <marker date="1388948718106" expanded="true" signature="8365:8397" placeholder="..." />
+                <marker date="1388948718106" expanded="true" signature="8542:8574" placeholder="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="v_tienquy.sql" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/__db/v_tienquy.sql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="68" selection-start="659" selection-end="659" vertical-scroll-proportion="-4.08">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -126,46 +164,38 @@
       <file leaf-file-name="style.css" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/src/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="429" column="48" selection-start="12760" selection-end="12760" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="script.sql" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/__db/script.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="53" selection-start="69" selection-end="69" vertical-scroll-proportion="-0.68">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Mylibs.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="0" selection-start="642" selection-end="642" vertical-scroll-proportion="-5.576923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="list_inout_details_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="265" selection-start="572" selection-end="572" vertical-scroll-proportion="-4.576923">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="container_v.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="0" selection-start="1651" selection-end="1651" vertical-scroll-proportion="-20.26923">
+            <state line="474" column="7" selection-start="13465" selection-end="13471" vertical-scroll-proportion="-26.88">
               <folding>
-                <marker date="1388422372257" expanded="true" signature="1159:1217" placeholder="..." />
-                <marker date="1388422372257" expanded="true" signature="1179:1205" placeholder="{...}" />
+                <marker date="1388894760302" expanded="true" signature="12843:12872" placeholder="{...}" />
+                <marker date="1388894760302" expanded="true" signature="12900:12911" placeholder="{...}" />
+                <marker date="1388894760302" expanded="true" signature="12922:12951" placeholder="{...}" />
+                <marker date="1388894760302" expanded="true" signature="12987:12998" placeholder="{...}" />
+                <marker date="1388894760302" expanded="true" signature="13000:13039" placeholder="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adminxntlist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminxntlist_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="116" selection-start="1066" selection-end="1066" vertical-scroll-proportion="-14.384615">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#0;n#div#4;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#div#4;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#2;n#div#4;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#3;n#div#4;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#4;n#div#4;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#5;n#div#4;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#6;n#div#4;n#fieldset#0;n#!!top" expanded="true" />
+                <marker date="1388836291410" expanded="true" signature="2562:2604" placeholder="..." />
+                <marker date="1388836291410" expanded="true" signature="2638:2668" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -174,16 +204,118 @@
       <file leaf-file-name="admin.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="206" column="150" selection-start="7322" selection-end="7322" vertical-scroll-proportion="-2.254902">
+            <state line="812" column="10" selection-start="30268" selection-end="30268" vertical-scroll-proportion="-8.784314">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mycfg.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/config/mycfg.php">
+      <file leaf-file-name="rp_congno.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/rp_congno.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="7" selection-start="686" selection-end="686" vertical-scroll-proportion="-18.307692">
+            <state line="13" column="69" selection-start="536" selection-end="536" vertical-scroll-proportion="0.47939262">
+              <folding>
+                <element signature="n#style#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#5;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#3;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#5;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rp_tienquy.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/rp_tienquy.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="45" selection-start="272" selection-end="272" vertical-scroll-proportion="-1.9615384">
+              <folding>
+                <element signature="n#style#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#tr#2;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#2;n#tr#2;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="rp_tonkho.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/rp_tonkho.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="3" column="45" selection-start="236" selection-end="236" vertical-scroll-proportion="-1.9615384">
+              <folding>
+                <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+                <marker date="1388950349780" expanded="true" signature="164:562" placeholder="..." />
+                <marker date="1388950349780" expanded="true" signature="236:562" placeholder="..." />
+                <marker date="1388950349780" expanded="true" signature="252:450" placeholder="..." />
+                <marker date="1388950349780" expanded="true" signature="252:450" placeholder="..." />
+                <marker date="1388950349780" expanded="true" signature="252:450" placeholder="..." />
+                <marker date="1388950349780" expanded="true" signature="252:450" placeholder="..." />
+                <marker date="1388950349780" expanded="true" signature="466:562" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adminmoneylist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminmoneylist_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="152" column="71" selection-start="6111" selection-end="6124" vertical-scroll-proportion="-20.923077">
+              <folding>
+                <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#div#2;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#div#2;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#textarea#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mylib.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/src/mylib.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="153" column="18" selection-start="5953" selection-end="5962" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list_moneytransfer_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_moneytransfer_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="27" column="65" selection-start="1338" selection-end="1338" vertical-scroll-proportion="-17.653847">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="adminreport_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminreport_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="70" selection-start="254" selection-end="254" vertical-scroll-proportion="-2.6153846">
               <folding />
             </state>
           </provider>
@@ -192,17 +324,64 @@
       <file leaf-file-name="list_inout_v.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_v.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="269" selection-start="569" selection-end="569" vertical-scroll-proportion="-4.576923">
+            <state line="1" column="25" selection-start="39" selection-end="54" vertical-scroll-proportion="-0.65384614">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/www/application/controllers/login.php">
+      <file leaf-file-name="rp_xnt.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/rp_xnt.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="26" selection-start="1996" selection-end="2005" vertical-scroll-proportion="-18.307692">
-              <folding />
+            <state line="0" column="191" selection-start="53" selection-end="191" vertical-scroll-proportion="2.0">
+              <folding>
+                <element signature="e#4#30#0" expanded="true" />
+                <element signature="e#1355#1380#0" expanded="true" />
+                <element signature="e#1838#1863#0" expanded="true" />
+                <element signature="e#1969#2018#0" expanded="true" />
+                <element signature="e#3281#3306#0" expanded="true" />
+                <element signature="e#4005#4030#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admintonkholist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/admintonkholist_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="66" selection-start="1311" selection-end="1311" vertical-scroll-proportion="-21.576923">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admintienquylist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/admintienquylist_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="20" selection-start="1167" selection-end="1167" vertical-scroll-proportion="-15.038462">
+              <folding>
+                <element signature="n#style#0;n#input#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#input#1;n#fieldset#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="admincongnolist_v.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/www/application/views/admin/admincongnolist_v.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="50" selection-start="269" selection-end="269" vertical-scroll-proportion="-3.2692308">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#select#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -227,22 +406,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/www/src/chubby-stacks-css/style.css" />
-        <option value="$PROJECT_DIR$/www/src/ckeditor/config.js" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/admininout_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/adminuserlist_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/list_nhomthietbi_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/rp_xnt.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/list_thietbi_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminreport_v.php" />
         <option value="$PROJECT_DIR$/www/application/views/admin/container_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php" />
-        <option value="$PROJECT_DIR$/www/application/views/admin/list_inout_v.php" />
-        <option value="$PROJECT_DIR$/www/src/style.css" />
-        <option value="$PROJECT_DIR$/www/__db/script.sql" />
-        <option value="$PROJECT_DIR$/www/application/config/mycfg.php" />
-        <option value="$PROJECT_DIR$/www/application/controllers/admin.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/admintonkholist_v.php" />
+        <option value="$PROJECT_DIR$/www/__db/v_tienquy.sql" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/list_moneytransfer_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/adminmoneylist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/admintienquylist_v.php" />
         <option value="$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/controllers/admin.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/admincongnolist_v.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/rp_tonkho.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/rp_tienquy.php" />
+        <option value="$PROJECT_DIR$/www/application/views/admin/rp_congno.php" />
       </list>
     </option>
   </component>
@@ -316,6 +495,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phongee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="phongee" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -479,10 +676,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="JavaScriptLanguageLevel" value="ES5" />
+    <property name="FullScreen" value="false" />
     <property name="JavaScriptPreferStrict" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\mywww\phongee\www\application\views\admin" />
       <recent name="$PROJECT_DIR$/www/application/views/admin" />
     </key>
   </component>
@@ -511,6 +710,19 @@
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -537,19 +749,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -620,37 +819,45 @@
       <created>1388142948265</created>
       <updated>1388142948265</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="inout">
+      <created>1388432040933</created>
+      <updated>1388432040933</updated>
+    </task>
+    <task id="LOCAL-00005" summary="inout">
+      <created>1388615442812</created>
+      <updated>1388615442812</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="988" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32660332" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32541567" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39810428" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39786223" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32897863" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32819906" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.67339665" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24959481" sideWeight="0.6745843" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32943144" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -696,7 +903,7 @@
     <option name="WRAP_WHEN_TYPING_REACHES_RIGHT_MARGIN" value="false" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="bootstrap" />
+    <option name="LAST_COMMIT_MESSAGE" value="inout" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -712,145 +919,199 @@
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
     <MESSAGE value=":(" />
     <MESSAGE value="bootstrap" />
+    <MESSAGE value="inout" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/www/application/controllers/admin.php</url>
-          <line>199</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-      <option name="time" value="4" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminthietbilist_v.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminreport_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="156" column="34" selection-start="6637" selection-end="6637" vertical-scroll-proportion="-13.307693">
+        <state line="4" column="70" selection-start="254" selection-end="254" vertical-scroll-proportion="-2.6153846">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminthietbi_v.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/admintonkholist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="33" column="66" selection-start="1311" selection-end="1311" vertical-scroll-proportion="-21.576923">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/src/mylib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="153" column="18" selection-start="5953" selection-end="5962" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininout_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="51" selection-start="76" selection-end="76" vertical-scroll-proportion="-1.3076923">
+        <state line="3" column="56" selection-start="163" selection-end="163" vertical-scroll-proportion="0.06818182">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminstorelist_v.php">
+    <entry file="file://$PROJECT_DIR$/www/__db/v_tienquy.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="34" selection-start="2448" selection-end="2448" vertical-scroll-proportion="-11.769231">
+        <state line="12" column="68" selection-start="659" selection-end="659" vertical-scroll-proportion="-4.08">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminnhomthietbilist_v.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_moneytransfer_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="2" selection-start="2228" selection-end="2228" vertical-scroll-proportion="-19.153847">
+        <state line="27" column="65" selection-start="1338" selection-end="1338" vertical-scroll-proportion="-17.653847">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminchitietthietbilist_v.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/adminmoneylist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="34" selection-start="5928" selection-end="5928" vertical-scroll-proportion="-19.038462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="269" selection-start="569" selection-end="569" vertical-scroll-proportion="-4.576923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/container_v.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="1651" selection-end="1651" vertical-scroll-proportion="-20.26923">
+        <state line="152" column="71" selection-start="6111" selection-end="6124" vertical-scroll-proportion="-20.923077">
           <folding>
-            <marker date="1388422372257" expanded="true" signature="1159:1217" placeholder="..." />
-            <marker date="1388422372257" expanded="true" signature="1179:1205" placeholder="{...}" />
+            <element signature="n#style#0;n#span#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#1;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#div#2;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#div#2;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#textarea#0;n#td#0;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_details_v.php">
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/admintienquylist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="265" selection-start="572" selection-end="572" vertical-scroll-proportion="-4.576923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/src/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="429" column="48" selection-start="12760" selection-end="12760" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/__db/script.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="53" selection-start="69" selection-end="69" vertical-scroll-proportion="-0.68">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/controllers/login.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="26" selection-start="1996" selection-end="2005" vertical-scroll-proportion="-18.307692">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/libraries/Mylibs.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="0" selection-start="642" selection-end="642" vertical-scroll-proportion="-5.576923">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/config/mycfg.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="7" selection-start="686" selection-end="686" vertical-scroll-proportion="-18.307692">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="206" column="150" selection-start="7322" selection-end="7322" vertical-scroll-proportion="-2.254902">
-          <folding />
+        <state line="23" column="20" selection-start="1167" selection-end="1167" vertical-scroll-proportion="-15.038462">
+          <folding>
+            <element signature="n#style#0;n#input#0;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#input#1;n#fieldset#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/www/application/views/admin/admininoutlist_v.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="253" column="71" selection-start="10758" selection-end="10758" vertical-scroll-proportion="0.6659751">
+        <state line="627" column="66" selection-start="26509" selection-end="26509" vertical-scroll-proportion="95.254906">
           <folding>
-            <element signature="n#style#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#i#0;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#select#0;n#div#1;n#div#0;n#td#1;n#tr#0;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#0;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#input#2;n#span#0;n#td#0;n#tr#1;n#table#0;n#fieldset#0;n#div#0;n#!!top" expanded="true" />
-            <marker date="1388431946969" expanded="true" signature="5042:5074" placeholder="..." />
-            <marker date="1388431946969" expanded="true" signature="5191:5223" placeholder="..." />
-            <marker date="1388431946969" expanded="true" signature="5598:5630" placeholder="..." />
-            <marker date="1388431946969" expanded="true" signature="5747:5779" placeholder="..." />
-            <marker date="1388431946969" expanded="true" signature="6548:6580" placeholder="..." />
-            <marker date="1388431946969" expanded="true" signature="6805:6837" placeholder="..." />
-            <marker date="1388431946969" expanded="true" signature="6958:6990" placeholder="..." />
+            <marker date="1388948718106" expanded="true" signature="6595:6627" placeholder="..." />
+            <marker date="1388948718106" expanded="true" signature="6882:6914" placeholder="..." />
+            <marker date="1388948718106" expanded="true" signature="7059:7091" placeholder="..." />
+            <marker date="1388948718106" expanded="true" signature="7368:7400" placeholder="..." />
+            <marker date="1388948718106" expanded="true" signature="7751:7783" placeholder="..." />
+            <marker date="1388948718106" expanded="true" signature="7928:7960" placeholder="..." />
+            <marker date="1388948718106" expanded="true" signature="8365:8397" placeholder="..." />
+            <marker date="1388948718106" expanded="true" signature="8542:8574" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/controllers/admin.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="812" column="10" selection-start="30268" selection-end="30268" vertical-scroll-proportion="-8.784314">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/admincongnolist_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="50" selection-start="269" selection-end="269" vertical-scroll-proportion="-3.2692308">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#0;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#select#0;n#div#1;n#fieldset#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/list_inout_v.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="25" selection-start="39" selection-end="54" vertical-scroll-proportion="-0.65384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/rp_xnt.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="191" selection-start="53" selection-end="191" vertical-scroll-proportion="2.0">
+          <folding>
+            <element signature="e#4#30#0" expanded="true" />
+            <element signature="e#1355#1380#0" expanded="true" />
+            <element signature="e#1838#1863#0" expanded="true" />
+            <element signature="e#1969#2018#0" expanded="true" />
+            <element signature="e#3281#3306#0" expanded="true" />
+            <element signature="e#4005#4030#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/rp_tonkho.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="45" selection-start="236" selection-end="236" vertical-scroll-proportion="-1.9615384">
+          <folding>
+            <element signature="n#style#0;n#h3#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <marker date="1388950349780" expanded="true" signature="164:562" placeholder="..." />
+            <marker date="1388950349780" expanded="true" signature="236:562" placeholder="..." />
+            <marker date="1388950349780" expanded="true" signature="252:450" placeholder="..." />
+            <marker date="1388950349780" expanded="true" signature="252:450" placeholder="..." />
+            <marker date="1388950349780" expanded="true" signature="252:450" placeholder="..." />
+            <marker date="1388950349780" expanded="true" signature="252:450" placeholder="..." />
+            <marker date="1388950349780" expanded="true" signature="466:562" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/rp_tienquy.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="45" selection-start="272" selection-end="272" vertical-scroll-proportion="-1.9615384">
+          <folding>
+            <element signature="n#style#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#2;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#2;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#2;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/www/application/views/admin/rp_congno.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="69" selection-start="536" selection-end="536" vertical-scroll-proportion="0.47939262">
+          <folding>
+            <element signature="n#style#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#5;n#tr#0;n#thead#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#5;n#tr#0;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#3;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#5;n#tr#1;n#tbody#0;n#table#0;n#center#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
