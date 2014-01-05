@@ -241,54 +241,72 @@ class Admin extends CI_Controller
     public function save($table)
     {
         $param = array();
-        foreach($_POST as $k=>$post){
-            if($k=="edit" || $k=='pgpassword') continue;
+        foreach ($_POST as $k => $post) {
+            if ($k == "edit" || $k == 'pgpassword') continue;
             $param[$k] = $this->input->post($k);
         }
         $param['pgcreateuser_id'] = $this->session->userdata('pguser_id');
-        if($table=='inout'){
+        if ($table == 'inout') {
             $param['pgdate'] = strtotime($param['pgdate']);
         }
         if ($this->input->post("pgpassword") != "")
             $param['pgpassword'] = md5(md5($this->input->post("pgpassword")));
         if ($this->input->post("edit") != "") //update
         {
-            $str = $this->db->update_string($this->tbprefix.$table, $param, " id = " . $this->input->post("edit"));
+            $str = $this->db->update_string($this->tbprefix . $table, $param, " id = " . $this->input->post("edit"));
             echo $this->db->query($str);
         } else { //insert
-            if($table == 'inout_details'){
-                $sql3 = "SELECT d.* FROM ".$this->tbprefix."inout d WHERE d.id=".$param['pginout_id']."";
+            if ($table == 'inout_details') {
+                $sql3 = "SELECT d.* FROM " . $this->tbprefix . "inout d WHERE d.id=" . $param['pginout_id'] . "";
                 $qr = $this->db->query($sql3);
                 if ($qr->num_rows > 0) {
-                    $row = $qr->row();
-                    $type=$row->pgtype;
-                    $hdid = $row->id;
-                    $xuattype=$row->pgxuattype;
-                    $sql2 = "SELECT count(d.id) numdetail, b.pgtype pgthietbitype
-                    FROM " . $this->tbprefix . "inout_details d, ".$this->tbprefix."thietbi b
-                    WHERE  d.pgseries='" . $param['pgseries'] . "'
-                    AND d.pginout_id='".$param['pginout_id']."'";
-                    $qr = $this->db->query($sql2);
+                    $flag = 1;
+                    $sqls = "SELECT id FROM pgchitietthietbi WHERE pgcode = '" . $this->input->post('pgseries') . "'";
+                    $qrs = $this->db->query($sqls);
+                    if ($qrs->num_rows() <= 0) {
+                        $sqlins = "INSERT INTO pgchitietthietbi (pglong_name,pgcode,pgthietbi_id,pgthietbi_code,
+                    pgprice,pgcolor,pgcountry,pgyear,pgcreateuser_id) VALUES
+                    ((SELECT pglong_name from pgthietbi where id='" . $this->input->post('pgthietbi_id') . "'),'" . $this->input->post('pgseries') . "','" . $this->input->post('pgthietbi_id') . "',
+                    '" . $this->input->post('pgthietbi_code') . "','" . $this->input->post('pgprice') . "','" . $this->input->post('pgcolor') . "',
+                    '" . $this->input->post('pgcountry') . "','" . $this->input->post('pgyear') . "','".$this->session->userdata('pguser_id')."' )";
+                        $flag = $this->db->query($sqlins);
+                    }
+
+                    if ($flag) {
                         $row = $qr->row();
-                        if($type == 'nhap' && $row->numdetail>0 ){
+                        $type = $row->pgtype;
+                        $hdid = $row->id;
+                        $xuattype = $row->pgxuattype;
+                        $sql2 = "SELECT count(d.id) numdetail, b.pgtype pgthietbitype
+                    FROM " . $this->tbprefix . "inout_details d, " . $this->tbprefix . "thietbi b
+                    WHERE  d.pgseries='" . $param['pgseries'] . "'
+                    AND d.pginout_id='" . $param['pginout_id'] . "'";
+                        $qr = $this->db->query($sql2);
+                        $row = $qr->row();
+                        if ($type == 'nhap' && $row->numdetail > 0) {
 //                            if($row->pgto == $param['pgto']){
-                                echo '-1'; // da duoc nhap ve
-                                return;
+                            echo '-1'; // da duoc nhap ve
+                            return;
 //                            }
                         }
-                        if($type == 'xuat' && $row->numdetail>0 ){
+                        if ($type == 'xuat' && $row->numdetail > 0) {
 //                            if($row->pgto == $param['pgto']){
-                                echo '-11'; // da duoc xuat trong hoa don nay
-                                return;
+                            echo '-11'; // da duoc xuat trong hoa don nay
+                            return;
 //                            }
                         }
+                    }
+                    else {
+                        echo -99; //them sn moi that bai
+                        return;
+                    }
+
                 }
             }
-            $str = $this->db->insert_string($this->tbprefix.$table, $param);
+            $str = $this->db->insert_string($this->tbprefix . $table, $param);
             if ($this->db->query($str)) {
                 echo $this->db->insert_id();
-            }
-            else echo 0;
+            } else echo 0;
         }
 
     }
