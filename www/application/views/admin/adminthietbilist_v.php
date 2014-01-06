@@ -97,6 +97,9 @@
 </fieldset>
 <script>
     $(function () {
+        $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
+        $("input[name=pgprice_old]").autoNumeric({aSep:' ',aPad: false});
+
         if($("[placeholder]").size() > 0) {
             $.Placeholder.init();
         }
@@ -108,8 +111,8 @@
         var pgtype     = $("input[name=pgtype]:checked").val();
         var pgcode     = $("input[name=pgcode]").val();
         var pgpic  = $("input[name=pgpic]").val();
-        var pgprice  = $("input[name=pgprice]").val();
-        var pgprice_old      = $("input[name=pgprice_old]").val();
+        var pgprice  = $("input[name=pgprice]").val().replace(/ /g,'');
+        var pgprice_old      = $("input[name=pgprice_old]").val().replace(/ /g,'');
         var pgshort_info     = $("input[name=pgshort_info]").val();
         var pgcolor     = $("input[name=pgcolor]").val();
         var pgyear     = $("input[name=pgyear]").val();

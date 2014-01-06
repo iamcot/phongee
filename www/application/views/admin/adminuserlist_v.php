@@ -91,7 +91,7 @@
 
         var edit = $("input[name=edit]").val();
 
-        if (pgusername.trim() != "" && pgfname.trim() != "") {
+        if (pgfname.trim() != "") {
             $.ajax({
                 type: "post",
                 url: "<?=base_url()?>admin/save/user",

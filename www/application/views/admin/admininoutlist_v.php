@@ -405,6 +405,9 @@
         });
     }
     function loadinout_details(page,parent) {
+        if(parent == 0){
+            parent = $("input[name=idhoadon]").val();
+        }
         addloadgif("#loadstatus");
         $("#list_hoadonitem").load("<?=base_url()?>admin/load/inout_details/" + page+"/"+parent, function () {
             removeloadgif("#loadstatus");

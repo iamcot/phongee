@@ -19,7 +19,7 @@
     <script>
     $('.pagination').jqPagination({
         paged: function(page) {
-            load(page);
+            loadinout_details(page,0);
         },
         current_page: <?=$page?>
     });
