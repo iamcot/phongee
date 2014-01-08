@@ -135,6 +135,24 @@ class Admin extends CI_Controller
             echo $this->load->view("admin/list_".$table."_v", $data, true);
         } else echo lang("NO_DATA");
     }
+    public function loadview($table,$page = 1,$where = "")
+    {
+        $parent = null;
+        if($where!= ""){
+            if($table == 'v_inout')
+            $parent = array("pginout_id" => $where);
+        }
+        $role = $this->mylibs->checkRole("rl".$table);
+        if($role == 1 || $role == 2){
+            $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
+        }
+        if (($rs = $this->Select($table, $parent, ($page-1), array('field' => 'id', 'type' => 'DESC'))) != null) {
+            $data['province'] = $rs;
+            $data['sumpage'] = $this->getSumPage($table, $parent);
+            $data['page'] = $page;
+            echo $this->load->view("admin/list_".$table."_v", $data, true);
+        } else echo lang("NO_DATA");
+    }
 
     public function loadcode($table,$id=0,$type='')
     {
@@ -248,13 +266,19 @@ class Admin extends CI_Controller
         $param['pgcreateuser_id'] = $this->session->userdata('pguser_id');
         if ($table == 'inout') {
             $param['pgdate'] = strtotime($param['pgdate']);
+            $param['pghanthanhtoan'] = strtotime($param['pghanthanhtoan']);
         }
         if ($this->input->post("pgpassword") != "")
             $param['pgpassword'] = md5(md5($this->input->post("pgpassword")));
         if ($this->input->post("edit") != "") //update
         {
             $str = $this->db->update_string($this->tbprefix . $table, $param, " id = " . $this->input->post("edit"));
-            echo $this->db->query($str);
+            try{
+                echo $this->db->query($str);
+            }catch (Exception $e){
+                echo 0;
+            }
+
         } else { //insert
             if ($table == 'inout_details') {
                 $sql3 = "SELECT d.* FROM " . $this->tbprefix . "inout d WHERE d.id=" . $param['pginout_id'] . "";
@@ -303,10 +327,15 @@ class Admin extends CI_Controller
 
                 }
             }
-            $str = $this->db->insert_string($this->tbprefix . $table, $param);
-            if ($this->db->query($str)) {
-                echo $this->db->insert_id();
-            } else echo 0;
+            try{
+                $str = $this->db->insert_string($this->tbprefix . $table, $param);
+                if ($this->db->query($str)) {
+                    echo $this->db->insert_id();
+                } else echo 0;
+            } catch(Exception $e){
+                echo 0;
+            }
+
         }
 
     }
@@ -356,6 +385,35 @@ class Admin extends CI_Controller
             echo -6; // da co sp trong don hang
             return;
         }
+        if($pgxuattype == 'xuatkho'){
+            $done = false;
+            $i = 0;
+            do{
+            if($i==0) $max = "";
+                else $max = " AND id < $i";
+            $sql="SELECT * FROM v_inout WHERE pgdeleted=0 AND pgseries='$sn' AND inouttype='nhap' ".$max." ORDER BY id DESC LIMIT 0,1";
+            $qr = $this->db->query($sql);
+            if($qr->num_rows()>0){
+                $row = $qr->row();
+                if($this->gettonkho($sn,$row->inoutto) > 0) {
+                    echo $row->inoutto;
+                    $done = true;
+                    return;
+                }
+                else{
+                    $i= $row->id;
+                    continue;
+                }
+
+            }
+            else{
+                echo -11;  //khong co trong kho
+                $done=true;
+                return;
+            }
+            }while(!$done);
+        }
+
         $kq = 1;
         //kiem tra hoa don cuoi cung
 //        $sql="SELECT i.pgtype,d.pgfrom, d.pgto, i.pgxuattype FROM ".$this->tbprefix."inout_details d, ".$this->tbprefix."inout i
@@ -370,9 +428,9 @@ class Admin extends CI_Controller
 //        }
         echo $kq;
     }
-    public function getStore(){
+    public function getStore($type='cuahang'){
         if($this->mylibs->checkRole("rqStore")>= 2)
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 AND pgtype='$type' ";
         if($this->mylibs->checkRole("rqStore")== 2)
              $sql.= " AND id =".$this->session->userdata("pgstore_id")."";
         $sql .= " ORDER BY pgorder ";
@@ -382,8 +440,8 @@ class Admin extends CI_Controller
         }
         else return null;
     }
-    public function jsGetStore(){
-        $arr = $this->getStore();
+    public function jsGetStore($type='cuahang'){
+        $arr = $this->getStore($type);
         if($arr!=null){
             $this->mylibs->echojson($arr);
         }
@@ -403,8 +461,8 @@ class Admin extends CI_Controller
         $sum = $this->getSuminout($inout_id);
         $remain = $this->getSumremain($inout_id);
         $arr = array(
-            'sum' =>number_format($sum,0,'.',' '),
-            'remain' =>number_format(($sum - $remain),0,'.',' '),
+            'sum' =>number_format($sum,0,'.',','),
+            'remain' =>number_format(($sum - $remain),0,'.',','),
         );
         $this->mylibs->echojson($arr);
 
@@ -600,7 +658,7 @@ class Admin extends CI_Controller
     }
     public function gettonkho($sn,$from=0){
         $sql="SELECT sum(d.pgcount) numin from ".$this->tbprefix."inout_details d,pginout i
-        where i.id = d.pginout_id and i.pgto=$from and d.pgseries='$sn' AND (i.pgtype='nhap' OR i.pgxuattype='cuahang')";
+        where i.id = d.pginout_id and i.pgto=$from and d.pgseries='$sn' AND (i.pgtype='nhap' OR i.pgxuattype='cuahang' OR i.pgxuattype='xuatkho')";
         $qr = $this->db->query($sql);
         $in = $qr->row()->numin;
         $sql="SELECT sum(d.pgcount) numout from ".$this->tbprefix."inout_details d,pginout i

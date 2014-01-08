@@ -3,22 +3,26 @@
     <table id="inputserviceplace">
         <tr>
             <td>
+                <label>Tên</label>
                 <input type="text" name="pgfname" placeholder="Tên"></td>
             <td>
+                <label>Họ</label>
                 <input type="text" name="pglname" placeholder="Họ và tên đệm">
             </td>
         </tr>
         <tr>
             <td>
+                <label>Tài khoản</label>
                 <input type="text" name="pgusername" placeholder="Tên tài khoản">
             </td>
             <td>
+                <label>Mật khẩu</label>
                 <input type="text" name="pgpassword" placeholder="Mật khẩu">
             </td>
         </tr>
         <tr>
             <td id="selectrole">
-
+                <label>Nhóm</label>
                 <select name="pgrole" data-placeholder="Quyền hạn"  >
                     <? foreach($this->config->item('aRole') as $k=>$v):?>
                     <option value="<?=$k?>"><?=$v?></option>
@@ -27,12 +31,16 @@
 
             </td>
             <td>
+                <label>Điện thoại</label>
                 <input type="text" name="pgmobi" placeholder="Điện thoại">
             </td>
         </tr>
         <tr>
-            <td><input type="text" name="pgemail" placeholder="Email"></td>
             <td>
+                <label>e-mail</label>
+                <input type="text" name="pgemail" placeholder="Email"></td>
+            <td>
+                <label>Cửa hàng</label>
                 <select name="pgstore_id">
                     <option value="0">Tất cả cửa hàng</option>
                     <? foreach($aStore as $store):?>
@@ -43,7 +51,9 @@
 
         </tr>
         <tr>
-            <td><input type="text" name="pgavatar" placeholder="Ảnh đại diện">
+            <td>
+                <label>Hình ảnh</label>
+                <input type="text" name="pgavatar" placeholder="Ảnh đại diện">
                 <input id="picupload"  type="file" name="files[]" data-url="<?=base_url()?>admin/calljupload" multiple>
             </td>
             <td rowspan="2" id="pgavatardemo">
@@ -52,7 +62,9 @@
         </tr>
 
         <tr>
-            <td><input type="text" name="pgaddr" placeholder="Địa chỉ"></td>
+            <td>
+                <label>Địa chỉ</label>
+                <input type="text" name="pgaddr" placeholder="Địa chỉ"></td>
 
         </tr>
         <tr>

@@ -3,16 +3,19 @@
     <table id="inputserviceplace">
         <tr>
             <td>
+                <label>Tên nhóm</label>
                 <input type="text" name="pglong_name" placeholder="Tên nhóm thiết bị">
             </td>
         </tr>
         <tr>
             <td>
+                <label>Mã nhóm</label>
                 <input type="text" name="pgcode" placeholder="Mã nhóm">
             </td>
         </tr>
         <tr>
             <td>
+                <label>hứ tự</label>
                 <input type="text" name="pgorder" placeholder="Thứ tự">
             </td>
         </tr>

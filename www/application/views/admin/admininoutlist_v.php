@@ -25,6 +25,10 @@
             <td>
 
                 <span id="xuatoption" style="display: none">
+                     <span style="display: inline-block;">
+                    <input type="radio" name="pgtypexuat" value="xuatkho" id="xuatkhoradio">
+                    <label for="xuatkhoradio">Xuất kho</label>
+                    </span>
                     <? if ($this->mylibs->checkRole('rsXuatCuaHang')): ?>
                     <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="cuahang" id="cuahangradio">
@@ -43,14 +47,14 @@
                     <div id="targetoption" style="display: none">
                         <div class="field_select" id="pgfromspan">
                         <select name="pgfrom" style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển">
-                            <option value="-1">Cửa hàng</option>
+
                         </select>
                         </div>
                         <i class="fa fa-plane fa-2x" style="float:left"></i>
                         <div class="field_select" id="pgtospan">
 
                         <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận">
-                            <option value="-1">Cửa hàng</option>
+
                         </select>
 
                             </div>
@@ -60,33 +64,65 @@
             </td>
         </tr>
         <tr >
+            <td >
+                <label>Thời hạn</label>
+                <input type="text" name='pghanthanhtoan' placeholder="Thời hạn thanh toán hóa đơn">
+            </td>
+            <td id="xuatoptiondichvu" >
+                 <span style="display: inline-block;">
+                    <input type="radio" name="pgtypedichvu" value="dichvu" id="dichvuradio">
+                    <label for="dichvuradio">Dịch vụ</label>
+                 </span>
+                 <span style="display: inline-block;">
+                    <input type="radio" name="pgtypedichvu" value="hanghoa" id="hanghoaradio">
+                    <label for="hanghoaradio">Hàng hóa</label>
+                 </span>
+                 <span style="display: inline-block;">
+                    <input type="radio" name="pgtypedichvu" value="suachua" id="suachuaradio">
+                    <label for="suachuaradio">Sửa chữa</label>
+                 </span>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2">
                 <div>Thông tin thiết bị: mã <b id="icode"></b>, tên thiết bị: <b id="iname"></b>, loại: <b id="itype"></b>, tồn kho <b id="icount"></b></div>
-                <input  tabindex="4" onblur="blursninput(this.value)" type="text" name="pgseries" style="width:20%;display: inline-block" placeholder="Series/IMEI">
+            </td>
+        </tr>
+        <tr >
+            <td colspan="2">
+                <label style="width:10%">Mã vạch</label>
+                <input  tabindex="4" onblur="blursninput(this.value)" type="text" name="pgseries" style="width:25%;display: inline-block" placeholder="Series/IMEI">
+                <label style="width:5%">Mã TB</label>
+                <input class="inputchitiethoadon" tabindex="5" type="text" onblur="getThietbi(this.value,true)" name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
+                <label style="width:5%">Giá</label>
                 <input  tabindex="6"  type="text" onblur="" name="pgprice" style="width:15%;display: inline-block" placeholder="Giá">
-                <input  tabindex="7" type="text" name="pgcount" style="width:8%;display: inline-block" placeholder="Số lượng" value="1">
-   <span id="inputchitiethoadon">
-                <input  tabindex="5" type="text" onblur="getThietbi(this.value,true)" name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
+                <label style="width:5%">S/Lg</label>
+                <input  tabindex="7" type="text" name="pgcount" style="width:10%;display: inline-block" placeholder="Số lượng" value="1">
 
                 <input type="hidden" name="pgthietbi_id" >
-
-                <select  tabindex="8" name="pgcolor" style="width:10%;display: inline-block" >
+             </td>
+            </tr>
+        <tr>
+            <td colspan="2">
+                <label  style="width:10%">Màu</label>
+                <select  class="inputchitiethoadon" tabindex="8" name="pgcolor" style="width:10%;display: inline-block" >
                     <option value="0">Màu </option>
                 </select>
-                <select  tabindex="9" name="pgcountry" style="width:10%;display: inline-block" >
+                <label  style="width:10%">Nước SX</label>
+                <select class="inputchitiethoadon" tabindex="9" name="pgcountry" style="width:10%;display: inline-block" >
                     <option value="0">Nước sx</option>
                 </select>
-                <select tabindex="10"  name="pgyear" style="width:10%;display: inline-block" >
+                <label  style="width:10%">Năm SX</label>
+                <select class="inputchitiethoadon" tabindex="10"  name="pgyear" style="width:10%;display: inline-block" >
                     <option value="0">Năm sx</option>
                 </select>
-                    </span>
-                <span class="btn btn-follow"><input  tabindex="10" type="button" value="Lưu" onclick="save()"> </span>
-            </td>
+                </td>
         </tr>
         <tr>
             <td colspan="2">
                 <input type="hidden" name="idhoadon" value="">
                 <input type="hidden" name="idchitiethoadon" value="">
+                <span class="btn btn-follow"><input  tabindex="10" type="button" value="Lưu" onclick="save()"> </span>
 
                 <span class="btn btn-small"><input type="button" value="Load" onclick="loadinout(1)"> </span>
                 <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
@@ -95,14 +131,16 @@
             </td>
 
         </tr>
+        </table>
+    <table>
         <tr>
             <td id="thanhtoanbox" style="width:40%">
                 <div>
-                <label>Tổng giá trị hóa đơn: </label> <b id="pgsumprice">0</b><br>
-                <label>Số tiền còn lại: </label> <b id="pgsumremain">0</b><br>
+                <label style="width: 50%">Tổng giá trị hóa đơn: </label> <b id="pgsumprice" style="text-align: right">0</b><br>
+                <label style="width: 50%">Số tiền còn lại: </label> <b id="pgsumremain"  style="text-align: right">0</b><br>
                 </div>
                 <div>
-                <label>Thanh toán: </label>    <br>
+                <label style="width: 50%">Thanh toán: </label>    <br>
                 <input type="hidden" name="pgtypethanhtoan" >
                 <input   type="text" name="pgthanhtoan" style="width:80%;display: block" placeholder="Số tiền thanh toán">
                 </div>
@@ -133,7 +171,7 @@
 <script>
     function typexuatcheck(type){
         if(type == 'khachhang'){
-            getStore('xuat');
+            getStore('xuat','cuahang');
             $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">khách hàng</option></select>');
             getCustomer();
             $("#targetoption").show();
@@ -141,15 +179,22 @@
         else if(type == 'cuahang'){
             $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">Cửa hàng</option></select>');
             $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"><option value="-1">Cửa hàng</option></select>');
-            getStore('xuatcuahang');
+            getStore('xuatcuahang','cuahang');
             $("#xuatoption").show();
             $("#targetoption").show();
-
+        }
+        else if(type == 'xuatkho'){
+            $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">Cửa hàng</option></select>');
+            $("#pgfromspan").html('<label style="width:40%">Kho Tổng</label> <select name="pgfrom"  style="width: 40%;display: none" data-placeholder="Nơi chuyển"><option value="-1">Cửa hàng</option></select>');
+            getStore('xuatkho','kho');
+            getStore('xuatkho','cuahang');
+            $("#xuatoption").show();
+            $("#targetoption").show();
         }
 		else{
 			$("#pgtospan").html(' <input type="text" name="pgto"  style="width: 90%;display: inline-block" placeholder="Tên khách hàng" value="">');
-            getStore('xuat');
-			$("input[name=pgto]").val($('input[name=pgtotmp]').val());
+            getStore('xuat','cuahang');
+			//$("input[name=pgto]").val($('input[name=pgtotmp]').val());
             $("#xuatoption").show();
             $("#targetoption").show();
 		}
@@ -158,16 +203,17 @@
         if(type == 'nhap'){
             $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">Cửa hàng</option></select>');
             $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"><option value="-1">Cửa hàng</option></select>');
-            getStore('nhap');
+            getStore('nhap','kho');
             getProvider();
             $("#xuatoption").hide();
+//            $("#xuatoptiondichvu").hide();
 
             $("#targetoption").show();
             enableinput();
-
         }
         else{
             $("#xuatoption").show();
+//            $("#xuatoptiondichvu").show();
             $("#targetoption").hide();
             $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"><option value="-1">Cửa hàng</option></select>');
             $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"><option value="-1">Cửa hàng</option></select>');
@@ -183,6 +229,12 @@
                     $("label[for=khachhangradio]").addClass("checked");
                     typexuatcheck("khachhang");
                 }
+                else if(xuattype == "xuatkho"){
+                    $("#xuatoption label").removeClass("checked");
+                    $("input[value=xuatkho]").prop('checked', true);
+                    $("label[for=xuatkhoradio]").addClass("checked");
+                    typexuatcheck("xuatkho");
+                }
 				else{
 					$("#xuatoption label").removeClass("checked");
                     $("input[value=khachle]").prop('checked', true);
@@ -197,11 +249,17 @@
         $("input[name=pghour]").val(mygettime());
         $('#pghour').mask('99:99:99');
         $('#pgdate').mask('9999-99-99');
+        $('input[name=pghanthanhtoan]').mask('9999-99-99');
         $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
         $("input[name=pgthanhtoan]").autoNumeric({aSep:' ',aPad: false});
         loadinout(1);
        $("input").customInput();
         $( "#pgdate" ).datepicker({
+            changeMonth: true,
+            changeYear: true,
+            dateFormat: "yy-mm-dd"
+        });
+        $( "input[name=pghanthanhtoan]" ).datepicker({
             changeMonth: true,
             changeYear: true,
             dateFormat: "yy-mm-dd"
@@ -212,69 +270,79 @@
 
         $("input[name=pgtype]").click(function(){
             typecheck($(this).val(),"");
+            if($("input[name=pgtype]:checked").val()=='nhap')
+            $("input[name=pgmahoadon]").val("N");
+                else
+                $("input[name=pgmahoadon]").val("X");
+
         });
         $("input[name=pgtypexuat]").click(function(){
                 typexuatcheck($(this).val())
         });
     });
-    function savehoadon(){
-        var pgcode     = $("input[name=pgmahoadon]").val();
-
-        var pgdate     = $("input[name=pgdate]").val();
-        var pghour     = $("input[name=pghour]").val();
-        if(pgcode == ""){
-            alert("Vui lòng nhập mã hóa đơn");
-            return false;
-        }
-        if(pgdate != "" && pghour !=""){
-            pgdate = pgdate+" "+pghour;
-        }
-        else{
-            alert("Vui lòng nhập ngày và giờ");
-            return false;
-        }
-        var pgtype= $("input[name=pgtype]:checked").val();
-
-        if(pgtype == "xuat") {
-        var pgtypexuat =  $("input[name=pgtypexuat]:checked").val();
-        }
-        else{
-            var pgtypexuat = "";
-        }
-        var pgfrom = $('select[name=pgfrom]').chosen().val();
-		if (pgtypexuat != 'khachle')
-			var pgto = $("select[name=pgto]").chosen().val();
-			else
-			var pgto = $("input[name=pgto]").val();
-        var idhoadon = $("input[name=idhoadon]").val();
-
-        $.ajax({
-            type: "post",
-            url: "<?=base_url()?>admin/save/inout",
-            data: "pgcode=" + pgcode
-                      + "&pgdate=" + pgdate
-                      + "&pgtype=" + pgtype
-                      + "&pgxuattype=" + pgtypexuat
-                      + "&pgfrom=" + pgfrom
-                      + "&pgto=" + pgto
-                      + "&edit=" + idhoadon,
-            success: function (msg) {
-                if (msg == 0) {
-                    alert("Không thể lưu");
-                }
-                else {
-                    $("input[name=idhoadon]").val(msg);
-                    loadinout(1);
-                }
-                 }
-            });
-
-    }
+//    function savehoadon(){
+//        var pgcode     = $("input[name=pgmahoadon]").val();
+//
+//        var pgdate     = $("input[name=pgdate]").val();
+//        var pghour     = $("input[name=pghour]").val();
+//        var pghanthanhtoan     = $("input[name=pghanthanhtoan]").val();
+//        if(pgcode == ""){
+//            alert("Vui lòng nhập mã hóa đơn");
+//            return false;
+//        }
+//        if(pgdate != "" && pghour !=""){
+//            pgdate = pgdate+" "+pghour;
+//        }
+//        else{
+//            alert("Vui lòng nhập ngày và giờ");
+//            return false;
+//        }
+//        var pgtype= $("input[name=pgtype]:checked").val();
+//
+//        if(pgtype == "xuat") {
+//        var pgtypexuat =  $("input[name=pgtypexuat]:checked").val();
+//        }
+//        else{
+//            var pgtypexuat = "";
+//        }
+//        var pgfrom = $('select[name=pgfrom]').val();
+//        var pgtypedichvu = $('select[name=pgtypedichvu]').val();
+//		if (pgtypexuat != 'khachle')
+//			var pgto = $("select[name=pgto]").val();
+//			else
+//			var pgto = $("input[name=pgto]").val();
+//        var idhoadon = $("input[name=idhoadon]").val();
+//
+//        $.ajax({
+//            type: "post",
+//            url: "admin/save/inout",
+//            data: "pgcode=" + pgcode
+//                      + "&pgdate=" + pgdate
+//                      + "&pghanthanhtoan=" + pghanthanhtoan
+//                      + "&pgtypedichvu=" + pgtypedichvu
+//                      + "&pgtype=" + pgtype
+//                      + "&pgxuattype=" + pgtypexuat
+//                      + "&pgfrom=" + pgfrom
+//                      + "&pgto=" + pgto
+//                      + "&edit=" + idhoadon,
+//            success: function (msg) {
+//                if (msg == 0) {
+//                    alert("Không thể lưu");
+//                }
+//                else {
+//                    $("input[name=idhoadon]").val(msg);
+//                    loadinout(1);
+//                }
+//                 }
+//            });
+//
+//    }
     function save() {
         var pgcode     = $("input[name=pgmahoadon]").val();
 
         var pgdate     = $("input[name=pgdate]").val();
         var pghour     = $("input[name=pghour]").val();
+        var pghanthanhtoan     = $("input[name=pghanthanhtoan]").val();
         if(pgcode == ""){
             alert("Vui lòng nhập mã hóa đơn");
             return false;
@@ -294,18 +362,26 @@
         else{
             var pgtypexuat = "";
         }
-        var pgfrom = $('select[name=pgfrom]').chosen().val();
+        var pgtypedichvu = $('input[name=pgtypedichvu]:checked').val();
+        var pgfrom = $('select[name=pgfrom]').val();
         if (pgtypexuat != 'khachle')
-			var pgto = $("select[name=pgto]").chosen().val();
+			var pgto = $("select[name=pgto]").val();
 			else
 			var pgto = $("input[name=pgto]").val();
         var idhoadon = $("input[name=idhoadon]").val();
+
+        if(pgfrom == null || pgto == null ){
+            alert("Chưa có thông tin cửa hàng");
+            return;
+        }
 
         $.ajax({
             type: "post",
             url: "<?=base_url()?>admin/save/inout",
             data: "pgcode=" + pgcode
                 + "&pgdate=" + pgdate
+                + "&pghanthanhtoan=" + pghanthanhtoan
+                + "&pgtypedichvu=" + pgtypedichvu
                 + "&pgtype=" + pgtype
                 + "&pgxuattype=" + pgtypexuat
                 + "&pgfrom=" + pgfrom
@@ -313,9 +389,9 @@
                 + "&edit=" + idhoadon,
             success: function (msg) {
                 if (msg == 0) {
-                    alert("Không thể lưu");
+                    alert("Lưu đơn hàng bị lỗi, xin kiểm tra lại thông tin");
                 }
-                else {
+                else if(parseInt(msg) > 0){
                    // console.log(msg);
 
                     if(idhoadon.trim() == "") $("input[name=idhoadon]").val(msg);
@@ -363,7 +439,7 @@
                                 + "&edit=" + idchitiethoadon,
                             success: function (msg) {
                                 if(msg=="0"){
-                                    alert("Lỗi lưu.");
+                                    alert("Lưu chi tiết đơn hàng bị lỗi, xin kiểm tra lại thông tin.");
 
                                 }
                                 else if(msg==-1){
@@ -384,8 +460,11 @@
                         });
                     }
                     else {
-                        alert("Chưa đủ thông tin của chi tiết đơn hàng.");
+                        alert("Đã lưu đơn hàng mà không có chi tiết đơn hàng.");
                     }
+                }
+                else{
+                    alert("Lưu đơn hàng bị lỗi, xin kiểm tra lại thông tin");
                 }
             }
         });
@@ -409,7 +488,7 @@
             parent = $("input[name=idhoadon]").val();
         }
         addloadgif("#loadstatus");
-        $("#list_hoadonitem").load("<?=base_url()?>admin/load/inout_details/" + page+"/"+parent, function () {
+        $("#list_hoadonitem").load("<?=base_url()?>admin/loadview/v_inout/" + page+"/"+parent, function () {
             removeloadgif("#loadstatus");
         });
     }
@@ -437,10 +516,13 @@
                     $("input[name=pghour]").val(formatTime(province.pgdate));
                     $("input[name=pgtotmp]").val(province.pgto);
                     $("input[name=pgfromtmp]").val(province.pgfrom);
+                    $("input[name=pghanthanhtoan]").val(formatDate(province.pghanthanhtoan));
                    // console.log($("input[value="+province.pgtype+"]"));
                     $("label").removeClass("checked");
                     $("input[value="+province.pgtype+"]").prop('checked', true);
+                    $("input[value="+province.pgtypedichvu+"]").prop('checked', true);
                     $("label[for="+province.pgtype+"radio]").addClass("checked");
+                    $("label[for="+province.pgtypedichvu+"radio]").addClass("checked");
                     typecheck($("input[value="+province.pgtype+"]:checked").val(),province.pgxuattype);
                     loadSumPrice(id,province.pgtype);
                     $("#hoadoninfo input[type=radio]").prop('disabled', 'disabled');
@@ -476,13 +558,13 @@
                     $("input[name=pgprice]").val(province.pgprice);
 
                     $("input[name=pgcount]").val(province.pgcount);
-                    var pgfrom     = $('select[name=pgfrom]').chosen().val();
+                //    var pgfrom     = $('select[name=pgfrom]').chosen().val();
 
-                    var pgtype= $("input[name=pgtype]:checked").val();
-                    var pgtypexuat= $("input[name=pgtypexuat]:checked").val();
-                    if(pgtypexuat != 'khachle')
-                     var pgto =   $('select[name=pgto]').chosen().val();
-                    else var pgto =  $('input[name=pgto]').val();
+                //    var pgtype= $("input[name=pgtype]:checked").val();
+                //    var pgtypexuat= $("input[name=pgtypexuat]:checked").val();
+                //    if(pgtypexuat != 'khachle')
+                //     var pgto =   $('select[name=pgto]').chosen().val();
+                //    else var pgto =  $('input[name=pgto]').val();
                     if(pgtype=='xuat'){
 
                         gettonkho(province.pgseries,pgfrom,true);
@@ -491,7 +573,6 @@
                     else{
                         gettonkho(province.pgseries,pgto,false);
                     }
-
 
                 }
             }
@@ -557,10 +638,10 @@
             }
         });
     });
-    function getStore(type){
+    function getStore(type,typestore){
         $.ajax({
             type: "post",
-            url: "<?=base_url()?>admin/jsGetStore",
+            url: "<?=base_url()?>admin/jsGetStore/"+typestore,
             success: function (msg) {
                 if (msg == "") alert('<?=lang("NO_DATA")?>');
                 else {
@@ -593,6 +674,20 @@
                         $('select[name=pgto]').val($("input[name=pgtotmp]").val()).trigger("chosen:updated");
 
                     }
+                    else if(type == "xuatkho"){
+                        if(typestore == 'kho') {
+                            $("select[name=pgfrom]").html(option);
+                           // $('select[name=pgfrom]').chosen({width:"100%"});
+                            $('select[name=pgfrom]').val($("input[name=pgfromtmp]").val());
+                        }
+                        else{
+                            $("select[name=pgto]").html(option);
+                            $('select[name=pgto]').chosen({width:"100%"});
+                            $('select[name=pgto]').val($("input[name=pgtotmp]").val()).trigger("chosen:updated");
+                        }
+                    }
+
+
 
                 }
             }
@@ -738,7 +833,7 @@
 
                 }
                 else {
-                    var pgfrom     = $('select[name=pgfrom]').chosen().val();
+                    var pgfrom     = $('select[name=pgfrom]').val();
                     var pgto     = $("select[name=pgto]").val();
                     var pgcount = $("input[name=pgcount]").val();
 
@@ -747,7 +842,8 @@
                   //  console.log(pgtype);
                     if(pgtype=='xuat'){
                         checkXuat(id,pgtypexuat,pgfrom,pgto,pginout_id);
-                        gettonkho(id,pgfrom,false);
+                        if(pgtypexuat!='xuatkho')
+                            gettonkho(id,pgfrom,false);
                     }
                     else{
                         gettonkho(id,pgto,false);
@@ -828,12 +924,10 @@
         return year + "-" + month + "-" + day;
     }
      function disableinput(){
-        $("#inputchitiethoadon input").prop('disabled', 'disabled');
-        $("#inputchitiethoadon select").prop('disabled', 'disabled');
+        $(".inputchitiethoadon").prop('disabled', 'disabled');
      }
     function enableinput(){
-        $("#inputchitiethoadon input").prop('disabled', false);
-        $("#inputchitiethoadon select").prop('disabled', false);
+        $(".inputchitiethoadon").prop('disabled', false);
 
     }
 	function changesn(val){
@@ -882,8 +976,18 @@
                     case "-6":  alert("Đã có sản phẩm này trong đơn hàng");
                         $("input[name=pgseries]").val("");
                         break;
+                    case "-11":  alert("Hàng không có trong kho");
+                        $("input[name=pgseries]").val("");
+                        break;
                     case "1": break;
-                    default : break;
+                    default :
+                        if(xuattype=='xuatkho'){
+                            if(parseInt(msg)>0){
+                                $('select[name=pgfrom]').val(msg);
+                                gettonkho(sn,msg,false);
+                            }
+                        }
+                        break;
                 }
             }
         });

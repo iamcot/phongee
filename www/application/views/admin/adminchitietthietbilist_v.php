@@ -15,16 +15,27 @@
                 <input type="text" name="pgthietbi_id" placeholder="ID thiết bị" style="width: 19%;float:left;">
             </td>
             <td>
-                <input type="text" name="pgcode" placeholder="Số series/ID định dạng thiết bị" ondblclick="this.value=''"></td>
+                <label>Series No.</label>
+                <input type="text" name="pgcode" placeholder="Số series thiết bị" ondblclick="this.value=''"></td>
+            </td>
+        </tr>
+        <tr>
+            <td> <label>Part No.</label>
+                <input type="text" name="pgpartno" placeholder="Số Part Number thiết bị" ondblclick="this.value=''"></td>
+            </td>
+            <td> <label>IMEI No.</label>
+                <input type="text" name="pgimei" placeholder="Số Imei thiết bị" ondblclick="this.value=''"></td>
             </td>
         </tr>
         <tr>
             <td>
 <!--                <input type="text" name="pgcolor" placeholder="Màu">-->
+                <label>Màu sắc</label>
                 <select name="pgcolor">
                     <option value="0">Màu </option>
                 </select>
             <td>
+                <label>Nước SX</label>
 <!--                <input type="text" name="pgcountry" placeholder="Nước"></td>-->
                     <select name="pgcountry">
                         <option value="0">Nước sản xuất</option>
@@ -34,11 +45,13 @@
         <tr>
             <td>
 <!--                <input type="text" name="pgyear" placeholder="Năm sx" >-->
+                <label>Năm SX</label>
                 <select name="pgyear">
                     <option value="0">Năm sản xuất</option>
                 </select>
             </td>
             <td rowspan="3" style="vertical-align: top">
+                <label>Hình ảnh</label>
                 <input type="text" name="pgpic" placeholder="Hình ảnh đại diện" readonly=true>
                 <input id="picupload"  type="file" name="files[]" data-url="<?=base_url()?>admin/calljupload" multiple>
                 <div id="pgavatardemo"></div>
@@ -46,15 +59,22 @@
         </tr>
         <tr>
             <td>
-                <label>Giá hiện tại</label>
-                <input type="text" name="pgprice" placeholder="Giá hiện tại">
-                <label>Giá cũ</label>
-                <input type="text" name="pgprice_old" placeholder="Giá cũ">
+                <div style="width: 50%;float: left">
+                    <label>Giá</label>
+                    <input type="text" name="pgprice" placeholder="Giá hiện tại">
+                </div>
+                 <div style="width: 50%;float: left">
+                     <label>Giá cũ</label>
+                     <input type="text" name="pgprice_old" placeholder="Giá cũ">
+                 </div>
+
             </td>
 
         </tr>
         <tr>
-            <td><input type="text" name="pgshort_info" placeholder="Thông tin ngắn"></td>
+            <td>
+                <label>Thông tin ngắn</label>
+                <input type="text" name="pgshort_info" placeholder="Thông tin ngắn"></td>
 
         </tr>
         <tr>
@@ -66,14 +86,14 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2"><input type="hidden" name="edit" value="">
+            <td colspan="2" ><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
                 <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
                 <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
                 <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
-                <span style="display: inline-block">
+                <span style="display: inline-block;float: left;">
                 <input type="checkbox" name="checkdelinput" id="notclear">
-                <label for="notclear">Không xóa dữ liệu</label>
+                <label for="notclear" style="width: 200px !important;">Không xóa dữ liệu</label>
                     </span>
 
                 <div id="loadstatus" style="float:right;"></div>
@@ -99,6 +119,8 @@
     function save() {
         var pglongname     = $("input[name=pglongname]").val();
         var pgcode     = $("input[name=pgcode]").val();
+        var pgimei     = $("input[name=pgimei]").val();
+        var pgpartno     = $("input[name=pgpartno]").val();
         var pgpic  = $("input[name=pgpic]").val();
         var pgprice  = $("input[name=pgprice]").val().replace(/ /g,'');
         var pgprice_old      = $("input[name=pgprice_old]").val().replace(/ /g,'');
@@ -119,6 +141,8 @@
                 url: "<?=base_url()?>admin/save/chitietthietbi",
                 data: "pglong_name=" + pglongname
                     + "&pgcode=" + pgcode
+                    + "&pgimei=" + pgimei
+                    + "&pgpartno=" + pgpartno
                     + "&pgpic=" + pgpic
                     + "&pgthietbi_id=" + pgthietbi_id
                     + "&pgthietbi_code=" + pgthietbi_code
@@ -173,6 +197,8 @@
         $("select[name=pgcountry]").val("");
         $("select[name=pgcolor]").val("");
         $("input[name=pgcode]").val("");
+        $("input[name=pgimei]").val("");
+        $("input[name=pgpartno]").val("");
         $("input[name=pgpic]").val("");
         $("input[name=pgthietbi_id]").val("");
         $("input[name=pgthietbicode]").val("");
@@ -196,6 +222,8 @@
                     var province = eval(msg);
                     $("input[name=pglongname]").val(province.pglong_name);
                     $("input[name=pgcode]").val(province.pgcode);
+                    $("input[name=pgimei]").val(province.pgimei);
+                    $("input[name=pgpartno]").val(province.pgpartno);
                     $("input[name=pgpic]").val(province.pgpic);
                     $("input[name=pgprice]").val(province.pgprice);
                     $("input[name=pgprice_old]").val(province.pgprice_old);

@@ -3,22 +3,36 @@
     <table id="inputserviceplace">
         <tr>
             <td>
+                <label>Loại</label>
+                <select name="pgtype">
+                    <option value="cuahang">Cửa hàng</option>
+                    <option value="kho">Kho</option>
+                </select>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <label>Tên Cửa hàng</label>
                 <input type="text" name="pglong_name" placeholder="Tên cửa hàng">
             </td>
         </tr>
         <tr>
             <td>
+                <label>Mã Cửa hàng</label>
                 <input type="text" name="pgcode" placeholder="Mã cửa hàng">
             </td>
 
         </tr>
         <tr>
             <td>
+                <label>Thứ tự</label>
                 <input type="text" name="pgorder" placeholder="Thứ tự">
             </td>
         </tr>
         <tr>
             <td>
+                <label>Địa chỉ</label>
                 <input type="text" name="pgaddr" placeholder="Địa chỉ">
             </td>
         </tr>
@@ -49,6 +63,7 @@
     });
     function save() {
         var pglong_name     = $("input[name=pglong_name]").val();
+        var pgtype     = $("select[name=pgtype]").val();
         var pgcode     = $("input[name=pgcode]").val();
         var pgorder  = $("input[name=pgorder]").val();
         var pgaddr  = $("input[name=pgaddr]").val();
@@ -60,6 +75,7 @@
                 url: "<?=base_url()?>admin/save/store",
                 data: "pglong_name=" + pglong_name
                     + "&pgcode=" + pgcode
+                    + "&pgtype=" + pgtype
                     + "&pgorder=" + pgorder
                     + "&pgaddr=" + pgaddr
                     + "&edit=" + edit,
@@ -113,6 +129,7 @@
                     $("input[name=pgorder]").val(province.pgorder);
                     $("input[name=pgaddr]").val(province.pgaddr);
                     $("input[name=edit]").val(province.id);
+                    $("select[name=pgtype]").val(province.pgtype);
                 }
             }
         });

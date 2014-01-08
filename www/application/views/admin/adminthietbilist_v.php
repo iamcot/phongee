@@ -21,24 +21,30 @@
         </tr>
         <tr>
             <td>
+                <label>Tên TB *</label>
                 <input type="text" name="pglongname" placeholder="Tên thiết bị"></td>
             <td>
+                <label>Mã TB *</label>
                 <input type="text" name="pgcode" placeholder="Mã thiết bị">
             </td>
         </tr>
         <tr>
             <td>
+                <label>Nước SX</label>
                 <input type="text" name="pgcountry" placeholder="Các nước sản xuất "></td>
             <td>
+                <label>Màu sắc</label>
                 <input type="text" name="pgcolor" placeholder="Các màu ">
             </td>
         </tr>
         <tr>
             <td>
+                <label>Năm SX</label>
                 <input type="text" name="pgyear" placeholder="Các năm ">
             </td>
 
             <td rowspan="3" style="vertical-align: top">
+                <label>Hình ảnh</label>
                 <input type="text" name="pgpic" placeholder="Hình ảnh đại diện" readonly=true>
                 <input id="picupload"  type="file" name="files[]" data-url="<?=base_url()?>admin/calljupload" multiple>
                 <div id="pgavatardemo"></div>
@@ -46,6 +52,7 @@
         </tr>
         <tr>
             <td id="parent">
+                <label>Nhóm TB</label>
                 <select name="pgnhomthietbi_id">
                     <option value="0">Chọn nhóm thiết bị</option>
                     <? foreach($aNhomthietbi as $store):?>
@@ -58,15 +65,26 @@
                     <input type="text" name="pkthietbi_id" placeholder="ID thiết bị" style="width: 19%;float:left;">
                 </div>
 
-                <label>Giá hiện tại</label>
-                <input type="text" name="pgprice" placeholder="Giá hiện tại">
-                <label>Giá cũ</label>
-                <input type="text" name="pgprice_old" placeholder="Giá cũ">
+
             </td>
 
         </tr>
         <tr>
-            <td><input type="text" name="pgshort_info" placeholder="Thông tin ngắn"></td>
+            <td>
+                <div style="width: 50%;float: left">
+                    <label>Giá *</label>
+                    <input type="text" name="pgprice" placeholder="Giá hiện tại">
+                </div>
+                <div style="width: 50%;float: left">
+                    <label>Giá cũ</label>
+                    <input type="text" name="pgprice_old" placeholder="Giá cũ">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <label>Thông tin</label>
+                <input type="text" name="pgshort_info" placeholder="Thông tin ngắn"></td>
 
         </tr>
         <tr>
@@ -131,7 +149,7 @@
 
         var edit = $("input[name=edit]").val();
 
-        if (pglongname.trim() != "" && pgcode.trim() != "") {
+        if (pgprice!= "" && pgprice > 0 && pglongname.trim() != "" && pgcode.trim() != "") {
             $.ajax({
                 type: "post",
                 url: "<?=base_url()?>admin/save/thietbi",

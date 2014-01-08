@@ -8,7 +8,7 @@
                    id="tr<?=$row->id?>">
                    <td><?=$row->id?></td>
                    <td><?=date("d/m/Y H:i:s",($row->pgdate))?></td>
-                   <td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',' ')?></a></td>
+                   <td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',',')?></a></td>
                    <td><?=$row->pginout_id?></td>
                    <td><?=$row->pgtype?></td>
                     <td><?=$row->pginfo?></td>

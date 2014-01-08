@@ -1,6 +1,6 @@
 
 CREATE OR REPLACE 
-    VIEW `v_inout` 
+    VIEW `v_inout`
     AS
 SELECT 
 d.*,
@@ -9,6 +9,8 @@ i.pgtype inouttype,
 i.pgxuattype,
 i.pgfrom inoutfrom,
 i.pgto inoutto,
+i.pghanthanhtoan,
+i.pgtypedichvu,
 t.pglong_name thietbiname,
 n.id nhomthietbi_id,
 n.pglong_name nhomthietbiname,

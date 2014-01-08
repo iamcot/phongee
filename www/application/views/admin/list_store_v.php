@@ -1,11 +1,11 @@
 <? if (isset($province)): ?>
     <table  class="tblist">
         <thead>
-        <tr><td>ID</td><td>Tên cửa hàng</td><td>Mã cửa hàng</td><td>Địa chỉ</td><td></td></tr>
+        <tr><td>ID</td><td>Loại</td><td>Tên cửa hàng</td></td><td>Mã cửa hàng</td><td>Địa chỉ</td><td></td></tr>
         </thead>
         <? $i=1; foreach ($province as $row): ?>
                <tr class="<?=(($i%2==1))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
-                   id="tr<?=$row->id?>"><td><?=$row->id?></td><td><a href="javascript:edit(<?=$row->id?>)"><?=$row->pglong_name?></a></td><td><?=$row->pgcode?></td><td><?=$row->pgaddr?></td><td style="text-align:right"><a href="javascript:hide(<?=$row->id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a></td></tr>
+                   id="tr<?=$row->id?>"><td><?=$row->id?></td><td><?=$row->pgtype?></td><td><a href="javascript:edit(<?=$row->id?>)"><?=$row->pglong_name?></a></td><td><?=$row->pgcode?></td><td><?=$row->pgaddr?></td><td style="text-align:right"><a href="javascript:hide(<?=$row->id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a></td></tr>
         <? $i++; endforeach; ?>
     </table>
     <div class="pagination">

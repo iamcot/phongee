@@ -223,14 +223,23 @@ header h2{
     vertical-align: top;
 }
 #inputserviceplace td{
-    max-width: 50%;
+    width: 50% !important;
 }
 
-/*td input[type=text],*/
-/*td select,*/
-/*td textarea{*/
-    /*width: 100%;*/
-/*}*/
+td input[type=text],
+td select,
+td textarea{
+    max-width: 78% !important;
+}
+td label{
+    width:20%;
+    vertical-align: middle;
+    overflow: hidden;
+    padding-left: 5px;
+}
+.custom-radio label{
+    width: auto;
+}
 .odd{
     background: #eee;
 }
