@@ -1,22 +1,28 @@
 <div style="overflow: hidden">
 <fieldset>
     <legend>Thông tin</legend>
-    <table id="inputserviceplace">
+    <table id="inputserviceplace" style="width:70%">
         <tr>
             <td id="hoadoninfo">
                 <? if($this->mylibs->checkRole('rsNhapRadio')):?>
-                <span style="display: inline-block;">
+                <span style="display: inline-block;float: left;">
                 <input type="radio" name="pgtype" value="nhap"  id="nhapradio">
                 <label for="nhapradio">Nhập tiền</label>
                     </span>
                 <? endif;?>
                 <? if($this->mylibs->checkRole('rsXuatRadio')):?>
-                 <span style="display: inline-block;">
+                 <span style="display: inline-block;;float: left;">
                 <input type="radio" name="pgtype" value="xuat"  id="xuatradio">
                 <label for="xuatradio">Rút tiền</label>
                  </span>
                 <? endif;?>
+                <div id="pgstoreiddiv" style="display: block;clear:both;">
+                    <select name="pgstore_id" style="width: 100%;display: inline-block" data-placeholder="Cửa hàng">
+
+                    </select>
+                </div>
                 <br>
+                <div class="clear"> </div>
                 <div>
                     <label>Mã hóa đơn</label>
                     <input tabindex="1" type="text" name="pginout_code" style="width:50%;display:inline-block" placeholder="Mã hóa đơn" onblur="loadSumPrice(this.value)">
@@ -38,9 +44,9 @@
                 </div>
                 <br>
                 <label>Số tiền</label>
-                <input tabindex="4" type="text" name="pgamount"  placeholder="Số tiền" style="width:40%;display:inline-block">
+                <input tabindex="4" type="text" name="pgamount"  placeholder="Số tiền" style="width:70%;display:inline-block">
                 <br><br>
-            <textarea tabindex="5" name="pginfo" placeholder="Ghi chú" style="width:50%;display:block"></textarea>
+                <textarea tabindex="5" name="pginfo" placeholder="Ghi chú" style="width:100%;display:block"></textarea>
 
         </tr>
         <tr >
@@ -48,7 +54,7 @@
                 <input type="hidden" name="edit" >
 
                 <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+                <span class="btn btn-small"><input type="button" value="Load" onclick="loadmoneytransfer(1)"> </span>
                 <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
             </td>
         </tr>
@@ -74,6 +80,7 @@
 
     });
     $(function () {
+        getStore();
         loadmoneytransfer(1,0);
         $("input[name=pgdate]").val(mygetdate());
         $("input[name=pghour]").val(mygettime());
@@ -84,6 +91,7 @@
         var pghour  = $("input[name=pghour]").val();
         var pgamount  = $("input[name=pgamount]").val().replace(/ /g,'');
         var pginfo      = $("textarea[name=pginfo]").val();
+        var pgstore_id      = $("select[name=pgstore_id]").val();
 
         var pgtype      = $("input[name=pgtype]:checked").val();
 
@@ -123,6 +131,7 @@
                 data: "pginout_id=" + pginout_id
                     + "&pgdate=" + pgdate
                     + "&pgamount=" + pgamount
+                    + "&pgstore_id=" + pgstore_id
                     + "&pginfo=" + pginfo
                     + "&pgtype=" + pgtype
                     + "&edit=" + edit,
@@ -150,7 +159,7 @@
     }
     function loadmoneytransfer(page,inout_id) {
         addloadgif("#loadstatus");
-        $("#list_hoadon").load("<?=base_url()?>admin/load/moneytransfer/" + page, function () {
+        $("#list_hoadon").load("<?=base_url()?>admin/loadview/v_moneytransfer/" + page, function () {
             removeloadgif("#loadstatus");
         });
 
@@ -191,6 +200,26 @@
                    $("input[name=pginout_code]").val("");
                }
 
+            }
+        });
+    }
+    function getStore(){
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/jsGetStore",
+            success: function (msg) {
+                if (msg == "") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    var option = "";
+                    $.each(province, function (index, store){
+                        option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
+                    });
+                        $("select[name=pgstore_id]").html(option);
+                        $('select[name=pgstore_id]').chosen({width:"90%"});
+                        $('select[name=pgstore_id]').trigger("chosen:updated");
+
+                }
             }
         });
     }

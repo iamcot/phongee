@@ -1,6 +1,6 @@
 <fieldset>
     <legend>Lựa chọn</legend>
-    <div class="field_select" id="pgstore_id" style="width:30%">
+    <div class="field_select" id="pgstore_id" style="width:20%">
 
         <select name="pgstore_id"  style="width:80%;display: inline-block" data-placeholder="Cửa hàng" multiple>
             <option value="all">Tất cả</option>
@@ -10,17 +10,18 @@
         </select>
 
     </div>
-    <div class="field_select" id="pgtype" style="width:20%">
+    <div class="field_select" id="pgtype" style="width:15%">
 
         <select name="pgtype"  style="width:80%;display: inline-block" data-placeholder="Xuất/nhập ">
-            <option value="all">Tất cả Xuất/nhập</option>
+            <option value="all">All X/N</option>
             <option value="xuat">Xuất</option>
             <option value="nhap">Nhập</option>
         </select>
 
     </div>
     <input type="text" name="pgdatefrom" id="pgdatefrom" placeholder="Từ ngày" style="width:15%" value="<?=date("Y-m-d", strtotime("-1 months"));?>">
-    <input type="text" name="pgdateto" id="pgdateto" placeholder="Đến ngày" style="width:15%" value="<?=date("Y-m-d");?>">
+    <input type="text" name="pgdateto" id="pgdateto" placeholder="Đến ngày" style="width:15%" value="<?=date("Y-m-d",strtotime("+1 day"));?>">
+    <input type="text" name="pgseries" placeholder="S/N Thiết bị" style="width:20%;display: inline-block">
     <div class="btn btn-small">
         <input type="button" value="Xem" onclick="viewreport()">
     </div>
@@ -73,6 +74,7 @@ function viewreport(){
     "&pgprice="+$("input[name=pgprice]").prop("checked") +
     "&pgcountry="+$("input[name=pgcountry]").prop("checked") +
     "&pgcolor="+$("input[name=pgcolor]").prop("checked") +
+    "&pgseries="+$("input[name=pgseries]").val() +
     "&pgyear="+$("input[name=pgyear]").prop("checked")
     );
 }

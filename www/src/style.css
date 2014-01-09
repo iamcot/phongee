@@ -210,7 +210,9 @@ header h2{
     width:100%;
     border-collapse: collapse;
 }
-
+.tblist thead{
+    background: #fff;
+}
 #content table thead{
     border-bottom: 2px solid #ddd;
     /*background: #cccccc url(smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;*/
@@ -242,6 +244,9 @@ td label{
 }
 .odd{
     background: #eee;
+}
+.even{
+    background: #fff;
 }
 .trdelete{
     text-decoration: line-through;

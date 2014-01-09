@@ -2,7 +2,9 @@
     <legend>Lựa chọn</legend>
     <div class="field_select" id="pgstore_id" style="width:40%">
         <select name="pgstore_id"  style="width:70%;display: inline-block" data-placeholder="Cửa hàng">
-            <option value="all">Tất cả Cửa hàng</option>
+            <option value="all">Toàn hệ thống</option>
+            <option value="cuahang">Tất cả Cửa hàng</option>
+            <option value="kho">Tổng kho </option>
             <? foreach($aStore as $store):?>
                 <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
             <? endforeach;?>

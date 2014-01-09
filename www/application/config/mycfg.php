@@ -39,6 +39,7 @@ $config['rsXuatCuaHang'] = '0000033';
 $config['rlinout'] = '0001233';
 $config['rlinout_details'] = '0001233';
 $config['rlv_inout'] = '0001233';
+$config['rlv_moneytransfer'] = '0001233';
 $config['rluser'] = '0001233';
 $config['rlnhomthietbi'] = '0001233';
 $config['rlthietbi'] = '0001233';

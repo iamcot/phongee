@@ -1,7 +1,7 @@
 <div style="overflow: hidden">
 <fieldset>
     <legend>Thông tin</legend>
-    <table id="inputserviceplace">
+    <table id="inputserviceplace" style="background: #fffeee">
         <tr>
             <td id="hoadoninfo">
                 <? if($this->mylibs->checkRole('rsNhapRadio')):?>
@@ -132,7 +132,7 @@
 
         </tr>
         </table>
-    <table>
+    <table style="background: #fff3f4">
         <tr>
             <td id="thanhtoanbox" style="width:40%">
                 <div>
@@ -194,7 +194,7 @@
 		else{
 			$("#pgtospan").html(' <input type="text" name="pgto"  style="width: 90%;display: inline-block" placeholder="Tên khách hàng" value="">');
             getStore('xuat','cuahang');
-			//$("input[name=pgto]").val($('input[name=pgtotmp]').val());
+			$("input[name=pgto]").val($('input[name=pgtotmp]').val());
             $("#xuatoption").show();
             $("#targetoption").show();
 		}
@@ -479,7 +479,7 @@
     }
     function loadmoneytransfer(page,pginout_id) {
         addloadgif("#loadstatus");
-        $("#list_transfer").load("<?=base_url()?>admin/load/moneytransfer/" + page+"/"+pginout_id, function () {
+        $("#list_transfer").load("<?=base_url()?>admin/loadview/v_moneytransfer/" + page+"/"+pginout_id, function () {
             removeloadgif("#loadstatus");
         });
     }
@@ -1008,7 +1008,7 @@ function loadSumPrice(inout_id,type){
 function savethanhtoan(){
     var pginout_id = $("input[name=idhoadon]").val();
     var pginout_code = $("input[name=pgmahoadon]").val();
-    var pgsumprice = $("#pgsumremain").html().replace(/ /g,'');
+    var pgsumprice = $("#pgsumremain").html().replace(/,/g,'');
     var pgthanhtoan = $("input[name=pgthanhtoan]").val().replace(/ /g,'');
     var pgtypethanhtoan = $("input[name=pgtypethanhtoan]").val();
     var pginfo = 'Thanh toán hóa đơn #'+pginout_code;

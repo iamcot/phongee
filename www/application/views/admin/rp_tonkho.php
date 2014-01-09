@@ -1,4 +1,9 @@
-<h3 style="text-align: center">BÁO CÁO TỒN KHO <?=(($pgstore_id=='all')?'TẤT CẢ CỬA HÀNG':$aStore[$pgstore_id]->pglong_name)?> NGÀY <?=date('d/m/Y')?> </h3>
+<h3 style="text-align: center">BÁO CÁO TỒN KHO <?
+    if($pgstore_id=='all') echo 'TẤT CẢ HỆ THỐNG ';
+    else if($pgstore_id=='cuahang') echo 'TẤT CẢ CỬA HÀNG';
+    else if($pgstore_id=='kho')
+        echo 'KHO HÀNG ';
+    else echo $aStore[$pgstore_id]->pglong_name?> NGÀY <?=date('d/m/Y')?> </h3>
 <center>
 <? if($aReport!=null):?>
     <table style="width: 50%"  class="tblist">

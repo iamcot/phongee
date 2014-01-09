@@ -123,7 +123,9 @@ class Admin extends CI_Controller
             $parent = array("pginout_id" => $where);
             else  if($table == 'moneytransfer')
                 $parent = array("pginout_id" => $where);
+
         }
+        $data['aStore'] = $this->getStore("");
         $role = $this->mylibs->checkRole("rl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
@@ -141,7 +143,11 @@ class Admin extends CI_Controller
         if($where!= ""){
             if($table == 'v_inout')
             $parent = array("pginout_id" => $where);
+            else if($table == 'v_moneytransfer'){
+                $parent = array("pginout_id" => $where);
+            }
         }
+
         $role = $this->mylibs->checkRole("rl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
@@ -161,7 +167,7 @@ class Admin extends CI_Controller
         else
             $sql = "SELECT c.*,b.pgtype thietbitype FROM " . $this->tbprefix . "chitietthietbi c, ".$this->tbprefix."thietbi b
             WHERE c.pgcode='$id' AND b.id=c.pgthietbi_id ";
-
+        //OR c.pgimei = '$id' OR c.pgpartno='$id'
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             $row = $qr->row_array();
@@ -428,9 +434,10 @@ class Admin extends CI_Controller
 //        }
         echo $kq;
     }
-    public function getStore($type='cuahang'){
+    public function getStore($type=''){
         if($this->mylibs->checkRole("rqStore")>= 2)
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 AND pgtype='$type' ";
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
+        if($type!='') $sql.= " AND pgtype='$type' ";
         if($this->mylibs->checkRole("rqStore")== 2)
              $sql.= " AND id =".$this->session->userdata("pgstore_id")."";
         $sql .= " ORDER BY pgorder ";
@@ -440,7 +447,7 @@ class Admin extends CI_Controller
         }
         else return null;
     }
-    public function jsGetStore($type='cuahang'){
+    public function jsGetStore($type=''){
         $arr = $this->getStore($type);
         if($arr!=null){
             $this->mylibs->echojson($arr);
@@ -683,6 +690,7 @@ class Admin extends CI_Controller
         $pgcolor=$this->input->get("pgcolor");
         $pgyear=$this->input->get("pgyear");
         $pgcreateuser=$this->input->get("pgcreateuser");
+        $pgseries=$this->input->get("pgseries");
         $data['pgtype'] = $pgtype;
         $data['pgname'] = $pgname;
         $data['pgstore_id'] = $pgstore_id;
@@ -694,6 +702,7 @@ class Admin extends CI_Controller
         $data['pgcolor'] = $pgcolor;
         $data['pgyear'] = $pgyear;
         $data['pgcreateuser'] = $pgcreateuser;
+        $data['pgseries'] = $pgseries;
 
         echo  $this->calReportXNT($data);
     }
@@ -736,8 +745,12 @@ class Admin extends CI_Controller
             $date .= " AND inoutdate >= ".strtotime($param['pgdatefrom']);
         if($param['pgdateto'] != "")
             $date .= " AND inoutdate <= ".strtotime($param['pgdateto']);
+        if($param['pgseries']!=''){
+            $series = " AND pgseries like '%".$param['pgseries']."%' ";
+        }
+        else $series = '';
 
-        $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date;
+        $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date.$series;
      //    echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
@@ -772,10 +785,16 @@ class Admin extends CI_Controller
         $param['aStore'] = $aStore;
         $sstore = '';
         if($param['pgstore_id'] == 'all'){
-            $sstore.=" AND ( inouttype='nhap' OR pgxuattype='khachle' OR pgxuattype='khachhang' )";
+        $sstore.=" AND (inouttype='nhap' OR pgxuattype='khachhang' OR pgxuattype='khachle' )";
+        }
+        else if($param['pgstore_id'] == 'cuahang'){
+            $sstore.=" AND inouttype='xuat' ";
+        }
+        else if($param['pgstore_id'] == 'kho'){
+            $sstore.=" AND ( pgxuattype='xuatkho' OR inouttype='nhap' )";
         }
         else{
-           $sstore .= " AND ( ( (inouttype='nhap' OR pgxuattype='cuahang' ) AND inoutto='".$param['pgstore_id']."' )
+           $sstore .= " AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$param['pgstore_id']."' )
            OR ( inouttype='xuat' AND inoutfrom = '".$param['pgstore_id']."' )  ) ";
         }
         $sthietbi = '';
@@ -791,12 +810,16 @@ class Admin extends CI_Controller
             }
         }
         if($sthietbi!='') $sthietbi.=')';
-        if($param['pgstore_id'] != 'all')
-            $sql="SELECT thietbiname, sum(case when (inoutfrom='".$param['pgstore_id']."') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname";
-        else if($param['pgstore_id'] =='all')
-            $sql="SELECT thietbiname, sum(case when (inouttype='xuat') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname";
+        if($param['pgstore_id'] =='all')
+            $sql="SELECT thietbiname, sum(case when (inouttype='nhap') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
+        else if($param['pgstore_id'] =='cuahang')
+            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
+        else if($param['pgstore_id'] == 'kho')
+            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
+        else
+            $sql="SELECT thietbiname, sum(case when (inoutfrom='".$param['pgstore_id']."') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
 
-       // echo $sql;
+//         echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             $report = $qr->result();
