@@ -860,19 +860,54 @@ class Admin extends CI_Controller
         else $date .=' WHERE ';
         if($param['pgdateto'] != "")
             $date .= " a.pgdate <= ".strtotime($param['pgdateto']);
+        if($param['pgstore_id']=='all'){
+            $store  = '';
+            $xuatmoney = " or a.inouttype='xuat' ";
+        }
+        else{
+            $xuatmoney = " or ( a.inouttype='xuat' and a.inoutfrom = '".$param['pgstore_id']."' ) ";
+            if($date=='') $store = " WHERE ";
+            else $store = " AND ";
+            $store .= " ( a.pgstore_id = ".$param['pgstore_id']."
+            OR (a.inoutfrom = ".$param['pgstore_id']." AND a.inouttype='xuat' )
+            OR (a.inoutto = ".$param['pgstore_id']." AND (a.inouttype='nhap' OR a.inoutxuattype='xuatkho' OR a.inoutxuattype='cuahang')   )
+            ) ";
+        }
 
-
-        $sql = "SELECT a.* FROM v_tienquy a $date  ORDER BY a.pgdate";
-
+        $sql = "SELECT a.*,
+         (CASE WHEN ( (a.pgtype='nhap' and a.inout_id=0)  $xuatmoney ) THEN (a.pgamount) ELSE ( 0 ) END) moneyin,
+         (CASE WHEN ( (a.pgtype='xuat' and a.inout_id=0 ) or (a.inouttype='nhap') or (a.inoutto = '".$param['pgstore_id']."' and (a.inoutxuattype='xuatkho' or a.inoutxuattype='cuahang' ) )  ) THEN (-1*a.pgamount) ELSE ( 0 ) END) moneyout
+         FROM v_tienquy a $date $store ORDER BY a.pgdate";
+//        echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             $report = $qr->result();
         }
         else $report = null;
-        $param['dudauky'] = $this->getdudauky(strtotime($param['pgdatefrom']));
+        $param['dudauky'] = $this->getdudauky(strtotime($param['pgdatefrom']),$param['pgstore_id']);
         $param['aReport'] = $report;
 
         return $this->load->view("admin/rp_tienquy",$param);
+    }
+    function getdudauky($datefrom,$store_id='all'){
+        if($store_id=='all'){
+            $store  = '';
+            $xuatmoney = " or inouttype='xuat' ";
+        }
+        else{
+            $xuatmoney = " or ( inouttype='xuat' and inoutfrom = '".$store_id."' ) ";
+            $store = " AND ";
+            $store .= " ( pgstore_id = ".$store_id."
+            OR (inoutfrom = ".$store_id." AND inouttype='xuat' )
+            OR (inoutto = ".$store_id." AND (inouttype='nhap' OR inoutxuattype='xuatkho' OR inoutxuattype='cuahang')   )
+            ) ";
+        }
+        $sql="SELECT COALESCE((sum((CASE WHEN ( (pgtype='nhap' and inout_id=0) $xuatmoney ) THEN (pgamount) ELSE ( 0 ) END))
+        + sum((CASE WHEN ( (pgtype='xuat' and inout_id=0 ) or (inouttype='nhap') or (inoutto = '".$store_id."' and (inoutxuattype='xuatkho' or inoutxuattype='cuahang' ) ) ) THEN (-1*pgamount) ELSE ( 0 ) END)) ),0) dudauky
+        FROM v_tienquy WHERE pgdate < '$datefrom' $store";
+//        echo $sql;
+        $qr = $this->db->query($sql);
+        return $qr->row()->dudauky;
     }
     public function reportcongno(){
         $pgtype=$this->input->get("pgtype");
@@ -919,11 +954,7 @@ class Admin extends CI_Controller
 
         return $this->load->view("admin/rp_congno",$param);
     }
-    function getdudauky($datefrom){
-        $sql="SELECT COALESCE((sum(moneyin) + sum(moneyout) ),0) dudauky FROM v_tienquy WHERE pgdate < '$datefrom' ";
-        $qr = $this->db->query($sql);
-        return $qr->row()->dudauky;
-    }
+
 
 }
 

@@ -1,15 +1,15 @@
 <fieldset>
     <legend>Lựa chọn</legend>
-<!--    <div class="field_select" id="pgstore_id" style="width:30%">-->
-<!---->
-<!--        <select name="pgstore_id"  style="width:80%;display: inline-block" data-placeholder="Cửa hàng">-->
-<!--            <option value="all">Tất cả</option>-->
-<!--            --><?// foreach($aStore as $store):?>
-<!--                <option value="--><?//=$store->id?><!--">--><?//=$store->pglong_name?><!--</option>-->
-<!--            --><?// endforeach;?>
-<!--        </select>-->
-<!---->
-<!--    </div>-->
+    <div class="field_select" id="pgstore_id" style="width:30%">
+
+        <select name="pgstore_id"  style="width:80%;display: inline-block" data-placeholder="Cửa hàng">
+            <option value="all">Tất cả</option>
+            <? foreach($aStore as $store):?>
+                <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
+            <? endforeach;?>
+        </select>
+
+    </div>
 <!--    <div class="field_select" id="pgtype" style="width:20%">-->
 <!---->
 <!--        <select name="pgtype"  style="width:80%;display: inline-block" data-placeholder="Gửi/rút">-->

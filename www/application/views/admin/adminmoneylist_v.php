@@ -166,8 +166,7 @@
     }
     function myclear() {
         $("input[name=pginout_id]").val("");
-        $("input[name=pgdate]").val("");
-        $("input[name=pghour]").val("");
+        $("input[name=pginout_code]").val("");
         $("input[name=pgamount]").val("");
         $("textarea[name=pginfo]").val("");
         $("input[name=pgsumprice]").val("");
@@ -175,6 +174,8 @@
         $("input[name=pgdate]").val(mygetdate());
         $("input[name=pghour]").val(mygettime());
         $("input[name=edit]").val("");
+        $("select[name=pgstore_id]").prop("disabled",false);
+        $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
 
 
     }
@@ -194,7 +195,9 @@
                    $("label[for="+price.type+"radio]").addClass("checked");
                    $("input[name=pgdate]").val(mygetdate());
                    $("input[name=pghour]").val(mygettime());
-               }
+                   $("select[name=pgstore_id]").prop("disabled",true);
+                   $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
+                   $("textarea[name=pginfo]").val("Thanh toán hóa đơn #"+inout_code);               }
                 else{
                    alert("Không có đơn hàng này");
                    $("input[name=pginout_code]").val("");
@@ -211,7 +214,7 @@
                 if (msg == "") alert('<?=lang("NO_DATA")?>');
                 else {
                     var province = eval(msg);
-                    var option = "";
+                    var option = "<option value='0'>Cửa hàng </option>";
                     $.each(province, function (index, store){
                         option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
                     });

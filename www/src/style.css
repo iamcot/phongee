@@ -378,6 +378,9 @@ td img{
 #content{
     padding-bottom:100px;
 }
+#tabs{
+    min-height: 400px;
+}
 #allpage{
     min-height:100%;
     display: block;
@@ -488,4 +491,14 @@ label
 }
 .tblist td{
     border-bottom: 1px solid #ddd;
+}
+.red{
+    background: red;
+}
+.orange{
+    background: orange;
+
+}
+.yellow{
+    background: #ffff00;
 }

@@ -84,7 +84,7 @@ foreach($pgstore_id as $store){
                 <td><?=$row->inoutcode?></td>
                 <td><?=$row->pgseries?></td>
                 <td><?=$row->pgcount?></td>
-                <td style="text-align: right"><?=number_format($row->pgprice,0,'.',' ')?></td>
+                <td style="text-align: right"><?=number_format($row->pgprice,0,'.',',')?></td>
                 <td><?=date('d/m/Y',$row->inoutdate)?></td>
                 <? if($pgcreateuser=='true'): $col++;?><td><?=$row->pglname.' '.$row->pgfname?></td><? endif;?>
                 <? if($pgname=='true'): $col++;?><td><?=$row->thietbiname?></td><? endif;?>
@@ -92,7 +92,7 @@ foreach($pgstore_id as $store){
                 <? if($pgcolor=='true'): $col++;?><td><?=$row->pgcolor?></td><? endif;?>
                 <? if($pgcountry=='true'): $col++;?><td><?=$row->pgcountry?></td><? endif;?>
                 <? if($pgyear=='true'): $col++;?><td><?=$row->pgyear?></td><? endif;?>
-                <td  style="text-align: right"><?=number_format(($row->pgprice*$row->pgcount),0,'.',' ')?></td>
+                <td  style="text-align: right"><?=number_format(($row->pgprice*$row->pgcount),0,'.',',')?></td>
             </tr>
         <? $i++;?>
             <? endif; endforeach; ?>

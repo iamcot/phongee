@@ -10,15 +10,15 @@
         </select>
 
     </div>
-    <div class="field_select" id="pgtype" style="width:20%">
-
-        <select name="pgtype"  style="width:80%;display: inline-block" data-placeholder="Nợ/Có ">
-            <option value="all">Tất cả Nợ/Có</option>
-            <option value="no">Nợ</option>
-            <option value="co">Có</option>
-        </select>
-
-    </div>
+<!--    <div class="field_select" id="pgtype" style="width:20%">-->
+<!---->
+<!--        <select name="pgtype"  style="width:80%;display: inline-block" data-placeholder="Nợ/Có ">-->
+<!--            <option value="all">Tất cả Nợ/Có</option>-->
+<!--            <option value="no">Nợ</option>-->
+<!--            <option value="co">Có</option>-->
+<!--        </select>-->
+<!---->
+<!--    </div>-->
     <div class="btn btn-small">
         <input type="button" value="Xem" onclick="viewreport()">
     </div>
