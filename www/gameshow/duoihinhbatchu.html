@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Đuôi hình bắt chữ  - Làng Tân Bình - Hội DakLaksaigon </title>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+        }
+        html,body{
+            text-align: center;
+            font-size: 100%;
+            font-family: verdana arial ;
+            /*background: #74c8ff;*/
+        }
+        .clear{
+            clear: both;
+            display: block;
+        }
+         #imagebox{
+             margin: 0 auto;
+             width: 600px;
+             height: 400px;
+             max-height: 400px;
+             display: block;
+             overflow: hidden;
+             text-align: center;
+         }
+        #image{
+            max-width: 100%;
+        }
+        #infobox{
+            margin: 0 auto;
+
+            height: 100px;
+            width: 600px;
+            overflow: hidden;
+        }
+        #goiy{
+            float:left;
+            font-size: 70px;
+        }
+        #time{
+            float:right;
+            width: 100px;
+            font-size: 100px;
+            background: red;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+ <h1>ĐUỔI HÌNH BẮT CHỮ</h1>
+     <div id="game">
+        <div id="imagebox">
+            <img src="" id="image">
+        </div>
+         <div id="infobox">
+             <div id="goiy"></div>
+             <div id="time"></div>
+         </div>
+     </div>
+ <div class="clear"></div>
+ <input type="text" id="crrimg" placeholder="Hình hiện tại ">
+ <input type="text" id="maxtime" placeholder="Tổng thời gian">
+  <button onclick="makegame()">Lấy hình</button>
+  <button onclick="showdapan()">Đán án</button>
+</body>
+
+</html>
+<script src="jquery.min.js"></script>
+<script>
+    var aImages = [
+        ['bi-dao.jpg', 'Bí đao ', 'Có 2 từ ', ''],
+        ['bong-bay.gif', 'Bóng Bẩy ', 'Có 2 từ', ''],
+        ['but-sa-ga-chet.gif', 'Bút sa gà chết', 'Có 4 từ', ''],
+        ['ca-phao.jpg', 'Cà pháo ', 'Có 2 từ', ''],
+        ['cau-gio.jpg', 'Câu giờ ', 'Có 2 từ', ''],
+        ['cau-long.jpg', 'Cầu lông', 'Có 2 từ', '']
+
+    ];
+
+    var crrimg;
+    function makegame(){
+        crrimg = $("#crrimg").val();
+        if(crrimg == '') crrimg = 0;
+
+        crrimg = parseInt(crrimg) + 1;
+        if(crrimg > aImages.length) crrimg = 1;
+        $("#image").attr("src",'images/'+aImages[(crrimg-1)][0]);
+        $("#crrimg").val(crrimg);
+        clearTimeout(t);
+        calltime();
+    }
+    $(function(){
+
+    });
+    var maxtime;
+    var t;
+function calltime(){
+    maxtime = $("#maxtime").val();
+    $("#goiy").html("");
+    if(maxtime == '') maxtime = 30;//60 seconds
+    $("#maxtime").val(maxtime);
+    ticktime();
+}
+function ticktime(){
+    $("#time").html(maxtime);
+    if(maxtime == 0){
+        clearTimeout(t);
+        return;
+    }
+    if(maxtime <= parseInt($("#maxtime").val())/2) {
+        $("#goiy").html(aImages[(crrimg-1)][2]);
+    }
+    maxtime -= 1;
+     t= setTimeout(ticktime,1000);
+}
+function showdapan(){
+    clearTimeout(t);
+    $("#goiy").html(aImages[(crrimg-1)][1]);
+}
+</script>

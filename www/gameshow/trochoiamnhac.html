@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Trò chơi âm nhac - Làng Tân Bình - Hội DakLaksaigon </title>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+        }
+        html,body{
+            text-align: center;
+            font-size: 100%;
+            font-family: verdana arial ;
+            background: #74c8ff;
+        }
+        ul{
+            list-style: none;
+            min-height: 3em;
+            margin: 50px auto;
+            padding: 20px;
+
+        }
+        li{
+
+            display: inline-block;
+            font-size: 2em;
+            border: 1px solid #74c8ff;
+            margin: 10px;
+            width: 150px;
+            background: #006dcc;
+            border-radius: 10px;
+            color: #fff;
+            font-weight: 500;
+            min-height: 80px;
+            line-height: 80px;
+            vertical-align: middle;
+        }
+        .clear{
+            clear: both;
+            display: block;
+        }
+        .box{
+            font-size: 4em;
+        }
+    </style>
+</head>
+
+<body>
+ <h1>TRÒ CHƠI ÂM NHẠC</h1>
+     <ul id="game">
+
+     </ul>
+ <div class="clear"></div>
+  <button onclick="makegame()">Start game</button>
+</body>
+
+</html>
+<script src="jquery.min.js"></script>
+<script>
+    var aKeySentence = ['Ngàn', 'hoa', 'thơm', 'khoe', 'sắc' ,'xinh tươi'];
+    var aDead =[2,4];
+    function makegame(){
+        $("#game").html("");
+        for(var i = 1;i<=aKeySentence.length;i++){
+            $("#game").append("<li class='box' id='box"+i+"'>"+i+"</li>");
+        }
+    }
+    $(function(){
+        $(document).keyup(function(event){
+            var number = event.which - 48;
+            if(number <=0 || number>aKeySentence.length) return;
+              //alert(number);
+            $("#box"+number).css("background","green");
+            setTimeout(function(){
+                $('#box'+number).html(aKeySentence[(number-1)]).removeClass("box");
+                if(aDead.indexOf(number) == -1){
+                     $("#box"+number).css('background','#006dcc');
+                }
+                else $("#box"+number).css('background','red');
+            },500);
+
+        });
+    });
+function changenormal(number){
+
+}
+</script>
