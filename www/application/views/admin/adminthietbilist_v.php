@@ -149,7 +149,7 @@
 
         var edit = $("input[name=edit]").val();
 
-        if (pgprice!= "" && pgprice > 0 && pglongname.trim() != "" && pgcode.trim() != "") {
+        if (pglongname.trim() != "" && pgcode.trim() != "") {
             $.ajax({
                 type: "post",
                 url: "<?=base_url()?>admin/save/thietbi",
