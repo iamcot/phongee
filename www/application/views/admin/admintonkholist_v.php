@@ -23,6 +23,9 @@
     <div class="btn btn-small">
         <input type="button" value="Xem" onclick="viewreport()">
     </div>
+    <div class="btn btn-small">
+        <input type="button" value="In" onclick="printreport()">
+    </div>
 
 
 </fieldset>
@@ -33,8 +36,15 @@
 <script>
 function viewreport(){
     $("#list").load("<?=base_url()?>admin/reporttonkho?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
-    "&pgthietbi_id="+$("select[name=pgthietbi_id]").chosen().val()
+    "&pgthietbi_id="+$("select[name=pgthietbi_id]").chosen().val()+
+        "&print=0"
     );
+}
+
+function printreport(){
+    window.open("<?=base_url()?>admin/reporttonkho?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
+        "&pgthietbi_id="+$("select[name=pgthietbi_id]").chosen().val()+
+        "&print=1");
 }
 $(function(){
     $('select[name=pgstore_id]').chosen({width:"90%"});

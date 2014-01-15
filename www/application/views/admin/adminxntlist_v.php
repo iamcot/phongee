@@ -21,9 +21,12 @@
     </div>
     <input type="text" name="pgdatefrom" id="pgdatefrom" placeholder="Từ ngày" style="width:15%" value="<?=date("Y-m-d", strtotime("-1 months"));?>">
     <input type="text" name="pgdateto" id="pgdateto" placeholder="Đến ngày" style="width:15%" value="<?=date("Y-m-d",strtotime("+1 day"));?>">
-    <input type="text" name="pgseries" placeholder="S/N Thiết bị" style="width:20%;display: inline-block">
+    <input type="text" name="pgseries" placeholder="S/N Thiết bị" style="width:10%;display: inline-block">
     <div class="btn btn-small">
         <input type="button" value="Xem" onclick="viewreport()">
+    </div>
+    <div class="btn btn-small">
+        <input type="button" value="In" onclick="printreport()">
     </div>
     <div class="clearfix"></div>
     <div id="checkfield">
@@ -75,8 +78,23 @@ function viewreport(){
     "&pgcountry="+$("input[name=pgcountry]").prop("checked") +
     "&pgcolor="+$("input[name=pgcolor]").prop("checked") +
     "&pgseries="+$("input[name=pgseries]").val() +
-    "&pgyear="+$("input[name=pgyear]").prop("checked")
+    "&pgyear="+$("input[name=pgyear]").prop("checked")+
+        "&print=0"
     );
+}
+function printreport(){
+    window.open("<?=base_url()?>admin/reportxnt?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
+        "&pgtype="+$("select[name=pgtype]").chosen().val()+
+        "&pgdatefrom="+$("input[name=pgdatefrom]").val()+
+        "&pgdateto="+$("input[name=pgdateto]").val()+
+        "&pgname="+$("input[name=pgname]").prop("checked")+
+        "&pgcode="+$("input[name=pgcode]").prop("checked")+
+        "&pgprice="+$("input[name=pgprice]").prop("checked") +
+        "&pgcountry="+$("input[name=pgcountry]").prop("checked") +
+        "&pgcolor="+$("input[name=pgcolor]").prop("checked") +
+        "&pgseries="+$("input[name=pgseries]").val() +
+        "&pgyear="+$("input[name=pgyear]").prop("checked")+
+        "&print=1");
 }
 $(function(){
     $("input").customInput();

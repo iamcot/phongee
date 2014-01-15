@@ -16,6 +16,12 @@
                 <label for="xuatradio">Rút tiền</label>
                  </span>
                 <? endif;?>
+                <div id="pguseriddiv" style="display: block;clear:both;">
+                    <select name="pguser_id" style="width: 100%;display: inline-block" data-placeholder="Thành viên">
+
+                    </select>
+                </div>
+                <br>
                 <div id="pgstoreiddiv" style="display: block;clear:both;">
                     <select name="pgstore_id" style="width: 100%;display: inline-block" data-placeholder="Cửa hàng">
 
@@ -81,6 +87,7 @@
     });
     $(function () {
         getStore();
+        getUser();
         loadmoneytransfer(1,0);
         $("input[name=pgdate]").val(mygetdate());
         $("input[name=pghour]").val(mygettime());
@@ -92,6 +99,7 @@
         var pgamount  = $("input[name=pgamount]").val().replace(/ /g,'');
         var pginfo      = $("textarea[name=pginfo]").val();
         var pgstore_id      = $("select[name=pgstore_id]").val();
+        var pguser_id      = $("select[name=pguser_id]").val();
 
         var pgtype      = $("input[name=pgtype]:checked").val();
 
@@ -134,6 +142,7 @@
                     + "&pgstore_id=" + pgstore_id
                     + "&pginfo=" + pginfo
                     + "&pgtype=" + pgtype
+                    + "&pguser_id=" + pguser_id
                     + "&edit=" + edit,
                 success: function (msg) {
                     switch (msg) {
@@ -175,7 +184,9 @@
         $("input[name=pghour]").val(mygettime());
         $("input[name=edit]").val("");
         $("select[name=pgstore_id]").prop("disabled",false);
+        $("select[name=pguser_id]").prop("pguser_id",false);
         $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
+        $('select[name=pguser_id]').val(0).trigger("chosen:updated");
 
 
     }
@@ -196,7 +207,9 @@
                    $("input[name=pgdate]").val(mygetdate());
                    $("input[name=pghour]").val(mygettime());
                    $("select[name=pgstore_id]").prop("disabled",true);
+                   $("select[name=pguser_id]").prop("disabled",true);
                    $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
+                   $('select[name=pguser_id]').val(0).trigger("chosen:updated");
                    $("textarea[name=pginfo]").val("Thanh toán hóa đơn #"+inout_code);               }
                 else{
                    alert("Không có đơn hàng này");
@@ -221,6 +234,26 @@
                         $("select[name=pgstore_id]").html(option);
                         $('select[name=pgstore_id]').chosen({width:"90%"});
                         $('select[name=pgstore_id]').trigger("chosen:updated");
+
+                }
+            }
+        });
+    }
+    function getUser(){
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/jxloadcustomer",
+            success: function (msg) {
+                if (msg == "") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    var option = "<option value='0'>Đối tượng</option>";
+                    $.each(province, function (index, store){
+                        option += "<option value='"+store.id+"'>"+store.pglname+" "+store.pgfname+"</option>";
+                    });
+                        $("select[name=pguser_id]").html(option);
+                        $('select[name=pguser_id]').chosen({width:"90%"});
+                        $('select[name=pguser_id]').trigger("chosen:updated");
 
                 }
             }

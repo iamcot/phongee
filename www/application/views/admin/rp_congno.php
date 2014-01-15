@@ -1,15 +1,34 @@
+<head>
+    <meta charset="UTF-8">
+</head>
 <h3 style="text-align: center">BÁO CÁO CÔNG NỢ NGÀY <?=date('d/m/Y')?> </h3>
 <center>
+    <? if($print == 1):?><style>
+        table{
+            border-collapse: collapse;
+        }
+        .odd{
+            background: #eee;
+        }
+        .even{
+            background: #fff;
+        }
+        td{
+            padding: 3px;
+        }
+        </style><? endif;?>
 <? if($aReport!=null):?>
-    <table style="width: 90%"  class="tblist">
+    <table style="width: 100%;"   <? if($print == 1):?>border=1<? endif;?> class="tblist">
         <thead>
             <tr>
                 <td >Tên đối tượng</td>
                 <td >Nhóm</td>
-                <td style="text-align: right">Tổng nhận</td>
-                <td style="text-align: right">Khách nợ</td>
-                <td style="text-align: right">Tổng trả</td>
-                <td style="text-align: right">Shop nợ</td>
+                <?if($khachno == 'true'):?><td style="text-align: right">Tổng nhận</td><? endif;?>
+                <?if($khachno == 'true'):?><td style="text-align: right">Khách nợ</td><? endif;?>
+                <?if($hanthanhtoan == 'true' && $khachno == 'true'):?><td>Hạn trả</td><? endif;?>
+                <?if($shopno == 'true'):?><td style="text-align: right">Tổng trả</td><? endif;?>
+                <?if($shopno == 'true'):?><td style="text-align: right">Shop nợ</td><? endif;?>
+                <?if($hanthanhtoan == 'true' && $shopno == 'true'):?><td>Hạn trả</td><? endif;?>
             </tr>
         </thead>
         <tbody>
@@ -17,7 +36,15 @@
                 $sumkhachno = 0;
                 $sumshopno = 0;
             foreach($aReport as $report):
-                if ($report->sumphaitra - $report->datra > 0){
+                 if($report->tiennhap - $report->tienxuat > 0 ){
+                $tienkhachno = 0;
+                $tienshopno = $report->tiennhap - $report->tienxuat;
+            }
+            else{
+                $tienkhachtra = $report->tienxuat - $report->tiennhap;
+                $tienshopno = 0;
+            }
+                if ($report->sumphaitra - $report->datra + $tienshopno  > 0){
                     $numDaystranhap = ($report->hanthanhtoannhap - time()) / 60 / 60 / 24;
                     if($numDaystranhap>7) $classnotra = '';
                     else if($numDaystranhap <= 7 && $numDaystranhap > 3) $classnotra = 'yellow';
@@ -26,7 +53,7 @@
                 }
                 else $classnotra = '';
 
-                if ($report->sumduocnhan - $report->danhan > 0)  {
+                if ($report->sumduocnhan - $report->danhan + $tienkhachno > 0)  {
                     $numDaystraxuat = ($report->hanthanhtoanxuat - time()) / 60 / 60 / 24;
                     if($numDaystraxuat>7) $classnonhan = '';
                     else if($numDaystraxuat <= 7 && $numDaystraxuat > 3) $classnonhan = 'yellow';
@@ -36,26 +63,32 @@
                 else $classnonhan = '';
                 ?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
+
                     <td ><?=$report->pglname.' '.$report->pgfname?></td>
                     <td ><?=$report->pgrole?></td>
-                    <td style="text-align: right"><?=number_format($report->sumduocnhan ,0,'.',',')?></td>
-                    <td style="text-align: right" class="<?=$classnonhan?>"><?=number_format($report->sumduocnhan -$report->danhan ,0,'.',',')?>
-                    </td>
-                    <td style="text-align: right"><?=number_format($report->sumphaitra ,0,'.',',')?></td>
-                    <td style="text-align: right"  class="<?=$classnotra?>"><?=number_format($report->sumphaitra - $report->datra ,0,'.',',')?>
-                    </td>
+                    <?if($khachno == 'true'):?><td style="text-align: right"><?=number_format($report->sumduocnhan ,0,'.',',')?></td><? endif;?>
+                    <?if($khachno == 'true'):?><td style="text-align: right" class="<?=$classnonhan?>"><?=number_format($report->sumduocnhan -$report->danhan + $tienkhachno ,0,'.',',')?>
+                    </td><? endif;?>
+                    <?if($hanthanhtoan == 'true' && $khachno == 'true'):?><td><?=((($report->sumduocnhan -$report->danhan)>0)?date("d/m/Y",$report->hanthanhtoanxuat):'')?></td><? endif;?>
+                    <?if($shopno == 'true'):?><td style="text-align: right"><?=number_format($report->sumphaitra ,0,'.',',')?></td><? endif;?>
+                    <?if($shopno == 'true'):?><td style="text-align: right"  class="<?=$classnotra?>"><?=number_format($report->sumphaitra - $report->datra + $tienshopno ,0,'.',',')?>
+                    </td><? endif;?>
+                    <?if($hanthanhtoan == 'true' && $shopno == 'true'):?><td><?=((($report->sumphaitra - $report->datra)>0)?date("d/m/Y",$report->hanthanhtoannhap):'')?></td><? endif;?>
+
                 </tr>
         <?
-                $sumkhachno +=  ($report->sumduocnhan -$report->danhan);
-                $sumshopno += ($report->sumphaitra - $report->datra);
+                $sumkhachno +=  ($report->sumduocnhan -$report->danhan +$tienkhachno);
+                $sumshopno += ($report->sumphaitra - $report->datra + $tienshopno);
                 $i++;endforeach;?>
             <tr  style="border-top: 2px solid #ddd;background: #fff3f4">
                 <td >Tổng nợ</td>
                 <td ></td>
-                <td style="text-align: right"></td>
-                <td style="text-align: right"><b><?=number_format($sumkhachno ,0,'.',',')?></td>
-                <td style="text-align: right"></td>
-                <td style="text-align: right"><b><?=number_format($sumshopno ,0,'.',',')?></td>
+                <?if($khachno == 'true'):?><td style="text-align: right"></td><? endif;?>
+                <?if($khachno == 'true'):?><td style="text-align: right"><b><?=number_format($sumkhachno ,0,'.',',')?></td><? endif;?>
+                <?if($hanthanhtoan == 'true' && $khachno == 'true'):?><td></td><? endif;?>
+                <?if($shopno == 'true'):?><td style="text-align: right"></td><? endif;?>
+                <?if($shopno == 'true'):?><td style="text-align: right"><b><?=number_format($sumshopno ,0,'.',',')?></td><? endif;?>
+                <?if($hanthanhtoan == 'true' && $shopno == 'true'):?><td></td><? endif;?>
             </tr>
         </tbody>
     </table>

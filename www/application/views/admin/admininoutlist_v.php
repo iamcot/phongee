@@ -621,9 +621,11 @@
                         option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
                     });
                     $("select[name=pg"+target+"]").html(option);
+                    $("select[name=pg"+target+"]").val($("input[name=pg"+target+"tmp]").val());
+//                    alert( $("select[name=pg"+target+"]").val());
                     if($("input[name=pgtypexuat]:checked").val()!='xuatkho' || target =='to'){
                     $("select[name=pg"+target+"]").chosen({width:"100%"});
-                    $("select[name=pg"+target+"]").val($("input[name=pg"+target+"tmp]").val()).trigger("chosen:updated");
+                    $("select[name=pg"+target+"]").trigger("chosen:updated");
                     }
 
 
@@ -927,9 +929,16 @@
                     default :
                         if(xuattype=='xuatkho'){
                             if(parseInt(msg)>0){
-                                alert($('select[name=pgfrom]').val()+"@@"+msg);
+                              //  alert($('select[name=pgfrom]').val()+"@@"+msg);
+                                var currkho = ($('select[name=pgfrom]').val());
+//                                console.log(currkho+"@"+msg);
+                                if(currkho == null || currkho == -1 || currkho == msg || $("input[name=idhoadon]").val() ==''){
                                 $('select[name=pgfrom]').val(msg);
                                 gettonkho(sn,msg,false);
+                                }
+                                else{
+                                    alert("Hai sản phẩm cùng 1 đơn hàng phải cùng 1 kho.");
+                                }
                             }
                         }
                         break;

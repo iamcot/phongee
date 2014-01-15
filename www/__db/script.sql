@@ -15,3 +15,7 @@ ALTER TABLE `pgstore`
   ALTER TABLE `pgmoneytransfer`
   ADD COLUMN `pgstore_id` INT NOT NULL AFTER `pginfo`;
 
+  /* home 16/1 */
+  ALTER TABLE `pgmoneytransfer`
+  ADD COLUMN `pguser_id` INT(11) NOT NULL AFTER `pgstore_id`;
+

@@ -1,7 +1,7 @@
 <? if (isset($province)): ?>
     <table style="text-align: right" class="tblist">
         <thead>
-        <tr><td>ID</td><td>Ngày</td><td>Cửa hàng </td></td><td>Thanh toán </td><td>Mã HĐ</td><td>Loại</td><td>Ghi chú</td></tr>
+        <tr><td>ID</td><td>Ngày</td><td>Cửa hàng </td><td>Đối tượng </td></td><td>Thanh toán </td><td>Mã HĐ</td><td>Loại</td><td>Ghi chú</td></tr>
         </thead>
         <? $i=1; foreach ($province as $row): $inout_id = $row->pginout_id;?>
                <tr class="<?=(($i%2==1))?'odd':'even'?> <?=($row->pgdeleted==0?'':'trdelete')?>"
@@ -9,6 +9,7 @@
                    <td><?=$row->id?></td>
                    <td><?=date("d/m/Y H:i",($row->pgdate))?></td>
                    <td><?=$row->storename?></td>
+                   <td><?=$row->username?></td>
                    <td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',',')?></a></td>
                    <td><?=$row->inoutcode?></td>
                    <td><?=$row->pgtype?></td>

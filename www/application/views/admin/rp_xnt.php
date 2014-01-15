@@ -1,3 +1,6 @@
+<head>
+    <meta charset="UTF-8">
+</head>
 <h3 style="text-align: center">BÁO CÁO XUẤT NHẬP TỒN <?=(($pgdatefrom!='')?'TỪ '.date('d/m/Y',strtotime($pgdatefrom)):'')?> <?=(($pgdateto!='')?'ĐẾN '.date('d/m/Y',strtotime($pgdateto)):'')?></h3>
 <? if($aReport!=null):?>
 <? $aStorelist = array();
@@ -33,7 +36,21 @@ foreach($pgstore_id as $store){
 <?
  $col = 9;
     ?>
-<table  class="tblist">
+    <? if($print == 1):?><style>
+        table{
+            border-collapse: collapse;
+        }
+        .odd{
+            background: #eee;
+        }
+        .even{
+            background: #fff;
+        }
+        td{
+            padding: 3px;
+        }
+    </style><? endif;?>
+        <table style="width: 100%;"   <? if($print == 1):?>border=1<? endif;?> class="tblist">
     <thead>
     <tr>
         <td>#</td>
@@ -66,7 +83,7 @@ foreach($pgstore_id as $store){
             <tr class="<?=(($i%2==0))?'odd':''?>" >
                 <td><?=$i?></td>
 <!--                <td>--><?//=$row->inouttype?><!--</td>-->
-                <td><? if($row->inouttype=='nhap'):?>
+                <td><? if($row->pgxuattype=='nhapkho'):?>
                         <?=$aProvider[$row->inoutfrom]->pgfname?>
                 <?else:?>
                         <?=$aStore[$row->inoutfrom]->pglong_name?>

@@ -377,10 +377,10 @@ class Admin extends CI_Controller
         $pgfrom = $this->input->post('from');
         $pginout_id = $this->input->post('inout_id');
         $kq = 0;
-        if($pgto == -1 || $pgfrom == -1){
-            echo -5;//chua chon target
-            return ;
-        }
+//        if($pgto == -1 || $pgfrom == -1){
+//            echo -5;//chua chon target
+//            return ;
+//        }
         if($pgxuattype == "cuahang" && $pgfrom == $pgto){
             echo  -4;// to va from giong nhau
             return;
@@ -691,6 +691,7 @@ class Admin extends CI_Controller
         $pgyear=$this->input->get("pgyear");
         $pgcreateuser=$this->input->get("pgcreateuser");
         $pgseries=$this->input->get("pgseries");
+        $print=$this->input->get("print");
         $data['pgtype'] = $pgtype;
         $data['pgname'] = $pgname;
         $data['pgstore_id'] = $pgstore_id;
@@ -703,6 +704,7 @@ class Admin extends CI_Controller
         $data['pgyear'] = $pgyear;
         $data['pgcreateuser'] = $pgcreateuser;
         $data['pgseries'] = $pgseries;
+        $data['print'] = $print;
 
         echo  $this->calReportXNT($data);
     }
@@ -765,9 +767,11 @@ class Admin extends CI_Controller
         $pgthietbi_id=$this->input->get("pgthietbi_id");
         $storename=$this->input->get("storename");
         $pgstore_id=$this->input->get("pgstore_id");
+        $print=$this->input->get("print");
         $data['pgthietbi_id'] = explode(",",$pgthietbi_id);
         $data['storename'] = $storename;
         $data['pgstore_id'] = $pgstore_id;
+        $data['print'] = $print;
 
         echo  $this->calReportTonkho($data);
     }
@@ -785,17 +789,17 @@ class Admin extends CI_Controller
         $param['aStore'] = $aStore;
         $sstore = '';
         if($param['pgstore_id'] == 'all'){
-        $sstore.=" AND (inouttype='nhap' OR pgxuattype='khachhang' OR pgxuattype='khachle' )";
+        $sstore.=" AND (pgxuattype='nhapkho' OR pgxuattype='khachhang' OR pgxuattype='khachle' )";
         }
         else if($param['pgstore_id'] == 'cuahang'){
-            $sstore.=" AND inouttype='xuat' ";
+            $sstore.=" AND ( inouttype='xuat' OR pgxuattype = 'thuhoi')";
         }
         else if($param['pgstore_id'] == 'kho'){
             $sstore.=" AND ( pgxuattype='xuatkho' OR inouttype='nhap' )";
         }
         else{
            $sstore .= " AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$param['pgstore_id']."' )
-           OR ( inouttype='xuat' AND inoutfrom = '".$param['pgstore_id']."' )  ) ";
+           OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom = '".$param['pgstore_id']."' )  ) ";
         }
         $sthietbi = '';
         foreach($param['pgthietbi_id'] as $thietbi){
@@ -811,7 +815,7 @@ class Admin extends CI_Controller
         }
         if($sthietbi!='') $sthietbi.=')';
         if($param['pgstore_id'] =='all')
-            $sql="SELECT thietbiname, sum(case when (inouttype='nhap') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
+            $sql="SELECT thietbiname, sum(case when (pgxuattype='nhapkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
         else if($param['pgstore_id'] =='cuahang')
             $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
         else if($param['pgstore_id'] == 'kho')
@@ -912,9 +916,17 @@ class Admin extends CI_Controller
     public function reportcongno(){
         $pgtype=$this->input->get("pgtype");
         $pguser_id=$this->input->get("pguser_id");
+        $khachno=$this->input->get("khachno");
+        $shopno=$this->input->get("shopno");
+        $hanthanhtoan=$this->input->get("hanthanhtoan");
+        $print=$this->input->get("print");
 
         $data['pgtype'] = $pgtype;
         $data['pguser_id'] = explode(",",$pguser_id);
+        $data['hanthanhtoan'] = $hanthanhtoan;
+        $data['shopno'] = $shopno;
+        $data['khachno'] = $khachno;
+        $data['print'] = $print;
 
 
         echo  $this->calreportcongno($data);
