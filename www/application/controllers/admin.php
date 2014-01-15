@@ -171,7 +171,7 @@ class Admin extends CI_Controller
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             $row = $qr->row_array();
-            if($type=='nhap' && $row['thietbitype']=='thietbi'){
+            if($type=='nhapkho' && $row['thietbitype']=='thietbi'){
                 if($this->TBremaininstock($id) > 0) {
                     echo -1;
                     return false;
@@ -182,7 +182,7 @@ class Admin extends CI_Controller
         } else echo '0';
     }
     public function TBremaininstock($sn){
-        $sql="SELECT count(id) numrow from v_inout WHERE pgseries='$sn' AND inouttype='nhap'
+        $sql="SELECT count(id) numrow from v_inout WHERE pgseries='$sn' AND pgxuattype='nhapkho'
         union all
         SELECT count(id) from v_inout WHERE pgseries='$sn' AND (pgxuattype='khachle' OR pgxuattype='khachhang')";
 //        echo $sql;
@@ -669,7 +669,7 @@ class Admin extends CI_Controller
         $qr = $this->db->query($sql);
         $in = $qr->row()->numin;
         $sql="SELECT sum(d.pgcount) numout from ".$this->tbprefix."inout_details d,pginout i
-        where i.id = d.pginout_id and i.pgfrom=$from and d.pgseries='$sn' AND i.pgtype='xuat'";
+        where i.id = d.pginout_id and i.pgfrom=$from and d.pgseries='$sn' AND (i.pgtype='xuat' OR i.pgxuattype='thuhoi')";
         $qr = $this->db->query($sql);
         $out = $qr->row()->numout;
         return ($in - $out);
