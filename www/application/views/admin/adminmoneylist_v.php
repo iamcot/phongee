@@ -184,7 +184,7 @@
         $("input[name=pghour]").val(mygettime());
         $("input[name=edit]").val("");
         $("select[name=pgstore_id]").prop("disabled",false);
-        $("select[name=pguser_id]").prop("pguser_id",false);
+        $("select[name=pguser_id]").prop("disabled",false);
         $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
         $('select[name=pguser_id]').val(0).trigger("chosen:updated");
 

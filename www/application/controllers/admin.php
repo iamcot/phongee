@@ -815,13 +815,13 @@ class Admin extends CI_Controller
         }
         if($sthietbi!='') $sthietbi.=')';
         if($param['pgstore_id'] =='all')
-            $sql="SELECT thietbiname, sum(case when (pgxuattype='nhapkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
+            $sql="SELECT thietbiname, sum(case when (pgxuattype='nhapkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
         else if($param['pgstore_id'] =='cuahang')
-            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
+            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
         else if($param['pgstore_id'] == 'kho')
-            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
+            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
         else
-            $sql="SELECT thietbiname, sum(case when (inoutfrom='".$param['pgstore_id']."') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname ";
+            $sql="SELECT thietbiname, sum(case when (inoutfrom='".$param['pgstore_id']."') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
 
 //         echo $sql;
          $qr = $this->db->query($sql);
@@ -965,6 +965,38 @@ class Admin extends CI_Controller
         $param['aReport'] = $report;
 
         return $this->load->view("admin/rp_congno",$param);
+    }
+    public function getUserTransfer($user_id){
+        $sql="SELECT * FROM v_inout where (pgxuattype='nhapkho' AND pgfrom = '".$user_id."') OR (pgxuattype='khachhang' AND pgto = ".$user_id.")";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $data['aInout'] = $qr->result();
+        }
+        else $data['aInout'] = null;
+        $sql="SELECT * FROM v_moneytransfer where user_id = '".$user_id."'";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $data['aMoney'] = $qr->result();
+        }
+        else $data['aMoney'] = null;
+        $tmp = $this->getStore();
+        $aStore = array();
+        if ($tmp != null)
+            foreach ($tmp as $v) {
+                $aStore[($v['id'])] = $v;
+            }
+        $data['aStore'] = $aStore;
+        $tmp = $this->getUserList();
+        $aStore = array();
+        if ($tmp != null)
+            foreach ($tmp as $v) {
+                $aStore[($v['id'])] = $v;
+            }
+        $data['aCustom'] = $aStore;
+        return $this->load->view('admin/list_usertransfer_v',$data,true);
+    }
+    public function jsgetUserTransfer($user_id){
+        echo $this->getUserTransfer($user_id);
     }
 
 

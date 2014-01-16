@@ -41,7 +41,7 @@
                 $tienshopno = $report->tiennhap - $report->tienxuat;
             }
             else{
-                $tienkhachtra = $report->tienxuat - $report->tiennhap;
+                $tienkhachno = $report->tienxuat - $report->tiennhap;
                 $tienshopno = 0;
             }
                 if ($report->sumphaitra - $report->datra + $tienshopno  > 0){
@@ -64,7 +64,7 @@
                 ?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
 
-                    <td ><?=$report->pglname.' '.$report->pgfname?></td>
+                    <td ><a href="javascript:getDetails(<?=$report->id?>)"><?=$report->pglname.' '.$report->pgfname?></a></td>
                     <td ><?=$report->pgrole?></td>
                     <?if($khachno == 'true'):?><td style="text-align: right"><?=number_format($report->sumduocnhan ,0,'.',',')?></td><? endif;?>
                     <?if($khachno == 'true'):?><td style="text-align: right" class="<?=$classnonhan?>"><?=number_format($report->sumduocnhan -$report->danhan + $tienkhachno ,0,'.',',')?>

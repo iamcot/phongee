@@ -6,8 +6,8 @@ SELECT u.id,u.`pglname`,u.pgfname, COALESCE(SUM(q.moneyin),0) danhan,COALESCE(SU
  SUM(i.sumduocnhan) sumduocnhan,
  MIN(io.pghanthanhtoan) hanthanhtoannhap,
   MIN(io2.pghanthanhtoan) hanthanhtoanxuat,
-  t.sumnhap tiennhap,
-  t.sumxuat tienxuat,
+  (t.sumnhap) tiennhap,
+  (t.sumxuat) tienxuat,
 u.`pgrole`
  FROM pguser AS u
  LEFT JOIN v_suminout AS i
