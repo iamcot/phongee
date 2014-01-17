@@ -43,23 +43,40 @@
         .box{
             font-size: 4em;
         }
+        #header{
+            margin-bottom: 20px;
+            padding-top: 10px;
+            background: url(images/logo.png) no-repeat top left;
+        }
     </style>
 </head>
 
 <body>
+<div id="header">
+
  <h1>TRÒ CHƠI ÂM NHẠC</h1>
+    </div>
      <ul id="game">
 
      </ul>
  <div class="clear"></div>
   <button onclick="makegame()">Start game</button>
+  <button onclick="goiy()">Nghe Gợi ý </button>
+  <button onclick="tatgoiy()"> Tắt </button>
+ <audio id="audiotag1" src="nang-co-con-xuan.mp3" preload="auto"></audio>
 </body>
 
 </html>
 <script src="jquery.min.js"></script>
 <script>
-    var aKeySentence = ['Ngàn', 'hoa', 'thơm', 'khoe', 'sắc' ,'xinh tươi'];
-    var aDead =[2,4];
+    var aKeySentence = ['Ta', 'nghe', 'mùa ', 'xuân ', 'hát '];
+    var aDead =[4];
+    function goiy(){
+        document.getElementById("audiotag1").play();
+    }
+    function tatgoiy(){
+        document.getElementById("audiotag1").pause();
+    }
     function makegame(){
         $("#game").html("");
         for(var i = 1;i<=aKeySentence.length;i++){

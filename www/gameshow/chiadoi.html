@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Chia đội - Làng Tân Bình - Hội DakLaksaigon </title>
+    <style>
+        body {
+            text-align: center;
+            font-size: 100%;
+        }
+
+        table {
+            width: 90%;
+            margin: 0 auto;
+        }
+        thead td{
+            font-size: 2em;
+        }
+        tbody td {
+            vertical-align: top;
+            font-size: 4.5em;
+            font-weight: 500;
+            width: 33%;
+        }
+        img{
+            height: 100px;
+        }
+        .boder{
+            border-right: 1px solid #000;
+        }
+        #header{
+            margin-bottom: 20px;
+            padding-top: 10px;
+            background: url(images/logo.png) no-repeat top left;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div id="header">
+        <input id="maxnumber" value="50">
+        <button onclick="chiadoi()">Chia đội</button>
+    </div>
+
+</div>
+<table>
+    <thead>
+    <tr>
+        <td><img src="images/tiger.jpg"></td>
+        <td><img src="images/heineken.jpg"></td>
+        <td><img src="images/sanmiguel.png"></td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td id="team1" class="boder"></td>
+        <td id="team2"  class="boder"></td>
+        <td id="team3"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+<script src="jquery.min.js"></script>
+<script>
+        function removeA(arr) {
+            var what, a = arguments, L = a.length, ax;
+            while (L > 1 && arr.length) {
+                what = a[--L];
+                while ((ax = arr.indexOf(what)) !== -1) {
+                    arr.splice(ax, 1);
+                }
+            }
+            return arr;
+        }
+        var arraydoi = [];
+        var count = 0;
+        var team = 1;
+        var max = 0;
+        var t;
+        function chiadoi() {
+            max = parseInt($("#maxnumber").val());
+            count = max;
+            for (var i = 0; i < max; i++) {
+                arraydoi[i] = i + 1;
+            }
+
+            if (max > 0) {
+                getrandom();
+            }
+            else {
+                alert("Chưa có max number");
+            }
+        }
+        function getrandom() {
+            var randomkey = (Math.floor(Math.random() * arraydoi.length));
+            var random = arraydoi[randomkey];
+            removeA(arraydoi, random);
+            count--;
+            $("#team" + team).append( random+", ");
+            team++;
+            if (team > 3) {
+                team = 1;
+            }
+            if(count > 0)
+                t = setTimeout("getrandom()",1000);
+            else clearTimeout(t);
+
+        }
+        </script>

@@ -21,19 +21,19 @@
          #imagebox{
              margin: 0 auto;
              width: 600px;
-             height: 400px;
-             max-height: 400px;
+             height: 350px;
+             max-height: 350px;
              display: block;
              overflow: hidden;
              text-align: center;
          }
         #image{
-            max-width: 100%;
+            max-height: 100%;
         }
         #infobox{
             margin: 0 auto;
 
-            height: 100px;
+            height: 130px;
             width: 600px;
             overflow: hidden;
         }
@@ -45,41 +45,96 @@
             float:right;
             width: 100px;
             font-size: 100px;
-            background: red;
-            color: #fff;
+            color: red;
+        }
+        #select{
+            height:100%;
+            list-style: none;
+        }
+        #select li{
+            width: 33%;
+            height: 250px;
+            float: left;
+            display: block;
+            text-align: center;
+        }
+        #select li a{
+            margin: 0 auto;
+            display: block;
+            width: 80%;
+            height: 200px;
+            line-height: 200px;
+            vertical-align: middle;
+            font-size: 10em;
+            background: #444;
+            color:#fff;
+            text-decoration: none;
+        }
+        h1{
+            padding: 5px;
+        }
+        #header{
+            margin-bottom: 20px;
+            padding-top: 10px;
+            background: url(images/logo.png) no-repeat top left;
+        }
+        .off{
+            visibility: hidden;
+        }
+        #clock{
+            float:right;
+        }
+        #timebox{
+            height:130px;
+            display: block;
+            overflow: hidden;
         }
     </style>
 </head>
 
 <body>
- <h1>ĐUỔI HÌNH BẮT CHỮ</h1>
+<div id="header">
+    <h1>ĐUỔI HÌNH BẮT CHỮ</h1>
+
+</div>
+ <ul id="select">
+
+ </ul>
+ <div id="display" style="display: none">
      <div id="game">
-        <div id="imagebox">
-            <img src="" id="image">
-        </div>
+         <div id="imagebox">
+             <img src="" id="image">
+         </div>
          <div id="infobox">
              <div id="goiy"></div>
-             <div id="time"></div>
+             <div id="timebox">
+                 <div id="time"></div>
+                 <div id="clock"></div>
+             </div>
+
          </div>
      </div>
- <div class="clear"></div>
- <input type="text" id="crrimg" placeholder="Hình hiện tại ">
- <input type="text" id="maxtime" placeholder="Tổng thời gian">
-  <button onclick="makegame()">Lấy hình</button>
-  <button onclick="showdapan()">Đán án</button>
+     <div class="clear">
+     <input type="text" id="crrimg" placeholder="Hình hiện tại ">
+     <input type="text" id="maxtime" placeholder="Tổng thời gian">
+     <button onclick="makegame()">Lấy hình</button>
+     <button onclick="showdapan()">Đán án</button>
+     <button onclick="chonhinh()">Quay lại chọn hình </button>
+     </div>
+ </div>
+
 </body>
 
 </html>
 <script src="jquery.min.js"></script>
 <script>
     var aImages = [
-        ['bi-dao.jpg', 'Bí đao ', 'Có 2 từ ', ''],
-        ['bong-bay.gif', 'Bóng Bẩy ', 'Có 2 từ', ''],
-        ['but-sa-ga-chet.gif', 'Bút sa gà chết', 'Có 4 từ', ''],
-        ['ca-phao.jpg', 'Cà pháo ', 'Có 2 từ', ''],
-        ['cau-gio.jpg', 'Câu giờ ', 'Có 2 từ', ''],
-        ['cau-long.jpg', 'Cầu lông', 'Có 2 từ', '']
-
+        ['1.jpg', 'Bí đao ', 'Có 2 từ ', ''],
+        ['2.jpg', 'Bí đao ', 'Có 2 từ ', ''],
+        ['3.jpg', 'Bí đao ', 'Có 2 từ ', ''],
+        ['4.jpg', 'Bí đao ', 'Có 2 từ ', ''],
+        ['5.jpg', 'Bí đao ', 'Có 2 từ ', ''],
+        ['6.jpg', 'Bí đao ', 'Có 2 từ ', '']
     ];
 
     var crrimg;
@@ -91,18 +146,39 @@
         if(crrimg > aImages.length) crrimg = 1;
         $("#image").attr("src",'images/'+aImages[(crrimg-1)][0]);
         $("#crrimg").val(crrimg);
+        $("#clock").html("<img src='images/clock.gif'>");
+
         clearTimeout(t);
         calltime();
     }
     $(function(){
+        for(var i=1;i<= aImages.length;i++){
+            $("#select").append("<li id='hinh"+i+"'><a href='javascript:selecthinh("+i+")'>"+i+"</a></li>");
 
+        }
     });
     var maxtime;
     var t;
+    function chonhinh(){
+        $("#display").hide();
+
+        $("#select").show();
+    }
+    function selecthinh(index){
+        crrimg = index;
+        $("#select").hide();
+        $("#hinh"+index).addClass("off");
+        $("#display").show();
+        $("#image").attr("src",'images/'+aImages[(crrimg-1)][0]);
+        $("#crrimg").val(crrimg);
+        $("#clock").html("<img src='images/clock.gif'>");
+        clearTimeout(t);
+        calltime();
+    }
 function calltime(){
     maxtime = $("#maxtime").val();
     $("#goiy").html("");
-    if(maxtime == '') maxtime = 30;//60 seconds
+    if(maxtime == '') maxtime = 20;//60 seconds
     $("#maxtime").val(maxtime);
     ticktime();
 }
@@ -110,6 +186,7 @@ function ticktime(){
     $("#time").html(maxtime);
     if(maxtime == 0){
         clearTimeout(t);
+        $("#clock").html("");
         return;
     }
     if(maxtime <= parseInt($("#maxtime").val())/2) {
@@ -121,5 +198,6 @@ function ticktime(){
 function showdapan(){
     clearTimeout(t);
     $("#goiy").html(aImages[(crrimg-1)][1]);
+    $("#clock").html("");
 }
 </script>
