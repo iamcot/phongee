@@ -3,7 +3,8 @@
         <li><a href="<?=base_url()?>admin/listpagerp/xnt">Xuất Nhập Tồn</a></li>
         <li><a href="<?=base_url()?>admin/listpagerp/tonkho">Tồn kho</a></li>
         <li><a href="<?=base_url()?>admin/listpagerp/tienquy">Tiền quỹ</a></li>
-        <li><a href="<?=base_url()?>admin/listpagerp/congno">Công nợ</a></li>
+        <li><a href="<?=base_url()?>admin/listpagerp/congno">Công nợ Đối tác </a></li>
+        <li><a href="<?=base_url()?>admin/listpagerp/congnostore">Công nợ cửa hàng </a></li>
     </ul>
 </div>
 <script>

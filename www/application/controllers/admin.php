@@ -931,6 +931,17 @@ class Admin extends CI_Controller
 
         echo  $this->calreportcongno($data);
     }
+    public function reportcongnostore(){
+        $pgstore_id=$this->input->get("pgstore_id");
+        $print=$this->input->get("print");
+
+        $data['pgstore_id'] = explode(",",$pgstore_id);
+
+        $data['print'] = $print;
+
+
+        echo  $this->calreportcongnostore($data);
+    }
     function calreportcongno($param){
         //print_r($param['pgstore_id']) ;
         $aStore = null;
@@ -965,6 +976,51 @@ class Admin extends CI_Controller
         $param['aReport'] = $report;
 
         return $this->load->view("admin/rp_congno",$param);
+    }
+    function calreportcongnostore($param){
+        //print_r($param['pgstore_id']) ;
+//        $aStore = null;
+//        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." ";
+//        $qr = $this->db->query($sql);
+//        if($qr->num_rows()>0){
+//            $rs = $qr->result();
+//            foreach($rs as $v){
+//                $aStore[$v->id] = $v;
+//            }
+//        }
+//        $param['aStore'] = $aStore;
+//        $aProvider = null;
+//        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." where pgdeleted=0 ";
+//        $qr = $this->db->query($sql);
+//        if($qr->num_rows()>0){
+//            $rs = $qr->result();
+//            foreach($rs as $v){
+//                $aProvider[$v->id] = $v;
+//            }
+//        }
+//        $param['aProvider'] = $aProvider;
+        $suser = '';
+        foreach($param['pgstore_id'] as $user){
+            if($user == 'all'){
+                $suser = '';
+                break;
+            }
+            else {
+                if($suser == '') $suser.=' WHERE ';
+                else $suser .=' OR ';
+                $suser.=" id = '$user' ";
+            }
+        }
+        $sql = "SELECT * FROM v_congno_store $suser";
+        //echo $sql;
+         $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $report = $qr->result();
+        }
+        else $report = null;
+        $param['aReport'] = $report;
+
+        return $this->load->view("admin/rp_congnostore",$param);
     }
     public function getUserTransfer($user_id){
         $sql="SELECT * FROM v_inout where (pgxuattype='nhapkho' AND pgfrom = '".$user_id."') OR (pgxuattype='khachhang' AND pgto = ".$user_id.")";
