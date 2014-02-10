@@ -4,13 +4,13 @@
     <table id="inputserviceplace" style="background: #fffeee">
         <tr>
             <td id="hoadoninfo">
-                <? if($this->mylibs->checkRole('rsNhapRadio')):?>
+                <? if($this->mylibs->checkRole('pgrbnhapradio')):?>
                 <span style="display: inline-block;">
                 <input type="radio" name="pgtype" value="nhap"  id="nhapradio">
                 <label for="nhapradio">Nhập</label>
                     </span>
                 <? endif;?>
-                <? if($this->mylibs->checkRole('rsXuatRadio')):?>
+                <? if($this->mylibs->checkRole('pgrbxuatradio')):?>
                  <span style="display: inline-block;">
                 <input type="radio" name="pgtype" value="xuat"  id="xuatradio">
                 <label for="xuatradio">Xuất</label>
@@ -24,34 +24,44 @@
             </td>
             <td>
                 <span id="nhapoption" style="display: none">
+                  <? if($this->mylibs->checkRole('pgrbnhapkho')):?>
                     <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="nhapkho" id="nhapkhoradio">
                     <label for="nhapkhoradio">Nhập kho</label>
                     </span>
+                    <? endif;?>
+                    <? if($this->mylibs->checkRole('pgrbthuhoi')):?>
                         <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="thuhoi" id="thuhoiradio">
                     <label for="thuhoiradio">Thu hồi</label>
                     </span>
+                    <? endif;?>
                 </span>
                 <span id="xuatoption" style="display: none">
+                   <? if($this->mylibs->checkRole('pgrbxuatkho')):?>
                      <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="xuatkho" id="xuatkhoradio">
                     <label for="xuatkhoradio">Xuất kho</label>
                     </span>
-                    <? if ($this->mylibs->checkRole('rsXuatCuaHang')): ?>
+                   <? endif;?>
+                    <? if ($this->mylibs->checkRole('pgrbxuatcuahang')): ?>
                     <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="cuahang" id="cuahangradio">
                     <label for="cuahangradio">Cửa hàng</label>
                     </span>
                     <? endif; ?>
-                     <span style="display: inline-block;">
-                    <input type="radio" name="pgtypexuat" value="khachhang"  id="khachhangradio">
+                    <? if ($this->mylibs->checkRole('pgrbxuatdoitac')): ?>
+                    <span style="display: inline-block;">
+                        <input type="radio" name="pgtypexuat" value="khachhang"  id="khachhangradio">
                     <label for="khachhangradio">Đối tác</label>
                      </span>
-					 <span style="display: inline-block;">
+                    <? endif; ?>
+                    <? if ($this->mylibs->checkRole('pgrbxuatkhachle')): ?>
+                    <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="khachle"  id="khachleradio">
                     <label for="khachleradio">Khách lẻ</label>
                      </span>
+                    <? endif; ?>
                 </span>
                     <div id="targetoption" style="display: none">
                         <div class="field_select" id="pgfromspan">

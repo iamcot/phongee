@@ -2,6 +2,7 @@
     <ul>
         <li><a href="<?=base_url()?>admin/listpageuser">Danh sách thành viên</a></li>
         <li><a href="<?=base_url()?>admin/listpage/store">Danh sách cửa hàng</a></li>
+        <li><a href="<?=base_url()?>admin/listpage/role">Phân quyền </a></li>
     </ul>
 </div>
 <script>

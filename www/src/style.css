@@ -505,3 +505,6 @@ label
 .ui-dialog{
     border:1px solid #333 !important;
 }
+.ui-tabs-panel{
+    overflow-x: auto;
+}

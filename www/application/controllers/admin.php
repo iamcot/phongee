@@ -24,7 +24,7 @@ class Admin extends CI_Controller
         if (!$this->session->userdata("pgrole")) {
             $this->session->set_userdata('referer', base_url() . "admin");
             header("Location: " . base_url() . "login");
-        } else if ($this->mylibs->checkRole('raAdmin')==0) {
+        } else if ($this->mylibs->checkRole('pgraadmin')==0) {
             header("Location: " . base_url().'login');
         }
         // Your own constructor code
@@ -67,7 +67,7 @@ class Admin extends CI_Controller
      */
     public function user()
     {
-        if ($this->mylibs->checkRole('raUser')==0)
+        if ($this->mylibs->checkRole('pgrauser')==0)
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/adminuser_v', $data, true);
@@ -80,7 +80,7 @@ class Admin extends CI_Controller
      */
     public function inout()
     {
-        if ($this->mylibs->checkRole('raInout')==0)
+        if ($this->mylibs->checkRole('pgrainout')==0)
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/admininout_v', $data, true);
@@ -93,7 +93,7 @@ class Admin extends CI_Controller
      */
     public function report()
     {
-        if ($this->mylibs->checkRole('raReport')==0)
+        if ($this->mylibs->checkRole('pgrareport')==0)
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/adminreport_v', $data, true);
@@ -106,7 +106,7 @@ class Admin extends CI_Controller
      */
     public function thietbi()
     {
-        if ($this->mylibs->checkRole('raThietbi')==0)
+        if ($this->mylibs->checkRole('pgrathietbi')==0)
             header("Location: " . base_url() . "admin");
         $data = array();
         $data['body'] = $this->load->view('admin/adminthietbi_v', $data, true);
@@ -126,7 +126,7 @@ class Admin extends CI_Controller
 
         }
         $data['aStore'] = $this->getStore("");
-        $role = $this->mylibs->checkRole("rl".$table);
+        $role = $this->mylibs->checkRole("pgrl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
         }
@@ -148,7 +148,7 @@ class Admin extends CI_Controller
             }
         }
 
-        $role = $this->mylibs->checkRole("rl".$table);
+        $role = $this->mylibs->checkRole("pgrl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
         }
@@ -435,10 +435,10 @@ class Admin extends CI_Controller
         echo $kq;
     }
     public function getStore($type=''){
-        if($this->mylibs->checkRole("rqStore")>= 2)
+        if($this->mylibs->checkRole("pgrlstore")>= 1)
         $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
         if($type!='') $sql.= " AND pgtype='$type' ";
-        if($this->mylibs->checkRole("rqStore")== 2)
+        if($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2)
              $sql.= " AND id =".$this->session->userdata("pgstore_id")."";
         $sql .= " ORDER BY pgorder ";
         $qr = $this->db->query($sql);

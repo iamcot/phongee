@@ -4,13 +4,13 @@
     <table id="inputserviceplace" style="width:70%">
         <tr>
             <td id="hoadoninfo">
-                <? if($this->mylibs->checkRole('rsNhapRadio')):?>
+                <? if($this->mylibs->checkRole('pgrbnhaptien')):?>
                 <span style="display: inline-block;float: left;">
                 <input type="radio" name="pgtype" value="nhap"  id="nhapradio">
                 <label for="nhapradio">Nhập tiền</label>
                     </span>
                 <? endif;?>
-                <? if($this->mylibs->checkRole('rsXuatRadio')):?>
+                <? if($this->mylibs->checkRole('pgrbxuattien')):?>
                  <span style="display: inline-block;;float: left;">
                 <input type="radio" name="pgtype" value="xuat"  id="xuatradio">
                 <label for="xuatradio">Rút tiền</label>

@@ -21,33 +21,29 @@ class MyLibs
         }
         return $i;
     }
-    public function checkRole($rolename=""){
-        $strrole =  str_split($this->CI->config->item($rolename));
-        $pos = $this->getUserPosition();
-        if($pos >=0)
-        return $strrole[$pos] ;
+
+    public function getDefaultRole($groupname = "",$rolename='')
+    {
+        $index = array_search($rolename, $this->CI->config->item('aRoleName'));
+        $aDefaultRole = $this->CI->config->item('adRole');
+        if ($index >= 0)
+            return $aDefaultRole[$groupname][$index];
         else return 0;
     }
 
-    public function accessadmin()
+    public function checkRole($rolename = "")
     {
-        $acees = false;
-        switch ($this->CI->session->userdata("pgrole")) {
-            case "admin":
-                $acees = true;
-                break;
-            case "author":
-                $acees = true;
-                break;
-            case "member":
-                $acees = false;
-                break;
-            default:
-                $acees = false;
-                break;
+        $sql = "SELECT $rolename as role FROM pgrole WHERE pguser_id='" . $this->CI->session->userdata('pguser_id') . "' ";
+        $qr = $this->CI->db->query($sql);
+        if ($qr->num_rows() > 0) {
+            $role = $qr->row();
+            return $role->role;
         }
-        return $acees;
+        else return $this->getDefaultRole($this->CI->session->userdata('pgrole'),$rolename);
+
     }
+
+
 
     public function makeThumbnails($file_path, $file_name, $width, $height)
     {
