@@ -1054,7 +1054,37 @@ class Admin extends CI_Controller
     public function jsgetUserTransfer($user_id){
         echo $this->getUserTransfer($user_id);
     }
+    public function getstaffrole(){
+        $sql="select u.pgusername,u.id userid,
+                r.*
+                FROM pguser u
+                LEFT JOIN pgrole r
+                ON r.pguser_id = u.id
+                WHERE u.`pgrole` = 'admin' OR u.`pgrole`='staff' OR u.pgrole = 'ketoan' OR u.pgrole = 'ketoantruong'";
+        $qr= $this->db->query($sql);
+        if($qr->num_rows()>0){
+            return $qr->result_array();
+        }
+        else return null;
+    }
+    public function loadstaffrole(){
+        $data['aStaffRole'] = $this->getstaffrole();
+        echo $this->load->view('admin/liststaffrole_v',$data,true);
+        return;
+    }
+    public function save1role($user_id,$rolename,$roleval){
+        $sql="SELECT pguser_id from pgrole WHERE pguser_id = $user_id";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){ //update
+            $sql="UPDATE pgrole SET $rolename= $roleval WHERE pguser_id=$user_id";
 
+        }
+        else{//insert
+            $sql="INSERT INTO pgrole (pguser_id,pgusername,$rolename) VALUES ('$user_id',(SELECT pgusername from pguser where id=$user_id),'$roleval')" ;
+
+        }
+        echo $this->db->query($sql);
+    }
 
 }
 

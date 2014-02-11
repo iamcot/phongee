@@ -508,3 +508,9 @@ label
 .ui-tabs-panel{
     overflow-x: auto;
 }
+#listrole td{
+    min-width: 80px;
+}
+#listrole td select{
+    width: 100% !important;
+}

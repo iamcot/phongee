@@ -10,10 +10,28 @@
                 <? endforeach;?>
             </tr>
             </thead>
+            <tbody id="listrole">
+
+            </tbody>
         </table>
 
 
 </fieldset>
 
 <script>
+$(function(){
+   load();
+});
+function load(){
+    $("#listrole").load("<?=base_url()?>admin/loadstaffrole");
+}
+function save1role(userid,rolename,select){
+    $.ajax({
+        type:"get",
+        url: "<?=base_url()?>admin/save1role/"+userid+"/"+rolename+"/"+select.value,
+        success:function(msg){
+            alert(msg);
+        }
+    });
+}
 </script>
