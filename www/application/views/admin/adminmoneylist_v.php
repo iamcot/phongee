@@ -16,18 +16,27 @@
                 <label for="xuatradio">Rút tiền</label>
                  </span>
                 <? endif;?>
-                <div id="pguseriddiv" style="display: block;clear:both;">
-                    <select name="pguser_id" style="width: 100%;display: inline-block" data-placeholder="Thành viên" onchange="getUserInout(this.value)">
-
-                    </select>
-                </div>
-                <br>
                 <div id="pgstoreiddiv" style="display: block;clear:both;">
                     <select name="pgstore_id" style="width: 100%;display: inline-block" data-placeholder="Cửa hàng">
 
                     </select>
                 </div>
                 <br>
+                <div id="pgmoneytypediv" style="display: block;clear:both;">
+                    <select name="pgmoneytype" style="width: 100%;display: inline-block" data-placeholder="Loại tiền">
+                        <? foreach($this->config->item('aMoneyType') as $moneytype):?>
+                            <option value="<?=$moneytype[0].'|'.$moneytype[3]?>"><?=$moneytype[1]?></option>
+                        <? endforeach;?>
+                    </select>
+                </div>
+                <br>
+                <div id="pguseriddiv" style="display: block;clear:both;">
+                    <select name="pguser_id" style="width: 100%;display: inline-block" data-placeholder="Thành viên" onchange="getUserInout(this.value)">
+
+                    </select>
+                </div>
+                <br>
+
                 <div class="clear"> </div>
                 <div>
                     <label>Mã hóa đơn</label>
@@ -79,7 +88,8 @@
         $('#pghour').mask('99:99:99');
         $('#pgdate').mask('9999-99-99');
         $("input[name=pgamount]").autoNumeric({aSep:' ',aPad: false});
-
+        $('select[name=pgmoneytype]').chosen({width:"90%"});
+        $('select[name=pgmoneytype]').trigger("chosen:updated");
        $("input").customInput();
         $( "#pgdate" ).datepicker({
             changeMonth: true,
@@ -103,6 +113,9 @@
         var pginfo      = $("textarea[name=pginfo]").val();
         var pgstore_id      = $("select[name=pgstore_id]").val();
         var pguser_id      = $("select[name=pguser_id]").val();
+        var arrmoney      = $("select[name=pgmoneytype]").val().split("|");
+        var pgmoneytype = arrmoney[0];
+        var pgmoneyrate = arrmoney[1];
 
         var pgtype      = $("input[name=pgtype]:checked").val();
 
@@ -146,6 +159,8 @@
                     + "&pginfo=" + pginfo
                     + "&pgtype=" + pgtype
                     + "&pguser_id=" + pguser_id
+                    + "&pgmoneytype=" + pgmoneytype
+                    + "&pgmoneyrate=" + pgmoneyrate
                     + "&edit=" + edit,
                 success: function (msg) {
                     switch (msg) {
@@ -271,13 +286,16 @@ function getUserInout(id){
         type:"post",
         url:"<?=base_url()?>admin/getUserInout/"+id,
         success:function(msg){
+            var inouttr = "Không có thông tin giao dịch.";
+            if(msg!=""){
             var inout = eval(msg);
-            var inouttr = "<thead><tr><td>Mã hóa đơn </td><td>Ngày </td><td>Tổng tiền</td></tr></thead>";
+            inouttr = "<thead><tr><td>Mã HD </td><td>Ngày </td><td>Tổng tiền</td></tr></thead>";
             var i = 0;
             $.each(inout, function (index, io){
                 inouttr += "<tr "+((i%2==0)?'class="odd"':'')+"><td>"+io.inoutcode+"</td><td>"+myformatdate(io.inoutdate)+"</td><td>"+((io.sumphaitra>0)?io.sumphaitra:io.sumduocnhan)+"</td></tr>";
                 i++;
             });
+            }
             $("#inoutuser").html(inouttr);
         }
     });

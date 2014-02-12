@@ -106,3 +106,8 @@ $config['roletype'] = array(
     array('9','All'),
 );
 
+$config['aMoneyType'] = array(
+    'tm' => array('tm','Tiền mặt','VNĐ',1),
+    'usd' => array('usd','USD','USD',21000),
+    'nh1' => array('nh1','Ngân hàng 1','VNĐ',1),
+);
