@@ -150,7 +150,25 @@ function checkexitsseourl(table,catname,catval,url){
         }
     })
 }
+function myformatdate(timestamp){
+    var dt = new Date(timestamp*1000);
 
+    var day = dt.getDate();
+    var month = dt.getMonth()+1;
+    var year = dt.getFullYear();
+
+    // the above dt.get...() functions return a single digit
+    // so I prepend the zero here when needed
+    if (day < 10)
+        day = '0' + day;
+
+    if (month < 10)
+        month = '0' + month;
+
+
+    return  day+'/'+month+'/'+year;
+
+}
 function mygetdate(){
     var dt = new Date();
 

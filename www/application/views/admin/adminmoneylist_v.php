@@ -1,7 +1,7 @@
 <div style="overflow: hidden">
 <fieldset>
     <legend>Thông tin</legend>
-    <table id="inputserviceplace" style="width:70%">
+    <table id="inputserviceplace" style="width:60%;display: block;float:left;">
         <tr>
             <td id="hoadoninfo">
                 <? if($this->mylibs->checkRole('pgrbnhaptien')):?>
@@ -17,7 +17,7 @@
                  </span>
                 <? endif;?>
                 <div id="pguseriddiv" style="display: block;clear:both;">
-                    <select name="pguser_id" style="width: 100%;display: inline-block" data-placeholder="Thành viên">
+                    <select name="pguser_id" style="width: 100%;display: inline-block" data-placeholder="Thành viên" onchange="getUserInout(this.value)">
 
                     </select>
                 </div>
@@ -65,7 +65,10 @@
             </td>
         </tr>
         </table>
+     <table style="width:35%;display: block;float:right;" id="inoutuser">
 
+     </table>
+    <div style="clear: both;display: block"></div>
 <fieldset >
     <legend>Lịch sử gần đây</legend>
     <div id="list_hoadon"></div>
@@ -202,8 +205,11 @@
                    $("input[name=pginout_id]").val(price.id);
 //                $("input[name=pgtypethanhtoan]").val(price.type);
                    $("label").removeClass("checked");
-                   $("#"+price.type+"radio").prop('checked', true);
-                   $("label[for="+price.type+"radio]").addClass("checked");
+                   var typemoney = '';
+                   if(price.type == 'nhap') typemoney = 'xuat';
+                   else typemoney = 'nhap';
+                   $("#"+typemoney+"radio").prop('checked', true);
+                   $("label[for="+typemoney+"radio]").addClass("checked");
                    $("input[name=pgdate]").val(mygetdate());
                    $("input[name=pghour]").val(mygettime());
                    $("select[name=pgstore_id]").prop("disabled",true);
@@ -259,5 +265,22 @@
             }
         });
     }
+function getUserInout(id){
+    $("#inoutuser").html("");
+    $.ajax({
+        type:"post",
+        url:"<?=base_url()?>admin/getUserInout/"+id,
+        success:function(msg){
+            var inout = eval(msg);
+            var inouttr = "<thead><tr><td>Mã hóa đơn </td><td>Ngày </td><td>Tổng tiền</td></tr></thead>";
+            var i = 0;
+            $.each(inout, function (index, io){
+                inouttr += "<tr "+((i%2==0)?'class="odd"':'')+"><td>"+io.inoutcode+"</td><td>"+myformatdate(io.inoutdate)+"</td><td>"+((io.sumphaitra>0)?io.sumphaitra:io.sumduocnhan)+"</td></tr>";
+                i++;
+            });
+            $("#inoutuser").html(inouttr);
+        }
+    });
+}
 </script>
 

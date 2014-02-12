@@ -514,3 +514,28 @@ label
 #listrole td select{
     width: 100% !important;
 }
+.fixcolum{
+    position: absolute;
+    background: #fff;
+}
+.w100{
+    width: 100px !important;
+}
+.w50{
+    width:50px  !important;
+}
+.l100{
+    left:100px;
+}
+#rolenotif{
+    color: red;
+    display: block;
+    background: lightgoldenrodyellow;
+    line-height: 28px;
+    vertical-align: middle;
+    width: auto;
+    position: absolute;
+}
+#tablerole{
+    margin-top: 28px;
+}

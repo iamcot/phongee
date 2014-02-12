@@ -1080,10 +1080,56 @@ class Admin extends CI_Controller
 
         }
         else{//insert
-            $sql="INSERT INTO pgrole (pguser_id,pgusername,$rolename) VALUES ('$user_id',(SELECT pgusername from pguser where id=$user_id),'$roleval')" ;
-
+            $sql="INSERT INTO pgrole (pguser_id,$rolename) VALUES ('$user_id','$roleval')" ;
         }
         echo $this->db->query($sql);
+    }
+    public function savedefault($userid){
+        $sql="SELECT pgrole FROM pguser WHERE id=$userid";
+        $qr = $this->db->query($sql);
+        $usergroup = $qr->row()->pgrole;
+        $sql="SELECT pguser_id from pgrole WHERE pguser_id = $userid";
+        $qr = $this->db->query($sql);
+        $rolename = $this->config->item('aRoleName');
+        $rolegroup = $this->config->item('adRole');
+        $numrole = count($rolename);
+        if($qr->num_rows()>0){ //update
+            $col = "";
+
+            for($i=0;$i< $numrole;$i++){
+                if($i>0) $col .=', ';
+                $col.= " ".$rolename[$i]."= ".$rolegroup[$usergroup][$i]." ";
+            }
+            $sql="UPDATE pgrole SET $col WHERE pguser_id=$userid";
+
+        }
+        else{//insert
+            $col = "";
+
+            for($i=0;$i< $numrole;$i++){
+                if($i>0) $col .=', ';
+                $col.= " ".$rolename[$i]." ";
+            }
+            $val = "";
+            for($i=0;$i< $numrole;$i++){
+                if($i>0) $val .=', ';
+                $val.= " '".$rolegroup[$usergroup][$i]."' ";
+            }
+            $sql="INSERT INTO pgrole (pguser_id,$col) VALUES ('$userid',$val)" ;
+        }
+        echo $this->db->query($sql);
+    }
+    public function getUserInout($userid){
+        $sql="SELECT * FROM v_suminout WHERE
+         (pgxuattype='nhapkho' AND inoutfrom = $userid ) OR
+         (pgxuattype='khachhang' AND inoutto = $userid)
+         ORDER by inoutdate";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $this->mylibs->echojson($qr->result_array());
+        }
+        else
+            echo "";
     }
 
 }

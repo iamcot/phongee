@@ -37,9 +37,11 @@ class MyLibs
         $qr = $this->CI->db->query($sql);
         if ($qr->num_rows() > 0) {
             $role = $qr->row();
-            return $role->role;
+            if($role->role > -1)
+                return  $role->role;
         }
-        else return $this->getDefaultRole($this->CI->session->userdata('pgrole'),$rolename);
+        //default role
+        return $this->getDefaultRole($this->CI->session->userdata('pgrole'),$rolename);
 
     }
 

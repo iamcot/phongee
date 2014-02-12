@@ -2,8 +2,9 @@
     <? $roletype = $this->config->item('roletype');?>
     <? $i=0;foreach($aStaffRole as $staff): ?>
         <tr class="<?=(($i%2==0))?'odd':''?>">
-            <td><?=$staff['pgusername']?></td>
-            <td><?=$staff['pguser_id']?></td>
+            <td class=""><?=$staff['pgusername']?></td>
+            <td class=""><?=$staff['userid']?></td>
+            <td><button style="width: 100px;height: 24px;font-size: .8em" onclick="setdefault(<?=$staff['userid']?>)">Mặc định </button></td>
             <? $k=0;foreach($this->config->item('aRoleName') as $role): ?>
             <td>
                 <select onchange="save1role(<?=$staff['userid']?>,'<?=$role?>',this)">
