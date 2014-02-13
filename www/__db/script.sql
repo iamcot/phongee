@@ -23,7 +23,7 @@ ALTER TABLE `pgstore`
   home 13/2/14
    */
    /*[1:04:39 AM][260 ms]*/ ALTER TABLE `pgmoneytransfer` ADD COLUMN `pgmoneytype` VARCHAR(20) NULL AFTER `pguser_id`;
-   /*[1:04:39 AM][260 ms]*/ ALTER TABLE `pgmoneytransfer` ADD COLUMN `pgmoneyrate` VARCHAR(20) NULL AFTER `pgmoneytransfer`;
+   /*[1:04:39 AM][260 ms]*/ ALTER TABLE `pgmoneytransfer` ADD COLUMN `pgmoneyrate` VARCHAR(20) NULL AFTER `pgmoneytype`;
 
 
 

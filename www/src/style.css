@@ -507,6 +507,7 @@ label
 }
 .ui-tabs-panel{
     overflow-x: auto;
+    min-height: 300px !important;
 }
 #listrole td{
     min-width: 80px;

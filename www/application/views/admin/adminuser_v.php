@@ -1,8 +1,12 @@
 <div id="tabs">
     <ul>
         <li><a href="<?=base_url()?>admin/listpageuser">Danh sách thành viên</a></li>
+        <? if ($this->mylibs->checkRole('pgrastore') > 0): ?>
         <li><a href="<?=base_url()?>admin/listpage/store">Danh sách cửa hàng</a></li>
+        <? endif;?>
+        <? if ($this->session->userdata("pgrole") =='admin'): ?>
         <li><a href="<?=base_url()?>admin/listpage/role">Phân quyền nhân viên </a></li>
+        <? endif;?>
     </ul>
 </div>
 <script>

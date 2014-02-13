@@ -117,10 +117,10 @@
 
     });
     function save() {
-        var pglongname     = $("input[name=pglongname]").val();
-        var pgcode     = $("input[name=pgcode]").val();
-        var pgimei     = $("input[name=pgimei]").val();
-        var pgpartno     = $("input[name=pgpartno]").val();
+        var pglongname     = $("input[name=pglongname]").val().trim();
+        var pgcode     = $("input[name=pgcode]").val().trim();
+        var pgimei     = $("input[name=pgimei]").val().trim();
+        var pgpartno     = $("input[name=pgpartno]").val().trim();
         var pgpic  = $("input[name=pgpic]").val();
         var pgprice  = $("input[name=pgprice]").val().replace(/ /g,'');
         var pgprice_old      = $("input[name=pgprice_old]").val().replace(/ /g,'');
@@ -131,7 +131,7 @@
         var pglong_info      = $("textarea[name=pglong_info]").val();
         var pgtech_info    = $("textarea[name=pgtech_info]").val();
         var pgthietbi_id      = $("input[name=pgthietbi_id]").val();
-        var pgthietbi_code     = $("input[name=pgthietbicode]").val();
+        var pgthietbi_code     = $("input[name=pgthietbicode]").val().trim();
 
         var edit = $("input[name=edit]").val();
 

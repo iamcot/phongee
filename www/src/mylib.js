@@ -185,7 +185,7 @@ function mygetdate(){
         month = '0' + month;
 
 
-    return year + "-" + month + "-" + day;
+    return year + "/" + month + "/" + day;
 
 }
 function mygettime(){

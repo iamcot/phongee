@@ -70,7 +70,36 @@ $(function(){
         title:'Lịch sử giao dịch '
     });
 
+    <? if($this->session->userdata("pgstore_id")>0):?>
+    getStore();
+    <? endif;?>
 });
+function getStore(){
+    $.ajax({
+        type: "post",
+        url: "<?=base_url()?>admin/jsGetStore",
+        success: function (msg) {
+            if (msg == "") alert('<?=lang("NO_DATA")?>');
+            else {
+                var userstoreid = <?=(($this->session->userdata("pgstore_id")>0)?$this->session->userdata("pgstore_id"):0)?>;
+                var province = eval(msg);
+                if(userstoreid > 0)
+                    var option = "";
+                else
+                    var option = "<option value='all'>Tất cả </option>";
+
+                $.each(province, function (index, store){
+                    option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
+                });
+                $("select[name=pgstore_id]").html(option);
+                $('select[name=pgstore_id]').chosen({width:"90%"});
+                $('select[name=pgstore_id]').trigger("chosen:updated");
+                if(userstoreid>0) $("select[name=pgstore_id]").val(userstoreid);
+
+            }
+        }
+    });
+}
 function getDetails(userid){
     $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransfer/"+userid,function(){$("#dialog").dialog("open")});
 

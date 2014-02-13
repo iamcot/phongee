@@ -28,8 +28,8 @@
                 <td><?=date("d/m/Y",$money->inoutdate)?></td>
                 <td><?=$money->pgseries?></td>
                 <td><?=$money->thietbiname?></td>
-                <td><?=(($money->inouttype=='nhap')?$aCustom[$money->inoutfrom]['pgfname']:$aStore[$money->inoutfrom]['pglong_name'])?></td>
-                <td><?=(($money->inouttype=='xuat')?$aCustom[$money->inoutto]['pgfname']:$aStore[$money->inoutto]['pglong_name'])?></td>
+                <td><?=(($money->pgxuattype=='nhapkho')?$aCustom[$money->inoutfrom]['pgfname']:$aStore[$money->inoutfrom]['pglong_name'])?></td>
+                <td><?=(($money->pgxuattype=='khachhang')?$aCustom[$money->inoutto]['pgfname']:$aStore[$money->inoutto]['pglong_name'])?></td>
                 <td><?=number_format($money->pgprice,0,'.',',')?></td>
                 <td><?=number_format($money->pgcount,0,'.',',')?></td>
                 <td><?=date("d/m/Y",$money->pghanthanhtoan)?></td>

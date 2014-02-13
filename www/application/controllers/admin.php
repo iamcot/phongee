@@ -117,44 +117,52 @@ class Admin extends CI_Controller
 
     public function load($table,$page = 1,$where = "")
     {
+        $otherwhere = "";
         $parent = null;
-        if($where!= ""){
-            if($table == 'inout_details')
-            $parent = array("pginout_id" => $where);
-            else  if($table == 'moneytransfer')
+        if ($where != "") {
+            if ($table == 'inout_details' || $table == 'moneytransfer')
                 $parent = array("pginout_id" => $where);
-
+        }
+        if ($this->session->userdata("pgstore_id") > 0) {
+            if ($table == 'inout') {
+                $otherwhere .= "  (((pgxuattype='thuhoi' OR pgtype='xuat') AND pgfrom = '" . $this->session->userdata("pgstore_id") . "') OR ((pgtype='nhap' OR pgxuattype='cuahang') AND pgto = " . $this->session->userdata("pgstore_id") . ")) ";
+            }
         }
         $data['aStore'] = $this->getStore("");
         $role = $this->mylibs->checkRole("pgrl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
         }
-        if (($rs = $this->Select($this->tbprefix.$table, $parent, ($page-1), array('field' => 'id', 'type' => 'DESC'))) != null) {
+        if (($rs = $this->Select($this->tbprefix.$table, $parent, ($page-1), array('field' => 'id', 'type' => 'DESC'),$otherwhere)) != null) {
             $data['province'] = $rs;
-            $data['sumpage'] = $this->getSumPage($this->tbprefix.$table, $parent);
+            $data['sumpage'] = $this->getSumPage($this->tbprefix.$table, $parent,$otherwhere);
             $data['page'] = $page;
             echo $this->load->view("admin/list_".$table."_v", $data, true);
         } else echo lang("NO_DATA");
     }
     public function loadview($table,$page = 1,$where = "")
     {
+        $otherwhere = "";
         $parent = null;
-        if($where!= ""){
-            if($table == 'v_inout')
-            $parent = array("pginout_id" => $where);
-            else if($table == 'v_moneytransfer'){
+        if ($where != "") {
+            if ($table == 'v_inout' || $table == 'v_moneytransfer')
                 $parent = array("pginout_id" => $where);
+        }
+        if ($this->session->userdata("pgstore_id") > 0) {
+            if ($table == 'v_inout') {
+                $otherwhere .= "  (((pgxuattype='thuhoi' OR inouttype='xuat') AND inoutfrom = '" . $this->session->userdata("pgstore_id") . "') OR ((inouttype='nhap' OR pgxuattype='cuahang') AND inoutto = " . $this->session->userdata("pgstore_id") . ")) ";
             }
+            else if ($table == 'v_moneytransfer')
+                $otherwhere .= "  pgstore_id = '" . $this->session->userdata("pgstore_id") . "' ";
         }
 
         $role = $this->mylibs->checkRole("pgrl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
         }
-        if (($rs = $this->Select($table, $parent, ($page-1), array('field' => 'id', 'type' => 'DESC'))) != null) {
+        if (($rs = $this->Select($table, $parent, ($page-1), array('field' => 'id', 'type' => 'DESC'),$otherwhere)) != null) {
             $data['province'] = $rs;
-            $data['sumpage'] = $this->getSumPage($table, $parent);
+            $data['sumpage'] = $this->getSumPage($table, $parent,$otherwhere);
             $data['page'] = $page;
             echo $this->load->view("admin/list_".$table."_v", $data, true);
         } else echo lang("NO_DATA");
@@ -434,11 +442,11 @@ class Admin extends CI_Controller
 //        }
         echo $kq;
     }
-    public function getStore($type=''){
+    public function getStore($type='',$full = false){
         if($this->mylibs->checkRole("pgrlstore")>= 1)
         $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
         if($type!='') $sql.= " AND pgtype='$type' ";
-        if($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2)
+        if(($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2) && !$full)
              $sql.= " AND id =".$this->session->userdata("pgstore_id")."";
         $sql .= " ORDER BY pgorder ";
         $qr = $this->db->query($sql);
@@ -501,7 +509,7 @@ class Admin extends CI_Controller
      * @param null $order
      * @return null
      */
-    public function Select($table, $parent_id = array(), $page = 0, $order = null)
+    public function Select($table, $parent_id = array(), $page = 0, $order = null, $otherwhere = "")
     {
 
         $where = "";
@@ -523,9 +531,14 @@ class Admin extends CI_Controller
                    // $where .= ($where != "" ? ((strpos("OR",$k) != false)?" AND ":"") : " WHERE ") . $k . " = " . "'$v'";
             }
         }
+        if($otherwhere != ""){
+            if($where !="") $otherwhere = " AND ".$otherwhere;
+            else $otherwhere = " WHERE ".$otherwhere;
+        }
+
         if ($page >= 0)
-            $sql = "SELECT * FROM " . $table . $where . " ORDER BY  " . (($order != null) ? $order['field'] . " " . $order["type"] : "pglong_name") . "  LIMIT " . ($page * $this->config->item('pp')) . "," . $this->config->item('pp');
-        else $sql = "SELECT * FROM " . $table . $where . " ORDER BY  dalong_name";
+            $sql = "SELECT * FROM " . $table . $where . " $otherwhere ORDER BY  " . (($order != null) ? $order['field'] . " " . $order["type"] : "pglong_name") . "  LIMIT " . ($page * $this->config->item('pp')) . "," . $this->config->item('pp');
+        else $sql = "SELECT * FROM " . $table . $where . " $otherwhere ORDER BY  dalong_name";
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             return $qr->result();
@@ -538,7 +551,7 @@ class Admin extends CI_Controller
      * @param array $parent_id
      * @return float|int
      */
-    public function getSumPage($table, $parent_id = array())
+    public function getSumPage($table, $parent_id = array(),$otherwhere  = "")
     {
         $where = "";
         if ($parent_id != null) {
@@ -547,7 +560,11 @@ class Admin extends CI_Controller
                     $where .= ($where != "" ? " AND " : " WHERE ") . $k . " = " . "'$v'";
             }
         }
-        $sql = "SELECT count(id) numid FROM " . $table . $where;
+        if($otherwhere != ""){
+            if($where !="") $otherwhere = " AND ".$otherwhere;
+            else $otherwhere = " WHERE ".$otherwhere;
+        }
+        $sql = "SELECT count(id) numid FROM " . $table . $where.$otherwhere;
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             return ceil($qr->row()->numid / $this->config->item("pp"));
@@ -838,10 +855,12 @@ class Admin extends CI_Controller
         $pgstore_id=$this->input->get("pgstore_id");
         $pgdatefrom=$this->input->get("pgdatefrom");
         $pgdateto=$this->input->get("pgdateto");
+        $pgmoneytype=$this->input->get("pgmoneytype");
         $data['pgtype'] = explode(",",$pgtype);
         $data['pgstore_id'] = $pgstore_id;
         $data['pgdatefrom'] = ($pgdatefrom);
         $data['pgdateto'] = ($pgdateto);
+        $data['pgmoneytype'] = ($pgmoneytype);
 
         echo  $this->calReportTienQuy($data);
     }
@@ -877,11 +896,13 @@ class Admin extends CI_Controller
             OR (a.inoutto = ".$param['pgstore_id']." AND (a.inouttype='nhap' OR a.inoutxuattype='xuatkho' OR a.inoutxuattype='cuahang')   )
             ) ";
         }
-
+        if($param['pgmoneytype']=='all')
+            $moneytype = '';
+        else $moneytype = " AND pgmoneytype='".$param['pgmoneytype']."' ";
         $sql = "SELECT a.*,
-         (CASE WHEN ( (a.pgtype='nhap' and a.inout_id=0)  $xuatmoney ) THEN (a.pgamount) ELSE ( 0 ) END) moneyin,
-         (CASE WHEN ( (a.pgtype='xuat' and a.inout_id=0 ) or (a.inouttype='nhap') or (a.inoutto = '".$param['pgstore_id']."' and (a.inoutxuattype='xuatkho' or a.inoutxuattype='cuahang' ) )  ) THEN (-1*a.pgamount) ELSE ( 0 ) END) moneyout
-         FROM v_tienquy a $date $store ORDER BY a.pgdate";
+         (CASE WHEN ( (a.pgtype='nhap' and a.inout_id=0)  $xuatmoney ) THEN (a.amountorg) ELSE ( 0 ) END) moneyin,
+         (CASE WHEN ( (a.pgtype='xuat' and a.inout_id=0 ) or (a.inouttype='nhap') or (a.inoutto = '".$param['pgstore_id']."' and (a.inoutxuattype='xuatkho' or a.inoutxuattype='cuahang' ) )  ) THEN (-1*a.amountorg) ELSE ( 0 ) END) moneyout
+         FROM v_tienquy a $date $store $moneytype ORDER BY a.pgdate";
 //        echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
@@ -1023,7 +1044,7 @@ class Admin extends CI_Controller
         return $this->load->view("admin/rp_congnostore",$param);
     }
     public function getUserTransfer($user_id){
-        $sql="SELECT * FROM v_inout where (pgxuattype='nhapkho' AND pgfrom = '".$user_id."') OR (pgxuattype='khachhang' AND pgto = ".$user_id.")";
+        $sql="SELECT * FROM v_inout where (pgxuattype='nhapkho' AND inoutfrom = '".$user_id."') OR (pgxuattype='khachhang' AND inoutto = ".$user_id.")";
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             $data['aInout'] = $qr->result();
@@ -1035,7 +1056,7 @@ class Admin extends CI_Controller
             $data['aMoney'] = $qr->result();
         }
         else $data['aMoney'] = null;
-        $tmp = $this->getStore();
+        $tmp = $this->getStore('',true);
         $aStore = array();
         if ($tmp != null)
             foreach ($tmp as $v) {

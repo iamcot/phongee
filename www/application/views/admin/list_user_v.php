@@ -3,10 +3,20 @@
         <thead>
         <tr><td>ID</td><td>Họ Tên</td><td>Tài khoản</td><td>Quyền</td><td></td></tr>
         </thead>
-        <? $i=1; foreach ($province as $row): ?>
+        <?
+        $pgrluser = $this->mylibs->checkRole('pgrluser');
+        $aRoleOrder = $this->config->item("aRoleOrder");
+        $i=1; foreach ($province as $row):
+        if($aRoleOrder[$this->session->userdata("pgrole")] > $aRoleOrder[$row->pgrole] || $this->session->userdata("pgrole") == 'admin'|| $this->session->userdata("pguser_id") == $row->id):
+            ?>
                <tr class="<?=(($i%2==1))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
-                   id="tr<?=$row->id?>"><td><?=$row->id?></td><td><a href="javascript:edit(<?=$row->id?>)"><?=$row->pglname.' '.$row->pgfname?></a></td><td><?=$row->pgusername?></td><td><?=$row->pgrole?></td><td style="text-align:right"><a href="javascript:hide(<?=$row->id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a></td></tr>
-        <? $i++; endforeach; ?>
+                   id="tr<?=$row->id?>"><td><?=$row->id?></td><td><a href="javascript:edit(<?=$row->id?>)"><?=$row->pglname.' '.$row->pgfname?></a></td><td><?=$row->pgusername?></td><td><?=$row->pgrole?></td>
+                   <td style="text-align:right">
+                       <? if($pgrluser>=4):?>
+                       <a href="javascript:hide(<?=$row->id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a>
+                        <? endif;?>
+            </td></tr>
+        <? endif;$i++; endforeach; ?>
     </table>
     <div class="pagination">
         <a href="#" class="first" data-action="first">&laquo;</a>

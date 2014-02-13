@@ -93,7 +93,7 @@
                     <label for="dichvuradio">Dịch vụ</label>
                  </span>
                  <span style="display: inline-block;">
-                    <input type="radio" name="pgtypedichvu" value="hanghoa" id="hanghoaradio">
+                    <input type="radio" name="pgtypedichvu" value="hanghoa" id="hanghoaradio" checked>
                     <label for="hanghoaradio">Hàng hóa</label>
                  </span>
                  <span style="display: inline-block;">
@@ -278,9 +278,10 @@
     $(function () {
         $("input[name=pgdate]").val(mygetdate());
         $("input[name=pghour]").val(mygettime());
+        $("input[name=pghanthanhtoan]").val(formatdatejs(nextweek()));
         $('#pghour').mask('99:99:99');
-        $('#pgdate').mask('9999-99-99');
-        $('input[name=pghanthanhtoan]').mask('9999-99-99');
+        $('#pgdate').mask('9999/99/99');
+        $('input[name=pghanthanhtoan]').mask('9999/99/99');
         $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
         $("input[name=pgthanhtoan]").autoNumeric({aSep:' ',aPad: false});
         loadinout(1);
@@ -288,12 +289,12 @@
         $( "#pgdate" ).datepicker({
             changeMonth: true,
             changeYear: true,
-            dateFormat: "yy-mm-dd"
+            dateFormat: "yy/mm/dd"
         });
         $( "input[name=pghanthanhtoan]" ).datepicker({
             changeMonth: true,
             changeYear: true,
-            dateFormat: "yy-mm-dd"
+            dateFormat: "yy/mm/dd"
         });
 
 
@@ -375,7 +376,7 @@
                     if(idhoadon.trim() == "") $("input[name=idhoadon]").val(msg);
                    // console.log($("input[name=idhoadon]").val());
                     loadinout(1);
-                    var pgseries     = $("input[name=pgseries]").val();
+                    var pgseries     = $("input[name=pgseries]").val().trim();
                     var pgthietbi_id     = $("input[name=pgthietbi_id]").val();
                     var pgthietbicode     = $("input[name=pgthietbicode]").val();
                     var pgprice  = $("input[name=pgprice]").val().replace(/ /g,'');
@@ -399,7 +400,7 @@
                         alert("Vui lòng nhập nơi gửi và nơi nhận");
                         return false;
                     }
-                    if (idhoadon.trim() !="" && pgseries.trim() != "" && pgthietbi_id.trim() != "" && pgcount > 0) {
+                    if (idhoadon.trim() !="" && pgseries != "" && pgthietbi_id.trim() != "" && pgcount > 0) {
                         $.ajax({
                             type: "post",
                             url: "<?=base_url()?>admin/save/inout_details",
@@ -478,6 +479,12 @@
         enableinput();
         $("input[name=pgdate]").val(mygetdate());
         $("input[name=pghour]").val(mygettime());
+        $("input[name=pghanthanhtoan]").val(formatdatejs(nextweek()));
+    }
+    function nextweek(){
+        var today = new Date();
+        var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()+7);
+        return nextweek;
     }
     function edithoadon(id){
 
@@ -624,14 +631,19 @@
             success: function (msg) {
                 if (msg == "") alert('<?=lang("NO_DATA")?>');
                 else {
+                    var userstoreid = <?=(($this->session->userdata("pgstore_id")>0)?$this->session->userdata("pgstore_id"):0)?>;
                     var province = eval(msg);
-                    var option = "<option value='-1'>Chọn cửa hàng</option>";
+//                    console.log(userstoreid);
+                    if(userstoreid == 0)
+                        var option = "<option value='-1'>Chọn cửa hàng</option>";
+                    else var option = "";
                     $.each(province, function (index, store){
 //                        console.log(store);
                         option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
                     });
                     $("select[name=pg"+target+"]").html(option);
                     $("select[name=pg"+target+"]").val($("input[name=pg"+target+"tmp]").val());
+                    if(userstoreid>0) $("select[name=pg"+target+"]").val(userstoreid);
 //                    alert( $("select[name=pg"+target+"]").val());
                     if($("input[name=pgtypexuat]:checked").val()!='xuatkho' || target =='to'){
                     $("select[name=pg"+target+"]").chosen({width:"100%"});
@@ -877,7 +889,24 @@
             month = '0' + month;
 
 
-        return year + "-" + month + "-" + day;
+        return year + "/" + month + "/" + day;
+    }
+    function formatdatejs(dt) {
+
+        var day = dt.getDate();
+        var month = dt.getMonth()+1;
+        var year = dt.getFullYear();
+
+        // the above dt.get...() functions return a single digit
+        // so I prepend the zero here when needed
+        if (day < 10)
+            day = '0' + day;
+
+        if (month < 10)
+            month = '0' + month;
+
+
+        return year + "/" + month + "/" + day;
     }
      function disableinput(){
         $(".inputchitiethoadon").prop('disabled', 'disabled');
@@ -903,7 +932,7 @@
 });
     function blursninput(val){
         disableinput();
-        getThietbiFromSn(val);
+        getThietbiFromSn(val.trim());
         $("input[name=pgcount]").val("1");
 
     }

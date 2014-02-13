@@ -23,9 +23,13 @@
         <tr>
             <td id="selectrole">
                 <label>Nhóm</label>
-                <select name="pgrole" data-placeholder="Quyền hạn"  >
-                    <? foreach($this->config->item('aRole') as $k=>$v):?>
+                <select name="pgrole" data-placeholder="Quyền hạn" >
+                    <?
+                    $aRoleOrder = $this->config->item("aRoleOrder");
+                    foreach($this->config->item('aRole') as $k=>$v):
+                        if($aRoleOrder[$this->session->userdata("pgrole")] > $aRoleOrder[$k] || $this->session->userdata("pgrole") == 'admin'):?>
                     <option value="<?=$k?>"><?=$v?></option>
+                    <? endif;?>
                     <? endforeach;?>
                 </select>
 
@@ -41,10 +45,12 @@
                 <input type="text" name="pgemail" placeholder="Email"></td>
             <td>
                 <label>Cửa hàng</label>
-                <select name="pgstore_id">
+                <select name="pgstore_id" >
                     <option value="0">Tất cả cửa hàng</option>
                     <? foreach($aStore as $store):?>
+                        <? if ($this->session->userdata("pgstore_id") == $store->id || $this->session->userdata("pgrole") =='admin'):?>
                     <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
+                            <? endif;?>
                     <? endforeach;?>
                 </select>
             </td>

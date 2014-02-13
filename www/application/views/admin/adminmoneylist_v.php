@@ -247,14 +247,18 @@
             success: function (msg) {
                 if (msg == "") alert('<?=lang("NO_DATA")?>');
                 else {
+                    var userstoreid = <?=(($this->session->userdata("pgstore_id")>0)?$this->session->userdata("pgstore_id"):0)?>;
                     var province = eval(msg);
-                    var option = "<option value='0'>Cửa hàng </option>";
+                    if(userstoreid == 0)
+                        var option = "<option value='-1'>Chọn cửa hàng</option>";
+                    else var option = "";
                     $.each(province, function (index, store){
                         option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
                     });
                         $("select[name=pgstore_id]").html(option);
                         $('select[name=pgstore_id]').chosen({width:"90%"});
                         $('select[name=pgstore_id]').trigger("chosen:updated");
+                    if(userstoreid>0) $("select[name=pgstore_id]").val(userstoreid);
 
                 }
             }

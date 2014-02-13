@@ -3,7 +3,9 @@
     else echo $aStore[$pgstore_id]->pglong_name;
     ?> <?=(($pgdatefrom!='')?'TỪ '.date('d/m/Y',strtotime($pgdatefrom)):'')?> <?=(($pgdateto!='')?'ĐẾN '.date('d/m/Y',strtotime($pgdateto)):'')?> </h3>
 <center>
-<? if($aReport!=null):?>
+<? if($aReport!=null):
+    $aMoneyType = $this->config->item('aMoneyType');
+    ?>
     <table style="width: 80%"  class="tblist">
         <thead>
             <tr>
@@ -20,13 +22,20 @@
                 ?>
                 <tr class="<?=(($i%2==0))?'odd':''?>">
                     <td ><?=date("d/m/Y H:i",$report->pgdate)?></td>
-                    <td style="text-align: right"><?=(($report->moneyin>0)?'+':'')?><?=(($report->moneyin>0)?number_format($report->moneyin,0,'.',','):'')?></td>
-                    <td style="text-align: right"><?=(($report->moneyout<0)?number_format($report->moneyout,0,'.',','):'')?></td>
+                    <td style="text-align: right"><?=(($report->moneyin>0)?'+':'')?><?=(($report->moneyin>0)?number_format($report->moneyin,0,'.',',').' ('.$aMoneyType[$report->pgmoneytype][2].') ':'')?></td>
+                    <td style="text-align: right"><?=(($report->moneyout<0)?number_format($report->moneyout,0,'.',',').' ('.$aMoneyType[$report->pgmoneytype][2].') ':'')?></td>
                     <td style="text-align: right"><?=$report->pginfo?></td>
                 </tr>
         <?
-                $co+=$report->moneyin;
-                $no+=$report->moneyout;
+                if($pgmoneytype=='all'){
+                    $co+=$report->moneyin * $report->pgmoneyrate;
+                    $no+=$report->moneyout * $report->pgmoneyrate;
+                }
+                else{
+                    $co+=$report->moneyin ;
+                    $no+=$report->moneyout ;
+                }
+
                 $i++;endforeach;?>
         <tr style="background: #fffeee;border-top: 2px solid #ddd;"><td>Tổng trong kỳ</td><td style="text-align: right"><?=number_format($co,0,'.',',')?></td><td style="text-align: right"><?=number_format($no,0,'.',',')?></td><td></td></tr>
         <tr style="background: #fff3f4"><td>Dư cuối kỳ</td><td><b><?=number_format(($dudauky+$co+$no),0,'.',',')?></b></td><td></td><td></td></tr>
