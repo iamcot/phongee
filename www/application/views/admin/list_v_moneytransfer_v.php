@@ -11,7 +11,7 @@
                    <td><?=$row->id?></td>
                    <td><?=date("d/m/Y H:i",($row->pgdate))?></td>
                    <td><?=$row->storename?></td>
-                   <td><?=$row->username?></td>
+                   <td><?=(($row->username!="")?$row->username:'Tổng kho')?></td>
                    <td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',',')?></a></td>
                    <td><?=$amoneytype[$row->pgmoneytype][1]?></td>
                    <td><?=$row->inoutcode?></td>

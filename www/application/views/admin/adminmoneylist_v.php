@@ -23,7 +23,7 @@
                 </div>
                 <br>
                 <div id="pgmoneytypediv" style="display: block;clear:both;">
-                    <select name="pgmoneytype" style="width: 100%;display: inline-block" data-placeholder="Loại tiền">
+                    <select name="pgmoneytype" style="width: 100%;display: inline-block" data-placeholder="Loại tiền" onchange="changemoneytype(this.value)">
                         <? foreach($this->config->item('aMoneyType') as $moneytype):?>
                             <option value="<?=$moneytype[0].'|'.$moneytype[3]?>"><?=$moneytype[1]?></option>
                         <? endforeach;?>
@@ -58,10 +58,15 @@
                     <input  tabindex="3" type="text" id="pghour" name="pghour" style="width:25%;display: inline-block" placeholder="Giờ:phút:giây">
                 </div>
                 <br>
-                <label>Số tiền</label>
-                <input tabindex="4" type="text" name="pgamount"  placeholder="Số tiền" style="width:70%;display:inline-block">
-                <br><br>
-                <textarea tabindex="5" name="pginfo" placeholder="Ghi chú" style="width:100%;display:block"></textarea>
+                <div>
+                    <label>Số tiền</label>
+                    <input tabindex="4" type="text" name="pgamount"  placeholder="Số tiền" style="width:25%;display:inline-block">
+
+                    <label>Tỉ giá </label>
+                    <input tabindex="5" type="text" name="pgmoneyrate"  placeholder="Tỉ giá " style="width:25%;display:inline-block" value="1">
+                </div>
+               <br><br>
+                <textarea tabindex="6" name="pginfo" placeholder="Ghi chú" style="width:100%;display:block"></textarea>
 
         </tr>
         <tr >
@@ -86,7 +91,7 @@
 <script>
     $(function () {
         $('#pghour').mask('99:99:99');
-        $('#pgdate').mask('9999-99-99');
+        $('#pgdate').mask('9999/99/99');
         $("input[name=pgamount]").autoNumeric({aSep:' ',aPad: false});
         $('select[name=pgmoneytype]').chosen({width:"90%"});
         $('select[name=pgmoneytype]').trigger("chosen:updated");
@@ -94,7 +99,7 @@
         $( "#pgdate" ).datepicker({
             changeMonth: true,
             changeYear: true,
-            dateFormat: "yy-mm-dd"
+            dateFormat: "yy/mm/dd"
         });
 
     });
@@ -115,7 +120,7 @@
         var pguser_id      = $("select[name=pguser_id]").val();
         var arrmoney      = $("select[name=pgmoneytype]").val().split("|");
         var pgmoneytype = arrmoney[0];
-        var pgmoneyrate = arrmoney[1];
+        var pgmoneyrate = $("input[name=pgmoneyrate]").val();
 
         var pgtype      = $("input[name=pgtype]:checked").val();
 
@@ -303,6 +308,10 @@ function getUserInout(id){
             $("#inoutuser").html(inouttr);
         }
     });
+}
+function changemoneytype(val){
+    var arrmoney      = val.split("|");
+    $("input[name=pgmoneyrate]").val(arrmoney[1]);
 }
 </script>
 

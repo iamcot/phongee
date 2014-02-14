@@ -61,24 +61,38 @@
                     else if($numDaystraxuat<=1) $classnonhan = 'red';
                 }
                 else $classnonhan = '';
+                $tmpkhachno = $report->sumduocnhan - $report->danhan + $tienkhachno;
+                $tmpshopno =  $report->sumphaitra - $report->datra + $tienshopno;
+                $rskhachno = 0;
+                $rsshopno = 0;
+
+                if($tmpkhachno > $tmpshopno){
+                    $rskhachno = $tmpkhachno - $tmpshopno;
+                    $rsshopno = 0;
+                }
+                else{
+                    $rskhachno = 0;
+                    $rsshopno = $tmpshopno - $tmpkhachno;
+                }
+
                 ?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
 
                     <td ><a href="javascript:getDetails(<?=$report->id?>)"><?=$report->pglname.' '.$report->pgfname?></a></td>
                     <td ><?=$report->pgrole?></td>
                     <?if($khachno == 'true'):?><td style="text-align: right"><?=number_format($report->sumduocnhan ,0,'.',',')?></td><? endif;?>
-                    <?if($khachno == 'true'):?><td style="text-align: right" class="<?=$classnonhan?>"><?=number_format($report->sumduocnhan -$report->danhan + $tienkhachno ,0,'.',',')?>
+                    <?if($khachno == 'true'):?><td style="text-align: right" class="<?=$classnonhan?>"><?=number_format($rskhachno ,0,'.',',')?>
                     </td><? endif;?>
                     <?if($hanthanhtoan == 'true' && $khachno == 'true'):?><td><?=((($report->sumduocnhan -$report->danhan)>0)?date("d/m/Y",$report->hanthanhtoanxuat):'')?></td><? endif;?>
                     <?if($shopno == 'true'):?><td style="text-align: right"><?=number_format($report->sumphaitra ,0,'.',',')?></td><? endif;?>
-                    <?if($shopno == 'true'):?><td style="text-align: right"  class="<?=$classnotra?>"><?=number_format($report->sumphaitra - $report->datra + $tienshopno ,0,'.',',')?>
+                    <?if($shopno == 'true'):?><td style="text-align: right"  class="<?=$classnotra?>"><?=number_format($rsshopno ,0,'.',',')?>
                     </td><? endif;?>
                     <?if($hanthanhtoan == 'true' && $shopno == 'true'):?><td><?=((($report->sumphaitra - $report->datra)>0)?date("d/m/Y",$report->hanthanhtoannhap):'')?></td><? endif;?>
 
                 </tr>
         <?
-                $sumkhachno +=  ($report->sumduocnhan -$report->danhan +$tienkhachno);
-                $sumshopno += ($report->sumphaitra - $report->datra + $tienshopno);
+                $sumkhachno += $rskhachno;
+                $sumshopno += $rsshopno;
                 $i++;endforeach;?>
             <tr  style="border-top: 2px solid #ddd;background: #fff3f4">
                 <td >Tổng nợ</td>

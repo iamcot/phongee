@@ -11,7 +11,8 @@ j.inoutto,
 j.pghanthanhtoan,
 j.inoutdate,
 j.inoutcode,
-SUM(CASE WHEN (j.pgxuattype='nhapkho') THEN (j.pgcount*j.pgprice) ELSE ( 0 ) END) sumphaitra,
-SUM(CASE WHEN (j.pgxuattype='khachhang') THEN (j.pgcount*j.pgprice) ELSE ( 0 ) END) sumduocnhan
+j.pgdeleted,
+SUM(CASE WHEN (j.inouttype='nhap') THEN (j.pgcount*j.pgprice) ELSE ( 0 ) END) sumphaitra,
+SUM(CASE WHEN (j.inouttype='xuat') THEN (j.pgcount*j.pgprice) ELSE ( 0 ) END) sumduocnhan
  FROM  v_inout j
 GROUP BY j.pginout_id

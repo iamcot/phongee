@@ -25,5 +25,8 @@ ALTER TABLE `pgstore`
    /*[1:04:39 AM][260 ms]*/ ALTER TABLE `pgmoneytransfer` ADD COLUMN `pgmoneytype` VARCHAR(20) NULL AFTER `pguser_id`;
    /*[1:04:39 AM][260 ms]*/ ALTER TABLE `pgmoneytransfer` ADD COLUMN `pgmoneyrate` VARCHAR(20) NULL AFTER `pgmoneytype`;
 
+  //tanner 14/2
+  /* 2:07:34 PM localhost */ ALTER TABLE `pgmoneytransfer` CHANGE `pgmoneytype` `pgmoneytype` VARCHAR(20)  CHARACTER SET utf8  COLLATE utf8_general_ci  NOT NULL  DEFAULT 'tm';
+  /* 2:07:36 PM localhost */ ALTER TABLE `pgmoneytransfer` CHANGE `pgmoneyrate` `pgmoneyrate` VARCHAR(20)  CHARACTER SET utf8  COLLATE utf8_general_ci  NOT NULL  DEFAULT '1';
 
 

@@ -247,6 +247,7 @@ class Admin extends CI_Controller
         if($qr->num_rows()>0) $rs = $qr->result();
         else $rs = null;
         $data['aStore'] = $rs;
+        $data['aCustom'] = $this->getUserList(array('custom','provider'));
         if($page=='tonkho'){
             $sql="SELECT *  FROM ".$this->tbprefix.$this->tbthietbi." where pgdeleted=0 ORDER BY pglong_name ";
             $qr = $this->db->query($sql);
@@ -281,6 +282,11 @@ class Admin extends CI_Controller
         if ($table == 'inout') {
             $param['pgdate'] = strtotime($param['pgdate']);
             $param['pghanthanhtoan'] = strtotime($param['pghanthanhtoan']);
+            $newid = 0;
+            $rs = $this->db->query("CALL buildinoutcode(?,?)",array($param['pgtype'],$newid));
+
+            var_dump($rs);
+            return;
         }
         if ($this->input->post("pgpassword") != "")
             $param['pgpassword'] = md5(md5($this->input->post("pgpassword")));
@@ -708,6 +714,8 @@ class Admin extends CI_Controller
         $pgyear=$this->input->get("pgyear");
         $pgcreateuser=$this->input->get("pgcreateuser");
         $pgseries=$this->input->get("pgseries");
+        $showalltongkho=$this->input->get("showalltongkho");
+        $pguser_id=explode(",",$this->input->get("pguser_id"));
         $print=$this->input->get("print");
         $data['pgtype'] = $pgtype;
         $data['pgname'] = $pgname;
@@ -721,6 +729,8 @@ class Admin extends CI_Controller
         $data['pgyear'] = $pgyear;
         $data['pgcreateuser'] = $pgcreateuser;
         $data['pgseries'] = $pgseries;
+        $data['pguser_id'] = $pguser_id;
+        $data['showalltongkho'] = $showalltongkho;
         $data['print'] = $print;
 
         echo  $this->calReportXNT($data);
@@ -759,6 +769,20 @@ class Admin extends CI_Controller
             }
         }
         if($sstore!='') $sstore.=')';
+        $scustom = '';
+        foreach($param['pguser_id'] as $store){
+              if($store == 'all'){
+                  $scustom = '';
+                  break;
+              }
+            else {
+                if($scustom == '') $scustom.=' AND (';
+                else $scustom .=' OR ';
+                $scustom.=" ( (pgxuattype='khachhang' AND inoutto = '$store' ) OR (pgxuattype='nhapkho' AND inoutfrom = '$store') ) ";
+            }
+        }
+        if($scustom!='') $scustom.=')';
+
         $date = "";
         if($param['pgdatefrom'] != "")
             $date .= " AND inoutdate >= ".strtotime($param['pgdatefrom']);
@@ -767,9 +791,15 @@ class Admin extends CI_Controller
         if($param['pgseries']!=''){
             $series = " AND pgseries like '%".$param['pgseries']."%' ";
         }
-        else $series = '';
 
-        $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date.$series;
+        else $series = '';
+        if($param['showalltongkho']=='true'){
+            $showalltongkho = " AND ( pgxuattype !='khachhang' AND pgxuattype!='cuahang' AND pgxuattype!='doitac' ) ";
+
+        }
+        else $showalltongkho = "";
+
+        $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date.$series.$scustom.$showalltongkho;
      //    echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
@@ -1081,7 +1111,7 @@ class Admin extends CI_Controller
                 FROM pguser u
                 LEFT JOIN pgrole r
                 ON r.pguser_id = u.id
-                WHERE u.`pgrole` = 'admin' OR u.`pgrole`='staff' OR u.pgrole = 'ketoan' OR u.pgrole = 'ketoantruong'";
+                WHERE u.`pgrole` = 'admin' OR u.`pgrole`='staff' OR u.pgrole = 'ketoan' OR u.pgrole = 'ketoantonghop'";
         $qr= $this->db->query($sql);
         if($qr->num_rows()>0){
             return $qr->result_array();
@@ -1151,6 +1181,59 @@ class Admin extends CI_Controller
         }
         else
             echo "";
+    }
+    public function getHoaDon($page=0,$full='false'){
+        $otherwhere = "";
+        if ($this->session->userdata("pgstore_id") > 0) {
+                $otherwhere .= "
+                (
+                    (
+                        (a.pgxuattype='thuhoi' OR a.inouttype='xuat')
+                        AND a.inoutfrom = '" . $this->session->userdata("pgstore_id") . "'
+                    )
+                    OR
+                    (
+                        (a.inouttype='nhap' OR a.pgxuattype='cuahang')
+                        AND a.inoutto = " . $this->session->userdata("pgstore_id") . "
+                    )
+                ) ";
+        }
+       // var_dump($full);
+        if($full=='true')
+            $sfull = " (a.sumthanhtoan IS NULL OR
+                (a.sumthanhtoan < a.sumduocnhan
+                AND a.sumthanhtoan < a.sumphaitra ) ) ";
+
+        else $sfull = "";
+
+
+        if($sfull!="" && $otherwhere != "") $otherwhere = " AND ".$otherwhere;
+        $sqlcommon=" FROM (
+                Select i.*,
+                SUM(m.`pgamount`) sumthanhtoan
+                from v_suminout i
+                LEFT JOIN `pgmoneytransfer` m
+                ON m.`pginout_id`= i.pginout_id
+
+                GROUP BY i.pginout_id
+                ) a
+                 ".(($sfull!="" || $otherwhere !="")?'WHERE':'')." $sfull $otherwhere "
+                ;
+        $sqlsum = "SELECT count(a.pginout_id) sumrow ".$sqlcommon;
+        $sqllimit = "SELECT a.* ".$sqlcommon."ORDER BY a.pginout_id DESC
+                LIMIT " . (($page-1) * $this->config->item('pp')) . "," . $this->config->item('pp');
+      // echo $sqllimit;
+       // echo $sqlsum;
+        $qrlimit = $this->db->query($sqllimit);
+        $qrsum = $this->db->query($sqlsum);
+        if($qrlimit->num_rows()>0)
+            $rs = $qrlimit->result();
+        else $rs = null;
+        $data['province'] = $rs;
+        $data['sumpage'] = ceil($qrsum->row()->sumrow / $this->config->item("pp"));
+        $data['page'] = $page;
+        echo $this->load->view("admin/list_inout_v", $data, true);
+
     }
 
 }

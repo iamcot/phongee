@@ -46,7 +46,10 @@ class MyLibs
     }
 
 
-
+    public function isTongKho($role = ""){
+        if($role == 'ketoantonghop' || $role == 'admin') return true;
+        else return false;
+    }
     public function makeThumbnails($file_path, $file_name, $width, $height)
     {
         $file_path = $file_path . $file_name;

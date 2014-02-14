@@ -184,6 +184,10 @@
 </fieldset>
 <fieldset style="float:right;width:49%">
     <legend>Danh sách hóa đơn</legend>
+    <div>
+        <input type="checkbox" name="showchuathanhtoan" id="showchuathanhtoan" checked="checked" onchange="loadinout(1)">
+        <label for="showchuathanhtoan">Chỉ Hóa đơn chưa thanh toán </label>
+    </div>
     <div id="list_hoadon"></div>
 </fieldset>
 </div>
@@ -453,8 +457,10 @@
     }
     function loadinout(page) {
         addloadgif("#loadstatus");
-        $("#list_hoadon").load("<?=base_url()?>admin/load/inout/" + page, function () {
+        $("#list_hoadon").load("<?=base_url()?>admin/getHoaDon/" + page+"/"+$("input[name=showchuathanhtoan]").prop("checked"), function () {
             removeloadgif("#loadstatus");
+            $("#list_hoadonitem").html("");
+            myclear();
         });
     }
     function loadmoneytransfer(page,pginout_id) {
@@ -1040,7 +1046,8 @@ function savethanhtoan(){
         success: function (msg) {
             loadmoneytransfer(1,pginout_id);
             loadSumPrice(pginout_id,pgtypethanhtoan);
-
+            loadinout(1);
+            $("#list_hoadonitem").html("");
         }
     });
 }
