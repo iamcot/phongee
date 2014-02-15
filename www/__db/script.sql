@@ -28,5 +28,9 @@ ALTER TABLE `pgstore`
   //tanner 14/2
   /* 2:07:34 PM localhost */ ALTER TABLE `pgmoneytransfer` CHANGE `pgmoneytype` `pgmoneytype` VARCHAR(20)  CHARACTER SET utf8  COLLATE utf8_general_ci  NOT NULL  DEFAULT 'tm';
   /* 2:07:36 PM localhost */ ALTER TABLE `pgmoneytransfer` CHANGE `pgmoneyrate` `pgmoneyrate` VARCHAR(20)  CHARACTER SET utf8  COLLATE utf8_general_ci  NOT NULL  DEFAULT '1';
-
+  /*[3:11:51 PM][1073 ms]*/ ALTER TABLE `pgrole` CHANGE `pgrbxuatcuahang` `pgrbcuahang` TINYINT(4) DEFAULT -1 NOT NULL, CHANGE `pgrbxuatdoitac` `pgrbkhachhang` TINYINT(4) DEFAULT -1 NOT NULL, CHANGE `pgrbxuatkhachle` `pgrbkhachle` TINYINT(4) DEFAULT -1 NOT NULL;
+  /*[5:31:50 PM][264 ms]*/ ALTER TABLE `pgthietbi` ADD COLUMN `pgdvt` VARCHAR(20) DEFAULT 'cái' NULL AFTER `pgcreateuser_id`, ADD COLUMN `pgtgbh` VARCHAR(50) DEFAULT '12 tháng' NULL AFTER `pgdvt`;
+ ALTER TABLE `pgchitietthietbi`
+  ADD COLUMN `pgdvt` VARCHAR(20) DEFAULT 'cái'   NULL AFTER `pgpartno`,
+  ADD COLUMN `pgtgbh` VARCHAR(50) DEFAULT '12 tháng'   NULL AFTER `pgdvt`;
 

@@ -44,19 +44,19 @@
                     <label for="xuatkhoradio">Xuất kho</label>
                     </span>
                    <? endif;?>
-                    <? if ($this->mylibs->checkRole('pgrbxuatcuahang')): ?>
+                    <? if ($this->mylibs->checkRole('pgrbcuahang')): ?>
                     <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="cuahang" id="cuahangradio">
                     <label for="cuahangradio">Cửa hàng</label>
                     </span>
                     <? endif; ?>
-                    <? if ($this->mylibs->checkRole('pgrbxuatdoitac')): ?>
+                    <? if ($this->mylibs->checkRole('pgrbkhachhang')): ?>
                     <span style="display: inline-block;">
                         <input type="radio" name="pgtypexuat" value="khachhang"  id="khachhangradio">
                     <label for="khachhangradio">Đối tác</label>
                      </span>
                     <? endif; ?>
-                    <? if ($this->mylibs->checkRole('pgrbxuatkhachle')): ?>
+                    <? if ($this->mylibs->checkRole('pgrbkhachle')): ?>
                     <span style="display: inline-block;">
                     <input type="radio" name="pgtypexuat" value="khachle"  id="khachleradio">
                     <label for="khachleradio">Khách lẻ</label>
@@ -258,24 +258,25 @@
                     $("label[for=cuahangradio]").addClass("checked");
                     typexuatcheck("cuahang");
                 }
-                else if(xuattype == "khachhang"){
-                    $("#xuatoption label").removeClass("checked");
-                    $("input[value=khachhang]").prop('checked', true);
-                    $("label[for=khachhangradio]").addClass("checked");
-                    typexuatcheck("khachhang");
-                }
+
                 else if(xuattype == "xuatkho"){
                     $("#xuatoption label").removeClass("checked");
                     $("input[value=xuatkho]").prop('checked', true);
                     $("label[for=xuatkhoradio]").addClass("checked");
                     typexuatcheck("xuatkho");
                 }
-				else{
+				else if(xuattype == "khachle"){
 					$("#xuatoption label").removeClass("checked");
                     $("input[value=khachle]").prop('checked', true);
                     $("label[for=khachleradio]").addClass("checked");
                     typexuatcheck("khachle");
 				}
+                else {
+                    $("#xuatoption label").removeClass("checked");
+                    $("input[value=khachhang]").prop('checked', true);
+                    $("label[for=khachhangradio]").addClass("checked");
+                    typexuatcheck("khachhang");
+                }
             disableinput();
         }
     }
@@ -326,10 +327,10 @@
         var pgdate     = $("input[name=pgdate]").val();
         var pghour     = $("input[name=pghour]").val();
         var pghanthanhtoan     = $("input[name=pghanthanhtoan]").val();
-        if(pgcode == ""){
-            alert("Vui lòng nhập mã hóa đơn");
-            return false;
-        }
+//        if(pgcode == ""){
+//            alert("Vui lòng nhập mã hóa đơn");
+//            return false;
+//        }
         if(pgdate != "" && pghour !=""){
             pgdate = pgdate+" "+pghour;
         }
@@ -374,6 +375,10 @@
                 if (msg == 0) {
                     alert("Lưu đơn hàng bị lỗi, xin kiểm tra lại thông tin");
                 }
+                else if(msg =='r1' || msg =='r2' || msg =='r0'){
+                    alert("Bạn không có quyền đối với loại đơn hàng này. Vui lòng liên hệ quản trị viên để biết thông tin.");
+                }
+
                 else if(parseInt(msg) > 0){
                    // console.log(msg);
 
@@ -434,6 +439,7 @@
                                 }
                                 else{
                                     $("input[name=pgseries]").val("");
+                                    loadinout(1);
                                     loadinout_details(1,idhoadon);
                                     clearinputdetails();
                                     loadSumPrice(idhoadon,$("input[name=pgtype]:checked").val());
@@ -456,10 +462,10 @@
 
     }
     function loadinout(page) {
+        $("#list_hoadonitem").html("");
         addloadgif("#loadstatus");
         $("#list_hoadon").load("<?=base_url()?>admin/getHoaDon/" + page+"/"+$("input[name=showchuathanhtoan]").prop("checked"), function () {
             removeloadgif("#loadstatus");
-            $("#list_hoadonitem").html("");
             myclear();
         });
     }
@@ -479,7 +485,7 @@
         });
     }
     function myclear() {
-        $("input[type=text]").val("");
+        $("input[type=text]:not(.pagination input)").val("");
         $("input[type=hidden]").val("");
         $("#hoadoninfo input[type=radio]").prop('disabled', false);
         enableinput();
@@ -640,7 +646,7 @@
                     var userstoreid = <?=(($this->session->userdata("pgstore_id")>0)?$this->session->userdata("pgstore_id"):0)?>;
                     var province = eval(msg);
 //                    console.log(userstoreid);
-                    if(userstoreid == 0)
+                    if(userstoreid == 0 || typestore=='kho')
                         var option = "<option value='-1'>Chọn cửa hàng</option>";
                     else var option = "";
                     $.each(province, function (index, store){
@@ -649,7 +655,8 @@
                     });
                     $("select[name=pg"+target+"]").html(option);
                     $("select[name=pg"+target+"]").val($("input[name=pg"+target+"tmp]").val());
-                    if(userstoreid>0) $("select[name=pg"+target+"]").val(userstoreid);
+                    if(userstoreid>0 && typestore!='kho')
+                        $("select[name=pg"+target+"]").val(userstoreid);
 //                    alert( $("select[name=pg"+target+"]").val());
                     if($("input[name=pgtypexuat]:checked").val()!='xuatkho' || target =='to'){
                     $("select[name=pg"+target+"]").chosen({width:"100%"});
@@ -1034,6 +1041,27 @@ function savethanhtoan(){
             return;
         }
     }
+    if(parseInt(pgthanhtoan) <=0 || pgthanhtoan.trim() == ""){
+        alert("Nhập số tiền thanh toán");
+        return;
+    }
+    var pgtypexuat =  $("input[name=pgtypexuat]:checked").val();
+    var storeid = 0;
+    var userid = 0;
+    switch(pgtypexuat){
+        case 'nhapkho': storeid = $("select[name=pgto]").val();
+            userid  = $("select[name=pgfrom]").val();
+            break;
+        case 'thuhoi': storeid = $("select[name=pgfrom]").val();
+            break;
+        case 'xuatkho': storeid = $("select[name=pgto]").val();
+            break;
+        case 'khachhang': storeid = $("select[name=pgfrom]").val();
+            userid  = $("select[name=pgto]").val();
+            break;
+        case 'khachle': storeid = $("select[name=pgfrom]").val();
+            break;
+    }
     $.ajax({
         type: "post",
         url: "<?=base_url()?>admin/save/moneytransfer",
@@ -1042,8 +1070,13 @@ function savethanhtoan(){
              "&pgamount="+pgthanhtoan+
              "&pginfo="+pginfo+
             "&pgdate=" +  (Math.round(new Date().getTime()/1000))+
-             "&pgtype="+pgtypethanhtoan,
+             "&pgtype="+pgtypethanhtoan +
+             "&pgstore_id="+storeid +
+             "&pguser_id="+userid,
         success: function (msg) {
+            if(msg=='r1' || msg=='r0'){
+                alert("Bạn không có quyền đối với thao tác này. Vui lòng liên hệ quản trị viên để biết thông tin.");
+            }
             loadmoneytransfer(1,pginout_id);
             loadSumPrice(pginout_id,pgtypethanhtoan);
             loadinout(1);
@@ -1062,6 +1095,9 @@ function gettonkho(sn,from,fromedit){
             $("#icount").html(msg);
         }
     });
+}
+function printinout(id){
+    window.open("<?=base_url()?>admin/printinout/"+id);
 }
 </script>
 

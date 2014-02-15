@@ -5,7 +5,7 @@
         <tr>
             <td id="hoadoninfo">
                 <? if($this->mylibs->checkRole('pgrbnhaptien')):?>
-                <span style="display: inline-block;float: left;">
+                <span style="display: inline-block;float: left;margin-right: 20px;">
                 <input type="radio" name="pgtype" value="nhap"  id="nhapradio">
                 <label for="nhapradio">Nhập tiền</label>
                     </span>
@@ -220,6 +220,53 @@
             success: function (msg) {
                if(msg!= -1){
                    var price = eval(msg);
+
+                   var sessstoreid = <?=$this->session->userdata("pgstore_id")?>;
+                   switch(price.pgxuattype){
+                       case 'nhapkho':
+                           if(sessstoreid > 0 && sessstoreid != price.pgto){
+                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+                               return;
+                           }
+                           $("select[name=pgstore_id]").val(price.pgto);
+                           $("select[name=pguser_id]").val(price.pgfrom);
+                           break;
+                       case 'thuhoi':
+                           if(sessstoreid > 0 && sessstoreid != price.pgfrom){
+                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+                               return;
+                           }
+                           $("select[name=pgstore_id]").val(price.pgfrom);
+                           break;
+                       case 'xuatkho':
+                           if(sessstoreid > 0 && sessstoreid != price.pgto){
+                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+                               return;
+                           }
+                           $("select[name=pgstore_id]").val(price.pgto);
+                           break;
+                       case 'cuahang':
+                           break;
+                       case 'khachhang':
+                           if(sessstoreid > 0 && sessstoreid != price.pgfrom){
+                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+                               return;
+                           }
+                           $("select[name=pgstore_id]").val(price.pgfrom);
+                           $("select[name=pguser_id]").val(price.pgto);
+                           break;
+                       case 'khachle':
+                           if(sessstoreid > 0 && sessstoreid != price.pgfrom){
+                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+                               return;
+                           }
+                           $("select[name=pgstore_id]").val(price.pgfrom);
+                           break;
+                       default:
+                           alert("Hóa đơn không đúng");
+                           return;
+                           break;
+                   }
                    $("input[name=pgsumprice]").val(price.sum);
                    $("input[name=pgsumremain]").val(price.remain);
                    $("input[name=pginout_id]").val(price.id);
@@ -232,10 +279,10 @@
                    $("label[for="+typemoney+"radio]").addClass("checked");
                    $("input[name=pgdate]").val(mygetdate());
                    $("input[name=pghour]").val(mygettime());
-                   $("select[name=pgstore_id]").prop("disabled",true);
-                   $("select[name=pguser_id]").prop("disabled",true);
-                   $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
-                   $('select[name=pguser_id]').val(0).trigger("chosen:updated");
+                   $("select[name=pgstore_id]").prop("disabled",true).trigger("chosen:updated");
+                   $("select[name=pguser_id]").prop("disabled",true).trigger("chosen:updated");
+                 //  $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
+                 //  $('select[name=pguser_id]').val(0).trigger("chosen:updated");
                    $("textarea[name=pginfo]").val("Thanh toán hóa đơn #"+inout_code);               }
                 else{
                    alert("Không có đơn hàng này");

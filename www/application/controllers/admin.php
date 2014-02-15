@@ -150,7 +150,7 @@ class Admin extends CI_Controller
         }
         if ($this->session->userdata("pgstore_id") > 0) {
             if ($table == 'v_inout') {
-                $otherwhere .= "  (((pgxuattype='thuhoi' OR inouttype='xuat') AND inoutfrom = '" . $this->session->userdata("pgstore_id") . "') OR ((inouttype='nhap' OR pgxuattype='cuahang') AND inoutto = " . $this->session->userdata("pgstore_id") . ")) ";
+                $otherwhere .= "  (((pgxuattype='thuhoi' OR inouttype='xuat') AND inoutfrom = '" . $this->session->userdata("pgstore_id") . "') OR ((inouttype='nhap' OR pgxuattype='cuahang' OR pgxuattype='xuatkho') AND inoutto = " . $this->session->userdata("pgstore_id") . ")) ";
             }
             else if ($table == 'v_moneytransfer')
                 $otherwhere .= "  pgstore_id = '" . $this->session->userdata("pgstore_id") . "' ";
@@ -282,11 +282,34 @@ class Admin extends CI_Controller
         if ($table == 'inout') {
             $param['pgdate'] = strtotime($param['pgdate']);
             $param['pghanthanhtoan'] = strtotime($param['pghanthanhtoan']);
-            $newid = 0;
-            $rs = $this->db->query("CALL buildinoutcode(?,?)",array($param['pgtype'],$newid));
 
-            var_dump($rs);
-            return;
+            $rolexuattype = $this->mylibs->checkRole("pgrb".$param['pgxuattype']);
+            switch($rolexuattype){
+                case 1: echo 'r1'; return; break;
+                case 2: if($this->input->post("edit") != "") echo 'r2'; return; break;
+                case 3: break;
+                case 4: break;
+                case 9: break;
+                default: echo 'r0'; return; break;
+            }
+            if ($this->input->post("edit") == ""){
+                $this->db->query("CALL buildinoutcode(?,@number);",array($param['pgtype']));
+                $qr = $this->db->query("SELECT @number");
+                $row=$qr->row_array();
+                $param['pgcode'] = $this->mylibs->buildinoutcode($param['pgtype'],$row['@number']);
+            }
+
+        }
+        else if($table == 'moneytransfer'){
+            $rolemoney = $this->mylibs->checkRole('pgramoneytransfer');
+            switch($rolemoney){
+                case 1: echo 'r1'; return; break;
+                case 2: break;
+                case 3: break;
+                case 4: break;
+                case 9: break;
+                default: echo 'r0'; return; break;
+            }
         }
         if ($this->input->post("pgpassword") != "")
             $param['pgpassword'] = md5(md5($this->input->post("pgpassword")));
@@ -300,6 +323,7 @@ class Admin extends CI_Controller
             }
 
         } else { //insert
+            $param['pgcreateuser_id'] = $this->session->userdata('pguser_id');
             if ($table == 'inout_details') {
                 $sql3 = "SELECT d.* FROM " . $this->tbprefix . "inout d WHERE d.id=" . $param['pginout_id'] . "";
                 $qr = $this->db->query($sql3);
@@ -452,7 +476,7 @@ class Admin extends CI_Controller
         if($this->mylibs->checkRole("pgrlstore")>= 1)
         $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
         if($type!='') $sql.= " AND pgtype='$type' ";
-        if(($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2) && !$full)
+        if(($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2) && !$full && $type!='kho')
              $sql.= " AND id =".$this->session->userdata("pgstore_id")."";
         $sql .= " ORDER BY pgorder ";
         $qr = $this->db->query($sql);
@@ -489,7 +513,7 @@ class Admin extends CI_Controller
 
     }
     public function jxloadsuminoutfromcode($inout_code){
-        $sql = "SELECT id,pgtype from pginout WHERE pgcode='$inout_code'";
+        $sql = "SELECT * from pginout WHERE pgcode='$inout_code'";
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             $row = $qr->row();
@@ -501,6 +525,10 @@ class Admin extends CI_Controller
                 'remain' => number_format(($sum - $remain), 0, '.', ' '),
                 'type' => $row->pgtype,
                 'id' => $row->id,
+                'pgxuattype' => $row->pgxuattype,
+                'pgfrom' => $row->pgfrom,
+                'pgto' => $row->pgto,
+
             );
             $this->mylibs->echojson($arr);
         } else {
@@ -1193,7 +1221,7 @@ class Admin extends CI_Controller
                     )
                     OR
                     (
-                        (a.inouttype='nhap' OR a.pgxuattype='cuahang')
+                        (a.inouttype='nhap' OR a.pgxuattype='cuahang'  OR a.pgxuattype='xuatkho' )
                         AND a.inoutto = " . $this->session->userdata("pgstore_id") . "
                     )
                 ) ";
@@ -1201,8 +1229,8 @@ class Admin extends CI_Controller
        // var_dump($full);
         if($full=='true')
             $sfull = " (a.sumthanhtoan IS NULL OR
-                (a.sumthanhtoan < a.sumduocnhan
-                AND a.sumthanhtoan < a.sumphaitra ) ) ";
+                ( (a.sumthanhtoan < a.sumduocnhan AND a.sumduocnhan > 0)
+                OR  ( a.sumthanhtoan < a.sumphaitra AND a.sumphaitra > 0 ) ) ) ";
 
         else $sfull = "";
 
@@ -1222,7 +1250,7 @@ class Admin extends CI_Controller
         $sqlsum = "SELECT count(a.pginout_id) sumrow ".$sqlcommon;
         $sqllimit = "SELECT a.* ".$sqlcommon."ORDER BY a.pginout_id DESC
                 LIMIT " . (($page-1) * $this->config->item('pp')) . "," . $this->config->item('pp');
-      // echo $sqllimit;
+//       echo $sqllimit;
        // echo $sqlsum;
         $qrlimit = $this->db->query($sqllimit);
         $qrsum = $this->db->query($sqlsum);
@@ -1234,6 +1262,25 @@ class Admin extends CI_Controller
         $data['page'] = $page;
         echo $this->load->view("admin/list_inout_v", $data, true);
 
+    }
+    public function printinout($id){
+        $sql="SELECT i.*,
+        COALESCE(u.pgfname,'') userfname, COALESCE(u.pglname,'') userlname,COALESCE(u.pgmobi,'') usermobi,COALESCE(u.pgaddr,'') useraddr,
+        COALESCE(s.pglong_name) storename
+         FROM v_inout i
+            LEFT JOIN pguser u
+            ON (u.id = i.inoutto and i.pgxuattype = 'khachhang') OR (u.id = i.inoutfrom AND i.pgxuattype='nhapkho')
+            LEFT JOIN pgstore s
+            ON (s.id = i.inoutto and i.pgxuattype='xuatkho') OR (s.id = i.inoutfrom and i.pgxuattype = 'thuhoi')
+        WHERE i.pginout_id = $id";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $data['aInout'] = $qr->result();
+        }
+        else{
+            $data['aInout'] = null;
+        }
+        echo $this->load->view("admin/printinout_v",$data,true);
     }
 
 }

@@ -1,6 +1,6 @@
 CREATE TABLE `pginoutcode` (
-  `id` tinyint(1) NOT NULL,
-  `pgmaxnhap` int(11) NOT NULL DEFAULT '0',
-  `pgmaxxuat` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `nhap` int(11) NOT NULL DEFAULT '0',
+  `xuat` int(11) NOT NULL DEFAULT '0',
+  `pgyear` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+INSERT INTO `pginoutcode` (xuat,nhap,pgyear) VALUES (0,0,2014);

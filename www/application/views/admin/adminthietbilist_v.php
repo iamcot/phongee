@@ -30,6 +30,18 @@
         </tr>
         <tr>
             <td>
+
+                <label>Đơn vị tính</label>
+                <input type="text" name="pgdvt" placeholder="Đơn vị tính" value="cái">
+            </td><td>
+
+                <label>Thời gian Bảo hành</label>
+                <input type="text" name="pgtgbh" placeholder="Thời gian Bảo hành" value="12 tháng">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
                 <label>Nước SX</label>
                 <input type="text" name="pgcountry" placeholder="Các nước sản xuất "></td>
             <td>
@@ -50,6 +62,7 @@
                 <div id="pgavatardemo"></div>
             </td>
         </tr>
+
         <tr>
             <td id="parent">
                 <label>Nhóm TB</label>
@@ -69,6 +82,7 @@
             </td>
 
         </tr>
+
         <tr>
             <td>
                 <div style="width: 50%;float: left">
@@ -81,6 +95,7 @@
                 </div>
             </td>
         </tr>
+
         <tr>
             <td>
                 <label>Thông tin</label>
@@ -138,6 +153,8 @@
         var pglong_info      = $("textarea[name=pglong_info]").val();
         var pgtech_info    = $("textarea[name=pgtech_info]").val();
         var pgtype_pk   = "";
+        var pgdvt     = $("input[name=pgdvt]").val().trim();
+        var pgtgbh     = $("input[name=pgtgbh]").val().trim();
 //        console.log($("input[name=pgtype]:checked").val());
         if(pgtype == "thietbi"){
         var pgnhomthietbi_id      = $("select[name=pgnhomthietbi_id]").val();
@@ -164,6 +181,8 @@
                     + "&pgshort_info=" + pgshort_info
                     + "&pgcolor=" + pgcolor
                     + "&pgyear=" + pgyear
+                    + "&pgdvt=" + pgdvt
+                    + "&pgtgbh=" + pgtgbh
                     + "&pgcountry=" + pgcountry
                     + "&pglong_info=" + encodeURIComponent(pglong_info)
                     + "&pgtech_info=" + encodeURIComponent(pgtech_info)
@@ -234,6 +253,8 @@
                     $("input[name=pgpic]").val(province.pgpic);
                     $("input[name=pgprice]").val(province.pgprice);
                     $("input[name=pgprice_old]").val(province.pgprice_old);
+                    $("input[name=pgdvt]").val(province.pgdvt);
+                    $("input[name=pgtgbh]").val(province.pgtgbh);
                     $("input[name=pgshort_info]").val(province.pgshort_info);
                     $("textarea[name=pglong_info]").val(province.pglong_info);
                     $("textarea[name=pgtech_info]").val(province.pgtech_info);

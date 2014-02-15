@@ -29,6 +29,18 @@
         </tr>
         <tr>
             <td>
+
+                <label>Đơn vị tính</label>
+                <input type="text" name="pgdvt" placeholder="Đơn vị tính" value="cái">
+            </td><td>
+
+                <label>Thời gian Bảo hành</label>
+                <input type="text" name="pgtgbh" placeholder="Thời gian Bảo hành" value="12 tháng">
+
+            </td>
+        </tr>
+        <tr>
+            <td>
 <!--                <input type="text" name="pgcolor" placeholder="Màu">-->
                 <label>Màu sắc</label>
                 <select name="pgcolor">
@@ -132,6 +144,8 @@
         var pgtech_info    = $("textarea[name=pgtech_info]").val();
         var pgthietbi_id      = $("input[name=pgthietbi_id]").val();
         var pgthietbi_code     = $("input[name=pgthietbicode]").val().trim();
+        var pgdvt     = $("input[name=pgdvt]").val().trim();
+        var pgtgbh     = $("input[name=pgtgbh]").val().trim();
 
         var edit = $("input[name=edit]").val();
 
@@ -152,6 +166,8 @@
                     + "&pgcountry=" + pgcountry
                     + "&pgshort_info=" + pgshort_info
                     + "&pgyear=" + pgyear
+                    + "&pgdvt=" + pgdvt
+                    + "&pgtgbh=" + pgtgbh
                     + "&pglong_info=" + encodeURIComponent(pglong_info)
                     + "&pgtech_info=" + encodeURIComponent(pgtech_info)
 
@@ -234,6 +250,8 @@
                     $("textarea[name=pglong_info]").val(province.pglong_info);
                     $("textarea[name=pgtech_info]").val(province.pgtech_info);
                     $("input[name=edit]").val(province.id);
+                    $("input[name=pgdvt]").val(province.pgdvt);
+                    $("input[name=pgtgbh]").val(province.pgtgbh);
                     $("input[name=pgthietbi_id]").val(province.pgthietbi_id);
                     $("input[name=pgthietbicode]").val(province.pgthietbi_code);
                     getthietbiselect(province.pgthietbi_id,province.pgyear,province.pgcolor,province.pgcountry);
@@ -330,6 +348,8 @@
                     $("input[name=pglongname]").val(province.pglong_name);
                     $("input[name=pgpic]").val(province.pgpic);
                     $("input[name=pgprice]").val(province.pgprice);
+                    $("input[name=pgdvt]").val(province.pgdvt);
+                    $("input[name=pgtgbh]").val(province.pgtgbh);
                     $("input[name=pgprice_old]").val(province.pgprice_old);
                     $("input[name=pgshort_info]").val(province.pgshort_info);
                     $("textarea[name=pglong_info]").val(province.pglong_info);

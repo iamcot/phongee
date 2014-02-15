@@ -5,7 +5,11 @@
         </thead>
         <? $i=1; foreach ($province as $row): ?>
                <tr class="<?=(($i%2==1))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
-                   id="tr<?=$row->pginout_id?>"><td><?=$row->id?></td><td><a href="javascript:edithoadon(<?=$row->pginout_id?>)"><?=$row->inoutcode?></a></td><td><?=date("d/m/Y H:i",$row->inoutdate)?></td><td><?=$row->inouttype?></td><td style="text-align:right"><a href="javascript:hideinout(<?=$row->pginout_id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a></td></tr>
+                   id="tr<?=$row->pginout_id?>"><td><?=$row->id?></td><td><a href="javascript:edithoadon(<?=$row->pginout_id?>)"><?=$row->inoutcode?></a></td><td><?=date("d/m/Y H:i",$row->inoutdate)?></td><td><?=$row->inouttype?></td>
+                   <td style="text-align:right">
+                       <b><a href="javascript:printinout(<?=$row->pginout_id?>)">Xuất hóa đơn</a></b>
+                       <!--<a href="javascript:hideinout(<?=$row->pginout_id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a> -->
+                   </td></tr>
         <? $i++; endforeach; ?>
     </table>
     <? if($sumpage > 1):?>

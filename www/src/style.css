@@ -540,3 +540,7 @@ label
 #tablerole{
     margin-top: 28px;
 }
+.clear{
+    display: block;
+    clear: both;
+}
