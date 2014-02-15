@@ -95,8 +95,8 @@
             <div id="date">Ngày lập: <?=date("d/m/Y",$first->inoutdate)?></div>
             <div class="info">
                 <span>Khách hàng (Buyer):</span>
-                <span><? if($first->pgxuattype=='khachhang' || $first->pgxuattype=='nhapkho'):?>
-                        <?=$first->userlname.' '.$first->userfname?>
+                <span><? if($first->pgxuattype=='khachhang' || $first->pgxuattype=='nhapkho'): ?>
+                        <?=$first->userlname.' '.$first->userfname ?>
                     <? elseif($first->pgxuattype =='khachle'):?> <?=$first->inoutto ?>
                     <? else:?>
                         <?=$first->storename?>
