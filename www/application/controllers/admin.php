@@ -122,6 +122,25 @@ class Admin extends CI_Controller
         if ($where != "") {
             if ($table == 'inout_details' || $table == 'moneytransfer')
                 $parent = array("pginout_id" => $where);
+            else if ($table == 'user') {
+                $arr = explode("-", $where);
+                if ($arr[0] == 'false')
+                    $otherwhere .= " pgrole!='admin' AND pgrole!='ketoantonghop' AND pgrole!='ketoankho' AND pgrole!='ketoan' AND pgrole!='staff' ";
+                if($arr[1] =='false')
+                {
+                    if($otherwhere!="") $otherwhere.=" AND ";
+                    $otherwhere.=" pgrole!='provider' ";
+                }
+                if($arr[2] =='false')
+                {
+                    if($otherwhere!="") $otherwhere.=" AND ";
+                    $otherwhere.=" pgrole!='custom' ";
+                }
+                if($arr[3]!=""){
+                    if($otherwhere!="") $otherwhere.=" AND ";
+                    $otherwhere.=" (pgusername like '%".$arr[3]."%' OR pglname like '%".$arr[3]."%' OR pgfname like '".$arr[3]."') ";
+                }
+            }
         }
         if ($this->session->userdata("pgstore_id") > 0) {
             if ($table == 'inout') {
@@ -133,6 +152,9 @@ class Admin extends CI_Controller
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
         }
+//        if($this->session->userdata("pgrole")!='admin' && $this->session->userdata("pgrole")!='ketoantonghop' ){
+//            $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
+//        }
         if (($rs = $this->Select($this->tbprefix.$table, $parent, ($page-1), array('field' => 'id', 'type' => 'DESC'),$otherwhere)) != null) {
             $data['province'] = $rs;
             $data['sumpage'] = $this->getSumPage($this->tbprefix.$table, $parent,$otherwhere);
@@ -155,7 +177,6 @@ class Admin extends CI_Controller
             else if ($table == 'v_moneytransfer')
                 $otherwhere .= "  pgstore_id = '" . $this->session->userdata("pgstore_id") . "' ";
         }
-
         $role = $this->mylibs->checkRole("pgrl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
@@ -472,11 +493,17 @@ class Admin extends CI_Controller
 //        }
         echo $kq;
     }
-    public function getStore($type='',$full = false){
+    public function getStore($type=''){
         if($this->mylibs->checkRole("pgrlstore")>= 1)
         $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
-        if($type!='' && $type!='all') $sql.= " AND pgtype='$type' ";
-        if(($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2) && !$full && $type!='kho' && $type!='all')
+        if($type == 'role'){
+            if($this->session->userdata("pgrole")=='ketoankho') $sql .=" AND pgtype='kho' ";
+            else if($this->session->userdata("pgrole")=='ketoan') $sql .=" AND pgtype='cuahang' ";
+
+        }
+        else if($type!='' && $type!='all') $sql.= " AND pgtype='$type' ";
+
+        if(($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2) && $type!='kho' && $type!='all')
              $sql.= " AND id =".$this->session->userdata("pgstore_id")."";
         $sql .= " ORDER BY pgorder ";
         $qr = $this->db->query($sql);
@@ -1114,7 +1141,7 @@ class Admin extends CI_Controller
             $data['aMoney'] = $qr->result();
         }
         else $data['aMoney'] = null;
-        $tmp = $this->getStore('',true);
+        $tmp = $this->getStore('all');
         $aStore = array();
         if ($tmp != null)
             foreach ($tmp as $v) {
@@ -1138,13 +1165,13 @@ class Admin extends CI_Controller
     }
     public function getStoreTransfer($store_id,$type,$page){
         if($type=='nhap')
-            $wherestore = " (pgxuattype !='khachhang' AND pgxuattype!='khachle' ) AND inoutto = $store_id ";
+            $wherestore = " inoutto = $store_id ";
         else if($type=='xuat')
-            $wherestore = " pgxuattype!='nhapkho'  AND inoutfrom = $store_id ";
+            $wherestore = " inoutfrom = $store_id ";
         else $wherestore = "";
-        if($wherestore != " ") $wherestore = " where ".$wherestore;
+       // if($wherestore != " ") $wherestore = " where ".$wherestore;
 
-        $sql="SELECT * FROM v_inout  $wherestore";
+        $sql="SELECT * FROM v_inout WHERE (pgxuattype ='thuhoi' OR pgxuattype='xuatkho') AND $wherestore";
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             $data['aInout'] = $qr->result();
@@ -1152,7 +1179,7 @@ class Admin extends CI_Controller
         else $data['aInout'] = null;
 
         $data['aMoney'] = null;
-        $tmp = $this->getStore('',true);
+        $tmp = $this->getStore('all');
         $aStore = array();
         if ($tmp != null)
             foreach ($tmp as $v) {
@@ -1174,7 +1201,7 @@ class Admin extends CI_Controller
                 FROM pguser u
                 LEFT JOIN pgrole r
                 ON r.pguser_id = u.id
-                WHERE u.`pgrole` = 'admin' OR u.`pgrole`='staff' OR u.pgrole = 'ketoan' OR u.pgrole = 'ketoantonghop'";
+                WHERE u.`pgrole` = 'admin' OR u.`pgrole`='staff' OR u.pgrole = 'ketoan' OR u.pgrole = 'ketoantonghop' OR u.pgrole = 'ketoankho'";
         $qr= $this->db->query($sql);
         if($qr->num_rows()>0){
             return $qr->result_array();
@@ -1271,6 +1298,21 @@ class Admin extends CI_Controller
 
 
         if($sfull!="" && $otherwhere != "") $otherwhere = " AND ".$otherwhere;
+        $ktkho = "";
+        if($this->session->userdata('pgrole')=='ketoankho' && $this->session->userdata("pgstore_id") == 0){
+            $ktkho ="(
+                    (
+                        (a.pgxuattype='thuhoi' OR a.inouttype='xuat')
+                        AND a.inoutfrom in (SELECT x1.id FROM pgstore x1 WHERE x1.pgtype='kho')
+                    )
+                    OR
+                    (
+                        (a.inouttype='nhap' OR a.pgxuattype='cuahang'  OR a.pgxuattype='xuatkho' )
+                        AND a.inoutto in (SELECT x2.id FROM pgstore x2 WHERE x2.pgtype='kho')
+                    )
+                )";
+        }
+        if(($sfull!="" ||  $otherwhere != "") && $ktkho!="") $ktkho = " AND ".$ktkho;
         $sqlcommon=" FROM (
                 Select i.*,
                 SUM(m.`pgamount`) sumthanhtoan
@@ -1280,7 +1322,7 @@ class Admin extends CI_Controller
 
                 GROUP BY i.pginout_id
                 ) a
-                 ".(($sfull!="" || $otherwhere !="")?'WHERE':'')." $sfull $otherwhere "
+                 ".(($sfull!="" || $otherwhere !="" || $ktkho!="")?'WHERE':'')." $sfull $otherwhere $ktkho"
                 ;
         $sqlsum = "SELECT count(a.pginout_id) sumrow ".$sqlcommon;
         $sqllimit = "SELECT a.* ".$sqlcommon."ORDER BY a.pginout_id DESC

@@ -196,7 +196,7 @@
         $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"></select>');
         $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"></select>');
         if(type == 'khachhang'){
-            getStore('from','all');
+            getStore('from','role');
             getCustomer();
             $("#targetoption").show();
         }
@@ -215,7 +215,7 @@
         }
 		else{
             $("#pgtospan").html(' <input type="text" name="pgto"  style="width: 90%;display: inline-block" placeholder="Tên khách hàng" value="">');
-            getStore('from','cuahang');
+            getStore('from','role');
 			$("input[name=pgto]").val($('input[name=pgtotmp]').val());
             $("#xuatoption").show();
             $("#targetoption").show();
@@ -653,7 +653,7 @@
                     });
                     $("select[name=pg"+target+"]").html(option);
                     $("select[name=pg"+target+"]").val($("input[name=pg"+target+"tmp]").val());
-                    if(userstoreid>0 )
+                    if(userstoreid>0 && typestore != 'kho')
                         $("select[name=pg"+target+"]").val(userstoreid);
 //                    if($("input[name=pgtypexuat]:checked").val()!='xuatkho' || target =='to'){
                     $("select[name=pg"+target+"]").chosen({width:"100%"});

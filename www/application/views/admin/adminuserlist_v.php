@@ -27,7 +27,7 @@
                     <?
                     $aRoleOrder = $this->config->item("aRoleOrder");
                     foreach($this->config->item('aRole') as $k=>$v):
-                        if($aRoleOrder[$this->session->userdata("pgrole")] > $aRoleOrder[$k] || $this->session->userdata("pgrole") == 'admin'):?>
+                        if($aRoleOrder[$this->session->userdata("pgrole")] >= $aRoleOrder[$k] || $this->session->userdata("pgrole") == 'admin'):?>
                     <option value="<?=$k?>"><?=$v?></option>
                     <? endif;?>
                     <? endforeach;?>
@@ -89,10 +89,29 @@
 </fieldset>
 <fieldset>
     <legend>Danh sách</legend>
+    <div>
+        <span style="display: inline-block;">
+        <input type="checkbox" name="pglstaff" id="pglstaff" checked="checked">
+        <label for="pglstaff">Nhân viên</label>
+            </span>
+        <span style="display: inline-block;">
+        <input type="checkbox" name="pglprovider" id="pglprovider" checked="checked">
+        <label for="pglprovider">Nhà cung cấp</label>
+            </span>
+        <span style="display: inline-block;">
+        <input type="checkbox" name="pglcustom" id="pglcustom" checked="checked">
+        <label for="pglcustom">Khách hàng</label>
+            </span>
+
+        <span style="display: inline-block;width:25%">
+        <input type="text" name="pglkeyword" placeholder="Từ khóa" style="display: inline-block;height: 28px;" ondblclick="this.value=''">
+            </span>
+    </div>
     <div id="list_province"></div>
 </fieldset>
 <script>
     $(function () {
+        $("input").customInput();
         load(1);
     });
     function save() {
@@ -149,7 +168,7 @@
     }
     function load(page) {
         addloadgif("#loadstatus");
-        $("#list_province").load("<?=base_url()?>admin/load/user/" + page, function () {
+        $("#list_province").load("<?=base_url()?>admin/load/user/" + page+"/"+$("#pglstaff").prop("checked")+"-"+$("#pglprovider").prop("checked")+"-"+$("#pglcustom").prop("checked")+"-"+$("input[name=pglkeyword]").val(), function () {
             removeloadgif("#loadstatus");
         });
         $("input[name=currpage]").val(page);

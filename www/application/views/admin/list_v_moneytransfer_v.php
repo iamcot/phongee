@@ -3,7 +3,7 @@
     ?>
     <table style="text-align: right" class="tblist">
         <thead>
-        <tr><td>ID</td><td>Ngày</td><td>Từ Cửa hàng </td><td>Đối tượng </td></td><td>Thanh toán </td><td>Loại tiền</td><td>Mã HĐ</td><td>Loại</td><td>Ghi chú</td></tr>
+        <tr><td>ID</td><td>Ngày</td><td>CH Nguồn</td><td>CH đích</td><td>Đối tượng </td></td><td>Thanh toán </td><td>Loại tiền</td><td>Mã HĐ</td><td>Loại</td><td>Ghi chú</td></tr>
         </thead>
         <? $i=1; foreach ($province as $row): $inout_id = $row->pginout_id;?>
                <tr class="<?=(($i%2==1))?'odd':'even'?> <?=($row->pgdeleted==0?'':'trdelete')?>"
@@ -11,7 +11,7 @@
                    <td><?=$row->id?></td>
                    <td><?=date("d/m/Y H:i",($row->pgdate))?></td>
                    <td><?=(($row->storename!="")?$row->storename:"Tổng kho")?></td>
-<!--                   <td>--><?//=$row->storenameall?><!--</td>-->
+                   <td><?=$row->storenameall?></td>
                    <td><?=(($row->username)?$row->username:"Tổng kho")?></td>
                    <td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',',')?></a></td>
                    <td><?=$amoneytype[$row->pgmoneytype][1]?></td>

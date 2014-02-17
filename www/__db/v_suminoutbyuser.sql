@@ -12,6 +12,7 @@ j.pghanthanhtoan,
 j.inoutdate,
 j.inoutcode,
 j.pgdeleted,
+j.pgcreateuser_id,
 SUM(CASE WHEN (j.inouttype='nhap') THEN (j.pgcount*j.pgprice) ELSE ( 0 ) END) sumphaitra,
 SUM(CASE WHEN (j.inouttype='xuat') THEN (j.pgcount*j.pgprice) ELSE ( 0 ) END) sumduocnhan
  FROM  v_inout j
