@@ -196,7 +196,7 @@
         $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"></select>');
         $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"></select>');
         if(type == 'khachhang'){
-            getStore('from','cuahang');
+            getStore('from','all');
             getCustomer();
             $("#targetoption").show();
         }
@@ -207,7 +207,7 @@
             $("#targetoption").show();
         }
         else if(type == 'xuatkho'){
-            $("#pgfromspan").html('<label style="width:40%">Kho Tổng</label> <select name="pgfrom"  style="width: 40%;display: none" data-placeholder="Nơi chuyển"></select>');
+//            $("#pgfromspan").html('<label style="width:40%">Kho Tổng</label> <select name="pgfrom"  style="width: 40%;display: none" data-placeholder="Nơi chuyển"></select>');
             getStore('from','kho');
             getStore('to','cuahang');
             $("#xuatoption").show();
@@ -645,23 +645,20 @@
                 else {
                     var userstoreid = <?=(($this->session->userdata("pgstore_id")>0)?$this->session->userdata("pgstore_id"):0)?>;
                     var province = eval(msg);
-//                    console.log(userstoreid);
                     if(userstoreid == 0 || typestore=='kho')
-                        var option = "<option value='-1'>Chọn cửa hàng</option>";
+                        var option = "<option value='0'>Chọn cửa hàng</option>";
                     else var option = "";
                     $.each(province, function (index, store){
-//                        console.log(store);
                         option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
                     });
                     $("select[name=pg"+target+"]").html(option);
                     $("select[name=pg"+target+"]").val($("input[name=pg"+target+"tmp]").val());
-                    if(userstoreid>0 && typestore!='kho')
+                    if(userstoreid>0 )
                         $("select[name=pg"+target+"]").val(userstoreid);
-//                    alert( $("select[name=pg"+target+"]").val());
-                    if($("input[name=pgtypexuat]:checked").val()!='xuatkho' || target =='to'){
+//                    if($("input[name=pgtypexuat]:checked").val()!='xuatkho' || target =='to'){
                     $("select[name=pg"+target+"]").chosen({width:"100%"});
                     $("select[name=pg"+target+"]").trigger("chosen:updated");
-                    }
+//                    }
 
 
 
@@ -820,7 +817,7 @@
                   //  console.log(pgtype);
                     if(pgtype=='xuat'){
                         checkXuat(id,pgtypexuat,pgfrom,pgto,pginout_id);
-                        if(pgtypexuat!='xuatkho')
+                       // if(pgtypexuat!='xuatkho')
                             gettonkho(id,pgfrom,false);
                     }
                     else{
@@ -944,6 +941,9 @@
     });
 });
     function blursninput(val){
+        if(val.trim()==""){
+            return;
+        }
         disableinput();
         getThietbiFromSn(val.trim());
         $("input[name=pgcount]").val("1");
@@ -979,20 +979,19 @@
                         break;
                     case "1": break;
                     default :
-                        if(xuattype=='xuatkho'){
-                            if(parseInt(msg)>0){
-                              //  alert($('select[name=pgfrom]').val()+"@@"+msg);
-                                var currkho = ($('select[name=pgfrom]').val());
-//                                console.log(currkho+"@"+msg);
-                                if(currkho == null || currkho == -1 || currkho == msg || $("input[name=idhoadon]").val() ==''){
-                                $('select[name=pgfrom]').val(msg);
-                                gettonkho(sn,msg,false);
-                                }
-                                else{
-                                    alert("Hai sản phẩm cùng 1 đơn hàng phải cùng 1 kho.");
-                                }
-                            }
-                        }
+//                        if(xuattype=='xuatkho'){
+//                            if(parseInt(msg)>0){
+//                                var currkho = ($('select[name=pgfrom]').val());
+//                                if(currkho == null || currkho == -1 || currkho == msg || $("input[name=idhoadon]").val() ==''){
+//                                $('select[name=pgfrom]').val(msg);
+//                                $('select[name=pgfrom]').trigger("chosen:updated");
+//                                gettonkho(sn,msg,false);
+//                                }
+//                                else{
+//                                    alert("Hai sản phẩm cùng 1 đơn hàng phải cùng 1 kho.");
+//                                }
+//                            }
+//                        }
                         break;
                 }
             }

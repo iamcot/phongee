@@ -36,9 +36,9 @@
             foreach($aReport as $report):?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
                     <td ><?=$report->pglong_name?></td>
-                    <td><?=number_format($report->sumnhap,0,'.',',')?></td>
+                    <td><a href="javascript:getDetails(<?=$report->id?>,'nhap')"><?=number_format($report->sumnhap,0,'.',',')?></td>
                     <td><?=number_format($report->sumnhap - $report->tranhap,0,'.',',')?></td>
-                    <td><?=number_format($report->sumxuat,0,'.',',')?></td>
+                    <td><a href="javascript:getDetails(<?=$report->id?>,'xuat')"><?=number_format($report->sumxuat,0,'.',',')?></td>
                     <td><?=number_format($report->sumxuat - $report->traxuat,0,'.',',')?></td>
                     <td><?=number_format($report->tiennhap,0,'.',',')?> </td>
                     <td><?=number_format($report->tienxuat,0,'.',',')?></td>

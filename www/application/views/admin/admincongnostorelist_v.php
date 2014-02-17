@@ -100,8 +100,8 @@ function getStore(){
         }
     });
 }
-function getDetails(userid){
-    $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransfer/"+userid,function(){$("#dialog").dialog("open")});
+function getDetails(storeid,type){
+    $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransfer/"+storeid+"/"+type,function(){$("#dialog").dialog("open")});
 
 }
 </script>

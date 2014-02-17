@@ -34,3 +34,8 @@ ALTER TABLE `pgstore`
   ADD COLUMN `pgdvt` VARCHAR(20) DEFAULT 'cái'   NULL AFTER `pgpartno`,
   ADD COLUMN `pgtgbh` VARCHAR(50) DEFAULT '12 tháng'   NULL AFTER `pgdvt`;
 
+/*16/2*/
+  /* 2:40:47 PM localhost */ ALTER TABLE `pgmoneytransfer` ADD `pgstore_idall` INT  NOT NULL  DEFAULT '0'  AFTER `pgstore_id`;
+ALTER TABLE  `pginoutcode` ADD  `id` INT NOT NULL FIRST ,
+ADD PRIMARY KEY (  `id` ) ;
+

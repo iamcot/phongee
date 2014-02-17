@@ -213,6 +213,9 @@ header h2{
 .tblist thead{
     background: #fff;
 }
+.tblist a{
+    text-decoration: underline !important;
+}
 #content table thead{
     border-bottom: 2px solid #ddd;
     /*background: #cccccc url(smoothness/images/ui-bg_highlight-soft_75_cccccc_1x100.png) 50% 50% repeat-x;*/

@@ -475,8 +475,8 @@ class Admin extends CI_Controller
     public function getStore($type='',$full = false){
         if($this->mylibs->checkRole("pgrlstore")>= 1)
         $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." WHERE pgdeleted=0 ";
-        if($type!='') $sql.= " AND pgtype='$type' ";
-        if(($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2) && !$full && $type!='kho')
+        if($type!='' && $type!='all') $sql.= " AND pgtype='$type' ";
+        if(($this->mylibs->checkRole("pgrlstore")== 3 || $this->mylibs->checkRole("pgrlstore")== 2) && !$full && $type!='kho' && $type!='all')
              $sql.= " AND id =".$this->session->userdata("pgstore_id")."";
         $sql .= " ORDER BY pgorder ";
         $qr = $this->db->query($sql);
@@ -1132,6 +1132,41 @@ class Admin extends CI_Controller
     }
     public function jsgetUserTransfer($user_id){
         echo $this->getUserTransfer($user_id);
+    }
+    public function jsgetStoreTransfer($store_id,$type,$page=1){
+        echo $this->getStoreTransfer($store_id,$type,$page);
+    }
+    public function getStoreTransfer($store_id,$type,$page){
+        if($type=='nhap')
+            $wherestore = " (pgxuattype !='khachhang' AND pgxuattype!='khachle' ) AND inoutto = $store_id ";
+        else if($type=='xuat')
+            $wherestore = " pgxuattype!='nhapkho'  AND inoutfrom = $store_id ";
+        else $wherestore = "";
+        if($wherestore != " ") $wherestore = " where ".$wherestore;
+
+        $sql="SELECT * FROM v_inout  $wherestore";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $data['aInout'] = $qr->result();
+        }
+        else $data['aInout'] = null;
+
+        $data['aMoney'] = null;
+        $tmp = $this->getStore('',true);
+        $aStore = array();
+        if ($tmp != null)
+            foreach ($tmp as $v) {
+                $aStore[($v['id'])] = $v;
+            }
+        $data['aStore'] = $aStore;
+        $tmp = $this->getUserList();
+        $aStore = array();
+        if ($tmp != null)
+            foreach ($tmp as $v) {
+                $aStore[($v['id'])] = $v;
+            }
+        $data['aCustom'] = $aStore;
+        return $this->load->view('admin/list_usertransfer_v',$data,true);
     }
     public function getstaffrole(){
         $sql="select u.pgusername,u.id userid,
