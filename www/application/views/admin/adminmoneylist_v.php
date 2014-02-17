@@ -22,11 +22,11 @@
                 <label for="xuatradio">Rút tiền</label>
                  </span>
                 <? endif;?>
-                <div id="pgstoreiddivall" style="display: block;clear:both;">
-                    <select name="pgstore_idall" style="width: 100%;display: inline-block" data-placeholder="Cửa hàng">
-
-                    </select>
-                </div>
+<!--                <div id="pgstoreiddivall" style="display: block;clear:both;">-->
+<!--                    <select name="pgstore_idall" style="width: 100%;display: inline-block" data-placeholder="Cửa hàng">-->
+<!---->
+<!--                    </select>-->
+<!--                </div>-->
                 <br>
                 <div id="pgmoneytypediv" style="display: block;clear:both;">
                     <select name="pgmoneytype" style="width: 100%;display: inline-block" data-placeholder="Loại tiền" onchange="changemoneytype(this.value)">
@@ -111,7 +111,7 @@
     });
     $(function () {
         getStore('');
-        getStore('all');
+//        getStore('all');
         getUser();
         loadmoneytransfer(1,0);
         $("input[name=pgdate]").val(mygetdate());
@@ -124,7 +124,7 @@
         var pgamount  = $("input[name=pgamount]").val().replace(/ /g,'');
         var pginfo      = $("textarea[name=pginfo]").val();
         var pgstore_id      = $("select[name=pgstore_id]").val();
-        var pgstore_idall      = $("select[name=pgstore_idall]").val();
+//        var pgstore_idall      = $("select[name=pgstore_idall]").val();
         var pguser_id      = $("select[name=pguser_id]").val();
         var arrmoney      = $("select[name=pgmoneytype]").val().split("|");
         var pgmoneytype = arrmoney[0];
@@ -169,7 +169,7 @@
                     + "&pgdate=" + pgdate
                     + "&pgamount=" + pgamount
                     + "&pgstore_id=" + pgstore_id
-                    + "&pgstore_idall=" + pgstore_idall
+//                    + "&pgstore_idall=" + pgstore_idall
                     + "&pginfo=" + pginfo
                     + "&pgtype=" + pgtype
                     + "&pguser_id=" + pguser_id
@@ -218,7 +218,7 @@
         $("select[name=pgstore_id]").prop("disabled",false);
         $("select[name=pguser_id]").prop("disabled",false);
         $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
-        $('select[name=pgstore_idall]').val(0).trigger("chosen:updated");
+//        $('select[name=pgstore_idall]').val(0).trigger("chosen:updated");
         $('select[name=pguser_id]').val(0).trigger("chosen:updated");
 
 
