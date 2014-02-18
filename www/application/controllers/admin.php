@@ -178,11 +178,12 @@ class Admin extends CI_Controller
             else if ($table == 'v_moneytransfer')
                 $otherwhere .= "  pgstore_id = '" . $this->session->userdata("pgstore_id") . "' ";
         }
-//        if($this->session->userdata('pgrole')!='admin'){
-//            if ($table == 'v_moneytransfer'){
-//                $otherwhere .= "  pgstore_id = '" . $this->session->userdata("pgstore_id") . "' ";
-//            }
-//        }
+        if ($table == 'v_moneytransfer'){
+            if($otherwhere!="") $otherwhere .= " AND ";
+            if($this->session->userdata('pgrole')=='ketoankho')
+                $otherwhere .= "  pgstore_id in (SELECT id from pgstore where pgtype='kho') ";
+
+        }
 
         $role = $this->mylibs->checkRole("pgrl".$table);
         if($role == 1 || $role == 2){
