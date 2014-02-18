@@ -172,11 +172,18 @@ class Admin extends CI_Controller
         }
         if ($this->session->userdata("pgstore_id") > 0) {
             if ($table == 'v_inout') {
-                $otherwhere .= "  (((pgxuattype='thuhoi' OR inouttype='xuat') AND inoutfrom = '" . $this->session->userdata("pgstore_id") . "') OR ((inouttype='nhap' OR pgxuattype='cuahang' OR pgxuattype='xuatkho') AND inoutto = " . $this->session->userdata("pgstore_id") . ")) ";
+                $otherwhere .= "  (((pgxuattype='thuhoi' OR inouttype='xuat') AND inoutfrom = '" . $this->session->userdata("pgstore_id") . "')
+                OR ((inouttype='nhap' OR pgxuattype='cuahang' OR pgxuattype='xuatkho') AND inoutto = " . $this->session->userdata("pgstore_id") . ")) ";
             }
             else if ($table == 'v_moneytransfer')
                 $otherwhere .= "  pgstore_id = '" . $this->session->userdata("pgstore_id") . "' ";
         }
+//        if($this->session->userdata('pgrole')!='admin'){
+//            if ($table == 'v_moneytransfer'){
+//                $otherwhere .= "  pgstore_id = '" . $this->session->userdata("pgstore_id") . "' ";
+//            }
+//        }
+
         $role = $this->mylibs->checkRole("pgrl".$table);
         if($role == 1 || $role == 2){
             $parent['pgcreateuser_id'] = $this->session->userdata('pguser_id');
@@ -1112,12 +1119,27 @@ class Admin extends CI_Controller
                 break;
             }
             else {
-                if($suser == '') $suser.=' WHERE ';
+                if($suser == '') $suser.=' WHERE ( ';
                 else $suser .=' OR ';
-                $suser.=" id = '$user' ";
+                $suser.=" c.id = '$user' ";
             }
         }
-        $sql = "SELECT * FROM v_congno_store $suser";
+        if($suser!="") $suser.=')';
+        $tiennhap = "";
+        $tienxuat = "";
+        if($this->session->userdata("pgrole")=='ketoan'){
+            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 ";
+            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 ";
+        }
+        else{
+            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 ";
+            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 ";
+
+        }
+        $sql = "SELECT c.*,
+         ($tiennhap) tiennhap,
+         ($tienxuat) tienxuat
+         FROM v_congno_store c $suser group by c.id";
         //echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
@@ -1163,6 +1185,9 @@ class Admin extends CI_Controller
     public function jsgetStoreTransfer($store_id,$type,$page=1){
         echo $this->getStoreTransfer($store_id,$type,$page);
     }
+    public function jsgetStoreTransferMoney($store_id,$type,$page=1){
+        echo $this->getStoreTransferMoney($store_id,$type,$page);
+    }
     public function getStoreTransfer($store_id,$type,$page){
         if($type=='nhap')
             $wherestore = " inoutto = $store_id ";
@@ -1179,6 +1204,48 @@ class Admin extends CI_Controller
         else $data['aInout'] = null;
 
         $data['aMoney'] = null;
+        $tmp = $this->getStore('all');
+        $aStore = array();
+        if ($tmp != null)
+            foreach ($tmp as $v) {
+                $aStore[($v['id'])] = $v;
+            }
+        $data['aStore'] = $aStore;
+        $tmp = $this->getUserList();
+        $aStore = array();
+        if ($tmp != null)
+            foreach ($tmp as $v) {
+                $aStore[($v['id'])] = $v;
+            }
+        $data['aCustom'] = $aStore;
+        return $this->load->view('admin/list_usertransfer_v',$data,true);
+    }
+    public function getStoreTransferMoney($store_id,$type,$page){
+        $data['aInout'] = null;
+        if ($type == 'nhap') {
+            if ($this->session->userdata('pgrole') == 'ketoan')
+                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='nhap' AND pgstore_id=$store_id AND inout_id=0) )";
+            else
+                $wherestore = " ( inoutxuattype='xuatkho' OR (pgtype='nhap' AND pgstore_idall=$store_id  AND inout_id=0) )";
+        }
+        else if ($type == 'xuat') {
+            if ($this->session->userdata('pgrole') == 'ketoan')
+                $wherestore = "( inoutxuattype='xuatkho' OR (pgtype='xuat' AND pgstore_id=$store_id AND inout_id=0) ) ";
+            else
+                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='xuat' AND pgstore_idall=$store_id  AND inout_id=0) )";
+
+        }
+        else $wherestore = "";
+       // if($wherestore != " ") $wherestore = " where ".$wherestore;
+
+        $sql="SELECT * FROM v_tienquy WHERE (pgstore_id=$store_id OR pgstore_idall=$store_id) AND $wherestore";
+//        echo $sql;
+        $qr = $this->db->query($sql);
+
+        if($qr->num_rows()>0){
+            $data['aMoney'] = $qr->result();
+        }
+        else $data['aMoney'] = null;
         $tmp = $this->getStore('all');
         $aStore = array();
         if ($tmp != null)
@@ -1357,7 +1424,13 @@ class Admin extends CI_Controller
         else{
             $data['aInout'] = null;
         }
+
         echo $this->load->view("admin/printinout_v",$data,true);
+    }
+    public function barcode($content = ""){
+        $this->load->library('zend');
+        $this->zend->load('Zend/Barcode');
+        return Zend_Barcode::render('code39', 'image', array('text' => $content), array());
     }
 
 }

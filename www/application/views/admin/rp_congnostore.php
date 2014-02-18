@@ -22,10 +22,8 @@
         <thead>
             <tr>
                 <td >Cửa hàng</td>
-                <td>Tổng nhập</td>
-                <td>Nợ nhập</td>
-                <td>Tổng xuất</td>
-                <td>Nợ xuất</td>
+                <td>Tổng nhập hàng</td>
+                <td>Tổng xuất hàng </td>
                 <td>Tiền nhập </td>
                 <td>Tiền xuất</td>
             </tr>
@@ -34,18 +32,36 @@
             <? $i=1;
 
             foreach($aReport as $report):?>
+                <? if($this->session->userdata("pgrole")=='ketoan'):?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
-                    <td ><?=$report->pglong_name?></td>
-                    <td><a href="javascript:getDetails(<?=$report->id?>,'nhap')"><?=number_format($report->sumnhap,0,'.',',')?></td>
-                    <td><?=number_format($report->sumnhap - $report->tranhap,0,'.',',')?></td>
-                    <td><a href="javascript:getDetails(<?=$report->id?>,'xuat')"><?=number_format($report->sumxuat,0,'.',',')?></td>
-                    <td><?=number_format($report->sumxuat - $report->traxuat,0,'.',',')?></td>
-                    <td><?=number_format($report->tiennhap,0,'.',',')?> </td>
-                    <td><?=number_format($report->tienxuat,0,'.',',')?></td>
+                    <td rowspan="2"><?=$report->pglong_name?></td>
+                    <td><a href="javascript:getDetails(<?=$report->id?>,'nhap')"><?=number_format($report->sumnhap,0,'.',',')?><a/></td>
+                    <td><a href="javascript:getDetails(<?=$report->id?>,'xuat')"><?=number_format($report->sumxuat,0,'.',',')?><a/></td>
+                    <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'nhap')"><?=number_format($report->tiennhap+$report->traxuat,0,'.',',')?><a/> </td>
+                    <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'xuat')"><?=number_format($report->tienxuat+$report->tranhap,0,'.',',')?><a/></td>
                 </tr>
+                <tr>
+                    <td colspan="4">
+                        Tổng nợ: <b><?=number_format(($report->sumnhap - $report->sumxuat + ($report->tiennhap+$report->traxuat) - ($report->tienxuat+$report->tranhap) ),0,'.',',')?></b>
+                    </td>
+                </tr>
+                    <?else:?>
+                    <tr class="<?=(($i%2==1))?'odd':''?>">
+                        <td rowspan="2"><?=$report->pglong_name?></td>
+                        <td><a href="javascript:getDetails(<?=$report->id?>,'xuat')"><?=number_format($report->sumxuat,0,'.',',')?><a/></td>
+                        <td><a href="javascript:getDetails(<?=$report->id?>,'nhap')"><?=number_format($report->sumnhap,0,'.',',')?><a/></td>
+                        <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'nhap')"><?=number_format($report->tiennhap+$report->tranhap,0,'.',',')?><a/> </td>
+                        <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'xuat')"><?=number_format($report->tienxuat+$report->traxuat,0,'.',',')?><a/></td>
+                    </tr>
+                    <tr>
+                        <td colspan="4">
+                            Tổng nợ: <b><?=number_format(($report->sumxuat - $report->sumnhap + ($report->tiennhap+$report->tranhap) - ($report->tienxuat+$report->traxuat) ),0,'.',',')?></b>
+                        </td>
+                    </tr>
+                    <? endif;?>
         <?
 
-                $i++;endforeach;?>
+                $i+=2;endforeach;?>
 
         </tbody>
     </table>

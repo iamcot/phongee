@@ -51,7 +51,9 @@
         <tr>
             <td>Thời gian </td>
             <td>Số tiền  </td>
+            <td>Cửa hàng </td>
             <td>Loại  </td>
+            <td>Cửa hàng/Đối tác  </td>
             <td>Ghi chú </td>
         </tr>
         </thead>
@@ -61,8 +63,10 @@
             $i=1;foreach($aMoney as $money):?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
                     <td><?=date("d/m/Y",$money->pgdate)?></td>
-                    <td><?=number_format($money->pgamount*$money->pgmoneyrate,0,'.',',')?>  (<?=$moneyType[$money->pgmoneytype][1]?>)</td>
+                    <td><?=number_format($money->pgamount,0,'.',',')?>  (<?=$moneyType[$money->pgmoneytype][1]?>)</td>
+                    <td><?=$aStore[$money->pgstore_id]['pglong_name']?></td>
                     <td><?=$money->pgtype?></td>
+                    <td><?=((isset($money->pguser_id)  && $money->pguser_id>0)?$aCustom[$money->pguser_id]['pgfname']:$aStore[$money->pgstore_idall]['pglong_name'])?></td>
                     <td><?=$money->pginfo?></td>
                 </tr>
         <? $i++;endforeach;?>

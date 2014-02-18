@@ -104,6 +104,10 @@ function getDetails(storeid,type){
     $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransfer/"+storeid+"/"+type,function(){$("#dialog").dialog("open")});
 
 }
+function getDetailsMoney(storeid,type){
+    $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransferMoney/"+storeid+"/"+type,function(){$("#dialog").dialog("open")});
+
+}
 </script>
 <div id="dialog">
 

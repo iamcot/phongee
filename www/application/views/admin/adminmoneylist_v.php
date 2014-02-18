@@ -19,7 +19,7 @@
                 <? if($this->mylibs->checkRole('pgrbxuattien')):?>
                  <span style="display: inline-block;;float: left;">
                 <input type="radio" name="pgtype" value="xuat"  id="xuatradio">
-                <label for="xuatradio">Rút tiền</label>
+                <label for="xuatradio">Xuất tiền</label>
                  </span>
                 <? endif;?>
                 <div id="pgstoreiddivall" style="display: block;clear:both;">
@@ -107,7 +107,16 @@
             changeYear: true,
             dateFormat: "yy/mm/dd"
         });
-
+        $("input[name=pginout_code]").bind('paste', function(event) {
+            var _this = this;
+            // Short pause to wait for paste to complete
+            setTimeout( function() {
+                var val = $(_this).val().trim();
+                $(_this).val(val);
+                //if(val.length >= 8)
+                loadSumPrice(val);
+            }, 100);
+        });
     });
     $(function () {
         getStore('role');
@@ -215,8 +224,10 @@
         $("input[name=pgdate]").val(mygetdate());
         $("input[name=pghour]").val(mygettime());
         $("input[name=edit]").val("");
-        $("select[name=pgstore_id]").prop("disabled",false);
-        $("select[name=pguser_id]").prop("disabled",false);
+        $("select[name=pgstore_id]").prop("disabled",false).trigger("chosen:updated");
+        $("select[name=pguser_id]").prop("disabled",false).trigger("chosen:updated");
+        $("select[name=pgstore_idall]").prop("disabled",false).trigger("chosen:updated");
+
         $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
         $('select[name=pgstore_idall]').val(0).trigger("chosen:updated");
         $('select[name=pguser_id]').val(0).trigger("chosen:updated");
@@ -232,28 +243,49 @@
                    var price = eval(msg);
 
                    var sessstoreid = <?=$this->session->userdata("pgstore_id")?>;
+                   $("label").removeClass("checked");
+                   var typemoney = '';
+                   if(price.type == 'nhap') typemoney = 'xuat';
+                   else typemoney = 'nhap';
+
                    switch(price.pgxuattype){
                        case 'nhapkho':
                            if(sessstoreid > 0 && sessstoreid != price.pgto){
                                alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
                                return;
                            }
-                           $("select[name=pgstore_id]").val(price.pgto);
-                           $("select[name=pguser_id]").val(price.pgfrom);
+                           $("select[name=pgstore_id]").val(price.pgto).trigger("chosen:updated");
+                           $("select[name=pguser_id]").val(price.pgfrom).trigger("chosen:updated");
                            break;
                        case 'thuhoi':
-                           if(sessstoreid > 0 && sessstoreid != price.pgfrom){
+                           if(sessstoreid > 0 && sessstoreid != price.pgfrom && sessstoreid != price.pgto ){
                                alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
                                return;
                            }
-                           $("select[name=pgstore_id]").val(price.pgfrom);
+                           <? if($this->session->userdata('pgrole')=='ketoan'):?>
+                           $("select[name=pgstore_id]").val(price.pgfrom).trigger("chosen:updated");
+                           $("select[name=pgstore_idall]").val(price.pgto).trigger("chosen:updated");
+                           if(price.type == 'nhap') typemoney = 'nhap';
+                           else typemoney = 'xuat';
+                           <? else:?>
+                           $("select[name=pgstore_id]").val(price.pgto).trigger("chosen:updated");
+                           $("select[name=pgstore_idall]").val(price.pgfrom).trigger("chosen:updated");
+                           <? endif;?>
                            break;
                        case 'xuatkho':
-                           if(sessstoreid > 0 && sessstoreid != price.pgto){
+                           if(sessstoreid > 0 && sessstoreid != price.pgto && sessstoreid != price.pgfrom){
                                alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
                                return;
                            }
-                           $("select[name=pgstore_id]").val(price.pgto);
+                           <? if($this->session->userdata('pgrole')=='ketoan'):?>
+                           $("select[name=pgstore_id]").chosen().val(price.pgto).trigger("chosen:updated");
+                           $("select[name=pgstore_idall]").chosen().val(price.pgfrom).trigger("chosen:updated");
+                           if(price.type == 'nhap') typemoney = 'nhap';
+                           else typemoney = 'xuat';
+                           <? else:?>
+                           $("select[name=pgstore_id]").chosen().val(price.pgfrom).trigger("chosen:updated");
+                           $("select[name=pgstore_idall]").chosen().val(price.pgto).trigger("chosen:updated");
+                           <? endif;?>
                            break;
                        case 'cuahang':
                            break;
@@ -262,34 +294,34 @@
                                alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
                                return;
                            }
-                           $("select[name=pgstore_id]").val(price.pgfrom);
-                           $("select[name=pguser_id]").val(price.pgto);
+                           $("select[name=pgstore_id]").val(price.pgfrom).trigger("chosen:updated");
+                           $("select[name=pguser_id]").val(price.pgto).trigger("chosen:updated");
                            break;
                        case 'khachle':
                            if(sessstoreid > 0 && sessstoreid != price.pgfrom){
                                alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
                                return;
                            }
-                           $("select[name=pgstore_id]").val(price.pgfrom);
+                           $("select[name=pgstore_id]").val(price.pgfrom).trigger("chosen:updated");
                            break;
                        default:
                            alert("Hóa đơn không đúng");
                            return;
                            break;
                    }
+
+                   $("#"+typemoney+"radio").prop('checked', true);
+                   $("label[for="+typemoney+"radio]").addClass("checked");
+
                    $("input[name=pgsumprice]").val(price.sum);
                    $("input[name=pgsumremain]").val(price.remain);
                    $("input[name=pginout_id]").val(price.id);
 //                $("input[name=pgtypethanhtoan]").val(price.type);
-                   $("label").removeClass("checked");
-                   var typemoney = '';
-                   if(price.type == 'nhap') typemoney = 'xuat';
-                   else typemoney = 'nhap';
-                   $("#"+typemoney+"radio").prop('checked', true);
-                   $("label[for="+typemoney+"radio]").addClass("checked");
+
                    $("input[name=pgdate]").val(mygetdate());
                    $("input[name=pghour]").val(mygettime());
                    $("select[name=pgstore_id]").prop("disabled",true).trigger("chosen:updated");
+                   $("select[name=pgstore_idall]").prop("disabled",true).trigger("chosen:updated");
                    $("select[name=pguser_id]").prop("disabled",true).trigger("chosen:updated");
                  //  $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
                  //  $('select[name=pguser_id]').val(0).trigger("chosen:updated");
@@ -318,7 +350,8 @@
                     if (type == 'role') type = "";//
                     $("select[name=pgstore_id" + type + "]").html(option);
                     $('select[name=pgstore_id' + type + ']').chosen({width: "90%"});
-                    if (userstoreid > 0 && type!='all') $("select[name=pgstore_id" + type + "]").chosen().val(userstoreid);
+                    if (userstoreid > 0 && type!='all')
+                        $("select[name=pgstore_id" + type + "]").chosen().val(userstoreid);
                     $('select[name=pgstore_id' + type + ']').trigger("chosen:updated");
 
                 }
