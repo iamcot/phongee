@@ -16,7 +16,7 @@
                    <td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',',')?></a></td>
                    <td><?=$amoneytype[$row->pgmoneytype][1]?></td>
                    <td><?=$row->inoutcode?></td>
-                   <td><?=$row->pgtype?></td>
+                   <td><?=(($row->pginout_id ==0)?(($row->pgtype=='nhap')?'Nhập Tiền':'Xuất Tiền'):'Thanh toán')?></td>
                     <td><?=$row->pginfo?></td>
             </tr>
         <? $i++; endforeach; ?>

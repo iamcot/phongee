@@ -307,10 +307,10 @@
 
         $("input[name=pgtype]").click(function(){
             typecheck($(this).val(),"");
-            if($("input[name=pgtype]:checked").val()=='nhap')
-            $("input[name=pgmahoadon]").val("N");
-                else
-                $("input[name=pgmahoadon]").val("X");
+//            if($("input[name=pgtype]:checked").val()=='nhap')
+//            $("input[name=pgmahoadon]").val("N");
+//                else
+//                $("input[name=pgmahoadon]").val("X");
 
         });
         $("input[name=pgtypexuat]").click(function(){
@@ -322,7 +322,7 @@
         });
     });
     function save() {
-        var pgcode     = $("input[name=pgmahoadon]").val();
+        var pgcode     = $("input[name=pgmahoadon]").val().trim();
 
         var pgdate     = $("input[name=pgdate]").val();
         var pghour     = $("input[name=pghour]").val();
@@ -443,6 +443,7 @@
                                     loadinout_details(1,idhoadon);
                                     clearinputdetails();
                                     loadSumPrice(idhoadon,$("input[name=pgtype]:checked").val());
+                                    $("input[name=idhoadon]").val(idhoadon);
                                 }
 
 
@@ -466,7 +467,7 @@
         addloadgif("#loadstatus");
         $("#list_hoadon").load("<?=base_url()?>admin/getHoaDon/" + page+"/"+$("input[name=showchuathanhtoan]").prop("checked"), function () {
             removeloadgif("#loadstatus");
-            myclear();
+//            myclear();
         });
     }
     function loadmoneytransfer(page,pginout_id) {
@@ -609,32 +610,7 @@
             $.Placeholder.init();
         }
 //        CKEDITOR.replace( '.textare1' );
-       $( '.ckeditor' ).ckeditor({
-           language: 'vi',
-           height:80,
-           toolbarGroups: [
-               { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-               { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-               { name: 'links' },
-               { name: 'insert' },
-               '/',
-               { name: 'styles' },
-               { name: 'colors' }
 
-           ]
-
-       });
-
-        $('#picupload').fileupload({
-            dataType: 'json',
-            done: function (e, data) {
-                $.each(data.result, function (index, file) {
-                    $('input[name=pgpic]').val(file.name);
-                    $("#pgavatardemo").html('<img src="<?=base_url()?>thumbnails/'+file.name+'">')
-
-                });
-            }
-        });
     });
     function getStore(target,typestore){
         $.ajax({

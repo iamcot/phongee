@@ -330,6 +330,11 @@ class Admin extends CI_Controller
                 $row=$qr->row_array();
                 $param['pgcode'] = $this->mylibs->buildinoutcode($param['pgtype'],$row['@number']);
             }
+            else{
+                if($param['pgcode']==''){
+                    unset($param['pgcode']);
+                }
+            }
 
         }
         else if($table == 'moneytransfer'){
@@ -365,10 +370,10 @@ class Admin extends CI_Controller
                     $qrs = $this->db->query($sqls);
                     if ($qrs->num_rows() <= 0) {
                         $sqlins = "INSERT INTO pgchitietthietbi (pglong_name,pgcode,pgthietbi_id,pgthietbi_code,
-                    pgprice,pgcolor,pgcountry,pgyear,pgcreateuser_id) VALUES
+                    pgprice,pgcolor,pgcountry,pgyear,pgcreateuser_id,pgdvt,pgtgbh) VALUES
                     ((SELECT pglong_name from pgthietbi where id='" . $this->input->post('pgthietbi_id') . "'),'" . $this->input->post('pgseries') . "','" . $this->input->post('pgthietbi_id') . "',
                     '" . $this->input->post('pgthietbi_code') . "','" . $this->input->post('pgprice') . "','" . $this->input->post('pgcolor') . "',
-                    '" . $this->input->post('pgcountry') . "','" . $this->input->post('pgyear') . "','".$this->session->userdata('pguser_id')."' )";
+                    '" . $this->input->post('pgcountry') . "','" . $this->input->post('pgyear') . "','".$this->session->userdata('pguser_id')."',(SELECT pgdvt from pgthietbi where id='" . $this->input->post('pgthietbi_id') . "'),(SELECT pgtgbh from pgthietbi where id='" . $this->input->post('pgthietbi_id') . "') )";
                         $flag = $this->db->query($sqlins);
                     }
 
@@ -559,7 +564,18 @@ class Admin extends CI_Controller
 
     }
     public function jxloadsuminoutfromcode($inout_code){
-        $sql = "SELECT * from pginout WHERE pgcode='$inout_code'";
+        $store = "";
+        if($this->session->userdata('pgstore_id')>0){
+            $store = " (((pgtype='nhap' OR pgxuattype='xuatkho' ) AND pgto = ".$this->session->userdata('pgstore_id').")
+            OR ((pgtype='xuat' OR pgxuattype='thuhoi') AND pgfrom =  ".$this->session->userdata('pgstore_id').") ) ";
+        }
+        else{
+            if($this->session->userdata('pgrole')=='ketoankho'){
+                $store = " (((pgtype='nhap' OR pgxuattype='xuatkho' ) AND pgto IN (select id from pgstore where pgtype='kho') )
+            OR ((pgtype='xuat' OR pgxuattype='thuhoi') AND pgfrom IN (select id from pgstore where pgtype='kho') ) ) ";
+            }
+        }
+        $sql = "SELECT * from pginout WHERE pgcode='$inout_code' AND $store";
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             $row = $qr->row();
@@ -1138,7 +1154,7 @@ class Admin extends CI_Controller
             else {
                 if($suser == '') $suser.=' AND ';
                 else $suser .=' OR ';
-                $suser.=" id = '$user' ";
+                $suser.=" tradeid = '$user' ";
             }
         }
         $tradestore = "";
@@ -1409,7 +1425,7 @@ class Admin extends CI_Controller
         else
             echo "";
     }
-    public function getHoaDon($page=0,$full='false'){
+    public function getHoaDon($page=1,$full='false',$userid=0){
         $otherwhere = "";
         if ($this->session->userdata("pgstore_id") > 0) {
                 $otherwhere .= "
@@ -1425,6 +1441,7 @@ class Admin extends CI_Controller
                     )
                 ) ";
         }
+
        // var_dump($full);
         if($full=='true')
             $sfull = " (a.sumthanhtoan IS NULL OR
@@ -1450,6 +1467,14 @@ class Admin extends CI_Controller
                 )";
         }
         if(($sfull!="" ||  $otherwhere != "") && $ktkho!="") $ktkho = " AND ".$ktkho;
+        if($userid>0){
+            $suser = " (
+                (a.pgxuattype='nhapkho' AND a.inoutfrom = $userid) OR
+                (a.pgxuattype='khachhang' AND a.inoutto = $userid)
+            ) ";
+        }
+        else $suser = "";
+        if(($sfull!="" ||  $otherwhere != "" || $ktkho!="") && $suser!="") $suser = " AND ".$suser;
         $sqlcommon=" FROM (
                 Select i.*,
                 SUM(m.`pgamount`) sumthanhtoan
@@ -1459,7 +1484,7 @@ class Admin extends CI_Controller
 
                 GROUP BY i.pginout_id
                 ) a
-                 ".(($sfull!="" || $otherwhere !="" || $ktkho!="")?'WHERE':'')." $sfull $otherwhere $ktkho"
+                 ".(($sfull!="" || $otherwhere !="" || $ktkho!="")?'WHERE':'')." $sfull $otherwhere $ktkho $suser"
                 ;
         $sqlsum = "SELECT count(a.pginout_id) sumrow ".$sqlcommon;
         $sqllimit = "SELECT a.* ".$sqlcommon."ORDER BY a.pginout_id DESC
@@ -1474,6 +1499,8 @@ class Admin extends CI_Controller
         $data['province'] = $rs;
         $data['sumpage'] = ceil($qrsum->row()->sumrow / $this->config->item("pp"));
         $data['page'] = $page;
+        if($userid>0) $data['inmoneypage'] = true;
+        else $data['inmoneypage'] = false;
         echo $this->load->view("admin/list_inout_v", $data, true);
 
     }
@@ -1500,7 +1527,7 @@ class Admin extends CI_Controller
     public function barcode($content = ""){
         $this->load->library('zend');
         $this->zend->load('Zend/Barcode');
-        return Zend_Barcode::render('code39', 'image', array('text' => $content), array());
+        return Zend_Barcode::render('code39', 'image', array('text' => $content,'barHeight' => 20,'drawText'=>false), array());
     }
     public function loadtraduser($userid){
         $sql="SELECT t.*,s.pglong_name FROM pgtradeuser t

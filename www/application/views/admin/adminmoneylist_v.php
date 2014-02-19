@@ -89,12 +89,14 @@
 
      </table>
     <div style="clear: both;display: block"></div>
+    <input type="hidden" name="ajaxload" value="0">
 <fieldset >
     <legend>Lịch sử gần đây</legend>
     <div id="list_hoadon"></div>
 </fieldset>
 </div>
 <script>
+
     $(function () {
         $('#pghour').mask('99:99:99');
         $('#pgdate').mask('9999/99/99');
@@ -109,12 +111,13 @@
         });
         $("input[name=pginout_code]").bind('paste', function(event) {
             var _this = this;
+
+          //  $(_this).val(val);
             // Short pause to wait for paste to complete
             setTimeout( function() {
                 var val = $(_this).val().trim();
-                $(_this).val(val);
-                //if(val.length >= 8)
-                loadSumPrice(val);
+                if(val.length >= 8)
+                    loadSumPrice(val);
             }, 100);
         });
     });
@@ -234,7 +237,13 @@
 
 
     }
+    function getInoutcode(code){
+        $("input[name=pginout_code]").val(code);
+        loadSumPrice(code);
+    }
     function loadSumPrice(inout_code){
+        if($("input[name=ajaxload]").val()=="1") return;
+        $("input[name=ajaxload]").val("1");
         $.ajax({
             type: "post",
             url: "<?=base_url()?>admin/jxloadsuminoutfromcode/" + inout_code,
@@ -250,18 +259,18 @@
 
                    switch(price.pgxuattype){
                        case 'nhapkho':
-                           if(sessstoreid > 0 && sessstoreid != price.pgto){
-                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
-                               return;
-                           }
+//                           if(sessstoreid > 0 && sessstoreid != price.pgto){
+//                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+//                               return;
+//                           }
                            $("select[name=pgstore_id]").val(price.pgto).trigger("chosen:updated");
                            $("select[name=pguser_id]").val(price.pgfrom).trigger("chosen:updated");
                            break;
                        case 'thuhoi':
-                           if(sessstoreid > 0 && sessstoreid != price.pgfrom && sessstoreid != price.pgto ){
-                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
-                               return;
-                           }
+//                           if(sessstoreid > 0 && sessstoreid != price.pgfrom && sessstoreid != price.pgto ){
+//                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+//                               return;
+//                           }
                            <? if($this->session->userdata('pgrole')=='ketoan'):?>
                            $("select[name=pgstore_id]").val(price.pgfrom).trigger("chosen:updated");
                            $("select[name=pgstore_idall]").val(price.pgto).trigger("chosen:updated");
@@ -273,10 +282,10 @@
                            <? endif;?>
                            break;
                        case 'xuatkho':
-                           if(sessstoreid > 0 && sessstoreid != price.pgto && sessstoreid != price.pgfrom){
-                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
-                               return;
-                           }
+//                           if(sessstoreid > 0 && sessstoreid != price.pgto && sessstoreid != price.pgfrom){
+//                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+//                               return;
+//                           }
                            <? if($this->session->userdata('pgrole')=='ketoan'):?>
                            $("select[name=pgstore_id]").chosen().val(price.pgto).trigger("chosen:updated");
                            $("select[name=pgstore_idall]").chosen().val(price.pgfrom).trigger("chosen:updated");
@@ -290,22 +299,23 @@
                        case 'cuahang':
                            break;
                        case 'khachhang':
-                           if(sessstoreid > 0 && sessstoreid != price.pgfrom){
-                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
-                               return;
-                           }
+//                           if(sessstoreid > 0 && sessstoreid != price.pgfrom){
+//                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+//                               return;
+//                           }
                            $("select[name=pgstore_id]").val(price.pgfrom).trigger("chosen:updated");
                            $("select[name=pguser_id]").val(price.pgto).trigger("chosen:updated");
                            break;
                        case 'khachle':
-                           if(sessstoreid > 0 && sessstoreid != price.pgfrom){
-                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
-                               return;
-                           }
+//                           if(sessstoreid > 0 && sessstoreid != price.pgfrom){
+//                               alert("Đơn hàng không thuộc cửa hàng bạn quản lý");
+//                               return;
+//                           }
                            $("select[name=pgstore_id]").val(price.pgfrom).trigger("chosen:updated");
                            break;
                        default:
                            alert("Hóa đơn không đúng");
+                           myclear();
                            return;
                            break;
                    }
@@ -325,10 +335,15 @@
                    $("select[name=pguser_id]").prop("disabled",true).trigger("chosen:updated");
                  //  $('select[name=pgstore_id]').val(0).trigger("chosen:updated");
                  //  $('select[name=pguser_id]').val(0).trigger("chosen:updated");
-                   $("textarea[name=pginfo]").val("Thanh toán hóa đơn #"+inout_code);               }
+                   $("textarea[name=pginfo]").val("Thanh toán hóa đơn #"+inout_code);
+                   $("input[name=ajaxload]").val("0");
+               }
                 else{
-                   alert("Không có đơn hàng này");
+                   alert("Không có đơn hàng này trong cửa hàng của bạn.");
+                   myclear();
                    $("input[name=pginout_code]").val("");
+                   $("input[name=ajaxload]").val("0");
+                   return;
                }
 
             }
@@ -382,19 +397,19 @@ function getUserInout(id){
     $("#inoutuser").html("");
     $.ajax({
         type:"post",
-        url:"<?=base_url()?>admin/getUserInout/"+id,
+        url:"<?=base_url()?>admin/getHoaDon/1/false/"+id,
         success:function(msg){
-            var inouttr = "Không có thông tin giao dịch.";
-            if(msg!=""){
-            var inout = eval(msg);
-            inouttr = "<thead><tr><td>Mã HD </td><td>Ngày </td><td>Tổng tiền</td></tr></thead>";
-            var i = 0;
-            $.each(inout, function (index, io){
-                inouttr += "<tr "+((i%2==0)?'class="odd"':'')+"><td>"+io.inoutcode+"</td><td>"+myformatdate(io.inoutdate)+"</td><td>"+((io.sumphaitra>0)?io.sumphaitra:io.sumduocnhan)+"</td></tr>";
-                i++;
-            });
-            }
-            $("#inoutuser").html(inouttr);
+           // var inouttr = "Không có thông tin giao dịch.";
+//            if(msg!=""){
+//            var inout = eval(msg);
+//            inouttr = "<thead><tr><td>Mã HD </td><td>Ngày </td><td>Tổng tiền</td></tr></thead>";
+//            var i = 0;
+//            $.each(inout, function (index, io){
+//                inouttr += "<tr "+((i%2==0)?'class="odd"':'')+"><td>"+io.inoutcode+"</td><td>"+myformatdate(io.inoutdate)+"</td><td>"+((io.sumphaitra>0)?io.sumphaitra:io.sumduocnhan)+"</td></tr>";
+//                i++;
+//            });
+//            }
+            $("#inoutuser").html(msg);
         }
     });
 }

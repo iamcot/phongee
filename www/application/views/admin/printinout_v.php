@@ -22,7 +22,7 @@
                 float:right;
             }
             #title{
-                margin-top: 15px;
+                /*margin-top: 15px;*/
                 text-align: center;
                 font-size: 15pt;
                 font-weight: 700;
@@ -43,8 +43,9 @@
             }
             td{
                 border: 1px solid #000;
-                padding: 3px 5px;
+                padding: 3px 5px 3px 5px;
                 vertical-align: top;
+                font-size: 10pt;
             }
             thead td{
                 font-weight: bold;
@@ -70,7 +71,14 @@
                 vertical-align: top;
             }
             div,td{
-                line-height: 20px;
+                line-height: 12pt;
+            }
+            tbody td{
+                font-size: 12pt;
+            }
+            #address img{
+                /*height: 30px;*/
+                /*width:200px;*/
             }
         </style>
 
@@ -93,7 +101,7 @@
                 <? endif; ?>
 
             </div>
-<!--            <div class="center"><i>(Mã HĐ: --><?//=$first->inoutcode?><!--)</i></div>-->
+            <div class="center"><i>(Mã HĐ: <?=$first->inoutcode?>)</i></div>
             <div id="date">Ngày lập: <?=date("d/m/Y",$first->inoutdate)?></div>
             <div class="info">
                 <span>Khách hàng (Buyer):</span>
@@ -117,11 +125,11 @@
                     <thead>
                         <tr>
                             <td>STT</td>
-                            <td>TÊN HÀNG, DỊCH VỤ <br>(Model)</td>
+                            <td>TÊN HÀNG, DỊCH VỤ (Model)</td>
                             <td>ĐVT</td>
-                            <td>SỐ LƯỢNG <br>(Quantity)</td>
-                            <td>ĐƠN GIÁ <br>(Unit Price)</td>
-                            <td>THÀNH TIỀN <br>(Amount)</td>
+                            <td>SỐ LƯỢNG (Quantity)</td>
+                            <td>ĐƠN GIÁ (Unit Price)</td>
+                            <td>THÀNH TIỀN (Amount)</td>
                         </tr>
                     </thead>
                     <tbody>

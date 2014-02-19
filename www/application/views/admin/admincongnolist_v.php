@@ -5,7 +5,7 @@
         <select name="pguser_id"  style="width:80%;display: inline-block" data-placeholder="Đối tượng" multiple>
             <option value="all" selected="selected">Tất cả đối tượng</option>
             <? foreach($aUser as $user):?>
-                <option value="<?=$user->id?>"><?=$user->pglname.' '.$user->pgfname?></option>
+                <option value="<?=$user->tradeid?>"><?=$user->pglname.' '.$user->pgfname?></option>
             <? endforeach;?>
         </select>
 
