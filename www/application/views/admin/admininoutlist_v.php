@@ -628,11 +628,13 @@
                         option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
                     });
                     $("select[name=pg"+target+"]").html(option);
-                    $("select[name=pg"+target+"]").val($("input[name=pg"+target+"tmp]").val());
+                    $("select[name=pg"+target+"]").chosen({width:"100%"});
                     if(userstoreid>0 && typestore != 'kho')
                         $("select[name=pg"+target+"]").val(userstoreid);
+                    if($("input[name=pg"+target+"tmp]").val()!="")
+                    $("select[name=pg"+target+"]").val($("input[name=pg"+target+"tmp]").val()).trigger("chosen:updated");
 //                    if($("input[name=pgtypexuat]:checked").val()!='xuatkho' || target =='to'){
-                    $("select[name=pg"+target+"]").chosen({width:"100%"});
+                   // $("select[name=pg"+target+"]").chosen({width:"100%"});
                     $("select[name=pg"+target+"]").trigger("chosen:updated");
 //                    }
 
@@ -1023,13 +1025,16 @@ function savethanhtoan(){
     var pgtypexuat =  $("input[name=pgtypexuat]:checked").val();
     var storeid = 0;
     var userid = 0;
+    var storeidall = 0;
     switch(pgtypexuat){
         case 'nhapkho': storeid = $("select[name=pgto]").val();
             userid  = $("select[name=pgfrom]").val();
             break;
-        case 'thuhoi': storeid = $("select[name=pgfrom]").val();
+        case 'thuhoi': storeid = $("select[name=pgto]").val();
+            storeidall = $("select[name=pgfrom]").val();
             break;
-        case 'xuatkho': storeid = $("select[name=pgto]").val();
+        case 'xuatkho': storeid = $("select[name=pgfrom]").val();
+            storeidall = $("select[name=pgto]").val();
             break;
         case 'khachhang': storeid = $("select[name=pgfrom]").val();
             userid  = $("select[name=pgto]").val();
@@ -1047,6 +1052,7 @@ function savethanhtoan(){
             "&pgdate=" +  (Math.round(new Date().getTime()/1000))+
              "&pgtype="+pgtypethanhtoan +
              "&pgstore_id="+storeid +
+             "&pgstore_idall="+storeidall +
              "&pguser_id="+userid,
         success: function (msg) {
             if(msg=='r1' || msg=='r0'){
