@@ -15,7 +15,7 @@
         <select name="pguser_id"  style="width:100%;display: inline-block" data-placeholder="Đối tượng" multiple>
             <option value="all" selected="selected">Tất cả đối tượng</option>
             <? foreach($aCustom as $user):?>
-                <option value="<?=$user['id']?>"><?=$user['pglname'].' '.$user['pgfname']?></option>
+                <option value="<?=$user['tradeid']?>"><?=$user['pglname'].' '.$user['pgfname']?></option>
             <? endforeach;?>
         </select>
 
@@ -44,7 +44,7 @@
         if($this->mylibs->isTongKho($this->session->userdata("pgrole"))):?>
          <span style="display: inline-block;">
         <input type="checkbox" name="showalltongkho" id="showalltongkho" checked="checked">
-        <label for="showalltongkho">Chỉ GD với tổng kho </label>
+        <label for="showalltongkho">Chỉ giao dịch cửa hàng</label>
             </span>
         <?endif;?>
          <span style="display: inline-block;">

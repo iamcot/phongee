@@ -48,7 +48,7 @@
                 <select name="pgstore_id" >
                     <option value="0">Tất cả cửa hàng</option>
                     <? foreach($aStore as $store):?>
-                        <? if ($this->session->userdata("pgstore_id") == $store->id || $this->session->userdata("pgrole") =='admin'):?>
+                        <? if ($this->session->userdata("pgstore_id") == $store->id || $aRoleOrder[$this->session->userdata('pgrole')]>=3):?>
                     <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
                             <? endif;?>
                     <? endforeach;?>
@@ -88,7 +88,32 @@
 
 </fieldset>
 <fieldset>
-    <legend>Danh sách</legend>
+    <legend>Tài khoản giao dịch cửa hàng</legend>
+    <div class="field_select"  style="width:10%">
+    <label>ID thành viên </label>
+    <input type="text" name="pguser_id" placeholder="ID">
+
+        </div>
+
+    <div class="field_select"  style="width:20%">
+        <label>Cửa hàng giao dịch </label>
+        <select name="pgtradestore_id" >
+            <?
+            foreach($aStore as $store):?>
+                <? if ($this->session->userdata("pgstore_id") == $store->id || $aRoleOrder[$this->session->userdata('pgrole')]>=3 ):?>
+                    <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
+                <? endif;?>
+            <? endforeach;?>
+        </select>
+    </div>
+
+    <span class="btn btn-small"><input type="button" value="Lưu" onclick="savetradeuser()"> </span>
+    <span class="btn btn-small"><input type="button" value="Load" onclick="loadtradeuser()"> </span>
+    <div class="clear"></div>
+    <div  id="listtradeuser"></div>
+</fieldset>
+<fieldset>
+    <legend>Danh sách thành viên </legend>
     <div>
         <span style="display: inline-block;">
         <input type="checkbox" name="pglstaff" id="pglstaff" checked="checked">
@@ -114,6 +139,48 @@
         $("input").customInput();
         load(1);
     });
+    function savetradeuser(){
+        var pgstore_id      = $("select[name=pgtradestore_id]").val();
+        var pguser_id     = $("input[name=pguser_id]").val();
+        if (pguser_id.trim() != "") {
+            $.ajax({
+                type: "post",
+                url: "<?=base_url()?>admin/save/tradeuser",
+                data: "pgstore_id=" + pgstore_id
+                          + "&pguser_id=" + pguser_id,
+                success: function (msg) {
+                    switch (msg) {
+                        case "0":
+                            alert("Không thể lưu");
+                            loadtradeuser();
+                            break;
+                        case "tu1":
+                            alert("Đã có tài khoản giao dịch của thành viên này tại cửa hàng ");
+                            loadtradeuser();
+                            break;
+                        default :
+                            loadtradeuser();
+                            addsavegif("#loadstatus");
+                            break;
+                    }
+
+                }
+            });
+        }
+        else {
+            alert("Vui lòng nhập dữ liệu");
+        }
+    }
+    function loadtradeuser(){
+        if($("input[name=pguser_id]").val().trim()==""){
+            alert("Chưa chọn thành viên");
+            return;
+        }
+        addloadgif("#loadstatus");
+        $("#listtradeuser").load("<?=base_url()?>admin/loadtraduser/"+$("input[name=pguser_id]").val(), function () {
+            removeloadgif("#loadstatus");
+        });
+    }
     function save() {
         var pgfname     = $("input[name=pgfname]").val();
         var pglname     = $("input[name=pglname]").val();
@@ -204,9 +271,10 @@
                     $("input[name=pgaddr]").val(province.pgaddr);
                     $("input[name=pgavatar]").val(province.pgavatar);
                     $("input[name=edit]").val(province.id);
+                    $("input[name=pguser_id]").val(province.id);
                     $("select[name=pgrole]").val(province.pgrole);
                     $("select[name=pgstore_id]").val(province.pgstore_id);
-
+                    loadtradeuser();
                     $("#pgavatardemo").html('<img src="<?=base_url()?>thumbnails/' + province.pgavatar + '">');
                 }
             }

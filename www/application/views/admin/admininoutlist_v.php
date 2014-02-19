@@ -670,14 +670,14 @@
     function getProvider(){
         $.ajax({
             type: "post",
-            url: "<?=base_url()?>admin/jxloadnhacungcap",
+            url: "<?=base_url()?>admin/jxloadTradecustomer",
             success: function (msg) {
                 if (msg == "") alert('<?=lang("NO_DATA")?>');
                 else {
                     var province = eval(msg);
                     var option = "";
                     $.each(province, function (index, store){
-                        option += "<option value='"+store.id+"'>"+store.pgfname+"</option>";
+                        option += "<option value='"+store.tradeid+"'>"+store.pglname+" "+store.pgfname+"<? if($this->session->userdata("pgstore_id")==0):?> ("+store.pglong_name+")<? endif;?></option>";
                     });
                     $("select[name=pgfrom]").html(option);
                     $('select[name=pgfrom]').chosen({width:"100%"});
@@ -690,14 +690,14 @@
     function getCustomer(){
         $.ajax({
             type: "post",
-            url: "<?=base_url()?>admin/jxloadcustomer",
+            url: "<?=base_url()?>admin/jxloadTradecustomer",
             success: function (msg) {
                 if (msg == "") alert('<?=lang("NO_DATA")?>');
                 else {
                     var province = eval(msg);
                     var option = "";
                     $.each(province, function (index, store){
-                        option += "<option value='"+store.id+"'>"+store.pgfname+"</option>";
+                        option += "<option value='"+store.tradeid+"'>"+store.pglname+" "+store.pgfname+"<? if($this->session->userdata("pgstore_id")==0):?>  ("+store.pglong_name+")<? endif;?></option>";
                     });
                     $("select[name=pgto]").html(option);
                     $('select[name=pgto]').chosen({width:"100%"});

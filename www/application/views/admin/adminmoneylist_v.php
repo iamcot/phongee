@@ -361,14 +361,14 @@
     function getUser(){
         $.ajax({
             type: "post",
-            url: "<?=base_url()?>admin/jxloadcustomer",
+            url: "<?=base_url()?>admin/jxloadTradecustomer",
             success: function (msg) {
                 if (msg == "") alert('<?=lang("NO_DATA")?>');
                 else {
                     var province = eval(msg);
-                    var option = "<option value='0'>Đối tượng</option>";
+                    var option = "<option value='0'>Đối tượng </option>";
                     $.each(province, function (index, store){
-                        option += "<option value='"+store.id+"'>"+store.pglname+" "+store.pgfname+"</option>";
+                        option += "<option value='"+store.tradeid+"'>"+store.pglname+" "+store.pgfname+"<? if($this->session->userdata("pgstore_id")==0):?>  ("+store.pglong_name+")<? endif;?></option>";
                     });
                         $("select[name=pguser_id]").html(option);
                         $('select[name=pguser_id]').chosen({width:"90%"});

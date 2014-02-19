@@ -78,7 +78,7 @@
                 ?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
 
-                    <td ><a href="javascript:getDetails(<?=$report->id?>)"><?=$report->pglname.' '.$report->pgfname?></a></td>
+                    <td ><a href="javascript:getDetails(<?=$report->tradeid?>)"><?=$report->pglname.' '.$report->pgfname?></a></td>
                     <td ><?=$report->pgrole?></td>
                     <?if($khachno == 'true'):?><td style="text-align: right"><?=number_format($report->sumduocnhan ,0,'.',',')?></td><? endif;?>
                     <?if($khachno == 'true'):?><td style="text-align: right" class="<?=$classnonhan?>"><?=number_format($rskhachno ,0,'.',',')?>

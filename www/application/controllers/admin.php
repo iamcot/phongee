@@ -138,7 +138,7 @@ class Admin extends CI_Controller
                 }
                 if($arr[3]!=""){
                     if($otherwhere!="") $otherwhere.=" AND ";
-                    $otherwhere.=" (pgusername like '%".$arr[3]."%' OR pglname like '%".$arr[3]."%' OR pgfname like '".$arr[3]."') ";
+                    $otherwhere.=" (pgusername like '%".$arr[3]."%' OR pglname like '%".$arr[3]."%' OR pgfname like '%".$arr[3]."%' OR pgmobi = '".$arr[3]."') ";
                 }
             }
         }
@@ -176,13 +176,14 @@ class Admin extends CI_Controller
                 OR ((inouttype='nhap' OR pgxuattype='cuahang' OR pgxuattype='xuatkho') AND inoutto = " . $this->session->userdata("pgstore_id") . ")) ";
             }
             else if ($table == 'v_moneytransfer')
-                $otherwhere .= "  pgstore_id = '" . $this->session->userdata("pgstore_id") . "' ";
+                $otherwhere .= "  ( pgstore_id = '" . $this->session->userdata("pgstore_id") . "' OR (pginout_id > 0 AND pgstore_idall = '" . $this->session->userdata("pgstore_id") . "') ) ";
         }
         if ($table == 'v_moneytransfer'){
-            if($otherwhere!="") $otherwhere .= " AND ";
+            $tmp = "";
             if($this->session->userdata('pgrole')=='ketoankho')
-                $otherwhere .= "  pgstore_id in (SELECT id from pgstore where pgtype='kho') ";
-
+                $tmp = "  pgstore_id in (SELECT id from pgstore where pgtype='kho') ";
+            if($otherwhere!="" && $tmp != "") $otherwhere .= " AND ".$tmp;
+            else $otherwhere .= $tmp;
         }
 
         $role = $this->mylibs->checkRole("pgrl".$table);
@@ -276,20 +277,22 @@ class Admin extends CI_Controller
         if($qr->num_rows()>0) $rs = $qr->result();
         else $rs = null;
         $data['aStore'] = $rs;
-        $data['aCustom'] = $this->getUserList(array('custom','provider'));
+        $data['aCustom'] = $this->getTradeUser();
         if($page=='tonkho'){
             $sql="SELECT *  FROM ".$this->tbprefix.$this->tbthietbi." where pgdeleted=0 ORDER BY pglong_name ";
             $qr = $this->db->query($sql);
             if($qr->num_rows()>0) $rs = $qr->result();
             else $rs = null;
             $data['aThietbi'] = $rs;
-        }
-        if($page=='congno'){
-            $sql="SELECT *  FROM ".$this->tbprefix.$this->tbuser." where pgdeleted=0 ORDER BY pgfname ";
+            $sql="SELECT *  FROM ".$this->tbprefix.$this->tbnhomthietbi." where pgdeleted=0 ORDER BY pglong_name ";
             $qr = $this->db->query($sql);
             if($qr->num_rows()>0) $rs = $qr->result();
             else $rs = null;
-            $data['aUser'] = $rs;
+            $data['aNhomThietbi'] = $rs;
+        }
+        if($page=='congno'){
+
+            $data['aUser'] = $this->getTradeUser(true);
         }
 
         echo $this->load->view('admin/admin'.$page.'list_v', $data, true);
@@ -398,6 +401,14 @@ class Admin extends CI_Controller
                         return;
                     }
 
+                }
+            }
+            else if ($table == 'tradeuser') {
+                $sql = "SELECT id from pgtradeuser WHERE pguser_id=" . $param['pguser_id'] . " AND pgstore_id=" . $param['pgstore_id'] . " ";
+                $qr = $this->db->query($sql);
+                if ($qr->num_rows() > 0) {
+                    echo "tu1";
+                    return;
                 }
             }
             try{
@@ -722,6 +733,28 @@ class Admin extends CI_Controller
             return $this->mylibs->echojson($qr->result_array());
         else return "";
     }
+    public function getTradeUser($getObject = false){
+        $store = "";
+        if($this->session->userdata("pgstore_id")>0){
+            $store = " = ".$this->session->userdata("pgstore_id");
+        }
+        else{
+            if($this->session->userdata('pgrole')=='ketoankho'){
+                $store = " IN (SELECT id FROM pgstore where pgtype = 'kho') ";
+            }
+            else{
+                $store = " > 0 ";
+            }
+        }
+        $sql="SELECT * FROM v_tradeuser WHERE tradestore_id ".$store;
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            if(!$getObject)
+            return $qr->result_array();
+            else return $qr->result();
+        }
+        else return null;
+    }
     public function getUserList($type=array()){
 		$role = '';
 		foreach($type as $k=>$v){
@@ -739,6 +772,12 @@ class Admin extends CI_Controller
     }
     public function jxloadcustomer(){
         $provider = $this->getUserList();
+        if($provider!=null){
+            $this->mylibs->echojson($provider);
+        }   else echo '';
+    }
+    public function jxloadTradecustomer(){
+        $provider = $this->getTradeUser();
         if($provider!=null){
             $this->mylibs->echojson($provider);
         }   else echo '';
@@ -810,14 +849,12 @@ class Admin extends CI_Controller
         }
         $param['aStore'] = $aStore;
         $aProvider = null;
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbuser." where pgdeleted=0 ";
-        $qr = $this->db->query($sql);
-        if($qr->num_rows()>0){
-            $rs = $qr->result();
-            foreach($rs as $v){
-                $aProvider[$v->id] = $v;
-            }
+
+        $rs = $this->getTradeUser(true);
+        foreach($rs as $v){
+            $aProvider[$v->tradeid] = $v;
         }
+
         $param['aProvider'] = $aProvider;
         $sstore = '';
         foreach($param['pgstore_id'] as $store){
@@ -857,10 +894,15 @@ class Admin extends CI_Controller
 
         else $series = '';
         if($param['showalltongkho']=='true'){
-            $showalltongkho = " AND ( pgxuattype !='khachhang' AND pgxuattype!='cuahang' AND pgxuattype!='doitac' ) ";
+            $showalltongkho = " AND ( pgxuattype ='xuatkho' OR pgxuattype ='thuhoi') ";
 
         }
-        else $showalltongkho = "";
+        else {
+            if($this->session->userdata('pgrole')=='ketoankho')
+                $showalltongkho = " AND  (( pgxuattype!='nhapkho'   AND inoutfrom  IN (SELECT id from pgstore where pgtype='kho') ) OR  inoutto  IN (SELECT id from pgstore where pgtype='kho') )";
+            else
+                $showalltongkho = "";
+        }
 
         $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date.$series.$scustom.$showalltongkho;
      //    echo $sql;
@@ -877,8 +919,12 @@ class Admin extends CI_Controller
         $pgthietbi_id=$this->input->get("pgthietbi_id");
         $storename=$this->input->get("storename");
         $pgstore_id=$this->input->get("pgstore_id");
+        $pgnhomthietbi_id=$this->input->get("pgnhomthietbi_id");
+        $pgkeyword=$this->input->get("pgkeyword");
         $print=$this->input->get("print");
         $data['pgthietbi_id'] = explode(",",$pgthietbi_id);
+        $data['pgnhomthietbi_id'] = explode(",",$pgnhomthietbi_id);
+        $data['pgkeyword'] = $pgkeyword;
         $data['storename'] = $storename;
         $data['pgstore_id'] = $pgstore_id;
         $data['print'] = $print;
@@ -901,12 +947,12 @@ class Admin extends CI_Controller
         if($param['pgstore_id'] == 'all'){
         $sstore.=" AND (pgxuattype='nhapkho' OR pgxuattype='khachhang' OR pgxuattype='khachle' )";
         }
-        else if($param['pgstore_id'] == 'cuahang'){
-            $sstore.=" AND ( inouttype='xuat' OR pgxuattype = 'thuhoi')";
-        }
-        else if($param['pgstore_id'] == 'kho'){
-            $sstore.=" AND ( pgxuattype='xuatkho' OR inouttype='nhap' )";
-        }
+//        else if($param['pgstore_id'] == 'cuahang'){
+//            $sstore.=" AND ( inouttype='xuat' OR pgxuattype = 'thuhoi')";
+//        }
+//        else if($param['pgstore_id'] == 'kho'){
+//            $sstore.=" AND ( pgxuattype='xuatkho' OR inouttype='nhap' )";
+//        }
         else{
            $sstore .= " AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$param['pgstore_id']."' )
            OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom = '".$param['pgstore_id']."' )  ) ";
@@ -924,14 +970,29 @@ class Admin extends CI_Controller
             }
         }
         if($sthietbi!='') $sthietbi.=')';
+        $snhomthietbi = '';
+        foreach($param['pgnhomthietbi_id'] as $thietbi){
+            if($thietbi == 'all'){
+                $snhomthietbi = '';
+                break;
+            }
+            else {
+                if($snhomthietbi == '') $snhomthietbi.=' AND (';
+                else $snhomthietbi .=' OR ';
+                $snhomthietbi.=" pgthietbi_id = '$thietbi'";
+            }
+        }
+        if($snhomthietbi!='') $snhomthietbi.=')';
+        if($param['pgkeyword']!='') $skeyword = " AND thietbiname like '%".$param['pgkeyword']."%' ";
+        else $skeyword = "";
         if($param['pgstore_id'] =='all')
-            $sql="SELECT thietbiname, sum(case when (pgxuattype='nhapkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
-        else if($param['pgstore_id'] =='cuahang')
-            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
-        else if($param['pgstore_id'] == 'kho')
-            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
+            $sql="SELECT thietbiname, sum(case when (pgxuattype='nhapkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi.$snhomthietbi.$skeyword." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
+//        else if($param['pgstore_id'] =='cuahang')
+//            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi.$snhomthietbi.$skeyword." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
+//        else if($param['pgstore_id'] == 'kho')
+//            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi.$snhomthietbi.$skeyword." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
         else
-            $sql="SELECT thietbiname, sum(case when (inoutfrom='".$param['pgstore_id']."') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
+            $sql="SELECT thietbiname, sum(case when (inoutfrom='".$param['pgstore_id']."' AND  (inouttype='xuat' OR pgxuattype = 'thuhoi') ) then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi.$snhomthietbi.$skeyword." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
 
 //         echo $sql;
          $qr = $this->db->query($sql);
@@ -1075,12 +1136,20 @@ class Admin extends CI_Controller
                 break;
             }
             else {
-                if($suser == '') $suser.=' WHERE ';
+                if($suser == '') $suser.=' AND ';
                 else $suser .=' OR ';
                 $suser.=" id = '$user' ";
             }
         }
-        $sql = "SELECT * FROM v_congno $suser  ORDER BY pgfname";
+        $tradestore = "";
+        if($this->session->userdata("pgstore_id")>0){
+            $tradestore=" tradestore_id = ".$this->session->userdata("pgstore_id");
+        }
+        else if($this->session->userdata("pgrole")=='ketoankho'){
+            $tradestore =" tradestore_id in (SELECT id from pgstore where pgtype='kho') ";
+        }
+        else $tradestore = " tradestore_id > 0 ";
+        $sql = "SELECT * FROM v_congno WHERE  $tradestore $suser  ORDER BY pgfname";
         //echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
@@ -1129,12 +1198,12 @@ class Admin extends CI_Controller
         $tiennhap = "";
         $tienxuat = "";
         if($this->session->userdata("pgrole")=='ketoan'){
-            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 ";
-            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 ";
+            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 AND t1.user_id IS NULL ";
+            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 AND t1.user_id IS NULL";
         }
         else{
-            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 ";
-            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 ";
+            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 AND t1.user_id IS NULL ";
+            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 AND t1.user_id IS NULL ";
 
         }
         $sql = "SELECT c.*,
@@ -1171,11 +1240,11 @@ class Admin extends CI_Controller
                 $aStore[($v['id'])] = $v;
             }
         $data['aStore'] = $aStore;
-        $tmp = $this->getUserList();
+        $tmp = $this->getTradeUser();
         $aStore = array();
         if ($tmp != null)
             foreach ($tmp as $v) {
-                $aStore[($v['id'])] = $v;
+                $aStore[($v['tradeid'])] = $v;
             }
         $data['aCustom'] = $aStore;
         return $this->load->view('admin/list_usertransfer_v',$data,true);
@@ -1225,15 +1294,15 @@ class Admin extends CI_Controller
         $data['aInout'] = null;
         if ($type == 'nhap') {
             if ($this->session->userdata('pgrole') == 'ketoan')
-                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='nhap' AND pgstore_id=$store_id AND inout_id=0) )";
+                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='nhap' AND pgstore_id=$store_id AND inout_id=0 AND user_id  IS NULL) )";
             else
-                $wherestore = " ( inoutxuattype='xuatkho' OR (pgtype='nhap' AND pgstore_idall=$store_id  AND inout_id=0) )";
+                $wherestore = " ( inoutxuattype='xuatkho' OR (pgtype='nhap' AND pgstore_idall=$store_id  AND inout_id=0 AND user_id  IS NULL) )";
         }
         else if ($type == 'xuat') {
             if ($this->session->userdata('pgrole') == 'ketoan')
-                $wherestore = "( inoutxuattype='xuatkho' OR (pgtype='xuat' AND pgstore_id=$store_id AND inout_id=0) ) ";
+                $wherestore = "( inoutxuattype='xuatkho' OR (pgtype='xuat' AND pgstore_id=$store_id AND inout_id=0 AND user_id  IS NULL) ) ";
             else
-                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='xuat' AND pgstore_idall=$store_id  AND inout_id=0) )";
+                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='xuat' AND pgstore_idall=$store_id  AND inout_id=0 AND user_id  IS NULL) )";
 
         }
         else $wherestore = "";
@@ -1432,6 +1501,17 @@ class Admin extends CI_Controller
         $this->load->library('zend');
         $this->zend->load('Zend/Barcode');
         return Zend_Barcode::render('code39', 'image', array('text' => $content), array());
+    }
+    public function loadtraduser($userid){
+        $sql="SELECT t.*,s.pglong_name FROM pgtradeuser t
+         LEFT JOIN pgstore s ON s.id=t.pgstore_id
+          WHERE t.pguser_id = $userid";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $data['aUser'] = $qr->result();
+        }
+        else $data['aUser'] = null;
+        echo $this->load->view("admin/list_tradeuser_v",$data,true);
     }
 
 }

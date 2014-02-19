@@ -64,7 +64,7 @@ class MyLibs
 
     public function isTongKho($role = "")
     {
-        if ($role == 'ketoantonghop' || $role == 'admin') return true;
+        if ($role == 'ketoantonghop' || $role == 'admin'|| $role == 'ketoankho'|| $role == 'ketoan') return true;
         else return false;
     }
 

@@ -38,4 +38,7 @@ ALTER TABLE `pgstore`
   /* 2:40:47 PM localhost */ ALTER TABLE `pgmoneytransfer` ADD `pgstore_idall` INT  NOT NULL  DEFAULT '0'  AFTER `pgstore_id`;
 ALTER TABLE  `pginoutcode` ADD  `id` INT NOT NULL FIRST ,
 ADD PRIMARY KEY (  `id` ) ;
+/**19/2*/
+
+
 
