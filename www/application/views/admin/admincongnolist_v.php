@@ -69,15 +69,17 @@ $(function(){
     $('select[name=pgtype]').chosen({width:"100%"});
     $("#dialog").dialog({
         autoOpen:false,
-        width:800,
+        width:1000,
         modal:true,
         title:'Lịch sử giao dịch '
     });
 
 });
-function getDetails(userid){
-    $("#dialog").load("<?=base_url()?>admin/jsgetUserTransfer/"+userid,function(){$("#dialog").dialog("open")});
-
+function getDetails(userid,type,page){
+    $("#dialog").load("<?=base_url()?>admin/jsgetUserTransfer/"+userid+"/"+type+"/"+page,function(){$("#dialog").dialog("open")});
+}
+function getDetailsMoney(userid,type,page){
+    $("#dialog").load("<?=base_url()?>admin/jsgetUserTransferMoney/"+userid+"/"+type+"/"+page,function(){$("#dialog").dialog("open")});
 }
 </script>
 <div id="dialog">

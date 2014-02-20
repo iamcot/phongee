@@ -78,16 +78,16 @@
                 ?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
 
-                    <td ><a href="javascript:getDetails(<?=$report->tradeid?>)"><?=$report->pglname.' '.$report->pgfname?></a></td>
+                    <td ><?=$report->pglname.' '.$report->pgfname?></td>
                     <td ><?=$report->pgrole?></td>
-                    <?if($khachno == 'true'):?><td style="text-align: right"><?=number_format($report->sumduocnhan ,0,'.',',')?></td><? endif;?>
-                    <?if($khachno == 'true'):?><td style="text-align: right" class="<?=$classnonhan?>"><?=number_format($rskhachno ,0,'.',',')?>
+                    <?if($khachno == 'true'):?><td style="text-align: right"><a href="javascript:getDetails(<?=$report->tradeid?>,'xuat',1)"><?=number_format($report->sumduocnhan ,0,'.',',')?></a></td><? endif;?>
+                    <?if($khachno == 'true'):?><td style="text-align: right" class="<?=$classnonhan?>"><a href="javascript:getDetailsMoney(<?=$report->tradeid?>,'nhap',1)"><?=number_format($rskhachno ,0,'.',',')?></a>
                     </td><? endif;?>
-                    <?if($hanthanhtoan == 'true' && $khachno == 'true'):?><td><?=((($report->sumduocnhan -$report->danhan)>0)?date("d/m/Y",$report->hanthanhtoanxuat):'')?></td><? endif;?>
-                    <?if($shopno == 'true'):?><td style="text-align: right"><?=number_format($report->sumphaitra ,0,'.',',')?></td><? endif;?>
-                    <?if($shopno == 'true'):?><td style="text-align: right"  class="<?=$classnotra?>"><?=number_format($rsshopno ,0,'.',',')?>
+                    <?if($hanthanhtoan == 'true' && $khachno == 'true'):?><td><?=((($report->sumduocnhan -$report->danhan)>0 && $report->hanthanhtoanxuat == 9999999999)?date("d/m/Y",$report->hanthanhtoanxuat):'')?></td><? endif;?>
+                    <?if($shopno == 'true'):?><td style="text-align: right"><a href="javascript:getDetails(<?=$report->tradeid?>,'nhap',1)"><?=number_format($report->sumphaitra ,0,'.',',')?></a></td><? endif;?>
+                    <?if($shopno == 'true'):?><td style="text-align: right"  class="<?=$classnotra?>"><a href="javascript:getDetailsMoney(<?=$report->tradeid?>,'xuat',1)"><?=number_format($rsshopno ,0,'.',',')?></a>
                     </td><? endif;?>
-                    <?if($hanthanhtoan == 'true' && $shopno == 'true'):?><td><?=((($report->sumphaitra - $report->datra)>0)?date("d/m/Y",$report->hanthanhtoannhap):'')?></td><? endif;?>
+                    <?if($hanthanhtoan == 'true' && $shopno == 'true'):?><td><?=((($report->sumphaitra - $report->datra)>0 && $report->hanthanhtoanxuat == 9999999999)?date("d/m/Y",$report->hanthanhtoannhap):'')?></td><? endif;?>
 
                 </tr>
         <?

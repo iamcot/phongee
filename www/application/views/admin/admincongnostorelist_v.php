@@ -65,7 +65,7 @@ $(function(){
     $('select[name=pgtype]').chosen({width:"100%"});
     $("#dialog").dialog({
         autoOpen:false,
-        width:800,
+        width:1000,
         modal:true,
         title:'Lịch sử giao dịch '
     });
@@ -83,9 +83,9 @@ function getStore(){
             else {
                 var userstoreid = <?=(($this->session->userdata("pgstore_id")>0)?$this->session->userdata("pgstore_id"):0)?>;
                 var province = eval(msg);
-                if(userstoreid > 0)
-                    var option = "";
-                else
+                //if(userstoreid > 0)
+               //     var option = "";
+               // else
                     var option = "<option value='all'>Tất cả </option>";
 
                 $.each(province, function (index, store){
@@ -100,12 +100,12 @@ function getStore(){
         }
     });
 }
-function getDetails(storeid,type){
-    $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransfer/"+storeid+"/"+type,function(){$("#dialog").dialog("open")});
+function getDetails(storeid,type,page){
+    $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransfer/"+storeid+"/"+type+"/"+page,function(){$("#dialog").dialog("open")});
 
 }
-function getDetailsMoney(storeid,type){
-    $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransferMoney/"+storeid+"/"+type,function(){$("#dialog").dialog("open")});
+function getDetailsMoney(storeid,type,page){
+    $("#dialog").load("<?=base_url()?>admin/jsgetStoreTransferMoney/"+storeid+"/"+type+"/"+page,function(){$("#dialog").dialog("open")});
 
 }
 </script>

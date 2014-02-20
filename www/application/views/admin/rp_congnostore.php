@@ -35,10 +35,10 @@
                 <? if($this->session->userdata("pgrole")=='ketoan'):?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
                     <td rowspan="2"><?=$report->pglong_name?></td>
-                    <td><a href="javascript:getDetails(<?=$report->id?>,'nhap')"><?=number_format($report->sumnhap,0,'.',',')?><a/></td>
-                    <td><a href="javascript:getDetails(<?=$report->id?>,'xuat')"><?=number_format($report->sumxuat,0,'.',',')?><a/></td>
-                    <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'nhap')"><?=number_format($report->tiennhap+$report->traxuat,0,'.',',')?><a/> </td>
-                    <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'xuat')"><?=number_format($report->tienxuat+$report->tranhap,0,'.',',')?><a/></td>
+                    <td><a href="javascript:getDetails(<?=$report->id?>,'nhap',1)"><?=number_format($report->sumnhap,0,'.',',')?><a/></td>
+                    <td><a href="javascript:getDetails(<?=$report->id?>,'xuat',1)"><?=number_format($report->sumxuat,0,'.',',')?><a/></td>
+                    <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'nhap',1)"><?=number_format($report->tiennhap+$report->traxuat,0,'.',',')?><a/> </td>
+                    <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'xuat',1)"><?=number_format($report->tienxuat+$report->tranhap,0,'.',',')?><a/></td>
                 </tr>
                 <tr>
                     <td colspan="4">
@@ -48,10 +48,10 @@
                     <?else:?>
                     <tr class="<?=(($i%2==1))?'odd':''?>">
                         <td rowspan="2"><?=$report->pglong_name?></td>
-                        <td><a href="javascript:getDetails(<?=$report->id?>,'xuat')"><?=number_format($report->sumxuat,0,'.',',')?><a/></td>
-                        <td><a href="javascript:getDetails(<?=$report->id?>,'nhap')"><?=number_format($report->sumnhap,0,'.',',')?><a/></td>
-                        <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'nhap')"><?=number_format($report->tiennhap+$report->tranhap,0,'.',',')?><a/> </td>
-                        <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'xuat')"><?=number_format($report->tienxuat+$report->traxuat,0,'.',',')?><a/></td>
+                        <td><a href="javascript:getDetails(<?=$report->id?>,'xuat',1)"><?=number_format($report->sumxuat,0,'.',',')?><a/></td>
+                        <td><a href="javascript:getDetails(<?=$report->id?>,'nhap',1)"><?=number_format($report->sumnhap,0,'.',',')?><a/></td>
+                        <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'nhap',1)"><?=number_format($report->tiennhap+$report->tranhap,0,'.',',')?><a/> </td>
+                        <td><a href="javascript:getDetailsMoney(<?=$report->id?>,'xuat',1)"><?=number_format($report->tienxuat+$report->traxuat,0,'.',',')?><a/></td>
                     </tr>
                     <tr>
                         <td colspan="4">

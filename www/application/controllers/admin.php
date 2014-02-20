@@ -603,6 +603,7 @@ class Admin extends CI_Controller
      * @param array $parent_id
      * @param int $page
      * @param null $order
+     * @param string
      * @return null
      */
     public function Select($table, $parent_id = array(), $page = 0, $order = null, $otherwhere = "")
@@ -645,6 +646,7 @@ class Admin extends CI_Controller
      * get sum row of select
      * @param $table
      * @param array $parent_id
+     * @param string $otherwhere
      * @return float|int
      */
     public function getSumPage($table, $parent_id = array(),$otherwhere  = "")
@@ -995,7 +997,7 @@ class Admin extends CI_Controller
             else {
                 if($snhomthietbi == '') $snhomthietbi.=' AND (';
                 else $snhomthietbi .=' OR ';
-                $snhomthietbi.=" pgthietbi_id = '$thietbi'";
+                $snhomthietbi.=" nhomthietbi_id = '$thietbi'";
             }
         }
         if($snhomthietbi!='') $snhomthietbi.=')';
@@ -1236,13 +1238,22 @@ class Admin extends CI_Controller
 
         return $this->load->view("admin/rp_congnostore",$param);
     }
-    public function getUserTransfer($user_id){
-        $sql="SELECT * FROM v_inout where (pgxuattype='nhapkho' AND inoutfrom = '".$user_id."') OR (pgxuattype='khachhang' AND inoutto = ".$user_id.")";
+    public function getUserTransfer($user_id,$type,$page){
+        if($type=='nhap')
+            $stype = " (pgxuattype='nhapkho' AND inoutfrom = '".$user_id."') ";
+        else $stype = " (pgxuattype='khachhang' AND inoutto = ".$user_id.") ";
+        $sql="SELECT * FROM v_inout where  $stype  LIMIT ".($page-1)*$this->config->item("pp").",".$this->config->item("pp");
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             $data['aInout'] = $qr->result();
         }
         else $data['aInout'] = null;
+        $sqlsum = "SELECT count(id) numrow FROM v_inout where  $stype";
+        $qr = $this->db->query($sqlsum);
+        $data['sumpage'] = ceil($qr->row()->numrow / $this->config->item("pp"));
+        $data['page'] = $page;
+        $data['store_id'] = $user_id;
+        $data['type'] = $type;
         $sql="SELECT * FROM v_moneytransfer where user_id = '".$user_id."'";
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
@@ -1265,8 +1276,45 @@ class Admin extends CI_Controller
         $data['aCustom'] = $aStore;
         return $this->load->view('admin/list_usertransfer_v',$data,true);
     }
-    public function jsgetUserTransfer($user_id){
-        echo $this->getUserTransfer($user_id);
+    public function getUserTransferMoney($user_id,$type,$page){
+        if($type=='nhap')
+            $stype = " ((inoutxuattype='khachhang' AND inoutto = '".$user_id."') OR (pginout_id=0 AND pguser_id = $user_id)) ";
+        else $stype = "  ((inoutxuattype='nhapkho' AND inoutfrom = '".$user_id."') OR ( pginout_id=0 AND pguser_id = $user_id))  ";
+
+
+        $sql="SELECT * FROM v_moneytransfer where $stype LIMIT ".($page-1)*$this->config->item("pp").",".$this->config->item("pp");
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $data['aMoney'] = $qr->result();
+        }
+        else $data['aMoney'] = null;
+        $sqlsum = "SELECT count(id) numrow FROM v_moneytransfer where $stype ";
+        $qr = $this->db->query($sqlsum);
+        $data['sumpage'] = ceil($qr->row()->numrow / $this->config->item("pp"));
+        $data['page'] = $page;
+        $data['store_id'] = $user_id;
+        $data['type'] = $type;
+        $tmp = $this->getStore('all');
+        $aStore = array();
+        if ($tmp != null)
+            foreach ($tmp as $v) {
+                $aStore[($v['id'])] = $v;
+            }
+        $data['aStore'] = $aStore;
+        $tmp = $this->getTradeUser();
+        $aStore = array();
+        if ($tmp != null)
+            foreach ($tmp as $v) {
+                $aStore[($v['tradeid'])] = $v;
+            }
+        $data['aCustom'] = $aStore;
+        return $this->load->view('admin/list_usertransfermoney_v',$data,true);
+    }
+    public function jsgetUserTransfer($user_id,$type,$page=1){
+        echo $this->getUserTransfer($user_id,$type,$page);
+    }
+    public function jsgetUserTransferMoney($user_id,$type,$page=1){
+        echo $this->getUserTransferMoney($user_id,$type,$page);
     }
     public function jsgetStoreTransfer($store_id,$type,$page=1){
         echo $this->getStoreTransfer($store_id,$type,$page);
@@ -1282,13 +1330,18 @@ class Admin extends CI_Controller
         else $wherestore = "";
        // if($wherestore != " ") $wherestore = " where ".$wherestore;
 
-        $sql="SELECT * FROM v_inout WHERE (pgxuattype ='thuhoi' OR pgxuattype='xuatkho') AND $wherestore";
+        $sql="SELECT * FROM v_inout WHERE (pgxuattype ='thuhoi' OR pgxuattype='xuatkho') AND $wherestore LIMIT ".($page-1)*$this->config->item("pp").",".$this->config->item("pp");
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
             $data['aInout'] = $qr->result();
         }
         else $data['aInout'] = null;
-
+        $sqlsum = "SELECT count(id) numrow FROM v_inout WHERE (pgxuattype ='thuhoi' OR pgxuattype='xuatkho') AND $wherestore";
+        $qr = $this->db->query($sqlsum);
+        $data['sumpage'] = ceil($qr->row()->numrow / $this->config->item("pp"));
+        $data['page'] = $page;
+        $data['store_id'] = $store_id;
+        $data['type'] = $type;
         $data['aMoney'] = null;
         $tmp = $this->getStore('all');
         $aStore = array();
@@ -1324,7 +1377,7 @@ class Admin extends CI_Controller
         else $wherestore = "";
        // if($wherestore != " ") $wherestore = " where ".$wherestore;
 
-        $sql="SELECT * FROM v_tienquy WHERE (pgstore_id=$store_id OR pgstore_idall=$store_id) AND $wherestore";
+        $sql="SELECT * FROM v_tienquy WHERE (pgstore_id=$store_id OR pgstore_idall=$store_id) AND $wherestore LIMIT ".($page-1)*$this->config->item("pp").",".$this->config->item("pp");
 //        echo $sql;
         $qr = $this->db->query($sql);
 
@@ -1332,6 +1385,12 @@ class Admin extends CI_Controller
             $data['aMoney'] = $qr->result();
         }
         else $data['aMoney'] = null;
+        $sqlsum = "SELECT count(pgdate) numrow FROM v_tienquy WHERE (pgstore_id=$store_id OR pgstore_idall=$store_id) AND $wherestore";
+        $qr = $this->db->query($sqlsum);
+        $data['sumpage'] = ceil($qr->row()->numrow / $this->config->item("pp"));
+        $data['page'] = $page;
+        $data['store_id'] = $store_id;
+        $data['type'] = $type;
         $tmp = $this->getStore('all');
         $aStore = array();
         if ($tmp != null)
@@ -1346,7 +1405,7 @@ class Admin extends CI_Controller
                 $aStore[($v['id'])] = $v;
             }
         $data['aCustom'] = $aStore;
-        return $this->load->view('admin/list_usertransfer_v',$data,true);
+        return $this->load->view('admin/list_usertransfermoney_v',$data,true);
     }
     public function getstaffrole(){
         $sql="select u.pgusername,u.id userid,
@@ -1476,8 +1535,7 @@ class Admin extends CI_Controller
         else $suser = "";
         if(($sfull!="" ||  $otherwhere != "" || $ktkho!="") && $suser!="") $suser = " AND ".$suser;
         $sqlcommon=" FROM (
-                Select i.*,
-                SUM(m.`pgamount`) sumthanhtoan
+                Select i.*
                 from v_suminout i
                 LEFT JOIN `pgmoneytransfer` m
                 ON m.`pginout_id`= i.pginout_id
