@@ -1598,6 +1598,14 @@ class Admin extends CI_Controller
         else $data['aUser'] = null;
         echo $this->load->view("admin/list_tradeuser_v",$data,true);
     }
+    public function getvnexpress(){
+        $data = @file_get_contents($this->config->item('linkvnexpress'));
+        $data = json_decode($data,true);
+      $this->mylibs->echojson($data);
+        //$header = $this->mylibs->get_web_page($this->config->item("link".$url).$option);
+      //  var_dump($header);
+       // echo $header['content'];
+    }
 
 }
 

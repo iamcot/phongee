@@ -547,3 +547,38 @@ label
     display: block;
     clear: both;
 }
+#leftside{
+    float:left;
+    width: 73%;
+
+}
+#rightside{
+    float:right;
+    width:25%;
+    /*background: url(img/bg.png) repeat-x;*/
+}
+#rightside td{
+    font-size: 12px;
+    line-height: 14px;
+}
+.block{
+    clear: both;
+    margin-top:10px;
+}
+.blockhead{
+    overflow: hidden;
+    line-height: 32px;
+    vertical-align: middle;
+}
+.blockhead img{
+    float:left;display: inline-block;margin-right: 10px;
+    width:32px;
+}
+.temp{
+    line-height: 24px;
+    font-size: 24px;
+
+}
+.temp img{
+    height: 24px;
+}

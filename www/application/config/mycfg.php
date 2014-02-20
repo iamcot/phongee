@@ -124,3 +124,9 @@ $config['aMoneyType'] = array(
     'usd' => array('usd','USD','USD',21000),
     'nh1' => array('nh1','Ngân hàng 1','VNĐ',1),
 );
+
+$config['linkweather'] = "http://muasamcangay.com/tool/weather/Weather.php?id=";
+//tp_hcm; ha_noi
+$config['linkgold'] = "http://www.sjc.com.vn/xml/tygiavang.xml?t=";
+$config['linkusd'] = "http://www.sjc.com.vn/ajax_currency.php?time=";
+$config['linkvnexpress'] = 'http://vnexpress.net/block/crawler?arrKeys%5B%5D=thoi_tiet&arrKeys%5B%5D=gia_vang&arrKeys%5B%5D=ty_gia';
