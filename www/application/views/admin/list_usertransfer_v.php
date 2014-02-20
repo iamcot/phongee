@@ -59,6 +59,7 @@
     });
     </script>
     <? endif;?>
-
+<?else:?>
+    <p>Chưa có thông tin giao dịch</p>
 <?endif;?>
     </div>
