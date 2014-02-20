@@ -13,7 +13,7 @@
             <div id="leftside"></div>
             <div id="rightside">
                 <div class="block">
-                    <div  class="blockhead"><img src="<?=base_url()?>images/cloud.png" style="">  Thời tiết</div>
+                    <div  class="blockhead"><img src="<?=base_url()?>src/img/cloud.png" style="">  Thời tiết</div>
                     <table>
                         <thead>
                         <tr>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="clear"></div>
                 <div id="usd" class="block">
-                    <div class="blockhead"><img src="<?=base_url()?>images/circle-chart.png" style="float:left;display: inline-block;margin-right: 10px"> Ngoại tệ</div>
+                    <div class="blockhead"><img src="<?=base_url()?>src/img/circle-chart.png" style="float:left;display: inline-block;margin-right: 10px"> Ngoại tệ</div>
                     <table>
                         <thead>
                         <tr>
@@ -48,7 +48,7 @@
                 </div>
                 <div class="clear"></div>
                 <div id="gold" class="block">
-                    <div  class="blockhead"><img src="<?=base_url()?>images/money.png" style="float:left;display: inline-block;margin-right: 10px"> Giá vàng </div>
+                    <div  class="blockhead"><img src="<?=base_url()?>src/img/money.png" style="float:left;display: inline-block;margin-right: 10px"> Giá vàng </div>
                     <table>
                         <thead>
                         <tr>
