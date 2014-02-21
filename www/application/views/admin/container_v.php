@@ -5,6 +5,7 @@
     <link id="page_favicon" href="/favicon.ico" rel="icon" type="image/x-icon" />
     <title><?= $title ?></title>
     <link type="text/css" rel="stylesheet" href="<?= base_url() ?>src/ckeditor/skins/moono/editor.css">
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <!-- main JS libs -->
     <script src="<?= base_url() ?>src/chubby-stacks-css/js/libs/modernizr.min.js"></script>
     <script src="<?= base_url() ?>src/chubby-stacks-css/js/libs/jquery-1.10.2.min.js"></script>

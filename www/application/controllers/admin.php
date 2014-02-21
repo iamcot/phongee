@@ -1632,6 +1632,10 @@ class Admin extends CI_Controller
         }
     }
     public function chartLine_StoreInoutMonth(){
+        $maxday = cal_days_in_month(CAL_GREGORIAN, date("m"), date("Y"));
+        $dayfrom = strtotime(date("Y").'-'.date("m").'-1');
+
+        $dayto = strtotime(date("Y").'-'.date("m").'-'.$maxday.' 23:59:59');
         $store = "";
         if($this->session->userdata("pgstore_id")>0){
             $store_id = $this->session->userdata("pgstore_id");
@@ -1639,74 +1643,57 @@ class Admin extends CI_Controller
             OR (inoutto = $store_id AND (inouttype='nhap' OR pgxuattype='xuatkho') )";
         }
         else{
-            $store = " (inoutfrom IN (SELECT id FROM pgstore where pgtype='kho') AND (pgxuattype='xuatkho') )
+            $store = " (inoutfrom IN (SELECT id FROM pgstore where pgtype='kho') AND (pgxuattype='xuatkho' OR pgxuattype='khachhang') )
             OR (inoutto IN (SELECT id FROM pgstore where pgtype='kho') AND (inouttype='nhap') )";
 //            if($this->session->userdata("pgrole")=='ketoankho'){
 //
 //            }
         }
-        $sql="SELECT SUM(sumphaitra) nhap,SUM(sumduocnhan) xuat, inoutdate FROM v_suminout WHERE $store GROUP BY inoutdate ORDER BY inoutdate";
+        $sql="SELECT (sumphaitra) nhap,(sumduocnhan) xuat, inoutdate FROM v_suminout WHERE ".$store." AND inoutdate >= ".$dayfrom." AND inoutdate < ".$dayto."  ORDER BY inoutdate";
         $qr = $this->db->query($sql);
-        if($qr->num_rows()>0){
+        $numrow = $qr->num_rows();
+        if($numrow>0){
             $this->load->library('gcharts');
             $this->gcharts->load('LineChart');
 
-            $dataTable = $this->gcharts->DataTable('Stocks');
+            $dataTable = $this->gcharts->DataTable('Inout');
 
-            $dataTable->addColumn('number', 'Ngày', 'inoutdate');
+            $dataTable->addColumn('date', 'Ngày', 'inoutdate');
             $dataTable->addColumn('number', 'Nhập', 'nhap');
             $dataTable->addColumn('number', 'Xuất', 'xuat');
-            foreach($qr->result() as $row)
-            {
-                $data[0] = date("d/m/Y H:i:s",$row->inoutdate); //Count
-                $data[1] = $row->nhap; //Line 1's data
-                $data[2] = $row->xuat; //Line 2's data
 
-                $dataTable->addRow($data);
-            }
-            $config = array(
-                'title' => 'Biểu đồ Nhập xuất trong tháng cửa hàng',
-            );
-            $this->gcharts->LineChart('Stocks')->setConfig($config);
-            echo $this->gcharts->LineChart('Stocks')->outputInto('stock_div');
-            echo $this->gcharts->div(600, 300);
+            $rs = $qr->result();
+            $curr = 1;
+            $sCurrDate = "";
+            $data = array("",0,0);
+                for($j=0;$j<$numrow;$j++){
+                    $row = $rs[$j];
+                    $dbCurrDate = date("Y-m-d",$row->inoutdate);
+                    $jsdate = new jsDate(date("Y",$row->inoutdate), date("m",$row->inoutdate)-1, date("d",$row->inoutdate));
+                    if($sCurrDate != $dbCurrDate){
+                        if($sCurrDate!=""){
+                            $dataTable->addRow($data);
+                            $data = array("",0,0);
+                        }
+                        for($i=$curr;$i<=$maxday;$i++){
+                            $sCurrDate = date("Y").'-'.date("m").'-'.(($i<10)?"0".$i:$i);
+                            if($sCurrDate == $dbCurrDate){
+                                $curr = $i+1;
+                                break;
+                            }
+                        }
+                    }
+                    $data[0] = $jsdate; //Count
+                    $data[1] += $row->nhap; //Line 1's data
+                    $data[2] += $row->xuat; //Line 2's data
+                }
+            $dataTable->addRow($data);
+            $this->mylibs->echojson($dataTable);
 
-            if($this->gcharts->hasErrors())
-            {
-                echo $this->gcharts->getErrors();
-            }
         }
         else echo "Không có thông tin về biểu đồ.";
     }
-    public function linechart(){
-        $this->load->library('gcharts');
-        $this->gcharts->load('LineChart');
 
-        $dataTable = $this->gcharts->DataTable('Stocks');
-
-        $dataTable->addColumn('number', 'Count', 'count');
-        $dataTable->addColumn('number', 'Projected', 'projected');
-        $dataTable->addColumn('number', 'Official', 'official');
-        for($a = 1; $a < 25; $a++)
-        {
-            $data[0] = $a; //Count
-            $data[1] = rand(800,1000); //Line 1's data
-            $data[2] = rand(800,1000); //Line 2's data
-
-            $dataTable->addRow($data);
-        }
-        $config = array(
-            'title' => 'Stocks'
-        );
-        $this->gcharts->LineChart('Stocks')->setConfig($config);
-        echo $this->gcharts->LineChart('Stocks')->outputInto('stock_div');
-        echo $this->gcharts->div(600, 300);
-
-        if($this->gcharts->hasErrors())
-        {
-            echo $this->gcharts->getErrors();
-        }
-    }
 
 }
 

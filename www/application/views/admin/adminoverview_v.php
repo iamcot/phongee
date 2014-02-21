@@ -15,7 +15,7 @@
                     <div class="gridblock">
                         <li class="fa fa-usd">Tiền mặt cửa hàng: <b id="cash"></b></li>
                     </div>
-                    <div class="gridblock" style="height:500px"></div>
+                    <div class="gridblock" id="linechart"></div>
                 </div>
                 <div class="gridcolumn">
                     <div class="gridblock" style="height:400px"></div>
@@ -88,7 +88,26 @@ $(function () {
     $("#tabs").tabs();
     loadvnexpress();
     getCash("tm");
+
 });
+google.load('visualization', '1', {'packages':['corechart']});
+google.setOnLoadCallback(chartLine_StoreInoutMonth);
+function chartLine_StoreInoutMonth(){
+    addloadgif("linechart");
+    var jsonData = $.ajax({
+        url: "<?=base_url()?>admin/chartLine_StoreInoutMonth",
+        dataType:"json",
+        async: false
+    }).responseText;
+
+    // Create our data table out of JSON data loaded from server.
+    var data = new google.visualization.DataTable(jsonData);
+
+    // Instantiate and draw our chart, passing in some options.
+    var chart = new google.visualization.LineChart(document.getElementById('linechart'));
+    chart.draw(data, {width: 350, height: 200,title:"Biểu đồ xuất/nhập cửa hàng tháng <?=date("m")?>"});
+  //  $("#linechart").load("<?=base_url()?>admin/chartLine_StoreInoutMonth");
+}
     function loadvnexpress(){
         var surl = "<?=base_url()?>admin/getvnexpress";
         $.ajax({
@@ -121,6 +140,7 @@ $(function () {
         });
     }
    function getCash(type){
+
        $("#cash").load("<?=base_url()?>admin/getCash/"+type);
    }
 </script>
