@@ -1081,27 +1081,40 @@ class Admin extends CI_Controller
             $report = $qr->result();
         }
         else $report = null;
-        $param['dudauky'] = $this->getdudauky(strtotime($param['pgdatefrom']),$param['pgstore_id']);
+        if($param['pgmoneytype']=='all') $type='tm';
+        else $type =  $param['pgmoneytype'];
+        $param['dudauky'] = $this->getdudauky(strtotime($param['pgdatefrom']),$param['pgstore_id'],$type);
         $param['aReport'] = $report;
 
         return $this->load->view("admin/rp_tienquy",$param);
     }
-    function getdudauky($datefrom,$store_id='all'){
+    function getdudauky($datefrom,$store_id='all',$type='tm'){
         if($store_id=='all'){
             $store  = '';
-            $xuatmoney = " or inouttype='xuat' ";
+            $xuatmoney = " or inoutxuattype='khachhang' or inoutxuattype='khachle' ";
+            $nhapmoney = " or inoutxuattype='nhapkho' ";
+        }
+        else if($store_id=='kho'){
+            $nhapmoney = "  or (inoutto  IN (SELECT id from pgstore WHERE pgtype='kho') and inouttype='nhap') ";
+            $xuatmoney  = " or ( inouttype='xuat' and inoutfrom IN (SELECT id from pgstore WHERE pgtype='kho') ) ";
+            $store = " AND ";
+            $store .=" ( (inouttype ='nhap'  AND inoutto IN (SELECT id from pgstore WHERE pgtype='kho') )
+            OR ( inouttype ='xuat'  AND inoutfrom IN (SELECT id from pgstore WHERE pgtype='kho') )
+            OR pgstore_id IN  (SELECT id from pgstore WHERE pgtype='kho') ) ";
         }
         else{
-            $xuatmoney = " or ( inouttype='xuat' and inoutfrom = '".$store_id."' ) ";
+            $nhapmoney = " or (inoutto = '".$store_id."' and (inoutxuattype='xuatkho' or inoutxuattype='cuahang' or inouttype='nhap') )";
+            $xuatmoney = " or ( (inouttype='xuat' OR inoutxuattype='thuhoi') and inoutfrom = '".$store_id."' ) ";
             $store = " AND ";
-            $store .= " ( pgstore_id = ".$store_id."
+            $store .= " (
+            pgstore_id = ".$store_id."
             OR (inoutfrom = ".$store_id." AND inouttype='xuat' )
             OR (inoutto = ".$store_id." AND (inouttype='nhap' OR inoutxuattype='xuatkho' OR inoutxuattype='cuahang')   )
             ) ";
         }
         $sql="SELECT COALESCE((sum((CASE WHEN ( (pgtype='nhap' and inout_id=0) $xuatmoney ) THEN (pgamount) ELSE ( 0 ) END))
-        + sum((CASE WHEN ( (pgtype='xuat' and inout_id=0 ) or (inouttype='nhap') or (inoutto = '".$store_id."' and (inoutxuattype='xuatkho' or inoutxuattype='cuahang' ) ) ) THEN (-1*pgamount) ELSE ( 0 ) END)) ),0) dudauky
-        FROM v_tienquy WHERE pgdate < '$datefrom' $store";
+        + sum((CASE WHEN ( (pgtype='xuat' and inout_id=0 )  $nhapmoney ) THEN (-1*pgamount) ELSE ( 0 ) END)) ),0) dudauky
+        FROM v_tienquy WHERE pgdate < '$datefrom' $store AND pgmoneytype='$type' ";
 //        echo $sql;
         $qr = $this->db->query($sql);
         return $qr->row()->dudauky;
@@ -1605,6 +1618,94 @@ class Admin extends CI_Controller
         //$header = $this->mylibs->get_web_page($this->config->item("link".$url).$option);
       //  var_dump($header);
        // echo $header['content'];
+    }
+    public function getCash($type='tm'){
+        $date = strtotime(' +1 day');
+        if($this->session->userdata("pgstore_id")>0){
+            echo number_format($this->getdudauky($date,$this->session->userdata("pgstore_id"),$type),0,'.',',').' VND';
+        }
+        else{
+            if($this->session->userdata("pgrole")=='ketoankho'){
+                echo number_format($this->getdudauky($date,'kho'),0,'.',',').' VND';
+            }
+            else echo number_format($this->getdudauky($date,'all'),0,'.',',').' VND';
+        }
+    }
+    public function chartLine_StoreInoutMonth(){
+        $store = "";
+        if($this->session->userdata("pgstore_id")>0){
+            $store_id = $this->session->userdata("pgstore_id");
+            $store = " (inoutfrom = $store_id AND (pgxuattype='thuhoi' OR inouttype='xuat') )
+            OR (inoutto = $store_id AND (inouttype='nhap' OR pgxuattype='xuatkho') )";
+        }
+        else{
+            $store = " (inoutfrom IN (SELECT id FROM pgstore where pgtype='kho') AND (pgxuattype='xuatkho') )
+            OR (inoutto IN (SELECT id FROM pgstore where pgtype='kho') AND (inouttype='nhap') )";
+//            if($this->session->userdata("pgrole")=='ketoankho'){
+//
+//            }
+        }
+        $sql="SELECT SUM(sumphaitra) nhap,SUM(sumduocnhan) xuat, inoutdate FROM v_suminout WHERE $store GROUP BY inoutdate ORDER BY inoutdate";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $this->load->library('gcharts');
+            $this->gcharts->load('LineChart');
+
+            $dataTable = $this->gcharts->DataTable('Stocks');
+
+            $dataTable->addColumn('number', 'Ngày', 'inoutdate');
+            $dataTable->addColumn('number', 'Nhập', 'nhap');
+            $dataTable->addColumn('number', 'Xuất', 'xuat');
+            foreach($qr->result() as $row)
+            {
+                $data[0] = date("d/m/Y H:i:s",$row->inoutdate); //Count
+                $data[1] = $row->nhap; //Line 1's data
+                $data[2] = $row->xuat; //Line 2's data
+
+                $dataTable->addRow($data);
+            }
+            $config = array(
+                'title' => 'Biểu đồ Nhập xuất trong tháng cửa hàng',
+            );
+            $this->gcharts->LineChart('Stocks')->setConfig($config);
+            echo $this->gcharts->LineChart('Stocks')->outputInto('stock_div');
+            echo $this->gcharts->div(600, 300);
+
+            if($this->gcharts->hasErrors())
+            {
+                echo $this->gcharts->getErrors();
+            }
+        }
+        else echo "Không có thông tin về biểu đồ.";
+    }
+    public function linechart(){
+        $this->load->library('gcharts');
+        $this->gcharts->load('LineChart');
+
+        $dataTable = $this->gcharts->DataTable('Stocks');
+
+        $dataTable->addColumn('number', 'Count', 'count');
+        $dataTable->addColumn('number', 'Projected', 'projected');
+        $dataTable->addColumn('number', 'Official', 'official');
+        for($a = 1; $a < 25; $a++)
+        {
+            $data[0] = $a; //Count
+            $data[1] = rand(800,1000); //Line 1's data
+            $data[2] = rand(800,1000); //Line 2's data
+
+            $dataTable->addRow($data);
+        }
+        $config = array(
+            'title' => 'Stocks'
+        );
+        $this->gcharts->LineChart('Stocks')->setConfig($config);
+        echo $this->gcharts->LineChart('Stocks')->outputInto('stock_div');
+        echo $this->gcharts->div(600, 300);
+
+        if($this->gcharts->hasErrors())
+        {
+            echo $this->gcharts->getErrors();
+        }
     }
 
 }

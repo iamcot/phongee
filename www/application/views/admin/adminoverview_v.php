@@ -10,7 +10,21 @@
 
     <div id="tab-1">
         <div class="block">
-            <div id="leftside"></div>
+            <div id="leftside">
+                <div class="gridcolumn">
+                    <div class="gridblock">
+                        <li class="fa fa-usd">Tiền mặt cửa hàng: <b id="cash"></b></li>
+                    </div>
+                    <div class="gridblock" style="height:500px"></div>
+                </div>
+                <div class="gridcolumn">
+                    <div class="gridblock" style="height:400px"></div>
+                    <div class="gridblock" style="height:200px"></div>
+                </div>
+
+
+
+            </div>
             <div id="rightside">
                 <div class="block">
                     <div  class="blockhead"><img src="<?=base_url()?>src/img/cloud.png" style="">  Thời tiết</div>
@@ -73,6 +87,7 @@
 $(function () {
     $("#tabs").tabs();
     loadvnexpress();
+    getCash("tm");
 });
     function loadvnexpress(){
         var surl = "<?=base_url()?>admin/getvnexpress";
@@ -105,5 +120,7 @@ $(function () {
             }
         });
     }
-
+   function getCash(type){
+       $("#cash").load("<?=base_url()?>admin/getCash/"+type);
+   }
 </script>

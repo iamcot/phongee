@@ -582,3 +582,14 @@ label
 .temp img{
     height: 24px;
 }
+.gridblock{
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 10px #ddd;
+    padding: 10px;
+}
+.gridcolumn{
+    margin-right:1%;
+    width:48%;
+    float:left;
+}

@@ -1,11 +1,11 @@
 function addloadgif(eid) {
     if (eid == null || eid == "") eid = "#loadstatus";
     //alert(eid);
-    $(eid).html("<img src='/src/ajax-loader.gif' name='ajaxload'>");
+    $(eid).html("<img src='"+$("#base_url").val()+"src/ajax-loader.gif' name='ajaxload'>");
 }
 function addsavegif(eid) {
     if (eid == null || eid == "") eid = "#loadstatus";
-    $(eid).html("<img src='/src/save.gif' name='ajaxload'>");
+    $(eid).html("<img src='"+$("#base_url").val()+"src/save.gif' name='ajaxload'>");
 }
 function removeloadgif(eid) {
     if (eid == null || eid == "") eid = "#loadstatus";

@@ -3,21 +3,26 @@
     else echo $aStore[$pgstore_id]->pglong_name;
     ?> <?=(($pgdatefrom!='')?'TỪ '.date('d/m/Y',strtotime($pgdatefrom)):'')?> <?=(($pgdateto!='')?'ĐẾN '.date('d/m/Y',strtotime($pgdateto)):'')?> </h3>
 <center>
-<? if($aReport!=null):
-    $aMoneyType = $this->config->item('aMoneyType');
-    ?>
+<?
+$aMoneyType = $this->config->item('aMoneyType');
+
+?>
     <table style="width: 80%"  class="tblist">
         <thead>
-            <tr>
-                <td >Ngày</td>
-                <td style="text-align: right">Dư có</td>
-                <td style="text-align: right">Dư nợ</td>
-                <td style="text-align: right">Ghi chú</td>
-            </tr>
+        <tr>
+            <td >Ngày</td>
+            <td style="text-align: right">Dư có</td>
+            <td style="text-align: right">Dư nợ</td>
+            <td style="text-align: right">Ghi chú</td>
+        </tr>
         </thead>
         <tbody>
-            <tr style="background: #fff3f4"><td>Dư đầu kỳ:</td><td colspan="3"> <b><?=number_format($dudauky,0,'.',',')?></b></td></tr>
-            <? $co=0;$no=0;$i=1; foreach($aReport as $report):
+        <tr style="background: #fff3f4"><td>Dư đầu kỳ:</td><td colspan="3"> <b><?=number_format($dudauky,0,'.',',')?></b></td></tr>
+
+     <?  $co=0;$no=0; if($aReport!=null):
+
+    ?>
+    <? $i=1; foreach($aReport as $report):
                 if(($report->inoutxuattype=='xuatkho' || $report->inoutxuattype=='cuahang') && $pgstore_id=='all') continue;
                 ?>
                 <tr class="<?=(($i%2==0))?'odd':''?>">
@@ -37,11 +42,12 @@
                 }
 
                 $i++;endforeach;?>
-        <tr style="background: #fffeee;border-top: 2px solid #ddd;"><td>Tổng trong kỳ</td><td style="text-align: right"><?=number_format($co,0,'.',',')?></td><td style="text-align: right"><?=number_format($no,0,'.',',')?></td><td></td></tr>
+     <? endif;
+     if($pgmoneytype == 'all') $pgmoneytype = 'tm';
+     ?>
+        <tr style="background: #fffeee;border-top: 2px solid #ddd;"><td>Tổng trong kỳ</td><td style="text-align: right"><?=number_format($co,0,'.',',').'('.$aMoneyType[$pgmoneytype][2].')'?> </td><td style="text-align: right"><?=number_format($no,0,'.',',').' ('.$aMoneyType[$pgmoneytype][2].')'?></td><td></td></tr>
         <tr style="background: #fff3f4"><td>Dư cuối kỳ</td><td><b><?=number_format(($dudauky+$co+$no),0,'.',',')?></b></td><td></td><td></td></tr>
         </tbody>
     </table>
-<? else:?>
-    Chưa có dữ liệu để báo cáo.
-<? endif;?>
+
     </center>
