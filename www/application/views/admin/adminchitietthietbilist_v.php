@@ -1,18 +1,13 @@
 <fieldset>
     <legend>Thông tin</legend>
     <table id="inputserviceplace">
-        <tr><td colspan="2">
-            <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
-            <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
-            <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
-
-            </td>
-        </tr>
+        <thead style="font-weight: normal">
         <tr>
             <td>
-                <input type="text" name="pgthietbicode" placeholder="Mã thiết bị" style="width: 28%;float:left;" onblur="getThietbi(this.value)">
-                <input type="text" name="pglongname" placeholder="Tên thiết bị"  style="width: 48%;float:left;">
-                <input type="text" name="pgthietbi_id" placeholder="ID thiết bị" style="width: 19%;float:left;">
+                <label>Mã TB</label>
+                <input type="text" name="pgthietbicode" placeholder="Mã thiết bị" style="width: 50%" onblur="getThietbi(this.value)">
+                <label style="width:10%">ID TB</label>
+                <input type="text" name="pgthietbi_id" placeholder="ID TB" style="width: 15%">
             </td>
             <td>
                 <label>Series No.</label>
@@ -20,18 +15,20 @@
             </td>
         </tr>
         <tr>
-            <td> <label>Part No.</label>
-                <input type="text" name="pgpartno" placeholder="Số Part Number thiết bị" ondblclick="this.value=''"></td>
-            </td>
+            <td>
+                <label>Tên TB</label>
+                <input type="text" name="pglongname" placeholder="Tên thiết bị"  >
+                </td>
             <td> <label>IMEI No.</label>
                 <input type="text" name="pgimei" placeholder="Số Imei thiết bị" ondblclick="this.value=''"></td>
             </td>
         </tr>
         <tr>
             <td>
+                <label>Part No.</label>
+                <input type="text" name="pgpartno" placeholder="Số Part Number thiết bị" ondblclick="this.value=''"></td>
 
-                <label>Đơn vị tính</label>
-                <input type="text" name="pgdvt" placeholder="Đơn vị tính" value="cái">
+
             </td><td>
 
                 <label>Thời gian Bảo hành</label>
@@ -41,48 +38,47 @@
         </tr>
         <tr>
             <td>
-<!--                <input type="text" name="pgcolor" placeholder="Màu">-->
-                <label>Màu sắc</label>
-                <select name="pgcolor">
-                    <option value="0">Màu </option>
-                </select>
+                    <label>Giá</label>
+                    <input type="text" name="pgprice" placeholder="Giá hiện tại"  style="width:28%" >
+                    <label>Giá cũ</label>
+                    <input type="text" name="pgprice_old" placeholder="Giá cũ"  style="width:28%" >
             <td>
-                <label>Nước SX</label>
-<!--                <input type="text" name="pgcountry" placeholder="Nước"></td>-->
-                    <select name="pgcountry">
-                        <option value="0">Nước sản xuất</option>
-                    </select>
+                <label>Đơn vị tính</label>
+                <input type="text" name="pgdvt" placeholder="Đơn vị tính" value="cái">
             </td>
         </tr>
         <tr>
             <td>
-<!--                <input type="text" name="pgyear" placeholder="Năm sx" >-->
+                <label>Nước SX</label>
+                <select name="pgcountry">
+                    <option value="0">Nước sản xuất</option>
+                </select>
+
+            </td>
+            <td>
                 <label>Năm SX</label>
                 <select name="pgyear">
                     <option value="0">Năm sản xuất</option>
                 </select>
             </td>
-            <td rowspan="3" style="vertical-align: top">
+        </tr>
+        <tr><td colspan="2"><a style="text-decoration: underline" href="javascript:$('table#inputserviceplace tbody').toggle()">Ẩn hiện Thông tin thêm cho thiết bị </a></td></tr>
+        </thead>
+        <tbody style="display: none">
+        <tr>
+            <td><label>Màu sắc</label>
+                <select name="pgcolor">
+                    <option value="0">Màu </option>
+                </select></td>
+            <td rowspan="2" style="vertical-align: top">
                 <label>Hình ảnh</label>
                 <input type="text" name="pgpic" placeholder="Hình ảnh đại diện" readonly=true>
                 <input id="picupload"  type="file" name="files[]" data-url="<?=base_url()?>admin/calljupload" multiple>
                 <div id="pgavatardemo"></div>
             </td>
         </tr>
-        <tr>
-            <td>
-                <div style="width: 50%;float: left">
-                    <label>Giá</label>
-                    <input type="text" name="pgprice" placeholder="Giá hiện tại">
-                </div>
-                 <div style="width: 50%;float: left">
-                     <label>Giá cũ</label>
-                     <input type="text" name="pgprice_old" placeholder="Giá cũ">
-                 </div>
 
-            </td>
 
-        </tr>
         <tr>
             <td>
                 <label>Thông tin ngắn</label>
@@ -97,12 +93,15 @@
                 <textarea name="pgtech_info" class="ckeditor"></textarea>
             </td>
         </tr>
+        </tbody>
         <tr>
             <td colspan="2" ><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
                 <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
                 <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+                <input type="text" style="width:20%" name="pgkeyword" placeholder="Từ khóa" ondblclick="this.value=''">
+                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+
                 <span style="display: inline-block;float: left;">
                 <input type="checkbox" name="checkdelinput" id="notclear">
                 <label for="notclear" style="width: 200px !important;">Không xóa dữ liệu</label>
@@ -202,10 +201,20 @@
     }
     function load(page) {
         addloadgif("#loadstatus");
-        $("#list_province").load("<?=base_url()?>admin/load/chitietthietbi/" + page, function () {
-            removeloadgif("#loadstatus");
+        $.ajax({
+                type: "post",
+                url: "<?=base_url()?>admin/load/chitietthietbi/" + page + "/keyword",
+                data: "key=" + $("input[name=pgkeyword]").val(),
+                success: function (msg) {
+                    $("#list_province").html(msg);
+                    removeloadgif("#loadstatus");
+                    $("input[name=currpage]").val(page);
+                }
         });
-        $("input[name=currpage]").val(page);
+<!--        $("#list_province").load("--><?//=base_url()?><!--admin/load/chitietthietbi/" + page+"/keyword?key="+$("input[name=pgkeyword]").val(), function () {-->
+<!--            removeloadgif("#loadstatus");-->
+<!--        });-->
+<!--        $("input[name=currpage]").val(page);-->
     }
     function myclear() {
         $("input[name=pglongname]").val("");

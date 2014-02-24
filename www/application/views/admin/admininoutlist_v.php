@@ -443,7 +443,8 @@
                                     loadinout_details(1,idhoadon);
                                     clearinputdetails();
                                     loadSumPrice(idhoadon,$("input[name=pgtype]:checked").val());
-                                    $("input[name=idhoadon]").val(idhoadon);
+                                    //$("input[name=idhoadon]").val(idhoadon);
+                                    edithoadon(idhoadon);
                                 }
 
 

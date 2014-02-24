@@ -15,7 +15,7 @@
         </tr>
         <tr>
             <td>
-                <label>hứ tự</label>
+                <label>Thứ tự</label>
                 <input type="text" name="pgorder" placeholder="Thứ tự">
             </td>
         </tr>
@@ -24,8 +24,9 @@
             <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
                 <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
                 <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+                <input type="text" style="width:20%" name="pgkeyword" placeholder="Từ khóa" ondblclick="this.value=''">
+                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
 
                 <div id="loadstatus" style="float:right;"></div>
             </td>
@@ -84,10 +85,21 @@
     }
     function load(page) {
         addloadgif("#loadstatus");
-        $("#list_province").load("<?=base_url()?>admin/load/nhomthietbi/" + page, function () {
-            removeloadgif("#loadstatus");
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/load/nhomthietbi/" + page + "/keyword",
+            data: "key=" + $("input[name=pgkeyword]").val(),
+            success: function (msg) {
+                $("#list_province").html(msg);
+                removeloadgif("#loadstatus");
+                $("input[name=currpage]").val(page);
+            }
         });
-        $("input[name=currpage]").val(page);
+<!--        addloadgif("#loadstatus");-->
+<!--        $("#list_province").load("--><?//=base_url()?><!--admin/load/nhomthietbi/" + page+"/"+$("input[name=pgkeyword]").val().trim(), function () {-->
+<!--            removeloadgif("#loadstatus");-->
+<!--        });-->
+<!--        $("input[name=currpage]").val(page);-->
     }
     function myclear() {
         $("input[name=pglong_name]").val("");

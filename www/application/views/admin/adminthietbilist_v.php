@@ -1,6 +1,7 @@
 <fieldset>
     <legend>Thông tin</legend>
     <table id="inputserviceplace">
+        <thead style="font-weight: normal">
         <tr>
             <td id="pgtype">
                 <span style="display: inline-block;">
@@ -29,33 +30,69 @@
             </td>
         </tr>
         <tr>
-            <td>
+            <td id="parent">
+                <label style="">Nhóm TB</label>
 
+                <div class="field_select" id="pgstore_id" style="width:75%;display: inline-block;float:none;">
+                <select name="pgnhomthietbi_id">
+                    <option value="0">Chọn nhóm thiết bị</option>
+                    <? foreach($aNhomthietbi as $store):?>
+                        <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
+                    <? endforeach;?>
+                </select>
+                </div>
+
+            </td><td>
+                <label>Giá</label>
+                <input type="text" name="pgprice" placeholder="Giá hiện tại"  style="width:28%" >
+                <label>Giá cũ</label>
+                <input type="text" name="pgprice_old" placeholder="Giá cũ"  style="width:28%" >
+            </td>
+        </tr>
+        <tr id="pkparent" style="display: none">
+            <td>
+                <label>Mã TB cha </label>
+                <input type="text" name="pkthietbicode" placeholder="Mã thiết bị" style="width: 50%" onblur="getThietbi(this.value)">
+                <label style="width: 15%">ID TB cha </label>
+                <input type="text" name="pkthietbi_id" placeholder="ID thiết bị" style="width: 10%">
+            </td>
+             <td>
+                 <label>Tên TB cha </label>
+                 <input type="text" name="pklongname" placeholder="Tên thiết bị"  >
+             </td>
+        </tr>
+        <tr>
+            <td>
                 <label>Đơn vị tính</label>
                 <input type="text" name="pgdvt" placeholder="Đơn vị tính" value="cái">
-            </td><td>
 
+            <td>
                 <label>Thời gian Bảo hành</label>
                 <input type="text" name="pgtgbh" placeholder="Thời gian Bảo hành" value="12 tháng">
 
             </td>
         </tr>
         <tr>
-            <td>
+            <td >
                 <label>Nước SX</label>
                 <input type="text" name="pgcountry" placeholder="Các nước sản xuất "></td>
-            <td>
-                <label>Màu sắc</label>
-                <input type="text" name="pgcolor" placeholder="Các màu ">
+
             </td>
-        </tr>
-        <tr>
             <td>
                 <label>Năm SX</label>
                 <input type="text" name="pgyear" placeholder="Các năm ">
             </td>
+        </tr>
+        <tr><td colspan="2"><a style="text-decoration: underline" href="javascript:$('table#inputserviceplace tbody').toggle()">Ẩn hiện Thông tin thêm cho thiết bị </a></td></tr>
+        </thead>
+        <tbody style="display: none">
+        <tr>
+            <td>
+                <label>Màu sắc</label>
+                <input type="text" name="pgcolor" placeholder="Các màu ">
+            </td>
 
-            <td rowspan="3" style="vertical-align: top">
+            <td rowspan="2" style="vertical-align: top">
                 <label>Hình ảnh</label>
                 <input type="text" name="pgpic" placeholder="Hình ảnh đại diện" readonly=true>
                 <input id="picupload"  type="file" name="files[]" data-url="<?=base_url()?>admin/calljupload" multiple>
@@ -64,43 +101,9 @@
         </tr>
 
         <tr>
-            <td id="parent">
-                <label>Nhóm TB</label>
-                <select name="pgnhomthietbi_id">
-                    <option value="0">Chọn nhóm thiết bị</option>
-                    <? foreach($aNhomthietbi as $store):?>
-                        <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
-                    <? endforeach;?>
-                </select>
-                <div id="pkparent" style="display: none">
-                    <input type="text" name="pkthietbicode" placeholder="Mã thiết bị" style="width: 28%;float:left;" onblur="getThietbi(this.value)">
-                    <input type="text" name="pklongname" placeholder="Tên thiết bị"  style="width: 48%;float:left;">
-                    <input type="text" name="pkthietbi_id" placeholder="ID thiết bị" style="width: 19%;float:left;">
-                </div>
-
-
-            </td>
-
-        </tr>
-
-        <tr>
-            <td>
-                <div style="width: 50%;float: left">
-                    <label>Giá *</label>
-                    <input type="text" name="pgprice" placeholder="Giá hiện tại">
-                </div>
-                <div style="width: 50%;float: left">
-                    <label>Giá cũ</label>
-                    <input type="text" name="pgprice_old" placeholder="Giá cũ">
-                </div>
-            </td>
-        </tr>
-
-        <tr>
             <td>
                 <label>Thông tin</label>
                 <input type="text" name="pgshort_info" placeholder="Thông tin ngắn"></td>
-
         </tr>
         <tr>
             <td colspan="2" >
@@ -110,16 +113,19 @@
                 <textarea name="pgtech_info" class="ckeditor"></textarea>
             </td>
         </tr>
+        </tbody>
         <tr>
             <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
                 <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
                 <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
+                <input type="text" style="width:20%" name="pgkeyword" placeholder="Từ khóa" ondblclick="this.value=''">
+                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
 
                 <div id="loadstatus" style="float:right;"></div>
             </td>
         </tr>
+
     </table>
 
 
@@ -132,6 +138,8 @@
     $(function () {
         $("input[name=pgprice]").autoNumeric({aSep:' ',aPad: false});
         $("input[name=pgprice_old]").autoNumeric({aSep:' ',aPad: false});
+        $('select[name=pgnhomthietbi_id]').chosen({width:"100%"});
+        $('select[name=pgnhomthietbi_id]').trigger("chosen:updated");
 
         if($("[placeholder]").size() > 0) {
             $.Placeholder.init();
@@ -153,14 +161,14 @@
         var pglong_info      = $("textarea[name=pglong_info]").val();
         var pgtech_info    = $("textarea[name=pgtech_info]").val();
         var pgtype_pk   = "";
+        var pgthietbi_parent = 0;
         var pgdvt     = $("input[name=pgdvt]").val().trim();
         var pgtgbh     = $("input[name=pgtgbh]").val().trim();
-//        console.log($("input[name=pgtype]:checked").val());
-        if(pgtype == "thietbi"){
         var pgnhomthietbi_id      = $("select[name=pgnhomthietbi_id]").val();
-        }
-        else{
-        var pgnhomthietbi_id      = $("input[name=pkthietbi_id]").val();
+
+//        console.log($("input[name=pgtype]:checked").val());
+        if(pgtype == "phukien"){
+            pgthietbi_parent      = $("input[name=pkthietbi_id]").val();
             pgtype_pk = $("select[name=pgtype_pk]").val();
         }
 
@@ -183,6 +191,7 @@
                     + "&pgyear=" + pgyear
                     + "&pgdvt=" + pgdvt
                     + "&pgtgbh=" + pgtgbh
+                    + "&pgthietbi_parent=" + pgthietbi_parent
                     + "&pgcountry=" + pgcountry
                     + "&pglong_info=" + encodeURIComponent(pglong_info)
                     + "&pgtech_info=" + encodeURIComponent(pgtech_info)
@@ -212,17 +221,28 @@
     }
     function load(page) {
         addloadgif("#loadstatus");
-        $("#list_province").load("<?=base_url()?>admin/load/thietbi/" + page, function () {
-            removeloadgif("#loadstatus");
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/load/thietbi/" + page + "/keyword",
+            data: "key=" + $("input[name=pgkeyword]").val(),
+            success: function (msg) {
+                $("#list_province").html(msg);
+                removeloadgif("#loadstatus");
+                $("input[name=currpage]").val(page);
+            }
         });
-        $("input[name=currpage]").val(page);
+<!--        addloadgif("#loadstatus");-->
+<!--        $("#list_province").load("--><?//=base_url()?><!--admin/load/thietbi/" + page+"/"+$("input[name=pgkeyword]").val().trim(), function () {-->
+<!--            removeloadgif("#loadstatus");-->
+<!--        });-->
+<!--        $("input[name=currpage]").val(page);-->
     }
     function myclear() {
         $("input[name=pglongname]").val("");
         $("input[name=pgcode]").val("");
         $("input[name=pgpic]").val("");
         $("input[name=pkthietbi_id]").val("");
-        $("select[name=pgnhomthietbi_id]").val("");
+        $("select[name=pgnhomthietbi_id]").val(0).trigger("chosen:updated");
         $("input[name=pgprice]").val("");
         $("input[name=pgcolor]").val("");
         $("input[name=pgyear]").val("");
@@ -265,17 +285,15 @@
                     $("#pgtype label").removeClass("checked");
                     $("input[value="+province.pgtype+"]").prop('checked', true);
                     $("label[for="+province.pgtype+"radio]").addClass("checked");
+                    $("select[name=pgnhomthietbi_id]").val(province.pgnhomthietbi_id).trigger("chosen:updated");
 
                     if(province.pgtype == 'phukien'){
-                        $("input[name=pkthietbi_id]").val(province.pgnhomthietbi_id);
+                        $("input[name=pkthietbi_id]").val(province.pgthietbi_parent);
                         $("select[name=pgtype_pk]").show();
                         $("#pkparent").show();
-                        $("select[name=pgnhomthietbi_id]").hide();
                     }
                     else{
-                        $("select[name=pgnhomthietbi_id]").val(province.pgnhomthietbi_id);
                         $("select[name=pgtype_pk]").hide();
-                        $("select[name=pgnhomthietbi_id]").show();
                         $("#pkparent").hide();
 
                     }
@@ -331,11 +349,9 @@
             if($(this).val() == 'phukien'){
                 $("select[name=pgtype_pk]").show();
                 $("#pkparent").show();
-                $("select[name=pgnhomthietbi_id]").hide();
             }
             else{
                 $("select[name=pgtype_pk]").hide();
-                $("select[name=pgnhomthietbi_id]").show();
                 $("#pkparent").hide();
 
             }

@@ -77,7 +77,6 @@
             <td colspan="2"><input type="hidden" name="edit" value="">
                 <input type="hidden" name="currpage" value="1">
                 <span class="btn btn-small"><input type="button" value="Lưu" onclick="save()"> </span>
-                <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
                 <span class="btn btn-small"><input type="button" value="Xóa nhập liệu" onclick="myclear()"> </span>
 
                 <div id="loadstatus" style="float:right;"></div>
@@ -131,6 +130,8 @@
         <span style="display: inline-block;width:25%">
         <input type="text" name="pglkeyword" placeholder="Từ khóa" style="display: inline-block;height: 28px;" ondblclick="this.value=''">
             </span>
+        <span class="btn btn-small"><input type="button" value="Load" onclick="load(1)"> </span>
+
     </div>
     <div id="list_province"></div>
 </fieldset>
@@ -235,10 +236,24 @@
     }
     function load(page) {
         addloadgif("#loadstatus");
-        $("#list_province").load("<?=base_url()?>admin/load/user/" + page+"/"+$("#pglstaff").prop("checked")+"-"+$("#pglprovider").prop("checked")+"-"+$("#pglcustom").prop("checked")+"-"+$("input[name=pglkeyword]").val(), function () {
-            removeloadgif("#loadstatus");
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/load/user/" + page + "/keyword",
+            data: "pglstaff="+$("#pglstaff").prop("checked")
+                      +"&pglprovider="+$("#pglprovider").prop("checked")
+                      +"&pglcustom="+$("#pglcustom").prop("checked")
+                      +"&pglkeyword=" + $("input[name=pglkeyword]").val(),
+            success: function (msg) {
+                $("#list_province").html(msg);
+                removeloadgif("#loadstatus");
+                $("input[name=currpage]").val(page);
+            }
         });
-        $("input[name=currpage]").val(page);
+<!--        addloadgif("#loadstatus");-->
+<!--        $("#list_province").load("--><?//=base_url()?><!--admin/load/user/" + page+"/"+$("#pglstaff").prop("checked")+"-"+$("#pglprovider").prop("checked")+"-"+$("#pglcustom").prop("checked")+"-"+$("input[name=pglkeyword]").val(), function () {-->
+<!--            removeloadgif("#loadstatus");-->
+<!--        });-->
+<!--        $("input[name=currpage]").val(page);-->
     }
     function myclear() {
         $("input[name=pgfname]").val("");

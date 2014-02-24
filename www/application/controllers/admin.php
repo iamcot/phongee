@@ -123,23 +123,26 @@ class Admin extends CI_Controller
             if ($table == 'inout_details' || $table == 'moneytransfer')
                 $parent = array("pginout_id" => $where);
             else if ($table == 'user') {
-                $arr = explode("-", $where);
-                if ($arr[0] == 'false')
+//                $arr = explode("-", $where);
+                if ($this->input->post("pglstaff") == 'false')
                     $otherwhere .= " pgrole!='admin' AND pgrole!='ketoantonghop' AND pgrole!='ketoankho' AND pgrole!='ketoan' AND pgrole!='staff' ";
-                if($arr[1] =='false')
+                if($this->input->post("pglprovider") =='false')
                 {
                     if($otherwhere!="") $otherwhere.=" AND ";
                     $otherwhere.=" pgrole!='provider' ";
                 }
-                if($arr[2] =='false')
+                if($this->input->post("pglcustom") =='false')
                 {
                     if($otherwhere!="") $otherwhere.=" AND ";
                     $otherwhere.=" pgrole!='custom' ";
                 }
-                if($arr[3]!=""){
+                if($this->input->post("pglkeyword")!=""){
                     if($otherwhere!="") $otherwhere.=" AND ";
-                    $otherwhere.=" (pgusername like '%".$arr[3]."%' OR pglname like '%".$arr[3]."%' OR pgfname like '%".$arr[3]."%' OR pgmobi = '".$arr[3]."') ";
+                    $otherwhere.=" (pgusername like '%".$this->input->post("pglkeyword")."%' OR pglname like '%".$this->input->post("pglkeyword")."%' OR pgfname like '%".$this->input->post("pglkeyword")."%' OR pgmobi like '%".$this->input->post("pglkeyword")."%') ";
                 }
+            }
+            else if($table == 'nhomthietbi' || $table == 'thietbi' || $table == 'chitietthietbi'){
+                $otherwhere = " (pglong_name like '%".$this->input->post("key")."%' OR pgcode like '%".$this->input->post("key")."%' ) ";
             }
         }
         if ($this->session->userdata("pgstore_id") > 0) {
@@ -1618,6 +1621,37 @@ class Admin extends CI_Controller
         //$header = $this->mylibs->get_web_page($this->config->item("link".$url).$option);
       //  var_dump($header);
        // echo $header['content'];
+    }
+
+    public function getTopTonkhoThietbiStore()
+    {
+        if($this->session->userdata("pgstore_id")>0){
+            $sqlstore = " = ".$this->session->userdata("pgstore_id");
+        }
+        else{
+            $sqlstore = " IN (SELECT id FROM pgstore where pgtype='kho') ";
+        }
+           $sstore = " AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto $sqlstore )
+           OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom $sqlstore )  ) ";
+
+         $sql = "SELECT a.* FROM (SELECT thietbiname,
+         sum(case when (inoutfrom $sqlstore AND  (inouttype='xuat' OR pgxuattype = 'thuhoi') )
+         then (pgcount*-1) else (pgcount) end) tbcount
+         FROM v_inout WHERE pgdeleted = 0 " . $sstore  . "
+         GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname) a WHERE a.tbcount > 0 ";
+
+//         echo $sql;
+        $qr = $this->db->query($sql);
+        if ($qr->num_rows() > 0) {
+            $report = $qr->result();
+        }
+        else $report = null;
+        $param['aReport'] = $report;
+        $param['pgstore_id'] = -1;
+        $param['print'] = -1;
+
+        echo $this->load->view("admin/rp_tonkho", $param);
+
     }
     public function getCash($type='tm'){
         $date = strtotime(' +1 day');

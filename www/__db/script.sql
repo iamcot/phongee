@@ -1,3 +1,7 @@
+/* tanner 23/2 */
+/* 9:36:44 AM localhost */ ALTER TABLE `pgthietbi` ADD `pgthietbi_parent` INT  NOT NULL  DEFAULT '0'  AFTER `pgtgbh`;
+
+
 /* home 31/12*/
 ALTER TABLE  `pginout` ADD  `pguser_id` INT NOT NULL;
 

@@ -1,12 +1,14 @@
 <head>
     <meta charset="UTF-8">
 </head>
-<h3 style="text-align: center">BÁO CÁO TỒN KHO <?
-    if($pgstore_id=='all') echo 'TẤT CẢ HỆ THỐNG ';
-    else if($pgstore_id=='cuahang') echo 'TẤT CẢ CỬA HÀNG';
-    else if($pgstore_id=='kho')
-        echo 'KHO HÀNG ';
-    else echo $aStore[$pgstore_id]->pglong_name?> NGÀY <?=date('d/m/Y')?> </h3>
+<h3 style="text-align: center">TỒN KHO
+    <?if($print == -1): echo "THIẾT BỊ TRONG CỬA HÀNG ";
+    elseif($pgstore_id=='all'): echo 'TẤT CẢ HỆ THỐNG ';
+    elseif($pgstore_id=='cuahang'): echo 'TẤT CẢ CỬA HÀNG';
+    elseif($pgstore_id=='kho'): echo 'KHO HÀNG ';
+    elseif($pgstore_id>0): echo $aStore[$pgstore_id]->pglong_name." NGÀY ".date('d/m/Y')."";
+    endif; ?>
+</h3>
 <center>
     <? if($print == 1):?><style>
         table{
@@ -23,7 +25,7 @@
         }
     </style><? endif;?>
     <? if($aReport!=null):?>
-    <table style="width: 50%;"   <? if($print == 1):?>border=1<? endif;?> class="tblist">
+    <table <? if($print!=-1):?>style="width: 50%;"<?endif;?>   <? if($print == 1):?>border=1<? endif;?> class="tblist">
         <thead>
             <tr>
                 <td style="text-align: right;padding-right:15px">Tên thiết bị</td>
@@ -40,6 +42,6 @@
         </tbody>
     </table>
 <? else:?>
-    Chưa có dữ liệu để báo cáo.
+    Chưa có dữ liệu để báo cáo. Hoặc cửa hàng không còn hàng gì ^^.
 <? endif;?>
     </center>
