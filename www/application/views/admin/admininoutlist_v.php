@@ -717,6 +717,7 @@
     }
 
     function getThietbi(id,custom){
+        if(id.trim()=="") return;
         $.ajax({
             type: "post",
             url: "<?=base_url()?>admin/loadcode/thietbi/" + id,
