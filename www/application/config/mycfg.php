@@ -122,7 +122,11 @@ $config['roletype'] = array(
 $config['aMoneyType'] = array(
     'tm' => array('tm','Tiền mặt','VNĐ',1),
     'usd' => array('usd','USD','USD',21000),
-    'nh1' => array('nh1','Ngân hàng 1','VNĐ',1),
+    'vcbap' => array('vcbap','VCB Mr Phong','VNĐ',1),
+    'scbap' => array('scbap','SCB Mr Phong','VNĐ',1),
+    'vcbcp' => array('vcbcp','VCB Ms Phương','VNĐ',1),
+    'bidvap' => array('bidvap','BIDV Anh Phong (cà thẻ)','VNĐ',1),
+    'agrcp' => array('agrcp','AGRIBANK Phương (cà thẻ)','VNĐ',1),
 );
 
 $config['linkweather'] = "http://muasamcangay.com/tool/weather/Weather.php?id=";

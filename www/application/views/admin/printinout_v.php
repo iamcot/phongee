@@ -173,7 +173,7 @@
             <ul>
                 <li>Người mua hàng</li>
                 <li>Người giao hàng</li>
-                <li>Người lập phiếu<br><br><br><?=$first->pglname.' '.$first->pgfname?></li>
+                <li>Người lập phiếu<br><br><br><br><br><?=$first->pglname.' '.$first->pgfname?></li>
                 </ul>
         </div>
 

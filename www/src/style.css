@@ -603,3 +603,11 @@ label
     max-width: 100%;
     overflow-x: auto;
 }
+#tonkhothietbi tbody td{
+    font-size:10px;
+    line-height: 12px;
+}
+#tonkhothietbi {
+    max-height: 270px;
+    overflow-y: auto;
+}

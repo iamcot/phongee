@@ -10,7 +10,7 @@
             <div id="leftside">
                 <div class="gridcolumn">
                     <div class="gridblock">
-                        <li class="fa fa-usd">Tiền mặt cửa hàng: <b id="cash"></b></li>
+                        <li class="fa fa-usd"></li> Tiền mặt cửa hàng: <b id="cash"></b>
                     </div>
                     <div class="gridblock" id="linechart"></div>
                 </div>

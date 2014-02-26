@@ -1583,8 +1583,8 @@ class Admin extends CI_Controller
         COALESCE(u.pgfname,'') userfname, COALESCE(u.pglname,'') userlname,COALESCE(u.pgmobi,'') usermobi,COALESCE(u.pgaddr,'') useraddr,
         COALESCE(s.pglong_name) storename
          FROM v_inout i
-            LEFT JOIN pguser u
-            ON (u.id = i.inoutto and i.pgxuattype = 'khachhang') OR (u.id = i.inoutfrom AND i.pgxuattype='nhapkho')
+            LEFT JOIN v_tradeuser u
+            ON (u.tradeid = i.inoutto and i.pgxuattype = 'khachhang') OR (u.tradeid = i.inoutfrom AND i.pgxuattype='nhapkho')
             LEFT JOIN pgstore s
             ON (s.id = i.inoutto and i.pgxuattype='xuatkho') OR (s.id = i.inoutfrom and i.pgxuattype = 'thuhoi')
         WHERE i.pginout_id = $id";
@@ -1670,20 +1670,18 @@ class Admin extends CI_Controller
         $dayfrom = strtotime(date("Y").'-'.date("m").'-1');
 
         $dayto = strtotime(date("Y").'-'.date("m").'-'.$maxday.' 23:59:59');
-        $store = "";
-        if($this->session->userdata("pgstore_id")>0){
-            $store_id = $this->session->userdata("pgstore_id");
-            $store = " (inoutfrom = $store_id AND (pgxuattype='thuhoi' OR inouttype='xuat') )
-            OR (inoutto = $store_id AND (inouttype='nhap' OR pgxuattype='xuatkho') )";
-        }
-        else{
-            $store = " (inoutfrom IN (SELECT id FROM pgstore where pgtype='kho') AND (pgxuattype='xuatkho' OR pgxuattype='khachhang') )
-            OR (inoutto IN (SELECT id FROM pgstore where pgtype='kho') AND (inouttype='nhap') )";
-//            if($this->session->userdata("pgrole")=='ketoankho'){
-//
-//            }
-        }
-        $sql="SELECT (sumphaitra) nhap,(sumduocnhan) xuat, inoutdate FROM v_suminout WHERE ".$store." AND inoutdate >= ".$dayfrom." AND inoutdate < ".$dayto."  ORDER BY inoutdate";
+        if($this->session->userdata("pgstore_id")>0)
+            $store_id = "= ".$this->session->userdata("pgstore_id");
+        else
+            $store_id = " IN (SELECT id FROM pgstore where pgtype='kho') ";
+        $store = " ( (inoutfrom $store_id AND (pgxuattype='thuhoi' OR inouttype='xuat') )
+            OR (inoutto $store_id AND (inouttype='nhap' OR pgxuattype='xuatkho') ) )";
+
+        $sql="SELECT sum(CASE WHEN (inoutto $store_id AND (inouttype='nhap' OR pgxuattype='xuatkho') ) THEN  (pgprice*pgcount) ELSE 0 END) nhap,
+        (CASE WHEN (inoutfrom $store_id AND (pgxuattype='thuhoi' OR inouttype='xuat')) THEN (pgprice*pgcount) ELSE 0 END) xuat, inoutdate
+        FROM v_inout WHERE ".$store." AND inoutdate >= ".$dayfrom." AND inoutdate < ".$dayto." group by pginout_id  ORDER BY inoutdate";
+
+     //  echo $sql;
         $qr = $this->db->query($sql);
         $numrow = $qr->num_rows();
         if($numrow>0){
