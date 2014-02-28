@@ -4,7 +4,7 @@
     ?>
     <head>
         <meta charset="utf-8">
-        <title>Hóa đơn <?=$aInout->inoutcode?></title>
+        <title>Biên nhận <?=$aInout->id?></title>
         <style>
             body{
                 font-size: 15pt;
