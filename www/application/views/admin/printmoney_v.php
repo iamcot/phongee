@@ -94,22 +94,32 @@
             </div>
             <div class="clear"></div>
             <div id="title">
+                <? if($aInout->inoutcode == ""):?>
                 <? if($aInout->pgtype == 'nhap'): ?>
                     PHIẾU BIÊN NHẬN
                 <? else: ?>
                     PHIẾU CHI
                 <? endif; ?>
+    <?else:?>
+                    PHIẾU THANH TOÁN HÓA ĐƠN
+    <? endif;?>
 
             </div>
             <div class="center"><i>(Số: <?=$aInout->id?>)</i><br>
                 Ngày <?=date("d",$aInout->pgdate)?> Tháng <?=date("m",$aInout->pgdate)?> Năm <?=date("Y",$aInout->pgdate)?></div>
              <br>
             <div class="info">
-                <span> <? if($aInout->pgtype == 'nhap'): ?>
+                <span>
+    <? if($aInout->inoutcode == ""):?>
+                    <? if($aInout->pgtype == 'nhap'): ?>
                         Người gửi tiền:
                     <? else: ?>
                         Người nhận tiền:
-                    <? endif; ?></span>
+                    <? endif; ?>
+    <?else:?>
+        Khách hàng:
+    <? endif;?>
+    </span>
                 <span><? if($aInout->userfname!=''): ?>
                         <?=$aInout->userlname.' '.$aInout->userfname ?>
                     <? else:?>
@@ -117,11 +127,11 @@
                     <? endif;?></span>
             </div>
             <div  class="info">
-                <span>Địa chỉ (Address):</span>
+                <span>Địa chỉ:</span>
                 <span><? if($aInout->useraddr!=""):?><?=$aInout->useraddr?><? endif;?></span>
             </div>
             <div  class="info">
-                <span>Số điện thoại (Tel):</span>
+                <span>Số điện thoại:</span>
                 <span><? if($aInout->usermobi!=""):?><?=$aInout->usermobi?><? endif;?></span>
             </div>
             <div  class="info">
@@ -140,11 +150,17 @@
 
             <ul>
                 <li>Người lập phiếu<br><br><br><br><br><?=$aInout->pglname.' '.$aInout->pgfname?></li>
-                <li><? if($aInout->pgtype == 'nhap'): ?>
+                <li>
+    <? if($aInout->inoutcode == ""):?>
+                    <? if($aInout->pgtype == 'nhap'): ?>
                         Người gửi tiền:
                     <? else: ?>
                         Người nhận tiền:
-                    <? endif; ?></li>
+                    <? endif; ?>
+    <?else:?>
+        Khách hàng
+    <? endif;?>
+    </li>
                 <li>Thủ quỹ</li>
                 <li>Kế toán trưởng</li>
                 <li>Giám đốc</li>

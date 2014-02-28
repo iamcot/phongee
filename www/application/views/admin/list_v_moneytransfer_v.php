@@ -11,7 +11,7 @@
                    <td><?=$row->id?>
 
                    </td>
-                   <td><? if($row->inoutcode==''):?><a href="javascript:printbl(<?=$row->id?>)"><i class="fa fa-print"></i></a><? endif;?></td>
+                   <td><a href="javascript:printbl(<?=$row->id?>)"><i class="fa fa-print"></i></a></td>
                    <td><?=date("d/m/Y H:i",($row->pgdate))?></td>
                    <td><?=(($row->storename!="")?$row->storename:"Tổng kho")?></td>
                    <td><?=$row->storenameall?></td>

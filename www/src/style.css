@@ -226,7 +226,7 @@ header h2{
     padding: 5px;
     text-shadow: none;
     vertical-align: middle;
-    line-height: 24px;
+    /*line-height: 24px;*/
 }
 #inputserviceplace td{
     width: 50% !important;
