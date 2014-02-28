@@ -62,7 +62,7 @@
                 </select>
             </td>
         </tr>
-        <tr><td colspan="2"><a style="text-decoration: underline" href="javascript:$('table#inputserviceplace tbody').toggle()">Ẩn hiện Thông tin thêm cho thiết bị </a></td></tr>
+        <tr><td colspan="2"><a style="text-decoration: underline" href="javascript:toggleinfo('table#inputserviceplace tbody')">Ẩn hiện Thông tin thêm cho thiết bị </a></td></tr>
         </thead>
         <tbody style="display: none">
         <tr>
@@ -127,6 +127,7 @@
         $("input[name=pgprice_old]").autoNumeric({aSep:' ',aPad: false});
 
     });
+
     function save() {
         var pglongname     = $("input[name=pglongname]").val().trim();
         var pgcode     = $("input[name=pgcode]").val().trim();

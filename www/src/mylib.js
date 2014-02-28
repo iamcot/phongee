@@ -11,6 +11,9 @@ function removeloadgif(eid) {
     if (eid == null || eid == "") eid = "#loadstatus";
     $(eid + " img").fadeOut(500);
 }
+function toggleinfo(id){
+    $(id).toggle();
+}
 /**
  * Get lat and lng from google map geocode
  * http://maps.googleapis.com/maps/api/geocode/json?address=a,+b,c&sensor=false
