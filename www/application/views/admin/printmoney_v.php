@@ -32,6 +32,7 @@
             .info{
                 clear: both;
                 margin-left:20px;
+                vertical-align: top;
             }
             .info span{
                 min-width: 150px;
@@ -135,8 +136,8 @@
                 <span><? if($aInout->usermobi!=""):?><?=$aInout->usermobi?><? endif;?></span>
             </div>
             <div  class="info">
-                <span>Nội dung:</span>
-                <span><?=$aInout->pginfo?></span>
+                <span style="float:left">Nội dung:</span>
+                <span><?=nl2br($aInout->pginfo)?></span>
             </div>
             <? $aMoneyType = $this->config->item('aMoneyType'); ?>
             <div  class="info">
