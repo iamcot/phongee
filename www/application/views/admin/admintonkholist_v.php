@@ -12,7 +12,7 @@
 
     </div>
     <div class="field_select" id="pgnhomthietbi_id" style="width:20%">
-        <select name="pgnhomthietbi_id"  style="width:70%;display: inline-block" data-placeholder="Nhóm Thiết bị" multiple>
+        <select name="pgnhomthietbi_id"  style="width:70%;display: inline-block" data-placeholder="Nhóm Thiết bị" multiple onchange="getthietbiofgroup()">
             <option value="all" selected="selected">Tất cả Nhóm TB</option>
             <? foreach($aNhomThietbi as $thietbi):?>
                 <option value="<?=$thietbi->id?>"><?=$thietbi->pglong_name?></option>
@@ -46,6 +46,26 @@
     <div id="list"></div>
 </fieldset>
 <script>
+function getthietbiofgroup(val){
+    var groupid = ($("select[name=pgnhomthietbi_id]").val());
+    $.ajax({
+        type:"post",
+        url:"<?=base_url()?>admin/getThietBiFromGroup",
+        data:"group_id="+groupid,
+        success: function(msg){
+            if(msg !=""){
+                var thietbi = eval(msg);
+                var option = "<option value='all' selected='selected'>Tất cả thiết bị </option>";
+                $.each(thietbi, function (index, itemthietbi){
+                    option += "<option value='"+itemthietbi.id+"'>"+itemthietbi.pglong_name+"</option>";
+                });
+                $("select[name=pgthietbi_id]").html(option);
+                $('select[name=pgthietbi_id]').chosen({width:"90%"});
+                $('select[name=pgthietbi_id]').trigger("chosen:updated");
+            }
+        }
+    })
+}
 function viewreport(){
     $("#list").load("<?=base_url()?>admin/reporttonkho?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
     "&pgthietbi_id="+$("select[name=pgthietbi_id]").chosen().val()+"&pgnhomthietbi_id="+$("select[name=pgnhomthietbi_id]").chosen().val()+

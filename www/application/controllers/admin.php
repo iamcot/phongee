@@ -1725,7 +1725,30 @@ class Admin extends CI_Controller
         }
         else echo "Không có thông tin về biểu đồ.";
     }
-
+    public function getThietBiFromGroup(){
+        $group_id = $this->input->post("group_id");
+        if($group_id == 'all'){
+            $sqlgroup = "";
+        }
+        else{
+        $arrgroup = explode(",",$group_id);
+        $sqlgroup = "";
+        $i=0;
+        foreach($arrgroup as $item){
+            if ($i>0) $sqlgroup.=",";
+            $i++;
+            $sqlgroup .="'$item'";
+        }
+        }
+        if($sqlgroup!="") $sqlgroup = " WHERE pgnhomthietbi_id IN ($sqlgroup) ";
+        $sql="SELECT id,pglong_name FROM pgthietbi $sqlgroup";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $arr = $qr->result_array();
+            $this->mylibs->echojson($arr);
+        }
+        else return "";
+    }
 
 }
 
