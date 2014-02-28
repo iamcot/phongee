@@ -3,12 +3,15 @@
     ?>
     <table style="text-align: right" class="tblist">
         <thead>
-        <tr><td>ID</td><td>Ngày</td><td>CH Nguồn</td><td>CH đích</td><td>Đối tượng </td></td><td>Thanh toán </td><td>Loại tiền</td><td>Mã HĐ</td><td>Loại</td><td>Ghi chú</td></tr>
+        <tr><td>ID</td><td></td><td>Ngày</td><td>CH Nguồn</td><td>CH đích</td><td>Đối tượng </td></td><td>Thanh toán </td><td>Loại tiền</td><td>Mã HĐ</td><td>Loại</td><td>Ghi chú</td></tr>
         </thead>
         <? $i=1; foreach ($province as $row): $inout_id = $row->pginout_id;?>
                <tr class="<?=(($i%2==1))?'odd':'even'?> <?=($row->pgdeleted==0?'':'trdelete')?>"
                    id="tr<?=$row->id?>">
-                   <td><?=$row->id?></td>
+                   <td><?=$row->id?>
+
+                   </td>
+                   <td><? if($row->inoutcode==''):?><a href="javascript:printbl(<?=$row->id?>)"><i class="fa fa-print"></i></a><? endif;?></td>
                    <td><?=date("d/m/Y H:i",($row->pgdate))?></td>
                    <td><?=(($row->storename!="")?$row->storename:"Tổng kho")?></td>
                    <td><?=$row->storenameall?></td>

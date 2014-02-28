@@ -67,6 +67,7 @@ function getthietbiofgroup(val){
     })
 }
 function viewreport(){
+    addloadgif("#list");
     $("#list").load("<?=base_url()?>admin/reporttonkho?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
     "&pgthietbi_id="+$("select[name=pgthietbi_id]").chosen().val()+"&pgnhomthietbi_id="+$("select[name=pgnhomthietbi_id]").chosen().val()+
         "&pgkeyword="+$("input[name=pgkeyword]").val()+"&print=0"

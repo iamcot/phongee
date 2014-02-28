@@ -275,7 +275,16 @@ class Admin extends CI_Controller
     public function listpagerp($page)
     {
         $data = array();
-        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." where pgdeleted=0 ORDER BY pgorder,pglong_name";
+        $swherestore = "";
+        if($this->session->userdata("pgstore_id")>0){
+            $swherestore = " AND id = ".$this->session->userdata("pgstore_id");
+        }
+        else{
+            if($this->session->userdata("pgrole")=='ketoankho'){
+               $swherestore = " AND pgtype = 'kho' ";
+            }
+        }
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." where pgdeleted=0 $swherestore ORDER BY pgorder,pglong_name";
         $qr = $this->db->query($sql);
         if($qr->num_rows()>0) $rs = $qr->result();
         else $rs = null;
@@ -924,8 +933,27 @@ class Admin extends CI_Controller
             else
                 $showalltongkho = "";
         }
+        $sinouttype = "";
+        if($param['pgtype']!='all'){
+            if($this->session->userdata("pgstore_id")>0){
+                if($param['pgtype']=="xuat")
+                $sinouttype = " AND (inoutfrom = ".$this->session->userdata("pgstore_id")." AND pgxuattype!='nhapkho' ) ";
+                else
+                    $sinouttype = " AND (inoutto = ".$this->session->userdata("pgstore_id")." AND (pgxuattype='xuatkho' OR inouttype='nhap') ) ";
+            }
+            else{
+                if($this->session->userdata('pgrole')=='ketoankho'){
+                    if($param['pgtype']=="xuat")
+                        $sinouttype = " AND (inoutfrom IN (SELECT id from pgstore where pgtype='kho') AND pgxuattype!='nhapkho' ) ";
+                    else
+                        $sinouttype = " AND (inoutto IN (SELECT id from pgstore where pgtype='kho') AND (pgxuattype='xuatkho' OR inouttype='nhap') ) ";
 
-        $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date.$series.$scustom.$showalltongkho;
+                }
+
+            }
+        }
+
+        $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date.$series.$scustom.$showalltongkho.$sinouttype;
      //    echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
@@ -1597,6 +1625,26 @@ class Admin extends CI_Controller
         }
 
         echo $this->load->view("admin/printinout_v",$data,true);
+    }
+    public function printmoney($id){
+        $sql="SELECT i.*,
+        COALESCE(u.pgfname,'') userfname, COALESCE(u.pglname,'') userlname,COALESCE(u.pgmobi,'') usermobi,COALESCE(u.pgaddr,'') useraddr,
+        COALESCE(s.pglong_name) storename
+         FROM v_moneytransfer i
+            LEFT JOIN v_tradeuser u
+            ON u.tradeid = i.pguser_id
+            LEFT JOIN pgstore s
+            ON s.id = i.pgstore_idall
+        WHERE i.id = $id";
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $data['aInout'] = $qr->row();
+        }
+        else{
+            $data['aInout'] = null;
+        }
+
+        echo $this->load->view("admin/printmoney_v",$data,true);
     }
     public function barcode($content = ""){
         $this->load->library('zend');

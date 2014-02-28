@@ -50,6 +50,7 @@
 </fieldset>
 <script>
 function viewreport(){
+    addloadgif("#list");
     $("#list").load("<?=base_url()?>admin/reportcongno?pguser_id="+$("select[name=pguser_id]").chosen().val()+
     "&pgtype="+$("select[name=pgtype]").chosen().val()+"&khachno="+$("input[name=khachno]").prop("checked")+
         "&shopno="+$("input[name=shopno]").prop("checked")+"&hanthanhtoan="+$("input[name=hanthanhtoan]").prop("checked")+

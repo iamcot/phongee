@@ -417,5 +417,8 @@ function changemoneytype(val){
     var arrmoney      = val.split("|");
     $("input[name=pgmoneyrate]").val(arrmoney[1]);
 }
+function printbl(id){
+    window.open("<?=base_url()?>admin/printmoney/"+id);
+}
 </script>
 

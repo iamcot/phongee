@@ -42,6 +42,7 @@
 </fieldset>
 <script>
 function viewreport(){
+    addloadgif("#list");
     $("#list").load("<?=base_url()?>admin/reporttienquy?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
     "&pgtype="+$("select[name=pgtype]").chosen().val()+
     "&pgdatefrom="+$("input[name=pgdatefrom]").val()+

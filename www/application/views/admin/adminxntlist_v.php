@@ -3,7 +3,7 @@
     <div class="field_select" id="pgstore_id" style="width:18%">
 
         <select name="pgstore_id"  style="width:80%;display: inline-block" data-placeholder="Cửa hàng" multiple>
-            <option value="all" selected="selected">Tất cả</option>
+<!--            <option value="all" selected="selected">Tất cả</option>-->
             <? foreach($aStore as $store):?>
                 <option value="<?=$store->id?>"><?=$store->pglong_name?></option>
             <? endforeach;?>
@@ -85,6 +85,7 @@
 </fieldset>
 <script>
 function viewreport(){
+    addloadgif("#list");
     $("#list").load("<?=base_url()?>admin/reportxnt?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
     "&pguser_id="+$("select[name=pguser_id]").chosen().val()+
     "&pgtype="+$("select[name=pgtype]").chosen().val()+
@@ -146,18 +147,20 @@ function getStore(){
             else {
                 var userstoreid = <?=(($this->session->userdata("pgstore_id")>0)?$this->session->userdata("pgstore_id"):0)?>;
                 var province = eval(msg);
-                if(userstoreid > 0)
+//                if(userstoreid > 0)
                     var option = "";
-                else
-                    var option = "<option value='all' selected='selected'>Tất cả</option>";
+//                else
+//                    var option = "<option value='all' selected='selected'>Tất cả</option>";
 
                 $.each(province, function (index, store){
                     option += "<option value='"+store.id+"'>"+store.pglong_name+"</option>";
                 });
                 $("select[name=pgstore_id]").html(option);
-                $('select[name=pgstore_id]').trigger("chosen:updated");
                 $('select[name=pgstore_id]').chosen({width:"90%"});
                 if(userstoreid>0) $("select[name=pgstore_id]").val(userstoreid);
+                $('select[name=pgstore_id]').trigger("chosen:updated");
+
+
 
             }
         }
