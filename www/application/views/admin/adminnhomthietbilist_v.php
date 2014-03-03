@@ -47,8 +47,8 @@
         load(1);
     });
     function save() {
-        var pglong_name     = $("input[name=pglong_name]").val();
-        var pgcode     = $("input[name=pgcode]").val();
+        var pglong_name     = $("input[name=pglong_name]").val().trim();
+        var pgcode     = $("input[name=pgcode]").val().trim();
         var pgorder  = $("input[name=pgorder]").val();
         var edit = $("input[name=edit]").val();
 

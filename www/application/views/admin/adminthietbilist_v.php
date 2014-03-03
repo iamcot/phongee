@@ -148,9 +148,9 @@
         $("input").customInput();
     });
     function save() {
-        var pglongname     = $("input[name=pglongname]").val();
+        var pglongname     = $("input[name=pglongname]").val().trim();
         var pgtype     = $("input[name=pgtype]:checked").val();
-        var pgcode     = $("input[name=pgcode]").val();
+        var pgcode     = $("input[name=pgcode]").val().trim();
         var pgpic  = $("input[name=pgpic]").val();
         var pgprice  = $("input[name=pgprice]").val().replace(/ /g,'');
         var pgprice_old      = $("input[name=pgprice_old]").val().replace(/ /g,'');

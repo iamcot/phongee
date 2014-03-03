@@ -1260,12 +1260,14 @@ class Admin extends CI_Controller
         $tiennhap = "";
         $tienxuat = "";
         if($this->session->userdata("pgrole")=='ketoan'){
-            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 AND t1.user_id IS NULL ";
-            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 AND t1.user_id IS NULL";
+            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 AND t1.user_id IS NULL AND ( t1.pgstore_idall IN (SELECT s2.id from pgstore s2 where s2.pgtype = 'kho') )";
+            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_id = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 AND t1.user_id IS NULL AND ( t1.pgstore_idall IN (SELECT s2.id from pgstore s2 where s2.pgtype = 'kho') )";
         }
         else{
-            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND t1.pgtype='nhap' AND t1.inout_id=0 AND t1.user_id IS NULL ";
-            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND t1.pgtype='xuat' AND t1.inout_id=0 AND t1.user_id IS NULL ";
+            if($this->session->userdata("pgstore_id") > 0 )  $sstore = " t1.pgstore_id = ".$this->session->userdata("pgstore_id");
+            else $sstore =  " t1.pgstore_id IN (SELECT s2.id from pgstore s2 where s2.pgtype = 'kho') ";
+            $tiennhap = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND $sstore  AND t1.pgtype='nhap' AND t1.inout_id=0 AND t1.user_id IS NULL ";
+            $tienxuat = " SELECT sum(t1.pgamount) FROM v_tienquy t1 WHERE t1.pgstore_idall = c.id AND $sstore AND t1.pgtype='xuat' AND t1.inout_id=0 AND t1.user_id IS NULL ";
 
         }
         $sql = "SELECT c.*,
@@ -1405,17 +1407,19 @@ class Admin extends CI_Controller
     }
     public function getStoreTransferMoney($store_id,$type,$page){
         $data['aInout'] = null;
+        if($this->session->userdata("pgstore_id") > 0 )  $sstore = " pgstore_id = ".$this->session->userdata("pgstore_id");
+        else $sstore =  " pgstore_id IN (SELECT s2.id from pgstore s2 where s2.pgtype = 'kho') ";
         if ($type == 'nhap') {
             if ($this->session->userdata('pgrole') == 'ketoan')
-                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='nhap' AND pgstore_id=$store_id AND inout_id=0 AND user_id  IS NULL) )";
+                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='nhap' AND pgstore_id=$store_id AND inout_id=0 AND user_id  IS NULL AND pgstore_idall IN (SELECT s2.id FROM pgstore s2 WHERE s2.pgtype='kho')) )";
             else
-                $wherestore = " ( inoutxuattype='xuatkho' OR (pgtype='nhap' AND pgstore_idall=$store_id  AND inout_id=0 AND user_id  IS NULL) )";
+                $wherestore = " ( inoutxuattype='xuatkho' OR (pgtype='nhap' AND pgstore_idall=$store_id  AND $sstore AND inout_id=0 AND user_id  IS NULL) )";
         }
         else if ($type == 'xuat') {
             if ($this->session->userdata('pgrole') == 'ketoan')
-                $wherestore = "( inoutxuattype='xuatkho' OR (pgtype='xuat' AND pgstore_id=$store_id AND inout_id=0 AND user_id  IS NULL) ) ";
+                $wherestore = "( inoutxuattype='xuatkho' OR (pgtype='xuat' AND pgstore_id=$store_id AND inout_id=0 AND user_id  IS NULL  AND pgstore_idall IN (SELECT s2.id FROM pgstore s2 WHERE s2.pgtype='kho')) ) ";
             else
-                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='xuat' AND pgstore_idall=$store_id  AND inout_id=0 AND user_id  IS NULL) )";
+                $wherestore = " ( inoutxuattype='thuhoi' OR (pgtype='xuat' AND pgstore_idall=$store_id  AND $sstore AND inout_id=0 AND user_id  IS NULL) )";
 
         }
         else $wherestore = "";

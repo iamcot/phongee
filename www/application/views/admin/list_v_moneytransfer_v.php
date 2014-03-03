@@ -13,9 +13,9 @@
                    </td>
                    <td><a href="javascript:printbl(<?=$row->id?>)"><i class="fa fa-print"></i></a></td>
                    <td><?=date("d/m/Y H:i",($row->pgdate))?></td>
-                   <td><?=(($row->storename!="")?$row->storename:"Tổng kho")?></td>
+                   <td><?=(($row->storename!="")?$row->storename:"")?></td>
                    <td><?=$row->storenameall?></td>
-                   <td><?=(($row->username)?$row->username:"Tổng kho")?></td>
+                   <td><?=(($row->username)?$row->username:"")?></td>
                    <td ><a href="javascript:edithistory(<?=$row->id?>)"><?=number_format($row->pgamount,0,'.',',')?></a></td>
                    <td><?=$amoneytype[$row->pgmoneytype][1]?></td>
                    <td><?=$row->inoutcode?></td>
