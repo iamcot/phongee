@@ -142,12 +142,16 @@
         var pgyear     = $("select[name=pgyear]").val();
         var pglong_info      = $("textarea[name=pglong_info]").val();
         var pgtech_info    = $("textarea[name=pgtech_info]").val();
-        var pgthietbi_id      = $("input[name=pgthietbi_id]").val();
+        var pgthietbi_id      = $("input[name=pgthietbi_id]").val().trim();
         var pgthietbi_code     = $("input[name=pgthietbicode]").val().trim();
         var pgdvt     = $("input[name=pgdvt]").val().trim();
         var pgtgbh     = $("input[name=pgtgbh]").val().trim();
 
         var edit = $("input[name=edit]").val();
+        if(pgthietbi_id == "" || pgthietbi_id <=0){
+            alert("Chưa có thông tin thiết bị ");
+            return false;
+        }
 
         if (pglongname.trim() != "" && pgcode.trim() != "") {
             $.ajax({

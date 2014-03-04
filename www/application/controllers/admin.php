@@ -237,6 +237,11 @@ class Admin extends CI_Controller
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             $row = $qr->row_array();
+            if($table=='moneytransfer'){
+                    $aMoneyType = $this->config->item("aMoneyType");
+                    $row['pgmoneyrateorg'] = $aMoneyType[($row['pgmoneytype'])][3];
+
+            }
             $this->mylibs->echojson($row);
 
         } else echo '0';

@@ -182,7 +182,7 @@
                     + "&pgamount=" + pgamount
                     + "&pgstore_id=" + pgstore_id
                     + "&pgstore_idall=" + pgstore_idall
-                    + "&pginfo=" + pginfo
+                    + "&pginfo=" + encodeURIComponent(pginfo)
                     + "&pgtype=" + pgtype
                     + "&pguser_id=" + pguser_id
                     + "&pgmoneytype=" + pgmoneytype
@@ -420,5 +420,36 @@ function changemoneytype(val){
 function printbl(id){
     window.open("<?=base_url()?>admin/printmoney/"+id);
 }
+    function edit(id) {
+        $.ajax({
+            type: "post",
+            url: "<?=base_url()?>admin/loadedit/moneytransfer/" + id,
+            success: function (msg) {
+                if (msg == "0") alert('<?=lang("NO_DATA")?>');
+                else {
+                    var province = eval(msg);
+                    $("input[name=pgamount]").val(province.pgamount);
+                    $("textarea[name=pginfo]").val(province.pginfo);
+                    $("input[name=edit]").val(province.id);
+                    $("input[name=pgmoneyrate]").val(province.pgmoneyrate);
+                    $("input[name=pgdate]").val(formatDate(province.pgdate));
+                    $("input[name=pghour]").val(formatTime(province.pgdate));
+                    $("input[name=pginout_code]").val(province.pginout_id);
+
+                    $("select[name=pgstore_id]").chosen().val(province.pgstore_id).trigger("chosen:updated");
+                    $("select[name=pgstore_idall]").chosen().val(province.pgstore_idall).trigger("chosen:updated");
+                    $("select[name=pguser_id]").chosen().val(province.pguser_id).trigger("chosen:updated");
+                    $("select[name=pgmoneytype]").chosen().val(""+province.pgmoneytype+"|"+province.pgmoneyrateorg).trigger("chosen:updated");
+
+                    $("input[name=pgtype] label").removeClass("checked");
+                    $("input[value="+province.pgtype+"]").prop('checked', true);
+                    $("label[for="+province.pgtype+"radio]").addClass("checked");
+
+
+
+                }
+            }
+        });
+    }
 </script>
 
