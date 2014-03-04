@@ -75,6 +75,10 @@
         <input type="checkbox" name="pgcolor" id="pgcolor">
         <label for="pgcolor">Màu</label>
             </span>
+        <span style="display: inline-block;">
+        <input type="checkbox" name="pgkygui" id="pgkygui">
+        <label for="pgkygui">Chỉ xem ký gửi</label>
+            </span>
 
     </div>
 
@@ -96,6 +100,7 @@ function viewreport(){
     "&pgprice="+$("input[name=pgprice]").prop("checked") +
     "&pgcountry="+$("input[name=pgcountry]").prop("checked") +
     "&pgcolor="+$("input[name=pgcolor]").prop("checked") +
+    "&pgkygui="+$("input[name=pgkygui]").prop("checked") +
     "&pgseries="+$("input[name=pgseries]").val() +
     "&pgyear="+$("input[name=pgyear]").prop("checked")+
     "&showalltongkho="+$("input[name=showalltongkho]").prop("checked")+
@@ -113,6 +118,7 @@ function printreport(){
         "&pgprice="+$("input[name=pgprice]").prop("checked") +
         "&pgcountry="+$("input[name=pgcountry]").prop("checked") +
         "&pgcolor="+$("input[name=pgcolor]").prop("checked") +
+        "&pgkygui="+$("input[name=pgkygui]").prop("checked") +
         "&pgseries="+$("input[name=pgseries]").val() +
         "&pgyear="+$("input[name=pgyear]").prop("checked")+
         "&showalltongkho="+$("input[name=showalltongkho]").prop("checked")+

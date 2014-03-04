@@ -356,7 +356,10 @@
             type: "post",
             url: "<?=base_url()?>admin/loadcode/thietbi/" + id,
             success: function (msg) {
-                if (msg == "0") alert('<?=lang("NO_DATA")?>');
+                if (msg == "0") {
+                    alert('<?=lang("NO_DATA")?>');
+                    $("input[name=pgthietbi_id]").val("");
+                }
                 else {
                     var province = eval(msg);
                     $("input[name=pglongname]").val(province.pglong_name);

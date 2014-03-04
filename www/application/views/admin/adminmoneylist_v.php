@@ -441,7 +441,8 @@ function printbl(id){
                     $("select[name=pguser_id]").chosen().val(province.pguser_id).trigger("chosen:updated");
                     $("select[name=pgmoneytype]").chosen().val(""+province.pgmoneytype+"|"+province.pgmoneyrateorg).trigger("chosen:updated");
 
-                    $("input[name=pgtype] label").removeClass("checked");
+                    $("label[for=xuatradio]").removeClass("checked");
+                    $("label[for=nhapradio]").removeClass("checked");
                     $("input[value="+province.pgtype+"]").prop('checked', true);
                     $("label[for="+province.pgtype+"radio]").addClass("checked");
 

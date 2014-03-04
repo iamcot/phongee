@@ -848,6 +848,7 @@ class Admin extends CI_Controller
         $pgprice=$this->input->get("pgprice");
         $pgcountry=$this->input->get("pgcountry");
         $pgcolor=$this->input->get("pgcolor");
+        $pgkygui=$this->input->get("pgkygui");
         $pgyear=$this->input->get("pgyear");
         $pgcreateuser=$this->input->get("pgcreateuser");
         $pgseries=$this->input->get("pgseries");
@@ -864,6 +865,7 @@ class Admin extends CI_Controller
         $data['pgcountry'] = $pgcountry;
         $data['pgcolor'] = $pgcolor;
         $data['pgyear'] = $pgyear;
+        $data['pgkygui'] = $pgkygui;
         $data['pgcreateuser'] = $pgcreateuser;
         $data['pgseries'] = $pgseries;
         $data['pguser_id'] = $pguser_id;
@@ -957,8 +959,12 @@ class Admin extends CI_Controller
 
             }
         }
+        if($param['pgkygui']=='true'){
+            $skygui = " AND pgtypedichvu='kygui' ";
+        }
+        else   $skygui = '';
 
-        $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date.$series.$scustom.$showalltongkho.$sinouttype;
+        $sql="SELECT * FROM v_inout WHERE pgdeleted = 0 ".$sstore.$date.$series.$scustom.$showalltongkho.$sinouttype.$skygui;
      //    echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){

@@ -100,6 +100,10 @@
                     <input type="radio" name="pgtypedichvu" value="suachua" id="suachuaradio">
                     <label for="suachuaradio">Sửa chữa</label>
                  </span>
+                 <span style="display: inline-block;">
+                    <input type="radio" name="pgtypedichvu" value="kygui" id="kyguiradio">
+                    <label for="kyguiradio">Ký gửi</label>
+                 </span>
             </td>
         </tr>
         <tr>
@@ -185,7 +189,7 @@
 <fieldset style="float:right;width:49%">
     <legend>Danh sách hóa đơn</legend>
     <div>
-        <input type="checkbox" name="showchuathanhtoan" id="showchuathanhtoan" checked="checked" onchange="loadinout(1)">
+        <input type="checkbox" name="showchuathanhtoan" id="showchuathanhtoan" onchange="loadinout(1)">
         <label for="showchuathanhtoan">Chỉ Hóa đơn chưa thanh toán </label>
     </div>
     <div id="list_hoadon"></div>
