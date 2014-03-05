@@ -583,16 +583,16 @@ class Admin extends CI_Controller
     public function jxloadsuminoutfromcode($inout_code){
         $store = "";
         if($this->session->userdata('pgstore_id')>0){
-            $store = " (((pgtype='nhap' OR pgxuattype='xuatkho' ) AND pgto = ".$this->session->userdata('pgstore_id').")
+            $store = "AND (((pgtype='nhap' OR pgxuattype='xuatkho' ) AND pgto = ".$this->session->userdata('pgstore_id').")
             OR ((pgtype='xuat' OR pgxuattype='thuhoi') AND pgfrom =  ".$this->session->userdata('pgstore_id').") ) ";
         }
         else{
             if($this->session->userdata('pgrole')=='ketoankho'){
-                $store = " (((pgtype='nhap' OR pgxuattype='xuatkho' ) AND pgto IN (select id from pgstore where pgtype='kho') )
+                $store = "AND (((pgtype='nhap' OR pgxuattype='xuatkho' ) AND pgto IN (select id from pgstore where pgtype='kho') )
             OR ((pgtype='xuat' OR pgxuattype='thuhoi') AND pgfrom IN (select id from pgstore where pgtype='kho') ) ) ";
             }
         }
-        $sql = "SELECT * from pginout WHERE pgcode='$inout_code' AND $store";
+        $sql = "SELECT * from pginout WHERE pgcode='$inout_code'  $store";
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
             $row = $qr->row();
@@ -1811,6 +1811,10 @@ class Admin extends CI_Controller
             $this->mylibs->echojson($arr);
         }
         else return "";
+    }
+    public function delmoney($id){
+        $sql="DELETE FROM pgmoneytransfer where id=$id";
+        echo $this->db->query($sql);
     }
 
 }

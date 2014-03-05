@@ -14,7 +14,10 @@
                    id="tr<?=$row->id?>">
                    <td><a href="javascript:printbl(<?=$row->id?>)"><i class="fa fa-print"></i></a></td>
             <? if($this->session->userdata("pgrole")=='admin'):?>
-                   <td><a href="javascript:edit(<?=$row->id?>)"><i class="fa fa-pencil"></i></a></td>
+                   <td>
+                       <a href="javascript:edit(<?=$row->id?>)"><i class="fa fa-pencil"></i></a>
+                       <a href="javascript:del(<?=$row->id?>)"><i class="fa fa-trash-o"></i></a>
+                   </td>
             <? endif;?>
                    <td><?=$row->id?>
 

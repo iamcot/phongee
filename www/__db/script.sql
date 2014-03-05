@@ -1,3 +1,6 @@
+/*tanner 5/3 */
+ALTER TABLE  `pguser` CHANGE  `pgfname`  `pgfname` VARCHAR( 50 ) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL ;
+
 /* tanner 23/2 */
 /* 9:36:44 AM localhost */ ALTER TABLE `pgthietbi` ADD `pgthietbi_parent` INT  NOT NULL  DEFAULT '0'  AFTER `pgtgbh`;
 

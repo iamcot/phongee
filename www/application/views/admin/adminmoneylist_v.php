@@ -161,7 +161,7 @@
                 return false;
             }
         }
-        else if(parseInt(remainprice) == 0){
+        else if(parseInt(remainprice) == 0 && edit==""){
             alert("Đơn hàng không cần thanh toán nữa");
             return false;
         }
@@ -452,5 +452,19 @@ function printbl(id){
             }
         });
     }
+function del(id){
+    if(confirm("Có chắc là muốn xóa giao dịch này?")){
+        $.ajax({
+            type:"post",
+            url:"<?=base_url()?>admin/delmoney/"+id,
+            success:function(msg){
+                if(msg!="1"){
+                    alert("Xóa  thất bại! ");
+                }
+                loadmoneytransfer(1);
+            }
+        });
+    }
+}
 </script>
 

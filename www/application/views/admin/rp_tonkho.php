@@ -25,7 +25,7 @@
         }
     </style><? endif;?>
     <? if($aReport!=null):?>
-    <table <? if($print!=-1):?>style="width: 50%;"<?endif;?>   <? if($print == 1):?>border=1<? endif;?> class="tblist">
+    <table  style="width:100%" <? if($print == 1):?>border=1<? endif;?> class="tblist">
         <thead>
             <tr>
                 <td style="text-align: right;padding-right:15px">Tên thiết bị</td>
