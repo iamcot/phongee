@@ -1,8 +1,26 @@
+<head>
+    <meta charset="UTF-8">
+    <? if($print == 1):?><style>
+    table{
+        border-collapse: collapse;
+    }
+    .odd{
+        background: #eee;
+    }
+    .even{
+        background: #fff;
+    }
+    td{
+        padding: 3px;
+    }
+    </style><? endif;?>
+</head>
 <h3 style="text-align: center">BÁO CÁO TIỀN QUỸ <?
     if($pgstore_id == 'all') echo ' TOÀN HỆ THỐNG ';
     else echo $aStore[$pgstore_id]->pglong_name;
     ?> <?=(($pgdatefrom!='')?'TỪ '.date('d/m/Y',strtotime($pgdatefrom)):'')?> <?=(($pgdateto!='')?'ĐẾN '.date('d/m/Y',strtotime($pgdateto)):'')?> </h3>
 <center>
+
 <?
 $aMoneyType = $this->config->item('aMoneyType');
 

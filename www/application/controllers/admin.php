@@ -982,12 +982,12 @@ class Admin extends CI_Controller
         $pgnhomthietbi_id=$this->input->get("pgnhomthietbi_id");
         $pgkeyword=$this->input->get("pgkeyword");
         $print=$this->input->get("print");
+        $data['print'] = $print;
         $data['pgthietbi_id'] = explode(",",$pgthietbi_id);
         $data['pgnhomthietbi_id'] = explode(",",$pgnhomthietbi_id);
         $data['pgkeyword'] = $pgkeyword;
         $data['storename'] = $storename;
         $data['pgstore_id'] = $pgstore_id;
-        $data['print'] = $print;
 
         echo  $this->calReportTonkho($data);
     }
@@ -1070,6 +1070,8 @@ class Admin extends CI_Controller
         $pgdatefrom=$this->input->get("pgdatefrom");
         $pgdateto=$this->input->get("pgdateto");
         $pgmoneytype=$this->input->get("pgmoneytype");
+        $print=$this->input->get("print");
+        $data['print'] = $print;
         $data['pgtype'] = explode(",",$pgtype);
         $data['pgstore_id'] = $pgstore_id;
         $data['pgdatefrom'] = ($pgdatefrom);

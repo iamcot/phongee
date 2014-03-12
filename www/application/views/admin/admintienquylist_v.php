@@ -34,6 +34,9 @@
     <div class="btn btn-small">
         <input type="button" value="Xem" onclick="viewreport()">
     </div>
+    <div class="btn btn-small">
+        <input type="button" value="In" onclick="printreport()">
+    </div>
 
 </fieldset>
 <fieldset>
@@ -49,6 +52,13 @@ function viewreport(){
     "&pgmoneytype="+$("select[name=pgmoneytype]").chosen().val()+
     "&pgdateto="+$("input[name=pgdateto]").val()
     );
+}
+function printreport(){
+    window.open("<?=base_url()?>admin/reporttienquy?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
+                "&pgtype="+$("select[name=pgtype]").chosen().val()+
+                "&pgdatefrom="+$("input[name=pgdatefrom]").val()+
+                "&pgmoneytype="+$("select[name=pgmoneytype]").chosen().val()+
+                "&pgdateto="+$("input[name=pgdateto]").val()+"&print=1");
 }
 $(function(){
     $("input").customInput();

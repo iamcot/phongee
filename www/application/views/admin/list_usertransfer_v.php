@@ -32,7 +32,14 @@
                 <td><?=$money->pgseries?></td>
                 <td><?=$money->thietbiname?></td>
                 <td><?=(($money->pgxuattype=='nhapkho')?$aCustom[$money->inoutfrom]['pgfname']:$aStore[$money->inoutfrom]['pglong_name'])?></td>
-                <td><?=(($money->pgxuattype=='khachhang')?$aCustom[$money->inoutto]['pgfname']:$aStore[$money->inoutto]['pglong_name'])?></td>
+                <td><?
+                    if ($money->inoutto > 0) {
+                        if ($money->pgxuattype == 'khachhang')
+                            echo $aCustom[$money->inoutto]['pgfname'];
+                        else
+                            echo $aStore[$money->inoutto]['pglong_name'];
+                    }
+                    ?></td>
                 <td><?=number_format($money->pgprice,0,'.',',')?></td>
                 <td><?=number_format($money->pgcount,0,'.',',')?></td>
                 <td><?=number_format($money->pgprice*$money->pgcount,0,'.',',')?></td>

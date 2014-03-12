@@ -358,7 +358,7 @@
 			var pgto = $("input[name=pgto]").val();
         var idhoadon = $("input[name=idhoadon]").val();
 
-        if(pgfrom == null || pgto == null ){
+        if(pgfrom == null || pgfrom<=0 || pgto <= 0 || pgto == null ){
             alert("Chưa có thông tin cửa hàng");
             return;
         }
