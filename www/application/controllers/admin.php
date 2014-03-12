@@ -1125,14 +1125,12 @@ class Admin extends CI_Controller
             $report = $qr->result();
         }
         else $report = null;
-        if($param['pgmoneytype']=='all') $type='tm';
-        else $type =  $param['pgmoneytype'];
-        $param['dudauky'] = $this->getdudauky(strtotime($param['pgdatefrom']),$param['pgstore_id'],$type);
+        $param['dudauky'] = $this->getdudauky(strtotime($param['pgdatefrom']),$param['pgstore_id'],$param['pgmoneytype']);
         $param['aReport'] = $report;
 
         return $this->load->view("admin/rp_tienquy",$param);
     }
-    function getdudauky($datefrom,$store_id='all',$type='tm'){
+    function getdudauky($datefrom,$store_id='all',$type='all'){
         if($store_id=='all'){
             $store  = '';
             $xuatmoney = " or inoutxuattype='khachhang' or inoutxuattype='khachle' ";
@@ -1152,13 +1150,15 @@ class Admin extends CI_Controller
             $store = " AND ";
             $store .= " (
             pgstore_id = ".$store_id."
-            OR (inoutfrom = ".$store_id." AND inouttype='xuat' )
+            OR (inoutfrom = ".$store_id." AND (inouttype='xuat' OR inoutxuattype='thuhoi'))
             OR (inoutto = ".$store_id." AND (inouttype='nhap' OR inoutxuattype='xuatkho' OR inoutxuattype='cuahang')   )
             ) ";
         }
+        if($type!='all') $smoneytype = " AND pgmoneytype='$type' ";
+        else $smoneytype = " ";
         $sql="SELECT COALESCE((sum((CASE WHEN ( (pgtype='nhap' and inout_id=0) $xuatmoney ) THEN (pgamount) ELSE ( 0 ) END))
         + sum((CASE WHEN ( (pgtype='xuat' and inout_id=0 )  $nhapmoney ) THEN (-1*pgamount) ELSE ( 0 ) END)) ),0) dudauky
-        FROM v_tienquy WHERE pgdate < '$datefrom' $store AND pgmoneytype='$type' ";
+        FROM v_tienquy WHERE pgdate < '$datefrom' $store $smoneytype ";
 //        echo $sql;
         $qr = $this->db->query($sql);
         return $qr->row()->dudauky;
