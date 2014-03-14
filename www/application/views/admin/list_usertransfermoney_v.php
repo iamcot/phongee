@@ -31,7 +31,7 @@
                     <td><?= number_format($money->pgamount, 0, '.', ',') ?>
                         (<?= $moneyType[$money->pgmoneytype][1] ?>)
                     </td>
-                    <td><?= $aStore[$money->pgstore_id]['pglong_name'] ?></td>
+                    <td><?= (($money->pgstore_id>0)?$aStore[$money->pgstore_id]['pglong_name']:'') ?></td>
                     <td><?= $money->pgtype ?></td>
                     <td><?= ((isset($money->pguser_id) && $money->pguser_id > 0) ? $aCustom[$money->pguser_id]['pgfname'] : $aStore[$money->pgstore_idall]['pglong_name']) ?></td>
                     <td><?= $money->pginfo ?></td>
