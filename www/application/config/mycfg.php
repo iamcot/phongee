@@ -127,6 +127,7 @@ $config['aMoneyType'] = array(
     'vcbcp' => array('vcbcp','VCB Ms Phương','VNĐ',1),
     'bidvap' => array('bidvap','BIDV Anh Phong (cà thẻ)','VNĐ',1),
     'agrcp' => array('agrcp','AGRIBANK Phương (cà thẻ)','VNĐ',1),
+    'np' => array('np','TK Nhất Phong','VNĐ',1),
 );
 
 $config['linkweather'] = "http://muasamcangay.com/tool/weather/Weather.php?id=";

@@ -29,14 +29,26 @@
         <thead>
             <tr>
                 <td style="text-align: right;padding-right:15px">Tên thiết bị</td>
+                <?if($pgallstore=='false'):?>
                 <td style="text-align: left">Số lượng tồn</td>
+                <? else:?>
+                    <? foreach($aStore as $store):?>
+                        <td><?=$store->pglong_name?></td>
+                        <? endforeach;?>
+                <? endif;?>
             </tr>
         </thead>
         <tbody>
             <? $i=1; foreach($aReport as $report):?>
                 <tr class="<?=(($i%2==1))?'odd':''?>">
-                    <td style="text-align: right;padding-right:15px"><?=$report->thietbiname?></td>
-                    <td style="text-align: left"><?=$report->tbcount?></td>
+                    <td style="text-align: right;padding-right:15px"><?=$report['thietbiname']?></td>
+                <?if($pgallstore=='false'):?>
+                    <td style="text-align: left"><?=$report['tbcount']?></td>
+                <? else:?>
+                    <? foreach($aStore as $store):?>
+                        <td><?=$report['tbcount'.$store->id]?></td>
+                    <? endforeach;?>
+                <? endif;?>
                 </tr>
         <? $i++;endforeach;?>
         </tbody>

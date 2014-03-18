@@ -1,5 +1,6 @@
 <fieldset>
     <legend>Lựa chọn</legend>
+    <div>
     <div class="field_select" id="pgstore_id" style="width:20%">
         <select name="pgstore_id"  style="width:70%;display: inline-block" data-placeholder="Cửa hàng">
             <option value="all">Toàn hệ thống</option>
@@ -38,7 +39,15 @@
     <div class="btn btn-small">
         <input type="button" value="In" onclick="printreport()">
     </div>
-
+    </div>
+    <div style="clear:both">
+        <?
+        $roleOrder = $this->config->item('aRoleOrder');
+        if($roleOrder[$this->session->userdata('pgrole')] >=3):?>
+        <input type="checkbox" name="pgallstore" id="pgallstore">
+        <label for="pgallstore">Xem tất cả cửa hàng </label>
+        <? endif;?>
+    </div>
 
 </fieldset>
 <fieldset>
@@ -70,16 +79,17 @@ function viewreport(){
     addloadgif("#list");
     $("#list").load("<?=base_url()?>admin/reporttonkho?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
     "&pgthietbi_id="+$("select[name=pgthietbi_id]").chosen().val()+"&pgnhomthietbi_id="+$("select[name=pgnhomthietbi_id]").chosen().val()+
-        "&pgkeyword="+$("input[name=pgkeyword]").val()+"&print=0"
+        "&pgkeyword="+$("input[name=pgkeyword]").val()+"&pgallstore="+$("input[name=pgallstore]").prop("checked")+"&print=0"
     );
 }
 
 function printreport(){
     window.open("<?=base_url()?>admin/reporttonkho?pgstore_id="+$("select[name=pgstore_id]").chosen().val()+
         "&pgthietbi_id="+$("select[name=pgthietbi_id]").chosen().val()+"&pgnhomthietbi_id="+$("select[name=pgnhomthietbi_id]").chosen().val()+
-                "&pgkeyword="+$("input[name=pgkeyword]").val()+"&print=1");
+                "&pgkeyword="+$("input[name=pgkeyword]").val()+"&pgallstore="+$("input[name=pgallstore]").prop("checked")+"&print=1");
 }
 $(function(){
+    $("input").customInput();
     $('select[name=pgstore_id]').chosen({width:"90%"});
     $('select[name=pgthietbi_id]').chosen({width:"90%"});
     $('select[name=pgnhomthietbi_id]').chosen({width:"90%"});

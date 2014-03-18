@@ -982,17 +982,82 @@ class Admin extends CI_Controller
         $pgnhomthietbi_id=$this->input->get("pgnhomthietbi_id");
         $pgkeyword=$this->input->get("pgkeyword");
         $print=$this->input->get("print");
+        $pgallstore=$this->input->get("pgallstore");
+        $data['pgallstore'] = $pgallstore;
         $data['print'] = $print;
         $data['pgthietbi_id'] = explode(",",$pgthietbi_id);
         $data['pgnhomthietbi_id'] = explode(",",$pgnhomthietbi_id);
         $data['pgkeyword'] = $pgkeyword;
         $data['storename'] = $storename;
         $data['pgstore_id'] = $pgstore_id;
-
+        if($data['pgallstore']=='false')
         echo  $this->calReportTonkho($data);
+        else
+            echo $this->calReportXNTAll($data);
+    }
+    function calReportXNTAll($param){
+        $aStore = null;
+        $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." ";
+        $qr = $this->db->query($sql);
+        $sqlstore = "";
+        $sqlsumstore = "";
+        if($qr->num_rows()>0){
+            $rs = $qr->result();
+            $i=1;
+            foreach($rs as $v){
+                $aStore[$v->id] = $v;
+                $sqlsumstore .="SUM(a.tbcount".$v->id.") tbcount".$v->id;
+                $sqlstore.="(SELECT sum(case when (inoutfrom='".$v->id."' AND (inouttype='xuat' OR pgxuattype = 'thuhoi') ) then (pgcount*-1) else (pgcount) end)
+                FROM v_inout WHERE pgdeleted = 0 AND c.pgcode=pgseries AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$v->id."' ) OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom = '".$v->id."' ) ) GROUP BY pgseries) tbcount".$v->id."";
+                if($i<$qr->num_rows()){
+                     $sqlstore.=",";
+                    $sqlsumstore.=",";
+                }
+                $i++;
+            }
+        }
+        $param['aStore'] = $aStore;
+        $sthietbi = '';
+        foreach($param['pgthietbi_id'] as $thietbi){
+            if($thietbi == 'all'){
+                $sthietbi = '';
+                break;
+            }
+            else {
+                if($sthietbi == '') $sthietbi.=' AND (';
+                else $sthietbi .=' OR ';
+                $sthietbi.=" t.id = '$thietbi'";
+            }
+        }
+        if($sthietbi!='') $sthietbi.=')';
+        $snhomthietbi = '';
+        foreach($param['pgnhomthietbi_id'] as $thietbi){
+            if($thietbi == 'all'){
+                $snhomthietbi = '';
+                break;
+            }
+            else {
+                if($snhomthietbi == '') $snhomthietbi.=' AND (';
+                else $snhomthietbi .=' OR ';
+                $snhomthietbi.=" t.pgnhomthietbi_id = '$thietbi'";
+            }
+        }
+        if($snhomthietbi!='') $snhomthietbi.=')';
+        if($param['pgkeyword']!='') $skeyword = " AND c.pglong_name like '%".$param['pgkeyword']."%' ";
+        else $skeyword = "";
+        $sql="SELECT a.pglong_name thietbiname,$sqlsumstore  FROM (SELECT DISTINCT(c.pglong_name),$sqlstore FROM pgchitietthietbi c,pgthietbi t WHERE c.pgdeleted = 0 AND t.id=c.pgthietbi_id $sthietbi $snhomthietbi $skeyword) a  GROUP BY  a.pglong_name ORDER BY a.pglong_name ";
+
+//        echo $sql;
+        $qr = $this->db->query($sql);
+        if($qr->num_rows()>0){
+            $report = $qr->result_array();
+        }
+        else $report = null;
+        $param['aReport'] = $report;
+
+        return $this->load->view("admin/rp_tonkho",$param);
     }
     function calReportTonkho($param){
-        //print_r($param['pgstore_id']) ;
         $aStore = null;
         $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." ";
         $qr = $this->db->query($sql);
@@ -1007,12 +1072,7 @@ class Admin extends CI_Controller
         if($param['pgstore_id'] == 'all'){
         $sstore.=" AND (pgxuattype='nhapkho' OR pgxuattype='khachhang' OR pgxuattype='khachle' )";
         }
-//        else if($param['pgstore_id'] == 'cuahang'){
-//            $sstore.=" AND ( inouttype='xuat' OR pgxuattype = 'thuhoi')";
-//        }
-//        else if($param['pgstore_id'] == 'kho'){
-//            $sstore.=" AND ( pgxuattype='xuatkho' OR inouttype='nhap' )";
-//        }
+
         else{
            $sstore .= " AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$param['pgstore_id']."' )
            OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom = '".$param['pgstore_id']."' )  ) ";
@@ -1047,17 +1107,12 @@ class Admin extends CI_Controller
         else $skeyword = "";
         if($param['pgstore_id'] =='all')
             $sql="SELECT thietbiname, sum(case when (pgxuattype='nhapkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi.$snhomthietbi.$skeyword." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
-//        else if($param['pgstore_id'] =='cuahang')
-//            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount) else (pgcount*-1) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi.$snhomthietbi.$skeyword." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
-//        else if($param['pgstore_id'] == 'kho')
-//            $sql="SELECT thietbiname, sum(case when (pgxuattype='xuatkho') then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi.$snhomthietbi.$skeyword." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
-        else
+          else
             $sql="SELECT thietbiname, sum(case when (inoutfrom='".$param['pgstore_id']."' AND  (inouttype='xuat' OR pgxuattype = 'thuhoi') ) then (pgcount*-1) else (pgcount) end) tbcount FROM v_inout WHERE pgdeleted = 0 ".$sstore.$sthietbi.$snhomthietbi.$skeyword." GROUP BY thietbiname ORDER BY nhomthietbiname, thietbiname ";
-
-//         echo $sql;
+//        echo $sql;
          $qr = $this->db->query($sql);
         if($qr->num_rows()>0){
-            $report = $qr->result();
+            $report = $qr->result_array();
         }
         else $report = null;
         $param['aReport'] = $report;
