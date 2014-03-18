@@ -1008,7 +1008,7 @@ class Admin extends CI_Controller
                 $aStore[$v->id] = $v;
                 $sqlsumstore .="SUM(a.tbcount".$v->id.") tbcount".$v->id;
                 $sqlstore.="(SELECT sum(case when (inoutfrom='".$v->id."' AND (inouttype='xuat' OR pgxuattype = 'thuhoi') ) then (pgcount*-1) else (pgcount) end)
-                FROM v_inout WHERE pgdeleted = 0 AND c.pgcode=pgseries AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$v->id."' ) OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom = '".$v->id."' ) ) GROUP BY pgseries) tbcount".$v->id."";
+                FROM v_inout WHERE pgdeleted = 0 AND c.pgcode=pgseries AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$v->id."' ) OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom = '".$v->id."' ) )) tbcount".$v->id."";
                 if($i<$qr->num_rows()){
                      $sqlstore.=",";
                     $sqlsumstore.=",";
