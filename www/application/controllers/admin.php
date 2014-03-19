@@ -993,9 +993,9 @@ class Admin extends CI_Controller
         if($data['pgallstore']=='false')
         echo  $this->calReportTonkho($data);
         else
-            echo $this->calReportXNTAll($data);
+            echo $this->calReportTKAll($data);
     }
-    function calReportXNTAll($param){
+    function calReportTKAll($param){
         $aStore = null;
         $sql="SELECT * FROM ".$this->tbprefix.$this->tbstore." ";
         $qr = $this->db->query($sql);
@@ -1008,7 +1008,7 @@ class Admin extends CI_Controller
                 $aStore[$v->id] = $v;
                 $sqlsumstore .="SUM(a.tbcount".$v->id.") tbcount".$v->id;
                 $sqlstore.="(SELECT sum(case when (inoutfrom='".$v->id."' AND (inouttype='xuat' OR pgxuattype = 'thuhoi') ) then (pgcount*-1) else (pgcount) end)
-                FROM v_inout WHERE pgdeleted = 0 AND c.pgcode=pgseries AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$v->id."' ) OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom = '".$v->id."' ) )) tbcount".$v->id."";
+                FROM v_inout WHERE pgdeleted = 0 AND c.pglong_name=thietbiname AND ( ( (inouttype='nhap' OR pgxuattype='xuatkho') AND inoutto='".$v->id."' ) OR ( (inouttype='xuat' OR pgxuattype = 'thuhoi') AND inoutfrom = '".$v->id."' ) ) GROUP BY thietbiname) tbcount".$v->id."";
                 if($i<$qr->num_rows()){
                      $sqlstore.=",";
                     $sqlsumstore.=",";
@@ -1763,12 +1763,13 @@ class Admin extends CI_Controller
 //         echo $sql;
         $qr = $this->db->query($sql);
         if ($qr->num_rows() > 0) {
-            $report = $qr->result();
+            $report = $qr->result_array();
         }
         else $report = null;
         $param['aReport'] = $report;
         $param['pgstore_id'] = -1;
         $param['print'] = -1;
+        $param['pgallstore'] = 'false';
 
         echo $this->load->view("admin/rp_tonkho", $param);
 
