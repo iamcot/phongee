@@ -71,10 +71,10 @@
                 vertical-align: top;
             }
             div,td{
-                line-height: 12pt;
+                line-height: 11pt;
             }
             tbody td{
-                font-size: 12pt;
+                font-size: 10pt;
             }
             #address img{
                 /*height: 30px;*/
