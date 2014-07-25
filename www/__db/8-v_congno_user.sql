@@ -8,7 +8,7 @@ FROM v_moneytransfer m
 WHERE m.pgdeleted=0 AND m.user_id > 0 AND m.pginout_id = 0
 group by m.user_id
 
-//new
+//** dont use it
 CREATE OR REPLACE VIEW v_congno_user
 AS
 SELECT

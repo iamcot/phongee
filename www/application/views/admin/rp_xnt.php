@@ -109,7 +109,9 @@ foreach($pgstore_id as $store){
                 <? if($pgcolor=='true'): $col++;?><td><?=$row->pgcolor?></td><? endif;?>
                 <? if($pgcountry=='true'): $col++;?><td><?=$row->pgcountry?></td><? endif;?>
                 <? if($pgyear=='true'): $col++;?><td><?=$row->pgyear?></td><? endif;?>
-                <td  style="text-align: right"><?=number_format(($row->pgprice*$row->pgcount),0,'.',',')?></td>
+                <td  style="text-align: right"><?=number_format(($row->saleprice*$row->pgcount),0,'.',',')?> <? if ($row->pgsaleamount > 0): echo "(- ".number_format($row->pgsaleamount, 0, '.', ',');
+                        if ($row->pgsaleunit == 'abs'): echo 'đ';
+                        else: echo '%'; endif; echo ')'; endif; ?></td>
             </tr>
         <? $i++;?>
             <? endif; endforeach; ?>

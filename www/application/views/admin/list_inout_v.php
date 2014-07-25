@@ -1,11 +1,11 @@
 <? if (isset($province)): ?>
     <table class="tblist">
         <thead>
-        <tr><td>ID</td><td>Mã hóa đơn </td><td>Ngày</td><td>Loại</td><td></td></tr>
+        <tr><td>Mã hóa đơn </td><td>Ngày</td><td></td></tr>
         </thead>
         <? $i=1; foreach ($province as $row): ?>
                <tr class="<?=(($i%2==1))?'odd':''?> <?=($row->pgdeleted==0?'':'trdelete')?>"
-                   id="tr<?=$row->pginout_id?>"><td><?=$row->pginout_id?></td><td><a href="javascript:<? if(!$inmoneypage):?>edithoadon(<?=$row->pginout_id?>)<? else:?>getInoutcode('<?=$row->inoutcode?>')<?endif;?>"><?=$row->inoutcode?></a></td><td><?=date("d/m/Y H:i",$row->inoutdate)?></td><td><?=$row->inouttype?></td>
+                   id="tr<?=$row->pginout_id?>"><td><a href="javascript:<? if(!$inmoneypage):?>edithoadon(<?=$row->pginout_id?>)<? else:?>getInoutcode('<?=$row->inoutcode?>')<?endif;?>"><?=$row->inoutcode?></a></td><td><?=date("d/m/Y H:i",$row->inoutdate)?></td>
                    <td style="text-align:right">
                        <b><a href="javascript:printinout(<?=$row->pginout_id?>)"><i class="fa fa-print"></i></a></a></b>
                        <!--<a href="javascript:hideinout(<?=$row->pginout_id?>,<?=$row->pgdeleted?>)"><?=($row->pgdeleted==0?'[Ẩn]':'[Hiện]')?></a> -->

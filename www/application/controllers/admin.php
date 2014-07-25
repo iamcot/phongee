@@ -577,7 +577,9 @@ class Admin extends CI_Controller
         else echo "";
     }
     public  function getSuminout($inout_id){
-        $sql="SELECT sum(pgcount * pgprice) summoney FROM ".$this->tbprefix."inout_details WHERE pginout_id='$inout_id' ";
+//        $sql="SELECT sum(pgcount * pgprice) summoney FROM ".$this->tbprefix."inout_details WHERE pginout_id='$inout_id' ";
+        //add sale
+        $sql="SELECT sum(pgcount * saleprice) summoney FROM v_inout WHERE pginout_id='$inout_id' ";
         $qr = $this->db->query($sql);
         return $qr->row()->summoney;
     }

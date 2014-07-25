@@ -17,7 +17,7 @@ ORDER BY s.pgorder, s.pglong_name
 
 
 /*
-full cua hang
+full cua hang dont use it
 */
 CREATE OR REPLACE VIEW v_tienquy_store
 AS

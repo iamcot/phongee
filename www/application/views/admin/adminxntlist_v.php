@@ -43,7 +43,7 @@
         <?
         if($this->mylibs->isTongKho($this->session->userdata("pgrole"))):?>
          <span style="display: inline-block;">
-        <input type="checkbox" name="showalltongkho" id="showalltongkho" checked="checked">
+        <input type="checkbox" name="showalltongkho" id="showalltongkho" >
         <label for="showalltongkho">Chỉ giao dịch cửa hàng</label>
             </span>
         <?endif;?>
@@ -52,7 +52,7 @@
         <label for="pgname">Tên thiết bị</label>
             </span>
          <span style="display: inline-block;">
-        <input type="checkbox" name="pgcode" id="pgcode" checked="checked">
+        <input type="checkbox" name="pgcode" id="pgcode" >
         <label for="pgcode">Mã thiết bị</label>
             </span>
          <span style="display: inline-block;">
@@ -63,18 +63,18 @@
         <input type="checkbox" name="pgcreateuser" id="pgcreateuser" checked="checked">
         <label for="pgcreateuser">Người tạo</label>
             </span>
-        <span style="display: inline-block;">
-        <input type="checkbox" name="pgyear" id="pgyear">
-        <label for="pgyear">Năm sx </label>
-            </span>
-        <span style="display: inline-block;">
-        <input type="checkbox" name="pgcountry" id="pgcountry">
-        <label for="pgcountry">Nước sx </label>
-            </span>
-        <span style="display: inline-block;">
-        <input type="checkbox" name="pgcolor" id="pgcolor">
-        <label for="pgcolor">Màu</label>
-            </span>
+<!--        <span style="display: inline-block;">-->
+<!--        <input type="checkbox" name="pgyear" id="pgyear">-->
+<!--        <label for="pgyear">Năm sx </label>-->
+<!--            </span>-->
+<!--        <span style="display: inline-block;">-->
+<!--        <input type="checkbox" name="pgcountry" id="pgcountry">-->
+<!--        <label for="pgcountry">Nước sx </label>-->
+<!--            </span>-->
+<!--        <span style="display: inline-block;">-->
+<!--        <input type="checkbox" name="pgcolor" id="pgcolor">-->
+<!--        <label for="pgcolor">Màu</label>-->
+<!--            </span>-->
         <span style="display: inline-block;">
         <input type="checkbox" name="pgkygui" id="pgkygui">
         <label for="pgkygui">Chỉ xem ký gửi</label>

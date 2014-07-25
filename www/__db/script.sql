@@ -47,5 +47,8 @@ ALTER TABLE  `pginoutcode` ADD  `id` INT NOT NULL FIRST ,
 ADD PRIMARY KEY (  `id` ) ;
 /**19/2*/
 
+/** 26/7/2014*/
+ALTER TABLE `pginout_details` ADD `pgsaleamount` INT NOT NULL , ADD `pgsaleunit` VARCHAR(10) NOT NULL ;
+
 
 

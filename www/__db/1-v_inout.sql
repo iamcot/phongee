@@ -4,6 +4,7 @@ CREATE OR REPLACE
     AS
 SELECT 
 d.*,
+(CASE WHEN (d.pgsaleunit = 'percent') THEN (d.pgprice - d.pgsaleamount*d.pgprice/100) ELSE (d.pgprice - d.pgsaleamount) END) saleprice,
 i.pgcode inoutcode,
 i.pgtype inouttype,
 i.pgxuattype,

@@ -18,7 +18,7 @@ WHERE m2.pgdeleted=0 AND m2.pginout_id > 0 AND i.id = m2.pginout_id
 
 
 
-
+//****** dont use it
 
 (CASE WHEN (m1.pgtype='nhap') THEN (pgamount) ELSE ( 0 ) END) moneyin,
 (CASE WHEN (m1.pgtype='xuat') THEN (-1*pgamount) ELSE ( 0 ) END) moneyout,
