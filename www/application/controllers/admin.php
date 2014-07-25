@@ -1616,7 +1616,9 @@ class Admin extends CI_Controller
         else
             echo "";
     }
-    public function getHoaDon($page=1,$full='false',$userid=0){
+    public function getHoaDon($page=1,$full='false',$userid=0,$search=""){
+
+
         $otherwhere = "";
         if ($this->session->userdata("pgstore_id") > 0) {
                 $otherwhere .= "
@@ -1666,6 +1668,13 @@ class Admin extends CI_Controller
         }
         else $suser = "";
         if(($sfull!="" ||  $otherwhere != "" || $ktkho!="") && $suser!="") $suser = " AND ".$suser;
+
+        $sqlsearch = "";
+        if($search!=""){
+            $sqlsearch = " a.inoutcode like '%$search%' ";
+        }
+        if(($sfull!="" ||  $otherwhere != "" || $ktkho!="" || $suser!="") && $sqlsearch!="" ) $sqlsearch = " AND ".$sqlsearch;
+
         $sqlcommon=" FROM (
                 Select i.*
                 from v_suminout i
@@ -1674,7 +1683,7 @@ class Admin extends CI_Controller
 
                 GROUP BY i.pginout_id
                 ) a
-                 ".(($sfull!="" || $otherwhere !="" || $ktkho!="")?'WHERE':'')." $sfull $otherwhere $ktkho $suser"
+                 ".(($sfull!="" || $otherwhere !="" || $ktkho!="" || $sqlsearch != "")?'WHERE':'')." $sfull $otherwhere $ktkho $suser $sqlsearch"
                 ;
         $sqlsum = "SELECT count(a.pginout_id) sumrow ".$sqlcommon;
         $sqllimit = "SELECT a.* ".$sqlcommon."ORDER BY a.pginout_id DESC

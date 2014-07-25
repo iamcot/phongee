@@ -166,9 +166,13 @@
 </fieldset>
 <fieldset style="float:right;width:49%">
     <legend>Danh sách hóa đơn</legend>
-    <div>
+    <div style="float:left;width: 60%">
         <input type="checkbox" name="showchuathanhtoan" id="showchuathanhtoan" onchange="loadinout(1)">
         <label for="showchuathanhtoan">Chỉ Hóa đơn chưa thanh toán </label>
+    </div>
+    <div style="float:left;width: 35%">
+        <input type="text" name="searchinout" id="searchinout" style="width: 80%">
+        <a href="javascript:loadinout(1)" class="btn btn-small"><i class="glyphicon glyphicon-search"></i></a>
     </div>
     <div id="list_hoadon"></div>
 </fieldset>
@@ -448,7 +452,7 @@
     function loadinout(page) {
         $("#list_hoadonitem").html("");
         addloadgif("#loadstatus");
-        $("#list_hoadon").load("<?=base_url()?>admin/getHoaDon/" + page+"/"+$("input[name=showchuathanhtoan]").prop("checked"), function () {
+        $("#list_hoadon").load("<?=base_url()?>admin/getHoaDon/" + page+"/"+$("input[name=showchuathanhtoan]").prop("checked")+"/0/"+$("#searchinout").val(), function () {
             removeloadgif("#loadstatus");
 //            myclear();
         });
@@ -658,6 +662,7 @@
                     var province = eval(msg);
                     var option = "";
                     $.each(province, function (index, store){
+                        if(store.pgrole == 'custom')
                         option += "<option value='"+store.tradeid+"'>"+store.pglname+" "+store.pgfname+"<? if($this->session->userdata("pgstore_id")==0):?>  ("+store.pglong_name+")<? endif;?></option>";
                     });
                     $("select[name=pgto]").html(option);
