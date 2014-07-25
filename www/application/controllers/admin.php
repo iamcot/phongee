@@ -425,6 +425,22 @@ class Admin extends CI_Controller
 
                 }
             }
+            else if ($table == 'chitietthietbi'){
+                $thietbiid = 0;
+                if($param['pgthietbi_id'] == "") {
+                    $sql = "INSERT INTO pgthietbi (pgnhomthietbi_id,pglong_name,pgcode,pgprice,pgprice_old,pgtype,pgtype_pk)
+                     VALUES ('".$param['pgnhomthietbi_id']."','".$param['pglong_name']."','".$param['pgthietbi_code']."','".$param['pgprice']."','".$param['pgprice_old']."','phukien','thietbi') ";
+                    if ($this->db->query($sql)) {
+                        $thietbiid = $this->db->insert_id();
+                        $param['pgthietbi_id'] = $thietbiid;
+                        unset($param['pgnhomthietbi_id']);
+                    }
+                    if($thietbiid <=0){
+                        echo -30;
+                        return;
+                    }
+                }
+            }
             else if ($table == 'tradeuser') {
                 $sql = "SELECT id from pgtradeuser WHERE pguser_id=" . $param['pguser_id'] . " AND pgstore_id=" . $param['pgstore_id'] . " ";
                 $qr = $this->db->query($sql);

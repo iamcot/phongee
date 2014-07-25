@@ -96,19 +96,26 @@
                     <input type="radio" name="pgtypedichvu" value="hanghoa" id="hanghoaradio" checked>
                     <label for="hanghoaradio">Hàng hóa</label>
                  </span>
-
+                 <span style="display: inline-block;">
+                    <input type="radio" name="pgtypedichvu" value="suachua" id="suachuaradio">
+                    <label for="suachuaradio">Sửa chữa</label>
+                 </span>
+                 <span style="display: inline-block;">
+                    <input type="radio" name="pgtypedichvu" value="kygui" id="kyguiradio">
+                    <label for="kyguiradio">Ký gửi</label>
+                 </span>
             </td>
         </tr>
         <tr>
             <td colspan="2">
-                <div>Thông tin Sản phẩm: mã <b id="icode"></b>, tên SP: <b id="iname"></b>, loại: <b id="itype"></b>, tồn kho <b id="icount"></b></div>
+                <div>Thông tin thiết bị: mã <b id="icode"></b>, tên thiết bị: <b id="iname"></b>, loại: <b id="itype"></b>, tồn kho <b id="icount"></b></div>
             </td>
         </tr>
         <tr >
             <td colspan="2">
                 <label style="width:10%">Mã vạch</label>
                 <input  tabindex="4" onblur="blursninput(this.value)" type="text" name="pgseries" style="width:25%;display: inline-block" placeholder="Series/IMEI">
-                <label style="width:5%">Mã SP</label>
+                <label style="width:5%">Mã TB</label>
                 <input class="inputchitiethoadon" tabindex="5" type="text" onblur="getThietbi(this.value,true)" name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
                 <label style="width:5%">Giá</label>
                 <input  tabindex="6"  type="text" onblur="" name="pgprice" style="width:15%;display: inline-block" placeholder="Giá">
@@ -118,7 +125,22 @@
                 <input type="hidden" name="pgthietbi_id" >
              </td>
             </tr>
-
+        <tr>
+            <td colspan="2">
+                <label  style="width:10%">Màu</label>
+                <select  class="inputchitiethoadon" tabindex="8" name="pgcolor" style="width:10%;display: inline-block" >
+                    <option value="0">Màu </option>
+                </select>
+                <label  style="width:10%">Nước SX</label>
+                <select class="inputchitiethoadon" tabindex="9" name="pgcountry" style="width:10%;display: inline-block" >
+                    <option value="0">Nước sx</option>
+                </select>
+                <label  style="width:10%">Năm SX</label>
+                <select class="inputchitiethoadon" tabindex="10"  name="pgyear" style="width:10%;display: inline-block" >
+                    <option value="0">Năm sx</option>
+                </select>
+                </td>
+        </tr>
         <tr>
             <td colspan="2">
                 <input type="hidden" name="idhoadon" value="">
@@ -790,10 +812,7 @@
                     }
 
                     var province = eval(msg);
-                    if(pgtype=='xuat')
                     $("input[name=pgprice]").val(province.pgprice);
-                    else
-                        $("input[name=pgprice]").val(province.pgprice_old);
                     $("input[name=pgthietbi_id]").val(province.pgthietbi_id);
                     $("input[name=pgthietbicode]").val(province.pgthietbi_code);
                     var array = province.pgyear.split(",");

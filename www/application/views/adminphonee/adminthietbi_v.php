@@ -1,8 +1,8 @@
 <div id="tabs">
     <ul>
-        <li><a href="<?=base_url()?>admin/listpagechitietthietbi">Chi tiết Sản phẩm</a></li>
-        <li><a href="<?=base_url()?>admin/listpagethietbi">Sản phẩm</a></li>
-        <li><a href="<?=base_url()?>admin/listpage/nhomthietbi">Nhóm Sản phẩm</a></li>
+        <li><a href="<?=base_url()?>admin/listpagechitietthietbi">Chi tiết thiết bị</a></li>
+        <li><a href="<?=base_url()?>admin/listpagethietbi">Thiết bị</a></li>
+        <li><a href="<?=base_url()?>admin/listpage/nhomthietbi">Nhóm thiết bị</a></li>
 
     </ul>
 </div>

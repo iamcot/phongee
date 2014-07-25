@@ -81,7 +81,7 @@
                 <? endif ?>
                 <? if ($this->mylibs->checkRole('pgrathietbi')>0): ?>
                     <li><a href="<?= base_url() ?>admin/thietbi"
-                           class="<?= (($cat == 'thietbi') ? 'select' : '') ?>">Sản phẩm</a></li>
+                           class="<?= (($cat == 'thietbi') ? 'select' : '') ?>">Thiết bị</a></li>
                 <? endif ?>
                 <? if ($this->mylibs->checkRole('pgrauser')>0): ?>
                     <li><a href="<?= base_url() ?>admin/user"
@@ -100,7 +100,7 @@
     <div style="clear: both;"></div>
     <footer>
         <div class="wrap">
-            <p>Copyright &copy <?=date("Y")?>.</p>
+            <p>Copyright &copy 2013.</p>
         </div>
     </footer>
 </div>

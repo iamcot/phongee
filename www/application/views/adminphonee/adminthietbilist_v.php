@@ -5,12 +5,12 @@
         <tr>
             <td id="pgtype">
                 <span style="display: inline-block;">
-                <input type="radio" name="pgtype" value="thietbi"  id="thietbiradio">
-                <label for="thietbiradio">Sản phẩm nhiều s/n </label>
+                <input type="radio" name="pgtype" value="thietbi" checked=checked id="thietbiradio">
+                <label for="thietbiradio">Thiết bị</label>
                     </span>
                  <span style="display: inline-block;">
-                <input type="radio" name="pgtype" value="phukien" id="phukienradio" checked=checked>
-                <label for="phukienradio">Sản phẩm 1 s/n  (phụ kiện)</label>
+                <input type="radio" name="pgtype" value="phukien" id="phukienradio">
+                <label for="phukienradio"> Phụ kiện</label>
                     </span>
             </td>
             <td>

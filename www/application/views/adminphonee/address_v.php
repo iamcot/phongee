@@ -1,8 +1,9 @@
 <div id="tabs">
     <ul>
-        <li><a href="<?=base_url()?>admin/listpagechitietthietbi">Chi tiết Sản phẩm</a></li>
-        <li><a href="<?=base_url()?>admin/listpagethietbi">Sản phẩm</a></li>
-        <li><a href="<?=base_url()?>admin/listpage/nhomthietbi">Nhóm Sản phẩm</a></li>
+        <li><a href="<?=base_url()?>admin/street">Đường phố</a></li>
+        <li><a href="<?=base_url()?>admin/province">Tỉnh/Thành phố</a></li>
+        <li><a href="<?=base_url()?>admin/district">Quận/Huyện</a></li>
+        <li><a href="<?=base_url()?>admin/ward">Phường/Xã</a></li>
 
     </ul>
 </div>
@@ -14,7 +15,7 @@
                     $(".ui-tabs-panel").empty();
                     ui.jqXHR.error(function() {
                         ui.panel.html(
-                            "<p>Chức năng hiện thời chưa có. Vui lòng liên hệ thang102@gmail.com</p>");
+                            "Trang không tồn tại." );
                     });
                 }
             }
