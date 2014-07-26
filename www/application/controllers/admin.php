@@ -369,6 +369,9 @@ class Admin extends CI_Controller
             $param['pgpassword'] = md5(md5($this->input->post("pgpassword")));
         if ($this->input->post("edit") != "") //update
         {
+            if($table == 'chitietthietbi'){
+                unset($param['pgnhomthietbi_id']);
+            }
             $str = $this->db->update_string($this->tbprefix . $table, $param, " id = " . $this->input->post("edit"));
             try{
                 echo $this->db->query($str);
