@@ -8,18 +8,19 @@
                 <input type="text" name="pgcode" placeholder="Số series sản phẩm" ondblclick="this.value=''"></td>
             </td>
             <td>
-                <label>Mã SP</label>
-                <input type="text" name="pgthietbicode" placeholder="Mã Sản phẩm" style="width: 50%"
-                       onblur="getThietbi(this.value)">
-                <label style="width:10%">ID SP</label>
-                <input type="text" name="pgthietbi_id" placeholder="ID SP" style="width: 15%">
+                <label>Tên SP</label>
+                <input type="text" name="pglongname" placeholder="Tên sản phẩm">
+
             </td>
 
         </tr>
         <tr>
             <td>
-                <label>Tên SP</label>
-                <input type="text" name="pglongname" placeholder="Tên sản phẩm">
+                <label>Mã SP</label>
+                <input type="text" name="pgthietbicode" placeholder="Mã Sản phẩm" style="width: 50%"
+                       onblur="getThietbi(this.value)">
+                <label style="width:10%">ID SP</label>
+                <input type="text" name="pgthietbi_id" placeholder="ID SP" style="width: 15%">
             </td>
             <td>
                 <label style="">Nhóm SP</label>
@@ -90,7 +91,7 @@ $(function () {
     $("input[name=pgprice_old]").autoNumeric({aSep: ' ', aPad: false});
     $('select[name=pgnhomthietbi_id]').chosen({width: "100%"});
     $('select[name=pgnhomthietbi_id]').trigger("chosen:updated");
-    $("input[name=pgseries]").focus();
+    $("input[name=pgcode]").focus();
 });
 
 function save() {
@@ -151,7 +152,7 @@ function save() {
                         }
                         break;
                 }
-                $("input[name=pgseries]").focus();
+                $("input[name=pgcode]").focus();
             }
         });
     }
@@ -171,6 +172,7 @@ function load(page) {
             $("input[name=currpage]").val(page);
         }
     });
+    $("input[name=pgcode]").focus();
     <!--        $("#list_province").load("-->
     <?//=base_url()?><!--admin/load/chitietthietbi/" + page+"/keyword?key="+$("input[name=pgkeyword]").val(), function () {-->
     <!--            removeloadgif("#loadstatus");-->

@@ -78,7 +78,7 @@
 
                     <div class="field_select" id="pgtospan">
 
-                        <select name="pgto" style="width: 40%;display: inline-block" data-placeholder="Nơi nhận">
+                        <select name="pgto" style="width: 40%;display: inline-block" data-placeholder="Nơi nhận" >
 
                         </select>
 
@@ -114,8 +114,8 @@
         <tr>
             <td colspan="2">
                 <label style="width:10%">Mã vạch</label>
-                <input tabindex="4" onblur="blursninput(this.value)" type="text" name="pgseries"
-                       style="width:25%;display: inline-block" placeholder="Series/IMEI">
+                <input tabindex="4" ondblclick="this.value=''" onchange="onmypaste(this.value)" onblur="blursninput(this.value)" type="text" name="pgseries"
+                       style="width:25%;display: inline-block" placeholder="Series">
                 <label style="width:7%">Mã SP</label>
                 <input class="inputchitiethoadon" tabindex="5" type="text" onblur="getThietbi(this.value,true)"
                        name="pgthietbicode" style="width:12%;display: inline-block" placeholder="Mã TB">
@@ -203,7 +203,9 @@
 </fieldset>
 </div>
 <script>
+
 function typexuatcheck(type) {
+    console.log(type);
     $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"></select>');
     $("#pgfromspan").html(' <select name="pgfrom"  style="width: 40%;display: inline-block" data-placeholder="Nơi chuyển"></select>');
     if (type == 'khachhang') {
@@ -223,14 +225,17 @@ function typexuatcheck(type) {
         getStore('to', 'cuahang');
         $("#xuatoption").show();
         $("#targetoption").show();
+
     }
     else {
-        $("#pgtospan").html(' <input type="text" name="pgto"  style="width: 90%;display: inline-block" placeholder="Tên khách hàng" value="">');
+        $("#pgtospan").html(' <input type="text" tabindex="3" name="pgto"  style="width: 90%;display: inline-block" placeholder="Tên khách hàng" value="">');
         getStore('from', 'role');
         $("input[name=pgto]").val($('input[name=pgtotmp]').val());
         $("#xuatoption").show();
         $("#targetoption").show();
+        $("input[name=pgto]").focus();
     }
+//    $("input[name=pgseries]").focus();
 }
 function typenhapcheck(type) {
     $("#pgtospan").html(' <select name="pgto"  style="width: 40%;display: inline-block" data-placeholder="Nơi nhận"></select>');
@@ -244,6 +249,7 @@ function typenhapcheck(type) {
         getStore('from', 'cuahang');
 
     }
+//    $("input[name=pgseries]").focus();
 }
 function typecheck(type, xuattype) {
     if (type == 'nhap') {
@@ -290,6 +296,7 @@ function typecheck(type, xuattype) {
         }
         disableinput();
     }
+//    $("input[name=pgseries]").focus();
 }
 $(function () {
     $("input[name=pgdate]").val(mygetdate());
@@ -301,6 +308,10 @@ $(function () {
     $("input[name=pgprice]").autoNumeric({aSep: ' ', aPad: false});
     $("input[name=pgthanhtoan]").autoNumeric({aSep: ' ', aPad: false});
     $("input[name=pgsaleamount]").autoNumeric({aSep: ' ', aPad: false});
+    $("#xuatradio").prop("checked",true);
+    typecheck("xuat", "khachle");
+    $("input[name=pgto]").focus();
+//    typexuatcheck("khachle");
     loadinout(1);
     $("input").customInput();
     $("#pgdate").datepicker({
@@ -474,7 +485,7 @@ function save() {
             }
         }
     });
-
+    $("input[name=pgseries]").focus();
 
 }
 function loadinout(page) {
@@ -484,6 +495,7 @@ function loadinout(page) {
         removeloadgif("#loadstatus");
 //            myclear();
     });
+//    $("input[name=pgseries]").focus();
 }
 function loadmoneytransfer(page, pginout_id) {
     addloadgif("#loadstatus");
@@ -508,6 +520,7 @@ function myclear() {
     $("input[name=pgdate]").val(mygetdate());
     $("input[name=pghour]").val(mygettime());
     $("input[name=pghanthanhtoan]").val(formatdatejs(nextweek()));
+    $("input[name=pgseries]").focus();
 }
 function nextweek() {
     var today = new Date();
@@ -594,6 +607,7 @@ function editchitiethoadon(id) {
         }
     });
 }
+
 function hidedetails(id, status, taga) {
     $.ajax({
         type: "post",
@@ -659,6 +673,7 @@ function getStore(target, typestore) {
             }
         }
     });
+//    $("input[name=pgseries]").focus();
 }
 function getProvider() {
     $.ajax({
@@ -679,6 +694,7 @@ function getProvider() {
             }
         }
     });
+//    $("input[name=pgseries]").focus();
 }
 function getCustomer() {
     $.ajax({
@@ -699,6 +715,7 @@ function getCustomer() {
             }
         }
     });
+//    $("input[name=pgseries]").focus();
 }
 function getthietbiselect(id, year, color, country) {
     $.ajax({
@@ -856,6 +873,7 @@ function getThietbiFromSn(id) {
                 $("#icode").html(province.pgthietbi_code);
                 $("#iname").html(province.pglong_name);
                 $("#itype").html(province.thietbitype);
+                $("input[name=pgprice]").focus();
 
             }
         }
@@ -889,18 +907,26 @@ function enableinput() {
 function changesn(val) {
     if (val.length >= 8)
         blursninput(val);
+//        save();
 }
-$(document).ready(function () {
-    $("input[name=pgseries]").bind('paste', function (event) {
-        var _this = this;
-        // Short pause to wait for paste to complete
-        setTimeout(function () {
-            var val = $(_this).val();
-            //if(val.length >= 8)
-            blursninput(val);
-        }, 100);
-    });
-});
+function onmypaste(val){
+
+    if(val.length >=8){
+        blursninput(val);
+//        save();
+    }
+}
+//$(document).ready(function () {
+//    $("input[name=pgseries]").bind('paste', function (event) {
+//        var _this = this;
+//        // Short pause to wait for paste to complete
+//        setTimeout(function () {
+//            var val = $(_this).val();
+//            //if(val.length >= 8)
+//            blursninput(val);
+//        }, 100);
+//    });
+//});
 function blursninput(val) {
     if (val.trim() == "") {
         return;

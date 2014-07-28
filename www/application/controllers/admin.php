@@ -443,6 +443,7 @@ class Admin extends CI_Controller
                         return;
                     }
                 }
+                else unset($param['pgnhomthietbi_id']);
             }
             else if ($table == 'tradeuser') {
                 $sql = "SELECT id from pgtradeuser WHERE pguser_id=" . $param['pguser_id'] . " AND pgstore_id=" . $param['pgstore_id'] . " ";
